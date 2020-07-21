@@ -211,12 +211,24 @@ VALUES (SEQ_employees_emp_uid.nextval, '사장임', '1868/06/04', 'sajang@gmail.
 ;
 
 
+/* 휴가 더미 */
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-20', 'YYYY-MM-DD'), 1)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-15', 'YYYY-MM-DD'), to_date('2020-07-18', 'YYYY-MM-DD'), 2)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-23', 'YYYY-MM-DD'), to_date('2020-07-27', 'YYYY-MM-DD'), 1)
+;
+
 /* SELECT */
 
 SELECT * FROM EMPLOYEES ;
 SELECT * FROM DEPARTMENT;
 SELECT * FROM NOTICE;
 SELECT * FROM POSITIONRANK;
+SELECT * FROM HOLIDAY;
 SELECT n_uid "uid", n_subject subject, n_content content,n_regdate regdate,dep_uid department, p_uid "position"  FROM NOTICE;
 
 
@@ -251,3 +263,35 @@ FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID
 ;
 
 SELECT * FROM emp;
+
+/* 해당 년도 휴가 가져오기 */
+SELECT *
+FROM HOLIDAY h 
+WHERE h.EMP_UID = 1 AND h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
+;
+
+/* 해당 사원의 모든 휴가의 휴가 일수 구하기 */
+SELECT (h.H_END - h.H_START) "Day"
+FROM HOLIDAY h 
+WHERE h.EMP_UID = 1 AND h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
+;
+
+/* 해당 사원의 총 휴가 일수 구하기 */
+
+SELECT SUM("Day")
+FROM (
+	SELECT (h.H_END - h.H_START) "Day"
+	FROM HOLIDAY h 
+	WHERE h.EMP_UID = 1 AND h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
+)
+;
+
+/* 모든 사원의 휴가 일수 구하기 */
+SELECT SUM("Day"), EMP_UID 
+FROM (
+	SELECT (h.H_END - h.H_START) "Day", h.EMP_UID EMP_UID
+	FROM HOLIDAY h 
+	WHERE h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
+)
+GROUP BY EMP_UID 
+;
