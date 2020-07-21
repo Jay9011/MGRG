@@ -2,7 +2,7 @@ package com.mgrg.hrm;
 
 import org.apache.ibatis.session.SqlSession;
 
-public class DefaultSet {
+public class D {
 	/**
 	 * MyBatis 용 SQL Session
 	 */
