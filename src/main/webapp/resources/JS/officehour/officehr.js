@@ -43,6 +43,11 @@ $(document).ready(function($)
 			//--->create table body rows > start
 			$.each(ajax_data, function(index, val) 
 			{
+				
+				var datetimepicker = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
+									 "<div class='input-group date' id='datetimepicker1'><input type='text' class='form-control' value=" + val['time'] + "/>" + 
+									 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
+				
 				//you can replace with your database row id
 				var row_id = random_id();
 
@@ -51,7 +56,7 @@ $(document).ready(function($)
 					tbl +='<td ><div class="row_data" edit_type="click" col_name="fname">'+val['name']+'</div></td>';
 					tbl +='<td ><div class="row_data" edit_type="click" col_name="lname">'+val['position']+'</div></td>';
 					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['currStat']+'</div></td>';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['time']+'</div></td>';
+					tbl +='<td >' + datetimepicker + '</td>';
 
 					//--->edit options > start
 					tbl +='<td>';
@@ -66,6 +71,8 @@ $(document).ready(function($)
 					//--->edit options > end
 					
 				tbl +='</tr>';
+				
+				
 			});
 
 			//--->create table body rows > end
@@ -96,7 +103,7 @@ $(document).ready(function($)
 		//make div editable
 		$(this).closest('div').attr('contenteditable', 'true');
 		//add bg css
-		$(this).addClass('bg-warning').css('padding','5px');
+		$(this).addClass('bg-white').css('padding','5px');
 
 		$(this).focus();
 	})	
