@@ -23,6 +23,26 @@
 	
 	<context:component-scan base-package="com.mgrg.hrm" />
 	
+	<!-- spring-jdbc 빈 객체 생성 -->
+    <!-- DataSource 객체 -->
+    <beans:bean name="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+       <beans:property name="driverClassName"  value="oracle.jdbc.driver.OracleDriver"/>
+       <beans:property name="url"  value="jdbc:oracle:thin:@localhost:1521:XE"/>
+       <beans:property name="username"  value="mgrg"/>
+       <beans:property name="password"  value="1234"/>
+    </beans:bean>
 	
+	<!-- 동작 정의 -->
+    <beans:bean name="sqlSessionFactory"  class="org.mybatis.spring.SqlSessionFactoryBean">
+       <!-- Oracle DB의 dataSource -->
+       <beans:property name="dataSource"  ref="dataSource"/>
+       <!-- XML에 만든 쿼리문을 위 dataSource  에서 작동시키기 위해 매핑 -->
+       <beans:property  name="mapperLocations"  value="classpath:com/mgrg/hrm/mapper/*.xml"/>
+    </beans:bean>
+    
+    <!-- 실질적으로 SQL 실행하고 트랜잭션 제어를  하는 녀석 -->
+    <beans:bean name="sqlSession"  class="org.mybatis.spring.SqlSessionTemplate">
+       <beans:constructor-arg index="0"  ref="sqlSessionFactory"/>
+    </beans:bean>
 	
 </beans:beans>
