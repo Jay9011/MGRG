@@ -151,13 +151,13 @@ INSERT INTO department (dep_uid, dep_name) VALUES (SEQ_department_dep_uid.nextva
 INSERT INTO department (dep_uid, dep_name) VALUES (SEQ_department_dep_uid.nextval, '기술부');
 
 /* 직책 더미 */
-INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (SEQ_positionrank_p_uid.NEXTVAL, '사원', 1, 14);
-INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (SEQ_positionrank_p_uid.NEXTVAL, '대리', 2, 17);
-INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (SEQ_positionrank_p_uid.NEXTVAL, '팀장', 3, 20);
-INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (SEQ_positionrank_p_uid.NEXTVAL, '부장', 4, 22);
-INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (SEQ_positionrank_p_uid.NEXTVAL, '과장', 5, 24);
-INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (SEQ_positionrank_p_uid.NEXTVAL, '사장', 6, 27);
-INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (SEQ_positionrank_p_uid.NEXTVAL, '인사총괄', 7, 0);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (1, '사원', 1, 14);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (2, '대리', 2, 17);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (3, '팀장', 3, 20);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (4, '부장', 4, 22);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (5, '과장', 5, 24);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (6, '사장', 6, 27);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (7, '인사총괄', 7, 0);
 
 /* 공지사항 더미 */
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
@@ -239,4 +239,15 @@ SELECT * FROM NOTI WHERE (DEP_UID =  0 OR DEP_UID = 1) AND P_UID <= 1  ;
 SELECT * FROM NOTI;
 DROP VIEW NOTI;
 
+/* 사원목록 */
+SELECT * FROM EMPLOYEES
+;
 
+/* 사원목록 VIEW */
+CREATE OR REPLACE VIEW emp AS
+SELECT e.EMP_UID "uid", e.EMP_NAME name, e.EMP_BIRTHDATE birthday, e.EMP_PHONENUM phonenum, e.EMP_EMAIL email, e.EMP_ID id, e.EMP_PW password, e.EMP_ADDR address, e.EMP_HIREDATE hiredate, e.EMP_SALARY salary, p.P_UID p_uid, p.P_NAME "position", d.DEP_NAME department
+FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID 
+				LEFT OUTER JOIN POSITIONRANK p ON e.P_UID = p.P_UID
+;
+
+SELECT * FROM emp;
