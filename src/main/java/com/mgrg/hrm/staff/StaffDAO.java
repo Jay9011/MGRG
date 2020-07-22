@@ -7,4 +7,5 @@ import org.mybatis.spring.annotation.MapperScan;
 public interface StaffDAO {
 	public ArrayList<StaffDTO> select();
 
+	
 }

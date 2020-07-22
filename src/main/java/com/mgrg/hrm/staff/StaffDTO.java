@@ -16,29 +16,14 @@ public class StaffDTO {
 	private int p_uid;
 	private String position;
 	private String department;
+	private int total;
+	private int useHoliday;
+	private int leftHoliday;
 	
 	public StaffDTO() {
 		super();
 	}
 	
-	public StaffDTO(int uid, String name, String birthday, int phonenum, String email, String id, String password,
-			String address, Date hiredate, int salary, int p_uid, String position, String department) {
-		super();
-		this.uid = uid;
-		this.name = name;
-		this.birthday = birthday;
-		this.phonenum = phonenum;
-		this.email = email;
-		this.id = id;
-		this.password = password;
-		this.address = address;
-		this.hiredate = hiredate;
-		this.salary = salary;
-		this.p_uid = p_uid;
-		this.position = position;
-		this.department = department;
-	}
-
 	public int getUid() {
 		return uid;
 	}
@@ -121,7 +106,23 @@ public class StaffDTO {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
-
-	
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	public int getLeftHoliday() {
+		return leftHoliday;
+	}
+	public void setLeftHoliday(int leftHoliday) {
+		this.leftHoliday = leftHoliday;
+	}
+	public int getUseHoliday() {
+		return useHoliday;
+	}
+	public void setUseHoliday(int useHoliday) {
+		this.useHoliday = useHoliday;
+	}
 	
 }

@@ -24,17 +24,5 @@
 	<context:component-scan base-package="com.mgrg.hrm" />
 	
 	
-	<!-- 동작 정의 -->
-    <beans:bean name="sqlSessionFactory"  class="org.mybatis.spring.SqlSessionFactoryBean">
-       <!-- Oracle DB의 dataSource -->
-       <beans:property name="dataSource"  ref="dataSource"/>
-       <!-- XML에 만든 쿼리문을 위 dataSource  에서 작동시키기 위해 매핑 -->
-       <beans:property  name="mapperLocations"  value="classpath:com/mgrg/hrm/mapper/*.xml"/>
-    </beans:bean>
-    
-    <!-- 실질적으로 SQL 실행하고 트랜잭션 제어를  하는 녀석 -->
-    <beans:bean name="sqlSession"  class="org.mybatis.spring.SqlSessionTemplate">
-       <beans:constructor-arg index="0"  ref="sqlSessionFactory"/>
-    </beans:bean>
 	
 </beans:beans>

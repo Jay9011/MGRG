@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#staff_list {
+	width:100% !important;
+}
+
+.pagination {
+	justify-content: flex-start !important;
+}
+
+.modal-body input {
+	border: 1px solid #0000;
+}
+
+.modal-body input:focus {
+	border: 1px solid #000;
+}
