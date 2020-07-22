@@ -3,10 +3,10 @@ $(document).ready(function($)
 	//ajax row data
 	var ajax_data =
 	[
-		{name:"한수빈", position:"사원", currStat:"출근", time: "2020-07-21"}, 
-		{name:"임상빈", position:"대리", currStat:"출근", time: "2020-07-21"},
-		{name:"홍성용", position:"과장", currStat:"출근", time: "2020-07-21"},
-		{name:"윤종섭", position:"대표", currStat:"출근", time: "2020-07-21"},
+		{name:"한수빈", position:"사원", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
+		{name:"임상빈", position:"대리", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
+		{name:"홍성용", position:"과장", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
+		{name:"윤종섭", position:"대표", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
 	]
 
 
@@ -30,7 +30,8 @@ $(document).ready(function($)
 			tbl +='<th>이름</th>';
 			tbl +='<th>직책</th>';
 			tbl +='<th>근태현황</th>';
-			tbl +='<th>날짜 및 시간</th>';
+			tbl +='<th>출근 시간</th>';
+			tbl +='<th>퇴근 시간</th>';
 			tbl +='<th>수정 및 삭제</th>';
 			tbl +='</tr>';
 		tbl +='</thead>';
@@ -44,9 +45,12 @@ $(document).ready(function($)
 			$.each(ajax_data, function(index, val) 
 			{
 				
-				var datetimepicker = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
-									 "<div class='input-group date' id='datetimepicker1'><input type='text' class='form-control' value=" + val['time'] + "/>" + 
+				var starttime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
+									 "<div class='input-group date' id='datetimepicker1'><input type='text' class='form-control' value=" + val['startTime'] + "/>" + 
 									 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
+				var endtime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
+				 "<div class='input-group date' id='datetimepicker1'><input type='text' class='form-control' value=" + val['endTime'] + "/>" + 
+				 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
 				
 				//you can replace with your database row id
 				var row_id = random_id();
@@ -56,16 +60,17 @@ $(document).ready(function($)
 					tbl +='<td ><div class="row_data" edit_type="click" col_name="fname">'+val['name']+'</div></td>';
 					tbl +='<td ><div class="row_data" edit_type="click" col_name="lname">'+val['position']+'</div></td>';
 					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['currStat']+'</div></td>';
-					tbl +='<td >' + datetimepicker + '</td>';
+					tbl +='<td >' + starttime + '</td>';
+					tbl +='<td >' + endtime + '</td>';
 
 					//--->edit options > start
 					tbl +='<td>';
 					 
-						tbl +='<span class="btn_edit" > <a href="#" class="btn btn-link " row_id="'+row_id+'" > Edit</a> </span>';
+						tbl +='<span class="btn_edit" > <a href="#" class="btn btn-link " row_id="'+row_id+'" > 수정</a> </span>';
 
 						//only show this button if edit button is clicked
-						tbl +='<span class="btn_save"> <a href="#" class="btn btn-link"  row_id="'+row_id+'"> Save</a> | </span>';
-						tbl +='<span class="btn_cancel"> <a href="#" class="btn btn-link" row_id="'+row_id+'"> Cancel</a> | </span>';
+						tbl +='<span class="btn_save"> <a href="#" class="btn btn-link"  row_id="'+row_id+'"> 저장</a> | </span>';
+						tbl +='<span class="btn_cancel"> <a href="#" class="btn btn-link" row_id="'+row_id+'"> 취소</a> </span>';
 
 					tbl +='</td>';
 					//--->edit options > end
@@ -88,7 +93,10 @@ $(document).ready(function($)
 
 	$(document).find('.btn_save').hide();
 	$(document).find('.btn_cancel').hide(); 
-
+	
+//	datetimepicker();
+	datetimepicker2();
+	
 
 	//--->make div editable > start
 	$(document).on('click', '.row_data', function(event) 
@@ -123,7 +131,7 @@ $(document).ready(function($)
 		var row_id = $(this).closest('tr').attr('row_id'); 
 		
 		var row_div = $(this)				
-		.removeClass('bg-warning') //add bg css
+		.removeClass('bg-white') //add bg css
 		.css('padding','')
 
 		var col_name = row_div.attr('col_name'); 
@@ -160,7 +168,7 @@ $(document).ready(function($)
 		tbl_row.find('.row_data')
 		.attr('contenteditable', 'true')
 		.attr('edit_type', 'button')
-		.addClass('bg-warning')
+		.addClass('bg-white')
 		.css('padding','3px')
 
 		//--->add the original entry > start
@@ -225,8 +233,8 @@ $(document).ready(function($)
 		//make the whole row editable
 		tbl_row.find('.row_data')
 		.attr('edit_type', 'click')
-		.removeClass('bg-warning')
-		.css('padding','') 
+		.removeClass('bg-white')
+		.css('padding','')
 
 		//--->get row data > start
 		var arr = {}; 
@@ -250,3 +258,12 @@ $(document).ready(function($)
 
 
 }); 
+
+
+
+function datetimepicker2(){
+	 $(function () {
+         $('#datetimepicker1').datetimepicker({
+         });
+     });
+}
