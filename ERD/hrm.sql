@@ -57,6 +57,7 @@ CREATE TABLE employees
 	emp_salary number NOT NULL,
 	p_uid number NOT NULL,
 	dep_uid number NOT NULL,
+	enabled char(1) DEFAULT '1',
 	PRIMARY KEY (emp_uid)
 );
 
@@ -100,6 +101,7 @@ CREATE TABLE positionrank
 	p_name varchar2(30) NOT NULL UNIQUE,
 	p_level number NOT NULL,
 	p_holiday number NOT NULL,
+	p_auth varchar2(30) NOT NULL,
 	PRIMARY KEY (p_uid)
 );
 
@@ -151,6 +153,7 @@ INSERT INTO department (dep_uid, dep_name) VALUES (SEQ_department_dep_uid.nextva
 INSERT INTO department (dep_uid, dep_name) VALUES (SEQ_department_dep_uid.nextval, '기술부');
 
 /* 직책 더미 */
+/*
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (1, '사원', 1, 14);
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (2, '대리', 2, 17);
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (3, '팀장', 3, 20);
@@ -158,6 +161,15 @@ INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (4, '부장'
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (5, '과장', 5, 24);
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (6, '사장', 6, 27);
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (7, '인사총괄', 7, 0);
+*/
+
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (1, '사원', 1, 14, 'ROLE_MEMBER');
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (2, '대리', 2, 17, 'ROLE_MEMBER');
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (3, '팀장', 3, 20, 'ROLE_MEMBER');
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (4, '부장', 4, 22, 'ROLE_MEMBER');
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (5, '과장', 5, 24, 'ROLE_MEMBER');
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (6, '사장', 6, 27, 'ROLE_MEMBER');
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (7, '인사총괄', 7, 0, 'ROLE_ADMIN');
 
 /* 공지사항 더미 */
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
@@ -210,6 +222,9 @@ INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_
 VALUES (SEQ_employees_emp_uid.nextval, '사장임', '1868/06/04', 'sajang@gmail.com', 'sajang', '123', 100000000, 6, 5);
 ;
 
+INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
+VALUES (SEQ_employees_emp_uid.nextval, '인사관리', '2020/06/04', 'dnd194@gmail.com', 'insa@insa.com', '123', 100000000, 7, 1);
+;
 
 /* 휴가 더미 */
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )

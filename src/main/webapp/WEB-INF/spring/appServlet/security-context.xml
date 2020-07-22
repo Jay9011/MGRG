@@ -11,8 +11,12 @@
 	<bean id="customLoginSuccess"
 		class="com.mgrg.hrm.login.security.CustomLoginSuccessHandler" />
 
-<!-- 	<bean id="customPasswordEncoder" class="com.mgrg.hrm.login.security.CustomNoOpPasswordEncoder"/> -->
-
+	<!-- 커스텀 -->
+	<bean id="customPasswordEncoder" class="com.mgrg.hrm.login.security.CustomNoOpPasswordEncoder"/>
+	
+	
+	<!-- 스프링에서 제공하는 bcryptPasswordEncoder -->
+	<!-- <bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />  -->
 	
 
 	<!-- 컨테이너의 HTTP security 요소 -->
@@ -25,12 +29,11 @@
 			pattern="/login/mainLoginPage" access="permitAll" />
 
 		<!-- /sample/member URI 요청은 ROLE_MEMBER 라는 권한이 있는 사용자만이 접근 가능 -->
-		<security:intercept-url
-			pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
-		<security:intercept-url pattern="/sample/admin"
-			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url
-			pattern="/login/adminMainPage" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
+			
+		<security:intercept-url pattern="/sample/admin"  access="hasRole('ROLE_ADMIN')" />
+		
+		<security:intercept-url pattern="/login/adminMainPage" access="hasRole('ROLE_ADMIN')" />
 
 		<security:form-login
 			login-page="/login/mainLoginPage"
@@ -47,19 +50,41 @@
 	<!-- AuthenticationManager 빈 생성 -->
 	<security:authentication-manager>
 		<security:authentication-provider>   <!-- provider는 당연히 여러개 만들 수 있다. -->
-			<security:user-service>
+			
 
-				<!-- inMemory 방식 -->
-				<security:user name="member" password="{noop}member"
-					authorities="ROLE_MEMBER" />
-				<security:user name="admin" password="{noop}admin"
-					authorities="ROLE_ADMIN, 
-				ROLE_MEMBER" />
-				<security:user name="admin@admin.com"
-					password="{noop}admin" authorities="ROLE_ADMIN, ROLE_MEMBER" />
-			</security:user-service>
+		<security:jdbc-user-service
+				data-source-ref="dataSource" 
+				users-by-username-query=
+				"select userid username, userpw password, enabled from tbl_member where userid = ?"
+				 authorities-by-username-query=
+				 "select userid username, auth authority from tbl_member_auth where userid = ?"/>
+
+				<security:password-encoder ref="customPasswordEncoder" /> 
 
 
+
+		<!-- 위에서 생성한 bcryptPasswordEncoder bean 주입 -->
+			<!-- <security:password-encoder ref="bcryptPasswordEncoder"/> -->
+ 				
+		</security:authentication-provider>
+		
+		<security:authentication-provider>   <!-- provider는 당연히 여러개 만들 수 있다. -->
+			
+
+		<security:jdbc-user-service
+				data-source-ref="dataSource" 
+				users-by-username-query=
+				"select EMP_ID username, EMP_PW password, enabled from employees where EMP_ID = ?"
+				 authorities-by-username-query=
+				 "select e.EMP_ID username, p.p_auth authority from employees e, positionrank p where EMP_ID = ? and e.p_uid = p.p_uid"/>
+
+				<security:password-encoder ref="customPasswordEncoder" /> 
+
+
+
+		<!-- 위에서 생성한 bcryptPasswordEncoder bean 주입 -->
+			<!-- <security:password-encoder ref="bcryptPasswordEncoder"/> -->
+ 				
 		</security:authentication-provider>
 	</security:authentication-manager>
 

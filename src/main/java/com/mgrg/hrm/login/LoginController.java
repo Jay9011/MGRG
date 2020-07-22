@@ -31,4 +31,11 @@ public class LoginController {
 	public void adminMain() {
 		
 	}
+	
+	@GetMapping("/member")
+	@PostMapping("/member")
+	public String goMember() {
+		return "login/member";
+		
+	}
 }
