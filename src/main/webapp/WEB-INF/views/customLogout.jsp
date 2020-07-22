@@ -17,7 +17,7 @@
                                 <div class="text-center mt-4">
                                     <h2 class="display-1">Log out</h2>
                                     <p class="lead">successfully</p>
-                                    <a href="<%= request.getContextPath() %>/login/main">
+                                    <a href="<%= request.getContextPath() %>/login/mainLoginPage">
                                         <i class="fas fa-arrow-left mr-1"></i>
                                         Return to login
                                     </a>
