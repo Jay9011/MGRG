@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgrg.hrm.notice.IBoard">
+
+	<select id="bSelect" resultType="com.mgrg.hrm.notice.BoardDTO">
+		SELECT
+			*
+		FROM
+			noti
+		ORDER BY
+			"uid" DESC
+	
+	</select>
+
+	<insert id="bInsert" flushCache="true">
+		INSERT INTO notice
+			(n_uid, n_subject, n_content,dep_uid,p_uid) 
+		VALUES
+			(SEQ_notice_n_uid.NEXTVAL, #{param1},  #{param2}, #{param3}, #{param4})
+	</insert>
+
+	<select id="bSelectUid" resultType="com.mgrg.hrm.notice.BoardDTO" >
+		SELECT
+			n_uid "uid",
+			n_subject subject,
+			n_content content,
+			n_regdate regdate,
+			NVL(dep_uid, 0) department,
+			p_uid "position"
+		FROM
+			notice
+		WHERE
+			n_uid = #{uid}
+	</select>
+	<select id="bSelectUid1" resultType="com.mgrg.hrm.notice.BoardDTO" >
+		<![CDATA[
+		SELECT
+			n_uid "uid",
+			n_subject subject,
+			n_content content,
+			n_regdate regdate,
+			NVL(dep_uid, 0) department,
+			p_uid "position"
+		FROM
+			notice
+		WHERE
+			 (dep_uid IS NULL OR dep_uid = #{param2}) AND p_uid <= #{param3};
+		]]>
+	</select>
+	
+	<update id="bUpdate" flushCache="true">
+		UPDATE
+			notice
+		SET 
+			n_subject = #{subject}, n_content = #{content}, dep_uid = #{dep_uid}, p_uid = #{p_uid}
+		WHERE
+			n_uid = #{uid}
+	</update>
+	
+	<delete id="bDeleteUid" flushCache="true" parameterType="java.util.ArrayList">
+		DELETE FROM
+			notice
+		WHERE
+			n_uid in (
+				 <foreach collection="array" item="item" index="index" separator=",">
+			 	${item}
+			 </foreach>
+			)
+	</delete>
+	
+</mapper>
