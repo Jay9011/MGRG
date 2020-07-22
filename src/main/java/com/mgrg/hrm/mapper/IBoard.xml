@@ -13,10 +13,20 @@
 	</select>
 
 	<insert id="bInsert" flushCache="true">
-		INSERT INTO notice
-			(n_uid, n_subject, n_content,dep_uid,p_uid) 
-		VALUES
-			(SEQ_notice_n_uid.NEXTVAL, #{param1},  #{param2}, #{param3}, #{param4})
+		<choose>
+			<when test="dep_uid == 0">
+				INSERT INTO notice
+					(n_uid, n_subject, n_content, p_uid) 
+				VALUES
+					(SEQ_notice_n_uid.NEXTVAL, #{param1},  #{param2}, #{param4})
+			</when>
+			<otherwise>
+				INSERT INTO notice
+				(n_uid, n_subject, n_content,dep_uid,p_uid) 
+				VALUES
+				(SEQ_notice_n_uid.NEXTVAL, #{param1},  #{param2}, #{param3}, #{param4})
+			</otherwise>
+		</choose>
 	</insert>
 
 	<select id="bSelectUid" resultType="com.mgrg.hrm.notice.BoardDTO" >
