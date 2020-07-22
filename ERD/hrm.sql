@@ -170,7 +170,6 @@ INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (4, 
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (5, '과장', 5, 24, 'ROLE_MEMBER');
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (6, '사장', 6, 27, 'ROLE_MEMBER');
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (7, '인사총괄', 7, 0, 'ROLE_ADMIN');
-
 /* 공지사항 더미 */
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
 VALUES (SEQ_notice_n_uid.NEXTVAL, '인-사휴가 관련 공지사항입니다.', '8월 7일부터는 휴가입니다.', to_date('2020-07-29', 'yyyy-mm-dd'),1,1);
@@ -254,9 +253,9 @@ FROM NOTICE n JOIN DEPARTMENT d ON n.DEP_UID = d.DEP_UID(+) JOIN POSITIONRANK p 
 
 -- SELECT * FROM NOTICE WHERE (DEP_UID IS NULL OR DEP_UID = 2) AND P_UID = 2;
 
-CREATE OR REPLACE VIEW NOTI AS SELECT
- n.n_uid "uid", n.n_subject subject, n.n_content content, n.n_regdate regdate, d.DEP_UID , NVL(d.DEP_NAME, '공통') department,p.P_UID ,p.P_NAME "position" 
-FROM NOTICE n JOIN DEPARTMENT d ON n.DEP_UID = d.DEP_UID(+) JOIN POSITIONRANK p ON n.P_UID =p.P_UID;
+--CREATE OR REPLACE VIEW NOTI AS SELECT
+-- n.n_uid "uid", n.n_subject subject, n.n_content content, n.n_regdate regdate, d.DEP_UID , NVL(d.DEP_NAME, '공통') department,p.P_UID ,p.P_NAME "position" 
+--FROM NOTICE n JOIN DEPARTMENT d ON n.DEP_UID = d.DEP_UID(+) JOIN POSITIONRANK p ON n.P_UID =p.P_UID;
 
 CREATE OR REPLACE VIEW NOTI AS SELECT
  n.n_uid "uid", n.n_subject subject, n.n_content content, n.n_regdate regdate, NVL(d.DEP_UID, 0) dep_uid , NVL(d.DEP_NAME, '공통') department,p.P_UID p_uid,p.P_NAME "position" 
@@ -264,7 +263,8 @@ FROM NOTICE n JOIN DEPARTMENT d ON n.DEP_UID = d.DEP_UID(+) JOIN POSITIONRANK p 
 
 SELECT * FROM NOTI WHERE (DEP_UID =  0 OR DEP_UID = 1) AND P_UID <= 1  ;
 SELECT * FROM NOTI;
-DROP VIEW NOTI;
+-- 뷰 삭제
+-- DROP VIEW NOTI;
 
 /* 사원목록 */
 SELECT * FROM EMPLOYEES
