@@ -8,9 +8,7 @@ $(document).ready(function($)
 		{name:"홍성용", position:"과장", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
 		{name:"윤종섭", position:"대표", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
 	]
-
-
-
+	
 	var random_id = function  () 
 	{
 		var id_num = Math.random().toString(9).substr(2,3);
@@ -45,12 +43,14 @@ $(document).ready(function($)
 			$.each(ajax_data, function(index, val) 
 			{
 				
-				var starttime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
-									 "<div class='input-group date' id='datetimepicker1'><input type='text' class='form-control' value=" + val['startTime'] + "/>" + 
-									 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
-				var endtime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
-				 "<div class='input-group date' id='datetimepicker1'><input type='text' class='form-control' value=" + val['endTime'] + "/>" + 
-				 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
+				//for(i = 0; i < ajax_data.length; i++ ){
+					var startTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
+										 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['startTime'] + "/>" + 
+										 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
+					var endTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
+					 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['endTime'] + "/>" + 
+					 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
+
 				
 				//you can replace with your database row id
 				var row_id = random_id();
@@ -60,13 +60,13 @@ $(document).ready(function($)
 					tbl +='<td ><div class="row_data" edit_type="click" col_name="fname">'+val['name']+'</div></td>';
 					tbl +='<td ><div class="row_data" edit_type="click" col_name="lname">'+val['position']+'</div></td>';
 					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['currStat']+'</div></td>';
-					tbl +='<td >' + starttime + '</td>';
-					tbl +='<td >' + endtime + '</td>';
+					tbl +='<td >' + startTime + '</td>';
+					tbl +='<td >' + endTime + '</td>';
 
 					//--->edit options > start
 					tbl +='<td>';
 					 
-						tbl +='<span class="btn_edit" > <a href="#" class="btn btn-link " row_id="'+row_id+'" > 수정</a> </span>';
+						tbl +='<span class="btn_edit" > <a href="#" class="btn btn-link" row_id="'+row_id+'" > 수정</a> </span>';
 
 						//only show this button if edit button is clicked
 						tbl +='<span class="btn_save"> <a href="#" class="btn btn-link"  row_id="'+row_id+'"> 저장</a> | </span>';
@@ -76,7 +76,7 @@ $(document).ready(function($)
 					//--->edit options > end
 					
 				tbl +='</tr>';
-				
+				//}
 				
 			});
 
@@ -87,6 +87,7 @@ $(document).ready(function($)
 
 	tbl +='</table>'	
 	//--->create data table > end
+			
 
 	//out put table data
 	$(document).find('.tbl_user_data').html(tbl);
@@ -95,7 +96,11 @@ $(document).ready(function($)
 	$(document).find('.btn_cancel').hide(); 
 	
 //	datetimepicker();
-	datetimepicker2();
+	//datetimepicker2();
+	$(".date").datetimepicker({
+		
+		// TODO datetimepicker가 설정 되었으면 DB에 저장이 되어야한다
+	});
 	
 
 	//--->make div editable > start
@@ -256,14 +261,37 @@ $(document).ready(function($)
 	});
 	//--->save whole row entery > end
 
-
 }); 
 
 
 
 function datetimepicker2(){
-	 $(function () {
-         $('#datetimepicker1').datetimepicker({
-         });
-     });
+	
+	$(".date").datetimepicker();
+	
+//	var count = $('.container').length / 2;
+//	//alert(count);
+//	
+//	for(a=1; a<=count; a++){
+//		$(function () {
+//			$(this).datetimepicker({
+//			});
+//		});
+//		
+//	}
+	
+//	$(function () {
+//		$('#datetimepicker' + i).datetimepicker({
+//		});
+//	});
+//	$(function () {
+//		$('#datetimepicker1').datetimepicker({
+//		});
+//	});
+//	$(function () {
+//		$('#datetimepicker2').datetimepicker({
+//		});
+//	});
+	
+	
 }
