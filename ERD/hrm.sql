@@ -266,19 +266,6 @@ SELECT * FROM NOTI WHERE (DEP_UID =  0 OR DEP_UID = 1) AND P_UID <= 1  ;
 SELECT * FROM NOTI;
 DROP VIEW NOTI;
 
-/* 사원목록 */
-SELECT * FROM EMPLOYEES
-;
-
-/* 사원목록 VIEW */
-CREATE OR REPLACE VIEW emp AS
-SELECT e.EMP_UID "uid", e.EMP_NAME name, e.EMP_BIRTHDATE birthday, e.EMP_PHONENUM phonenum, e.EMP_EMAIL email, e.EMP_ID id, e.EMP_PW password, e.EMP_ADDR address, e.EMP_HIREDATE hiredate, e.EMP_SALARY salary, p.P_UID p_uid, p.P_NAME "position", d.DEP_NAME department
-FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID 
-				LEFT OUTER JOIN POSITIONRANK p ON e.P_UID = p.P_UID
-;
-
-SELECT * FROM emp;
-
 /* 해당 년도 휴가 가져오기 */
 SELECT *
 FROM HOLIDAY h 
@@ -293,7 +280,7 @@ WHERE h.EMP_UID = 1 AND h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AN
 
 /* 해당 사원의 총 휴가 일수 구하기 */
 
-SELECT SUM("Day")
+SELECT SUM("Day") "useHoliday"
 FROM (
 	SELECT (h.H_END - h.H_START) "Day"
 	FROM HOLIDAY h 
@@ -302,7 +289,7 @@ FROM (
 ;
 
 /* 모든 사원의 휴가 일수 구하기 */
-SELECT SUM("Day"), EMP_UID 
+SELECT SUM("Day") "useHoliday", EMP_UID 
 FROM (
 	SELECT (h.H_END - h.H_START) "Day", h.EMP_UID EMP_UID
 	FROM HOLIDAY h 
@@ -310,3 +297,43 @@ FROM (
 )
 GROUP BY EMP_UID 
 ;
+/* 현재 년도의 모든 사원의 휴가 일수 */
+SELECT SUM("Day") "useHoliday", EMP_UID 
+FROM (
+	SELECT (h.H_END - h.H_START) "Day", h.EMP_UID EMP_UID
+	FROM HOLIDAY h 
+	WHERE h.H_START BETWEEN TO_DATE(TO_CHAR(SYSDATE ,'YYYY') , 'YYYY') AND TO_DATE(TO_CHAR(SYSDATE ,'YYYY') + 1, 'YYYY')
+)
+GROUP BY EMP_UID 
+;
+
+/* 휴가 VIEW */
+CREATE OR REPLACE VIEW holi AS
+SELECT SUM("Day") "useHoliday", EMP_UID 
+FROM (
+	SELECT (h.H_END - h.H_START) "Day", h.EMP_UID EMP_UID
+	FROM HOLIDAY h 
+	WHERE h.H_START BETWEEN TO_DATE(TO_CHAR(SYSDATE ,'YYYY') , 'YYYY') AND TO_DATE(TO_CHAR(SYSDATE ,'YYYY') + 1, 'YYYY')
+)
+GROUP BY EMP_UID 
+;
+
+DROP VIEW holi
+;
+
+SELECT * FROM holi
+;
+
+/* 사원목록 */
+SELECT * FROM EMPLOYEES
+;
+
+/* 사원목록 VIEW */
+CREATE OR REPLACE VIEW emp AS
+SELECT e.EMP_UID "uid", e.EMP_NAME name, e.EMP_BIRTHDATE birthday, e.EMP_PHONENUM phonenum, e.EMP_EMAIL email, e.EMP_ID id, e.EMP_PW password, e.EMP_ADDR address, e.EMP_HIREDATE hiredate, e.EMP_SALARY salary, p.P_UID p_uid, p.P_NAME "position", d.DEP_NAME department, NVL(h."useHoliday", 0) "useHoliday", p.P_HOLIDAY "total", (p.P_HOLIDAY - NVL(h."useHoliday", 0)) "leftHoliday"
+FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID 
+				LEFT OUTER JOIN POSITIONRANK p ON e.P_UID = p.P_UID
+				LEFT OUTER JOIN holi h ON e.EMP_UID = h.EMP_UID
+;
+
+SELECT * FROM emp;
