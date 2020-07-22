@@ -64,10 +64,15 @@
 
 
 
+<<<<<<< HEAD
+<!-- 		위에서 생성한 bcryptPasswordEncoder bean 주입 -->
+<!-- 			 <security:password-encoder ref="bcryptPasswordEncoder"/> -->
+=======
 
 <!-- 		 위에서 생성한 bcryptPasswordEncoder bean 주입 --> 
 <!-- 			 <security:password-encoder ref="bcryptPasswordEncoder"/> --> 
 
+>>>>>>> refs/heads/master
  				
 <!-- 		</security:authentication-provider> -->
 		
