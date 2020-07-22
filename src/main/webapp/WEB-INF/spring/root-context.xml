@@ -12,6 +12,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- spring-jdbc 빈 객체 생성 -->
+
     <!-- DataSource 객체 -->
     <beans:bean name="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
        <beans:property name="driverClassName"  value="oracle.jdbc.driver.OracleDriver"/>
@@ -32,5 +33,6 @@
     <beans:bean name="sqlSession"  class="org.mybatis.spring.SqlSessionTemplate">
        <beans:constructor-arg index="0"  ref="sqlSessionFactory"/>
     </beans:bean>
+
 	
 </beans>
