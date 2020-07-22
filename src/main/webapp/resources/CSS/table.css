@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.page-link{
+	background-color: transparent ;
+	border-color: transparent !important;
+	
+}
+.page-item.active .page-link{
+	background-color: #6d7fcc;
+	border-color: transparent !important;
+}
+
+.page-item.disabled .page-link{
+	background-color: transparent ;
+	border-color: transparent  !important;
+}
+ul.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}

@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BoardDTO {
-	private int uid;
+	private Integer uid;
 	private String subject;
 	private String content;
 	@JsonProperty("regdate")
@@ -77,7 +77,7 @@ public class BoardDTO {
 	}
 	// 날짜를 정확히 나타내 주기 위해서
 		public String getRegDate() {
-			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(regDate);
+			return new SimpleDateFormat("yyyy-MM-dd").format(regDate);
 		}
 	public void setRegDate(Timestamp regDate) {
 		this.regDate = regDate;

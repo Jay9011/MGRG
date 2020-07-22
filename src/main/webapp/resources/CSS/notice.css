@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
+/* 테이블 사이즈 */
 #list {
 	margin: auto;
-	width: 80%;
+	width: 100%
 }
 
 /* 글 목록 */
@@ -10,8 +11,8 @@
 #list table{width: 100%;}
 
 #list table, #list th, #list td{
-	border: 1px solid olive;
-	border-collapse: collapse;
+	border-top: 1px solid olive;
+	border-bottom: 1px solid olive;
 }
 #list th, #list td{
 	padding: 10px;
@@ -122,11 +123,13 @@ ul.pagination a:hover:not(.active) {background-color: #ddd;}
 
 .modal .modal-content {
 	background-color: #fefefe;  /* 배경은 흰색 */
-	width: 80%;   /* 화면대비 80% */
+	width: 50%;   /* 화면대비 60% */
 	margin: 5% auto 15% auto;  /* 위에서 5%,  아래에서 15%, 좌우 중앙정렬 */
 	border: 1px solid #888;  /* 테두리 */
 }
-
+.modal .modal-content b{
+    margin-right: 5px;	
+}
 .modal .container {
 	padding: 16px;
 	position: relative;  /* 이래야 안에 있는 absolute 들이 동작 */
@@ -149,13 +152,16 @@ ul.pagination a:hover:not(.active) {background-color: #ddd;}
 
 
 .modal input[type=text] {
-	width: 100%;
-	border: 1px solid #ccc;
+	width: 95%;
 	margin: 8px 0;
 	padding: 12px 20px;
 	display: inline-block;
-	border: 1px solid #ccc;
+	border: 1px solid transparent;
+	border-bottom: 1px solid #ddd;
 	box-sizing: border-box;
+}
+.modal input[type=radio]{
+	margin: 0 5px;
 }
 
 .modal textarea {
@@ -168,4 +174,8 @@ ul.pagination a:hover:not(.active) {background-color: #ddd;}
 	cursor: pointer;
 }
 
-
+@media (max-width: 768px) {
+.modal .modal-content{
+	width: 90%;  
+}
+	}

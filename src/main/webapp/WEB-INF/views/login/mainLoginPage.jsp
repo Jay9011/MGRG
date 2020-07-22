@@ -50,7 +50,7 @@ $("#login").validate({ // login에 validate를 적용
     },
     messages: {
       	//양식에 맞지 않을 시 email 입력란 하단에 나오는 메세지
-        email: "유효한 이메일을 입력해주세요"
+        email: "유효한 이메일을 입력해주세요" 
         text : "유효한 아이디를 입력해주세요"
     	},
     	
