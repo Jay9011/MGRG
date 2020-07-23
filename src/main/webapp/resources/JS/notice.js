@@ -27,6 +27,7 @@ $(document).ready(function() {
 
 	// 글 작성 submit 처리(db저장, action은 없으나)
 	$("#frmWrite").submit(function() {
+		
 		$(this).parents(".modal").hide(); // 저장 처리를하면
 		return chkWrite(); // 페이지 리로딩이 발생되면 안된다. but 리쿼스트는 할거기 때문에 fun 이용
 	});
