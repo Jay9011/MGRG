@@ -6,10 +6,15 @@ var viewItem = undefined; // 가장 최근에 view 한 글 데이터
 $(document).ready(function() {
 	
 	boardRord();
+	
+	let table = $('#list').DataTable();
+	$('#list tbody').on('click','td span',function(){
+		let data = table.row(this).data();
+		alert(data.uid + ' 클릭함.');
+		
+	});
 	$('#sidebarCollapse').on('click', function() {
 		$('#sidebar').toggleClass('active');
-		
-	
 	});
 
 	// 게시판 목록 1페이지 로딩
@@ -55,15 +60,19 @@ $(document).ready(function() {
 	$('#updateOk').click(function() {
 		chkUpdate();
 	});
+	
+	
+	
 });
 
 function boardRord() {
-	$('#tlc').DataTable().destroy();
+	
 	var n_uid;
 	$('#tlc').DataTable({
 		ajax : {
 			url : '/hrm/notice/list.ajax',
 			dataSrc : 'data'
+				
 		},
 		columns : [{
 					data : "uid",
@@ -80,7 +89,7 @@ function boardRord() {
 			targets : 0,
 			orderable : false
 		} ],
-		order : [ [ 1, 'asc' ] ],
+		order : [ [ 2, 'desc' ] ], // 작성일을 기준으로 오름차순
 		language : {
 			info : '총 공지사항  _TOTAL_ 개',
 			infoFiltered : '(검색된 공지사항 _MAX_개)',
@@ -96,6 +105,7 @@ function boardRord() {
 			}
 		}
 	});
+	
 }
 
 function changePageRows() {
@@ -130,7 +140,7 @@ function chkWrite() {
 	});
 
 	$('#frmWrite')[0].reset();
-
+	$('#tlc').DataTable().destroy();
 	return false; 
 }// end chkWrite()
 
@@ -178,11 +188,11 @@ function chkDelete() {
 
 // 현재 글 목록 list에 대해 이벤트 등록
 function addViewEvent() {
-
-	$('#list .subject').click(
+	alert("들어는 오니?");
+	
+	$('#list td > .subject').click(
 			function() {
-
-				// alert($(this).text() + " : " + $(this).attr('data-uid')); //
+				//alert($(this).text() + " : " + $(this).attr('data-uid')); //
 				// 확인용
 
 				// 읽어오기
@@ -194,17 +204,10 @@ function addViewEvent() {
 								if (status == "success") {
 									if (data.status == "OK") {
 										// 읽어온 view 데이터를 전역변수에 세팅
-										viewItem = data.data[0]; // 0 인이유는
-																	// 하나밖에
-																	// 없으니깡?.
+										viewItem = data.data[0]; 
 										// 팝업에 보여주기
 										setPopup("view");
 										$("#dlg_write").show();
-
-										// 리스트 상의 조회수 증가시키기 ( data 안에 값이 담겨있따
-										$(
-												"#list [data-viewcnt='"+ viewItem.uid + "']").text(viewItem.viewcnt);
-
 									} else {
 										alert("VIEW 실패" + data.message);
 									}
