@@ -339,3 +339,45 @@ FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID
 ;
 
 SELECT * FROM emp;
+
+-- Office HOUR Dummy Variables --
+SELECT * FROM POSITIONRANK p ;
+
+SELECT e2.EMP_NAME, d.DEP_NAME 
+FROM EMPLOYEES e2, DEPARTMENT d 
+WHERE e2.dep_uid = d.DEP_UID ;
+
+SELECT e.EMP_NAME , p.P_NAME 
+FROM EMPLOYEES e , POSITIONRANK p
+WHERE e.P_UID = p.P_UID ;
+
+SELECT * FROM OFFICE_HOUR;
+
+-- 출근 버튼 클릭 --
+INSERT INTO OFFICE_HOUR (w_uid, w_category, w_start, EMP_UID )
+VALUES
+(SEQ_office_hour_w_uid.nextval, '출근', TO_DATE(sysdate, 'yyyy-mm-dd hh24:mi:ss'), ?)
+WHERE ;
+
+-- 9시 30 "이후"로 찍었을 경우 == 지각
+-- 10시 30분 "이후"로 찍엇을 경우 == 결근
+-- ****************************
+-- 11시까지 출근이 안찍었을 경우 == 결근
+
+-- 퇴근 버튼 클릭 --
+UPDATE OFFICE_HOUR 
+SET w_end = TO_DATE('2020-07-23 06:30:22', 'yyyy-mm-dd hh24:mi:ss')
+WHERE emp_uid = 1; 
+
+--  --
+
+-- 휴가인 사람 --
+-- TODO --
+
+-- 직원 이름과 직책을 통합한 근태 현황 뽑기 --
+SELECT e.EMP_NAME, d.DEP_NAME, p.P_NAME, oh.W_CATEGORY, oh.W_START, oh.W_END
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p, OFFICE_HOUR oh 
+WHERE oh.EMP_UID = e.EMP_UID AND d.DEP_UID = e.dep_uid AND e.P_UID = p.P_UID 
+ORDER BY e.EMP_NAME ASC;
+
+
