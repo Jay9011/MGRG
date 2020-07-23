@@ -42,7 +42,6 @@ $(document).ready(function($)
 			//--->create table body rows > start
 			$.each(ajax_data, function(index, val) 
 			{
-				
 				//for(i = 0; i < ajax_data.length; i++ ){
 					var startTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
 										 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['startTime'] + "/>" + 
@@ -207,7 +206,7 @@ $(document).ready(function($)
 		//make the whole row editable
 		tbl_row.find('.row_data')
 		.attr('edit_type', 'click')
-		.removeClass('bg-warning')
+		.removeClass('bg-white')
 		.css('padding','') 
 
 		tbl_row.find('.row_data').each(function(index, val) 
@@ -262,36 +261,3 @@ $(document).ready(function($)
 	//--->save whole row entery > end
 
 }); 
-
-
-
-function datetimepicker2(){
-	
-	$(".date").datetimepicker();
-	
-//	var count = $('.container').length / 2;
-//	//alert(count);
-//	
-//	for(a=1; a<=count; a++){
-//		$(function () {
-//			$(this).datetimepicker({
-//			});
-//		});
-//		
-//	}
-	
-//	$(function () {
-//		$('#datetimepicker' + i).datetimepicker({
-//		});
-//	});
-//	$(function () {
-//		$('#datetimepicker1').datetimepicker({
-//		});
-//	});
-//	$(function () {
-//		$('#datetimepicker2').datetimepicker({
-//		});
-//	});
-	
-	
-}

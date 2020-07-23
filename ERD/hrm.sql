@@ -243,6 +243,7 @@ SELECT * FROM DEPARTMENT;
 SELECT * FROM NOTICE;
 SELECT * FROM POSITIONRANK;
 SELECT * FROM HOLIDAY;
+SELECT * FROM OFFICE_HOUR;
 SELECT n_uid "uid", n_subject subject, n_content content,n_regdate regdate,dep_uid department, p_uid "position"  FROM NOTICE;
 
 
