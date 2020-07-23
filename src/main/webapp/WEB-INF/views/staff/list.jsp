@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
 
 <script>const path = "${pageContext.request.contextPath}";</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/JS/staff/Main.js"></script>
@@ -61,8 +62,10 @@
 					<label for="staff_name">이름 : </label>
 					<input id="staff_name" type="text" value="name"/>
 					
-					생년월일 : 
-					<span>1990-01-01</span>
+					<div class="input-group date">
+						<label for="staff_birthday">생일 : </label>
+						<input id="staff_birthday" type="date" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+					</div>
 
 					<label for="staff_phone">휴대폰 번호 : </label>
 					<input id="staff_phone" type="text" value="phonenum"/>
@@ -73,31 +76,34 @@
 					<label for="staff_id">아이디 : </label>
 					<input id="staff_id" type="text" value="id"/>
 					
+					<div class="password">
+						<label for="staff_pw">비밀번호 : </label>
+						<input id="staff_pw" type="password" value="pw"/>
+						<i class="fa fa-eye fa-lg"></i>
+					</div>
+
+					<div class="password">
+						<label for="staff_chkpw">비밀번호 확인 : </label>
+						<input id="staff_chkpw" type="password" value="pw"/>
+						<i class="fa fa-eye fa-lg"></i>
+					</div>
+					
 					<label for="staff_address">주소 : </label>
 					<input id="staff_address" type="text" value="address"/>
 					
 					<div class="input-group date">
 						<label for="staff_hiredate">입사 날짜 : </label>
-						<input id="staff_hiredate" type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+						<input id="staff_hiredate" type="date" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 					</div>
 					
-					<label for="test">이름 : </label>
-					<input id="staff_name" type="text" value="name"/>
+					<label for="staff_salary">연봉 : </label>
+					<input id="staff_salary" type="number" value="salary"/>
 					
-					<label for="test">이름 : </label>
-					<input id="staff_name" type="text" value="name"/>
+					<label for="staff_position">직책 : </label>
+					<input id="staff_position" type="text" value="position"/>
 					
-					<label for="test">이름 : </label>
-					<input id="staff_name" type="text" value="name"/>
-					
-					<label for="test">이름 : </label>
-					<input id="staff_name" type="text" value="name"/>
-					
-					<label for="test">이름 : </label>
-					<input id="staff_name" type="text" value="name"/>
-					
-					<label for="test">이름 : </label>
-					<input id="staff_name" type="text" value="name"/>
+					<label for="staff_department">부서 : </label>
+					<input id="staff_department" type="text" value="department"/>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
