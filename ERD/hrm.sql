@@ -91,9 +91,8 @@ CREATE TABLE notice
 CREATE TABLE office_hour
 (
 	w_uid number NOT NULL,
-	w_category varchar2(20),
-	w_start date,
-	w_end date,
+	w_start timestamp,
+	w_end timestamp,
 	emp_uid number NOT NULL,
 	PRIMARY KEY (w_uid)
 );
@@ -353,11 +352,27 @@ WHERE e.P_UID = p.P_UID ;
 
 SELECT * FROM OFFICE_HOUR;
 
+--------------------------------------------------
+-- 휴가 테이블 --
+SELECT * FROM HOLIDAY;
+
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-20', 'YYYY-MM-DD'), to_date('2020-07-28', 'YYYY-MM-DD'), 4)
+;
+
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 5)
+;
+
+-- 금일날짜에 휴가인 사람 뽑기 --
+SELECT * FROM HOLIDAY
+WHERE TO_CHAR(H_END, 'yyyy/mm/dd') <= TO_CHAR(SYSDATE, 'yyyy/mm/dd');
+
+---------------------------------------------------
 -- 출근 버튼 클릭 --
-INSERT INTO OFFICE_HOUR (w_uid, w_category, w_start, EMP_UID )
+INSERT INTO OFFICE_HOUR (w_uid, w_start, EMP_UID )
 VALUES
-(SEQ_office_hour_w_uid.nextval, '출근', TO_DATE(sysdate, 'yyyy-mm-dd hh24:mi:ss'), ?)
-WHERE ;
+(SEQ_office_hour_w_uid.nextval, to_char(systimestamp, 'yyyy-mm-dd hh24:mi:ss'), 4);
 
 -- 9시 30 "이후"로 찍었을 경우 == 지각
 -- 10시 30분 "이후"로 찍엇을 경우 == 결근
@@ -366,18 +381,27 @@ WHERE ;
 
 -- 퇴근 버튼 클릭 --
 UPDATE OFFICE_HOUR 
-SET w_end = TO_DATE('2020-07-23 06:30:22', 'yyyy-mm-dd hh24:mi:ss')
-WHERE emp_uid = 1; 
+SET w_end = TO_CHAR(SYSTIMESTAMP, 'yyyy-mm-dd hh24:mi:ss')
+WHERE emp_uid = 4; 
 
---  --
-
--- 휴가인 사람 --
--- TODO --
+SELECT * FROM OFFICE_HOUR oh ;
 
 -- 직원 이름과 직책을 통합한 근태 현황 뽑기 --
-SELECT e.EMP_NAME, d.DEP_NAME, p.P_NAME, oh.W_CATEGORY, oh.W_START, oh.W_END
+SELECT e.EMP_NAME, d.DEP_NAME, p.P_NAME, oh.W_START, oh.W_END
 FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p, OFFICE_HOUR oh 
 WHERE oh.EMP_UID = e.EMP_UID AND d.DEP_UID = e.dep_uid AND e.P_UID = p.P_UID 
 ORDER BY e.EMP_NAME ASC;
+
+CREATE OR REPLACE VIEW officehour AS
+
+
+
+
+
+
+
+
+
+
 
 
