@@ -9,11 +9,11 @@ $(document).ready(function(){
 	});
 
 	$('.input-group.date').datepicker({
-	    todayBtn: "linked",
-	    language: "ko",
-	    daysOfWeekHighlighted: "1,2,3,4,5",
-	    autoclose: true,
-	    todayHighlight: true
+		todayBtn: "linked",
+		language: "ko",
+		daysOfWeekHighlighted: "0,6",
+		autoclose: true,
+		todayHighlight: true
 	});
 });
 
