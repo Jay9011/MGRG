@@ -137,6 +137,7 @@
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}"/>
                     <div>
                     <label><b>부서</b></label>
+                    <input type="radio" name="dep_uid" value="0" selected/>공통
                     <input type="radio" name="dep_uid" value="1"/>인사부
                     <input type="radio" name="dep_uid" value="2"/>총무부
                     <input type="radio" name="dep_uid" value="3"/>경영지원부
@@ -145,7 +146,6 @@
                 </div>
                 <div>
                     <label for="position"><b>직책</b></label>
-                    <input type="radio" name="p_uid" value="0" selected/>공통
                     <input type="radio" name="p_uid" value="1"/>사원
                     <input type="radio" name="p_uid" value="2"/>대리
                     <input type="radio" name="p_uid" value="3"/>팀장
@@ -186,7 +186,7 @@
 CKEDITOR.replace('editor',{
 		allowedContent: true	// HTML 태그 자동 삭제 방지 설정
 	}); // 에디터로 생성
-	
+
 </script >
 </body>
 </html>

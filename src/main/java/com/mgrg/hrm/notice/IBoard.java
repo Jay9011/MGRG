@@ -3,6 +3,7 @@ package com.mgrg.hrm.notice;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
 @MapperScan
@@ -12,7 +13,7 @@ public interface IBoard {
 	public List<BoardDTO> bSelect();
 	
 	// 글 작성
-	public int bInsert(String subject, String content,int dep_uid, int p_uid);
+	public int bInsert(String subject, String content,@Param("dep_uid")int dep_uid, int p_uid);
 	
 	// 글 수정
 	public int bUpdate(int uid, String subject, String content,int dep_uid, int p_uid);
