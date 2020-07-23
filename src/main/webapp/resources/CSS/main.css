@@ -157,6 +157,7 @@ ul ul a {
     }
     .btnsh{
         display: block;
+        padding: 6px 12px !important;
     }
 
     #sidebar.active {
