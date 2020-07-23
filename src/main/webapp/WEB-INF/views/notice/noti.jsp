@@ -158,6 +158,7 @@
 						placeholder="글 제목(필수)" name="subject" required>
 					<label for="content"><b>내용</b></label>
 					<textarea id="editor" name="content" placeholder="글 내용(필수)"></textarea>
+					<p id="chkit"></p>
 					<div class="d01 btn_group_write">
 						<button type="submit" class="btn success">작성</button>
 					</div>
@@ -185,7 +186,7 @@
 CKEDITOR.replace('editor',{
 		allowedContent: true	// HTML 태그 자동 삭제 방지 설정
 	}); // 에디터로 생성
-	CKEDITOR.instances.['editor'].getData();
+	
 </script >
 </body>
 </html>
