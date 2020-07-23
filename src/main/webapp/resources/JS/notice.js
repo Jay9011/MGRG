@@ -105,6 +105,8 @@ function changePageRows() {
 
 // 새글 등록 처리
 function chkWrite() {
+	
+	CKEDITOR.instances.editor.updateElement();
 	var data = $('#frmWrite').serialize(); // 해당 폼 안의 name 이 있는 것들을 끌고
 											// 들어옴(String )
 	// subject=ddd&name=eeee&content=qwerwe (get 방식 형태로 보내김 )
