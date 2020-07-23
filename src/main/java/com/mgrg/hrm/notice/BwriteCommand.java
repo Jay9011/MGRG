@@ -39,6 +39,7 @@ public class BwriteCommand implements Command{
 					System.out.println("OK이라구");
 				}
 			}catch (Exception e) {
+				e.printStackTrace();
 				message.append("[트랜잭션 에러 : " + e.getMessage() + "]");
 			}
 		}
