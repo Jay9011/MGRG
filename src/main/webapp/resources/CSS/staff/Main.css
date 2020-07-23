@@ -15,3 +15,20 @@
 .modal-body input:focus {
 	border: 1px solid #000;
 }
+
+div.password {
+    position: relative;
+    padding: 20px;
+}
+div.password input {
+    width: 300px;
+    height: 30px;
+    border: 0;
+    text-indent: 10px;
+}
+div.password svg {
+	position: relative;
+	top: 0;
+	right: 0;
+	font-size: 1.2em;
+}

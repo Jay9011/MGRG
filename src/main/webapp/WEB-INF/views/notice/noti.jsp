@@ -10,9 +10,9 @@
 <jsp:include page="../datatable.jsp"/>
 <jsp:include page="../topend.jsp"/>
 
-<script src="${pageContext.request.contextPath}/resources/JS/notice.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/table.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/notice.css">
+<script src="${pageContext.request.contextPath}/resources/JS/notice.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js" ></script>
     
 	
