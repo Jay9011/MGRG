@@ -2,18 +2,26 @@ $(document).ready(function(){
 	loadPage();
 	
 	let table = $('#staff_list').DataTable();
-	$('#staff_list tbody').on('click','tr',function(){
-		let data = table.row(this).data();
-		alert(data.uid + ' 클릭함.');
-		$('#viewStaff').modal('show');
+	$('#staff_list tbody').on('click','tr',function(e){
+		let cell = $(e.target).closest('td');
+		if(cell.index() > 0){
+			let data = table.row(this).data();
+			alert(data.uid + ' 클릭함.');
+			$('#viewStaff').modal('show');
+		} else {
+			
+		}
 	});
 
-	$('.input-group.date').datepicker({
-		todayBtn: "linked",
-		language: "ko",
-		daysOfWeekHighlighted: "0,6",
-		autoclose: true,
-		todayHighlight: true
+	$('.password i').on('click',function() {
+		$('input').toggleClass('active');
+		if($('input').hasClass('active')) {
+			$(this).attr('class', "fa fa-eye-slash fa-lg")
+			.prev('input').attr('type', "text");
+		}else{
+			$(this).attr('class', "fa fa-eye fa-lg")
+			.prev('input').attr('type', 'password');
+		}
 	});
 });
 
