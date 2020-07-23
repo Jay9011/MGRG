@@ -5,88 +5,25 @@
 <head>
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/notice.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-<!-- datatables css,js -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"/> 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/> 
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js" ></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-     <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath}/resources/JS/notice.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/table.css">
     
+<jsp:include page="../top.jsp"/>
+<jsp:include page="../datatable.jsp"/>
+<jsp:include page="../topend.jsp"/>
 
+<script src="${pageContext.request.contextPath}/resources/JS/notice.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/table.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/notice.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js" ></script>
+    
 	
 <title>공지사항</title>
 </head>
 <body>
+<jsp:include page="../nav.jsp"/>
 
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container-fluid">
-            <strong>MR</strong>
-            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-            <div id="navbarSupportedContent">
-            <ul class="nav ">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">로그아웃</a>
-                    </li>
-                    <li>
-                        <button type="button" id="sidebarCollapse" class="btn btnsh  text-dark">
-                            <i class="fas fa-align-left"></i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar">
-             <ul class="list-unstyled components">
-                <!-- <li class="active"> -->
-                    <li>
-                    <a href="#homeSubmenu">
-                        <i class="fas fa-home"></i>
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-briefcase"></i>
-                        About
-                    </a>
-                    <a href="#pageSubmenu" >
-                        <i class="fas fa-copy"></i>
-                        Pages
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-image"></i>
-                        Portfolio
-                    </a>
-                </li>
-            </ul>
-        </nav>
              <!-- Page Content  -->
         <div id="content">
+        
 	<%-- 공지 목록 --%>
 	<div id="list">
 	<h2>공지사항</h2>

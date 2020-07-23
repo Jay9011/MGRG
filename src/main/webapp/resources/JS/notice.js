@@ -106,11 +106,10 @@ function changePageRows() {
 // 새글 등록 처리
 function chkWrite() {
 	
-	CKEDITOR.instances.editor.updateElement();
-	var data = $('#frmWrite').serialize(); // 해당 폼 안의 name 이 있는 것들을 끌고
-											// 들어옴(String )
-	// subject=ddd&name=eeee&content=qwerwe (get 방식 형태로 보내김 )
-	alert(data + "--" + typeof data); // 확인용
+	CKEDITOR.instances.editor.updateElement(); //ckeditor 에서 쓴글을 가져올때 사용 
+	var data = $('#frmWrite').serialize();
+	
+	// alert(data + "--" + typeof data); // 확인용
 
 	// ajax request
 	$.ajax({
@@ -130,12 +129,9 @@ function chkWrite() {
 		}
 	});
 
-	// request 후, form 에 입력된 것 reset(); .reset(); 어떤 특정 오브젝트를 리셋해야한다.
-	// (javascript 함수) jquery아님
-	// $('#frmWrite').reset();
 	$('#frmWrite')[0].reset();
 
-	return false; // 페이지 리로딩은 안할것!
+	return false; 
 }// end chkWrite()
 
 // check 된 uid 의 게시글들만 삭제
