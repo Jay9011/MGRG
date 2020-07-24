@@ -17,10 +17,14 @@
                                 <div class="text-center mt-4">
                                     <h2 class="display-1">Log out</h2>
                                     <p class="lead">successfully</p>
-                                    <a href="<%= request.getContextPath() %>/login/mainLoginPage">
+                                    <form action="<%= request.getContextPath() %>/customLogout" method="post">
+                                    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}"/>
+                                    <button>
                                         <i class="fas fa-arrow-left mr-1"></i>
                                         Return to login
-                                    </a>
+                                    </button>
+                                    
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,185 @@
+html,body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+	font-family: Roboto, sans-serif;
+}
+
+/* DEFAULT */
+
+.transition {
+	transition: .5s;
+	transition-timing-function: cubic-bezier(.4,0,.5,1);
+}
+
+.centred {
+	transform: translateX(-50%)translateY(-50%);
+}
+
+.clearfix {
+	clear: both;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    margin: 1em 0 2em;
+    font-weight: 100;
+    color: #999;
+    position: relative;
+}
+
+h1:after {
+    content: "";
+    width: 100px;
+    height: 1px;
+    position: absolute;
+    bottom: -1em;
+    background-color: #ddd;
+    left: 50%;
+    margin-left: -50px;
+}
+
+circle,line,path {
+	stroke-linecap: round;
+	stroke: #fff;
+	stroke-width: 10px;
+}
+
+/* CARD */
+
+#san-francisco .card-header {
+    background-color: #3D6AA2;
+}
+
+
+.card {
+    background-color: #fff;
+    width: 350px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    margin: 2em;
+    display: inline-block;
+}
+
+.card svg {
+	display: inline-block;
+	width: 100%;
+	height: auto;
+}
+
+.card-header {
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 200px;
+    z-index: 1;
+    text-align: left;
+}
+
+.left-side {
+    float: left;
+    width: 60%;
+}
+
+h2.city {
+    font-size: 1.2em;
+    font-weight: 300;
+    margin: 0 0 20px;
+    position: relative;
+}
+
+h2.city:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    left: 0;
+    bottom: -11px;
+}
+
+span.currently-weather {
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: .8em;
+}
+
+
+span.temperature {
+    font-size: 2em;
+    font-weight: 100;
+    margin-top: 1em;
+    display: block;
+    line-height: 1em;
+}
+	
+.weather-icon {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    width: 30%;
+    transform: translateY(-50%);
+}
+
+.header-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: .1;
+    z-index: -1;
+}
+
+.col {
+    float: left;
+    width: 33.33%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+span.day {
+    display: block;
+    font-weight: 300;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.col .weather-icon {
+    position: relative;
+    width: 100%;
+    right: 0;
+    top: 0;
+    transform: none;
+    margin: 20px 0 0;
+}
+
+.col .weather-icon svg {
+    width: 80%;
+    height: auto;
+}
+
+.col:nth-child(2) {
+    border-width: 0 1px 0 1px;
+    border-style: solid;
+    border-color: #f9f9f9;
+}
+
+#san-francisco .col .weather-icon , #san-francisco .col .weather-icon  {
+    stroke: #3D6AA2;
+}
+	
+.coming-weather .wi{
+	font-size: 1.5em !important;
+	color: red !important;
+}	
