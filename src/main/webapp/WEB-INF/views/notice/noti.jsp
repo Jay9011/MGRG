@@ -44,9 +44,9 @@
 			<table id="tlc"  class="table table-hover" style="width:100%">
 				<thead>
 					<th style="width:3%"> </th>
-					<th style="width:77%">제목</th>
+					<th style="width:75%">제목</th>
 					<th style="width:9%">작성일</th>
-					<th style="width:5%">부서</th>
+					<th style="width:8%">부서</th>
 					<th style="width:5%">직책</th>
 				</thead>
 

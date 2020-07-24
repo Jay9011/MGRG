@@ -3,17 +3,25 @@ package com.mgrg.hrm.notice;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+import org.springframework.lang.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BoardDTO {
 	private Integer uid;
+	
+	@NonNull
 	private String subject;
+	@NonNull
 	private String content;
+	
 	@JsonProperty("regdate")
 	private Timestamp regDate;
 	private int dep_uid;
 	private int p_uid;
+	@NonNull
 	private String department;
+	@NonNull
 	private String position;
 	
 	
