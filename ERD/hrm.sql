@@ -174,12 +174,139 @@ INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (5, 
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (6, '사장', 6, 27, 'ROLE_MEMBER');
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (7, '인사총괄', 7, 0, 'ROLE_ADMIN');
 /* 공지사항 더미 */
-INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
-VALUES (SEQ_notice_n_uid.NEXTVAL, '인-사휴가 관련 공지사항입니다.', '8월 7일부터는 휴가입니다.', to_date('2020-07-29', 'yyyy-mm-dd'),1,1);
+
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
-VALUES (SEQ_notice_n_uid.NEXTVAL, '공-사 휴가 관련 공지사항입니다.', '8월 7일부터는 휴가입니다.',to_date('2020-07-29', 'yyyy-mm-dd'),1);
-INSERT INTO notice (n_uid, n_subject, n_content, n_regdate,p_uid) 
-VALUES (SEQ_notice_n_uid.NEXTVAL, '공-대 휴가 관련 공지사항입니다.', '8월 7일부터는 휴가입니다.',to_date('2020-07-29', 'yyyy-mm-dd'),2);
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/7)', '<h2><span style="color:#e74c3c;">8월 7일부터는 휴가입니다.</span></h2>
+<pre>
+<span style="color:#e74c3c;">
+각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
+',to_date('2020-07-29', 'yyyy-mm-dd'),1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/1)', '<h2><span style="color:#e74c3c;">8월 1일부터는 휴가입니다.</span></h2>
+<pre>
+<span style="color:#e74c3c;">
+각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
+',to_date('2020-07-29', 'yyyy-mm-dd'),2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/2)', '<h2><span style="color:#e74c3c;">8월 2일부터는 휴가입니다.</span></h2>
+<pre>
+<span style="color:#e74c3c;">
+각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
+',to_date('2020-07-29', 'yyyy-mm-dd'),3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/3)', '<h2><span style="color:#e74c3c;">8월 3일부터는 휴가입니다.</span></h2>
+<pre>
+<span style="color:#e74c3c;">
+각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
+',to_date('2020-07-29', 'yyyy-mm-dd'),4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/6)', '<h2><span style="color:#e74c3c;">8월 6일부터는 휴가입니다.</span></h2>
+<pre>
+<span style="color:#e74c3c;">
+각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
+',to_date('2020-07-29', 'yyyy-mm-dd'),5);
+
+
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-29', 'yyyy-mm-dd'),1,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-29', 'yyyy-mm-dd'),1,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-29', 'yyyy-mm-dd'),1,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-29', 'yyyy-mm-dd'),1,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-29', 'yyyy-mm-dd'),1,5);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">인사부 사원 여러분들은 8시 출근이 아닌 8시 30분에  출근해 주십시오</span></h2>', to_date('2020-07-29', 'yyyy-mm-dd'),1,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">인사부 대리 여러분들은 8시 출근이 아닌 8시 30분에 출근해 주십시오</span></h2>', to_date('2020-07-27', 'yyyy-mm-dd'),1,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">인사부 팀장 여러분들은 8시 출근이 아닌 8시 30분에 출근해 주십시오</span></h2>', to_date('2020-07-26', 'yyyy-mm-dd'),1,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">인사부 부장 여러분들은 8시 출근이 아닌 8시 30분에 출근해 주십시오</span></h2>', to_date('2020-07-25', 'yyyy-mm-dd'),1,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">인사부 과장 여러분들은 8시 출근이 아닌 8시 30분에 출근해 주십시오</span></h2>', to_date('2020-07-24', 'yyyy-mm-dd'),1,5);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-18', 'yyyy-mm-dd'),2,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-18', 'yyyy-mm-dd'),2,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-18', 'yyyy-mm-dd'),2,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-18', 'yyyy-mm-dd'),2,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-18', 'yyyy-mm-dd'),2,5);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">총무부 사원 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-07-13', 'yyyy-mm-dd'),2,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">총무부 대리 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-07-13', 'yyyy-mm-dd'),2,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">총무부 팀장 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-07-13', 'yyyy-mm-dd'),2,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">총무부 부장 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-07-13', 'yyyy-mm-dd'),2,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">총무부 과장 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-07-13', 'yyyy-mm-dd'),2,5);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-18', 'yyyy-mm-dd'),3,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-18', 'yyyy-mm-dd'),3,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-18', 'yyyy-mm-dd'),3,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-18', 'yyyy-mm-dd'),3,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-18', 'yyyy-mm-dd'),3,5);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">경영지원부 사원 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2019-07-12', 'yyyy-mm-dd'),3,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">경영지원부 대리 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2019-07-12', 'yyyy-mm-dd'),3,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">경영지원부 팀장 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2019-07-12', 'yyyy-mm-dd'),3,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">경영지원부 부장 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2019-07-12', 'yyyy-mm-dd'),3,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">경영지원부 과장 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2019-07-12', 'yyyy-mm-dd'),3,5);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,5);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">영업부 사원 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">영업부 대리 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">영업부 팀장 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">영업부 부장 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">영업부 과장 여러분들은 8시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,5);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-03-10', 'yyyy-mm-dd'),4,5);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '사)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">기술부  사원 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,1);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">기술부 대리 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,2);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">기술부 팀장 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,3);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '부)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">기술부 부장 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,4);
+INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
+VALUES (SEQ_notice_n_uid.NEXTVAL, '과)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">기술부 과장 여러분들은 9시 30분 출근이 아닌 9시에 출근해 주십시오</span></h2>', to_date('2020-04-12', 'yyyy-mm-dd'),4,5);
 
 
 /* 사원 더미 */
@@ -410,15 +537,41 @@ SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) , oh.EMP_UID
 ;
 -- 직원 이름과 직책을 통합한 근태 현황 뽑기 --
 SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, oh.W_START, oh.W_END, category.status 
-FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p, OFFICE_HOUR oh, (SELECT  
-	CASE WHEN h.ohno < 900 THEN '출근'
-		WHEN h.ohno >= 900 THEN '지각'
-		WHEN h.ohno >= 1030 THEN '결근'
-		END AS status
-FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.EMP_UID
-		FROM OFFICE_HOUR oh ) h) category
-WHERE e.EMP_UID = oh.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID 
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p, OFFICE_HOUR oh, 
+	(SELECT  
+		h.EMP_UID,
+		CASE WHEN h.ohno < 900 THEN '1'
+			WHEN h.ohno >= 900 THEN '2'
+			WHEN h.ohno >= 1030 THEN '3'
+			END AS status
+	FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.EMP_UID
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = oh.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID AND category.EMP_UID = e.EMP_UID 
 ORDER BY oh.W_START ASC;
+
+
+SELECT  
+	h.*,
+	CASE WHEN h.ohno < 900 THEN '1'
+		WHEN h.ohno >= 900 THEN '2'
+		WHEN h.ohno >= 1030 THEN '3'
+		END AS status
+FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
+		FROM OFFICE_HOUR oh ) h
+;
+
+SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, category.W_START, category.W_END, category.status 
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+	(SELECT  
+		h.*,
+		CASE WHEN h.ohno < 900 THEN '출근'
+			WHEN h.ohno >= 900 THEN '지각'
+			WHEN h.ohno >= 1030 THEN '결근'
+			END AS status
+	FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+ORDER BY category.W_START ASC;
 
 -- 근태 현황이 나오는 테이블 --
 SELECT e.EMP_NAME, d.DEP_NAME, p.P_NAME, oh.W_START, oh.W_END
@@ -481,8 +634,31 @@ select n_uid, n_subject, n_content, n_regdate, dep_uid, p_uid from notice where 
 
 SELECT * FROM ontime;
 
+			SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME posRank, p.P_NAME dept, category.W_START "start", category.W_END "end", category.stat "status" 
+			FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+				(SELECT  
+					h.*,
+					CASE WHEN h.ohno < 900 THEN '출근'
+						WHEN h.ohno >= 900 THEN '지각'
+						WHEN h.ohno >= 1030 THEN '결근'
+						END AS stat
+				FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
+						FROM OFFICE_HOUR oh ) h) category
+			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+			ORDER BY category.W_START ASC;
 
-
+SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, category.W_START, category.W_END, category.stat 
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+	(SELECT  
+		h.*,
+		CASE WHEN h.ohno < 900 THEN '출근'
+			WHEN h.ohno >= 900 THEN '지각'
+			WHEN h.ohno >= 1030 THEN '결근'
+			END AS stat
+	FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+ORDER BY category.W_START ASC;
 
 
 

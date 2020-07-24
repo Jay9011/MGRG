@@ -72,6 +72,7 @@ function boardRord() {
 			dataSrc : 'data'
 				
 		},
+		autoWidth:true,
 		columns : [{
 					data : "uid",
 					"render" : function(data, type, full, meta) {

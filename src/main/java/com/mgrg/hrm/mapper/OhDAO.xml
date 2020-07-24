@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mgrg.hrm.officehr.OhDAO">
+	<select id="select_officehr"
+		resultType="com.mgrg.hrm.officehr.OhDTO" flushCache="true">
+		<![CDATA[
+			SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME posRank, p.P_NAME dept, category.W_START "start", category.W_END "end", category.stat "status" 
+			FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+				(SELECT  
+					h.*,
+					CASE WHEN h.ohno < 900 THEN '출근'
+						WHEN h.ohno >= 900 THEN '지각'
+						WHEN h.ohno >= 1030 THEN '결근'
+						END AS stat
+				FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
+						FROM OFFICE_HOUR oh ) h) category
+			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+			ORDER BY category.W_START ASC
+		]]>
+	</select>
+
+
+</mapper>
