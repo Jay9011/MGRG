@@ -27,23 +27,23 @@
                     <li>
                     <a href="#homeSubmenu">
                         <i class="fas fa-home"></i>
-                        Home
+                        	근태 관리
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <i class="fas fa-briefcase"></i>
-                        About
+                       	직원 명부
                     </a>
                     <a href="#pageSubmenu" >
                         <i class="fas fa-copy"></i>
-                        Pages
+                      	  급여 관리
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <i class="fas fa-image"></i>
-                        Portfolio
+                       	공지 사항
                     </a>
                 </li>
             </ul>
