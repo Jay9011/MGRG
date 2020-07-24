@@ -65,8 +65,8 @@ function loadPage(){
 			{data: 'leftHoliday'}
 		]
 		,columnDefs:[
-			{targets: 0,
-				orderable: false}
+			{targets: 0, orderable: false},
+			{targets: 5, width:"500px"}
 		]
 	});
 }
