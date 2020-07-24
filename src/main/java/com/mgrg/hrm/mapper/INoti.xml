@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgrg.hrm.login.INotiDAO">
+
+	<select id="selectNoti" resultType="com.mgrg.hrm.login.NoticeDTO">
+		select n_uid, n_subject, n_content, n_regdate, dep_uid, p_uid from notice where p_uid = #{parma1}
+	</select>
+
+
+</mapper>
