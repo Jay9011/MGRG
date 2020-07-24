@@ -661,7 +661,7 @@ WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_U
 ORDER BY category.W_START ASC;
 
 
-
+SELECT * FROM EMPLOYEES e ;
 
 
 
