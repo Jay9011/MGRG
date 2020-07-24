@@ -197,7 +197,7 @@ VALUES (SEQ_employees_emp_uid.nextval, '사지원', '1995/01/25', 'sup@gmail.com
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '영업왕', '1894/11/14', 'king@gmail.com', 'king', '123', 50000000, 1, 4);
+VALUES (SEQ_employees_emp_uid.nextval, '영업왕입니다', '1894/11/14', 'king@gmail.com', 'king', '123', 50000000, 1, 4);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, EMP_ADDR, EMP_PHONENUM , emp_salary, p_uid, dep_uid)

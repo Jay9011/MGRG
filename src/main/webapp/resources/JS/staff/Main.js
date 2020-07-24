@@ -12,6 +12,10 @@ $(document).ready(function(){
 			
 		}
 	});
+	
+	$('#btnWrite').on('click', function(){
+		$('#writeStaff').modal('show');
+	});
 
 	$('.password svg').on('click',function() {
 		$('input').toggleClass('active');
@@ -60,15 +64,17 @@ function loadPage(){
 			{data: 'position'},
 			{data: 'phonenum'},
 			{data: 'email'},
-			{data: 'address'},
+			{data: 'leftHoliday'},
 			{data: 'birthday'},
-			{data: 'leftHoliday'}
+			{data: 'address'}
 		]
 		,columnDefs:[
-			{targets: 0, orderable: false},
-			{targets: 5, width:"500px"}
+			{targets: 0, orderable: false}
 		]
-	});
+		,fixedColumns: {
+			leftColumns: 3
+		}
+	}).columns.adjust();
 }
 
 var themeObj = {

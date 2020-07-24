@@ -1,10 +1,15 @@
 @charset "UTF-8";
 
 #content {
-	max-width: max-content;
+	max-width: 95%;
 } 
 
-#staff_list td {
+table.dataTable.nowrap th, table.dataTable.nowrap td {
+	white-space: nowrap;
+	background-color: #fbfbfb;
+}
+
+table.dataTable.nowrap td {
 	border-bottom: 1px solid olive;
 }
 
@@ -21,6 +26,7 @@
 	float: right;
 	background-color: #9569CC;
 	color: #F8EBFF;
+	margin: 15px 0;
 	/* font-weight: bold; */
 }
 
@@ -38,7 +44,7 @@
 
 .modal-body input {
 	border: none;
-	border-bottom: 1px solid #223259;
+	border-bottom: 1px solid #a9adb9;
 }
 
 .modal-body input:focus {
@@ -55,6 +61,11 @@
 
 .input-group {
 	margin: 5px 0 10px 0;
+}
+
+span.requied::before {
+	content: "* ";
+	color: red;
 }
 
 div.password {
@@ -77,10 +88,19 @@ div.addLable {
 	width: 120px;
 	margin-right: 10px;
 	text-align: end;
-	line-height: 45px;
+	line-height: 55px;
 }
 
 div.addBody {
 	float: left;
 	width: 70%;
+}
+
+input#addrBtn {
+	border: none;
+}
+
+button.addBtn {
+	background-color: #9569CC;
+	color: #F8EBFF;
 }

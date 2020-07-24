@@ -23,7 +23,7 @@
 	<jsp:include page="../nav.jsp" />
 	<!-- Page Content  -->
 	<div id="content">
-		<div class="right">
+		<div class="float-right">
 			<button type="button" id="btnWrite" class="btn">직원 추가</button>
 		</div>
 		
@@ -32,22 +32,27 @@
 		<table id="staff_list" class="table table-hover nowrap">
 			<thead>
 				<tr>
-					<th style="width:4%">*</th>
-					<th style="width:9%">이름</th>
-					<th style="width:8%">직책</th>
-					<th style="width:16%">전화번호</th>
-					<th style="width:18%">이메일</th>
-					<th style="width:33%">주소</th>
-					<th style="width:8%">생년월일</th>
-					<th style="width:4%">남은 휴가일수</th>
+					<th>*</th>
+					<th>이름</th>
+					<th>직책</th>
+					<th>전화번호</th>
+					<th>이메일</th>
+					<th>남은 휴가일수</th>
+					<th>생년월일</th>
+					<th>주소</th>
 				</tr>
 			</thead>
 			<tbody>
 			</tbody>
 		</table>
+		<div class="clearfix"></div>
+		<div class="float-left">
+			<button type="button" id="btnDelete" class="btn">직원 삭제</button>
+		</div>
+		<div class="clearfix"></div>
 	
 		<!-- Modal -->
-		<div class="modal fade" id="viewStaff" tabindex="-1" role="dialog"
+		<div class="modal fade" id="writeStaff" tabindex="-1" role="dialog"
 			aria-labelledby="viewStaffTitle" aria-hidden="true">
 			<div
 				class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
@@ -61,24 +66,24 @@
 					</div>
 					<div class="modal-body">
 						<div class="input-group text">
-							<label for="staff_name">이름 </label>
-							<input name="name" id="staff_name" type="text" style="width:100px"/>
+							<label for="staff_name"><span class="requied"></span>이름 </label>
+							<input name="name" id="staff_name" type="text" style="width:160px" required="required"/>
 						</div>
 						<div class="input-group date">
-							<label for="staff_birthday">생일 </label>
-							<input name="birthday" id="staff_birthday" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							<label for="staff_birthday"><span class="requied"></span>생일 </label>
+							<input name="birthday" id="staff_birthday" type="date" class="form-control" style="width: 160px; flex: none;" required="required"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 						</div>
 						<div class="input-group text">
 							<label for="staff_phone">휴대폰 번호 </label>
 							<input name="phonenum" id="staff_phone" type="text" style="width:300px"/>
 						</div>
 						<div class="input-group text">
-							<label for="staff_email">E-mail </label>
-							<input name="email" id="staff_email" type="text" style="width:300px"/>
+							<label for="staff_email"><span class="requied"></span>E-mail </label>
+							<input name="email" id="staff_email" type="text" style="width:300px" required="required"/>
 						</div>
 						<div class="input-group text">
-							<label for="staff_id">아이디 </label>
-							<input name="id" id="staff_id" type="text" style="width:300px"/>
+							<label for="staff_id"><span class="requied"></span>아이디 </label>
+							<input name="id" id="staff_id" type="text" style="width:300px" required="required"/>
 						</div>
 						<!-- <div class="input-group password">
 							<label for="staff_pw">비밀번호 </label>
@@ -100,7 +105,7 @@
 						<div class="input-group text addBody">
 							<div class="input-group">
 								<input name="addrZoneCode" id="addrZoneCode" type="text" readonly="readonly" style="width: 80px;"/>
-								<input type="button" onclick="DaumAddr()" value="주소 찾기"/>
+								<input id="addrBtn" class="btn btn-light" type="button" onclick="DaumAddr()" value="주소 찾기"/>
 							</div>
 							<div class="input-group">
 								<input name="addrRoad" id="addrRoad" type="text" readonly="readonly" style="width:300px; margin-bottom:10px;"/>
@@ -108,12 +113,12 @@
 							</div>
 						</div>
 						<div class="input-group date">
-							<label for="staff_hiredate">입사 날짜 </label>
-							<input name="hiredate" id="staff_hiredate" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							<label for="staff_hiredate"><span class="requied"></span>입사 날짜 </label>
+							<input name="hiredate" id="staff_hiredate" type="date" class="form-control" style="width: 160px; flex: none;" required="required"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 						</div>
 						<div class="input-group text">
-							<label for="staff_salary">연봉 </label>
-							<input name="salary" id="staff_salary" type="number" style="width:300px"/>
+							<label for="staff_salary"><span class="requied"></span>연봉 </label>
+							<input name="salary" id="staff_salary" type="number" style="width:300px" required="required"/>
 						</div>
 						<div class="input-group select" style="margin-left:125px">
 							<select name="department" id="staff_department" style="margin:0 5px">
@@ -135,6 +140,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
+						<button type="button" class="btn addBtn"
+							data-dismiss="modal">저장하기</button>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">닫기</button>
 					</div>
