@@ -8,7 +8,9 @@
 		select p_uid, dep_uid from EMPLOYEES where emp_id = #{param1}
 	</select>
 
-
+	<select id="findPW" resultType="String">
+		select emp_pw from EMPLOYEES where emp_id = #{param1}
+	</select>
 
 </mapper>
 
