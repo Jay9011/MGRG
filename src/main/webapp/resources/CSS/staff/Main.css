@@ -16,20 +16,6 @@
 .pagination {
 	justify-content: flex-start !important;
 }
-
-#btnWrite {
-	float: right;
-	background-color: #9569CC;
-	color: #F8EBFF;
-	/* font-weight: bold; */
-}
-
-#btnDelete {
-	float: right;
-	background-color: #ffcd57;
-	color: white;
-}
-
 .modal-header {
 	color: #FFF;
 	background-color: #7386D5;
