@@ -1,5 +1,7 @@
 package com.mgrg.hrm.notice;
 
+import java.util.Arrays;
+
 import org.springframework.ui.Model;
 
 import com.mgrg.hrm.Command;
@@ -13,14 +15,14 @@ public class BVIewCommand implements Command{
 		NoticeJSON list = new NoticeJSON();
 		StringBuffer message = new StringBuffer();
 		String status = "FAIL"; // 기본 FAIL
-		
+		BoardDTO arr = null;
 		int uid = (int) model.getAttribute("uid");
 		
 		try {
 			if(uid == 0) {
 				message.append("[uid를 찾을수 없어요]");
 			}else {
-				dao.bSelectUid(uid);
+				arr = dao.bSelectUid(uid);
 				status = "OK";
 			}
 		}catch (Exception e) {
@@ -28,6 +30,7 @@ public class BVIewCommand implements Command{
 		}
 		list.setMessage(message.toString());
 		list.setStatus(status);
+		list.setList(Arrays.asList(arr));
 		
 		model.addAttribute("list",list);
 		

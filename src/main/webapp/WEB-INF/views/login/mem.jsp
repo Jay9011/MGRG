@@ -7,8 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <jsp:include page="../top.jsp"/>
-
 <jsp:include page="../topend.jsp"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/weather.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css">
+<script src="${pageContext.request.contextPath}/resources/JS/weather.js"></script>
 
 <title>메인 화면</title>
 </head>
@@ -18,9 +20,48 @@
         <div id="content">
 
             <h2>근태 현황</h2>
-            <canvas id="myChart" height="400" width="400"></canvas>
-            <div class="line"></div>
+            <canvas id="myChart" height="400" width="400" style="display: inline-block;"></canvas>
+<!--             날씨 -->
+  <div id="san-francisco" class="card">
+            <div class="card-header">
+                <!-- INFO -->
+                <div class="left-side">
+                    <h2 class="city">오늘의 날씨</h2>
+                    <!-- <span class="temperature">63°</span> -->
+                    <span class="temperature"></span>
+                </div>
+                <div class="weather-icon">
+                    <!-- PARTIALLY -->
+                    <i id='icon' class="" style="font-size: 100px; padding-right: 20px;"></i>
 
+                </div>
+                <div class="header-bg" style="background-image: url(../resources/CSS/main.jpg)"></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="coming-weather">
+                <div class="col">
+                    <span class="day">내일</span>
+                    <div class="weather-icon">
+                        <i id='day1'></i>
+                    </div>
+                </div>
+                <div class="col">
+                    <span class="day">모레</span>
+                    <div class="weather-icon">
+                        <i id='day2'></i>
+                    </div>
+                </div>
+                <div class="col">
+                    <span class="day">내일모레</span>
+                    <div class="weather-icon">
+                        <i id='day3'></i>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+            <div class="line"></div>
+<!--     공지 게시판 -->
             <h2>공지사항</h2>
            
             <div class="col-xs-12 col-md-6 ">

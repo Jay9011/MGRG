@@ -47,4 +47,9 @@ public class HomeController {
 		return "staff/list";
 	} // end staff();
 	
+	@RequestMapping("/login/mem")
+	public String mem(Model model) {
+		return "login/mem";
+	}
+	
 }
