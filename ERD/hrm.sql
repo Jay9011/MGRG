@@ -200,9 +200,11 @@ INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_
 VALUES (SEQ_employees_emp_uid.nextval, '영업왕', '1894/11/14', 'king@gmail.com', 'king', '123', 50000000, 1, 4);
 ;
 
-INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '공돌이', '1898/10/04', 'gong@gmail.com', 'gong', '123', 50000000, 1, 5);
+INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, EMP_ADDR, EMP_PHONENUM , emp_salary, p_uid, dep_uid)
+VALUES (SEQ_employees_emp_uid.nextval, '공돌이', '1898/10/04', 'gong@gmail.com', 'gong', '123', '123456 서울특별시 강남구 강남로 한강변 초대형 아파트 제일 윗층과 인천광역시 부평구 신생로 새로생긴 아파트 102동 402호에 살고있는 공돌이 입니다.', 01012345678,50000000, 1, 5);
 ;
+
+SELECT * FROM EMPLOYEES;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
 VALUES (SEQ_employees_emp_uid.nextval, '대대리', '1980/01/07', 'bald@gmail.com', 'bald', '123', 60000000, 2, 1);
