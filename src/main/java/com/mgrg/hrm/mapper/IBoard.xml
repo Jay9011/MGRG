@@ -59,23 +59,35 @@
 	</select>
 	
 	<update id="bUpdate" flushCache="true">
-		UPDATE
-			notice
-		SET 
-			n_subject = #{subject}, n_content = #{content}, dep_uid = #{dep_uid}, p_uid = #{p_uid}
-		WHERE
-			n_uid = #{uid}
+		<choose>
+			<when test="dep_uid == 0">
+				UPDATE
+					notice
+				SET 
+					n_subject = #{subject}, n_content = #{content}, p_uid = #{p_uid}
+				WHERE
+					n_uid = #{uid}
+			</when>
+			<otherwise>
+				UPDATE
+					notice
+				SET 
+					n_subject = #{subject}, n_content = #{content}, dep_uid = #{dep_uid}, p_uid = #{p_uid}
+				WHERE
+					n_uid = #{uid}
+			</otherwise>
+		</choose>
 	</update>
 	
-	<delete id="bDeleteUid" flushCache="true" parameterType="java.util.ArrayList">
+	<delete id="bDeleteUids" flushCache="true" parameterType="java.util.ArrayList">
 		DELETE FROM
 			notice
 		WHERE
-			n_uid in (
-				 <foreach collection="array" item="item" index="index" separator=",">
+			n_uid in
+				 <foreach collection="array" item="item" index="index" separator="," open="(" close=")">
 			 	${item}
 			 </foreach>
-			)
+		
 	</delete>
 	
 </mapper>
