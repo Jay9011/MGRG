@@ -23,6 +23,12 @@
 	<jsp:include page="../nav.jsp" />
 	<!-- Page Content  -->
 	<div id="content">
+		<div class="right">
+			<button type="button" id="btnWrite" class="btn">직원 추가</button>
+		</div>
+		
+		<div class="clearfix"></div>
+		
 		<table id="staff_list" class="table table-hover nowrap">
 			<thead>
 				<tr>
