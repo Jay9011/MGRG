@@ -3,8 +3,12 @@
     
     <%	int puid= (Integer) session.getAttribute("puid") ;
     	int depuid= (Integer)	session.getAttribute("depuid");
+    	String date = (String) session.getAttribute("regdate");
+    	String subject = (String)session.getAttribute("subject");
     	System.out.println(puid);
     	System.out.println(depuid);
+    	System.out.println(date);
+    	System.out.println(subject);
     %>
 <!DOCTYPE html>
 <html>

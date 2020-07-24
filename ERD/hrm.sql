@@ -395,7 +395,7 @@ ORDER BY e.EMP_NAME ASC;
 CREATE OR REPLACE VIEW officehour AS
 
 
-
+select n_uid, n_subject, n_content, n_regdate, dep_uid, p_uid from notice where p_uid = 1;
 
 
 
