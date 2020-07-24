@@ -6,7 +6,7 @@ $(document).ready(function(){
 		let cell = $(e.target).closest('td');
 		if(cell.index() > 0){
 			let data = table.row(this).data();
-			alert(data.uid + ' 클릭함.');
+//			alert(data.uid + ' 클릭함.');
 			$('#viewStaff').modal('show');
 		} else {
 			
@@ -45,6 +45,7 @@ function loadPage(){
 			}
 		}
 		,scrollX:true
+		,autoWidth:true
 		,ajax:{
 			url: path + '/staff/list.json',
 			dataSrc: 'data'
@@ -67,5 +68,44 @@ function loadPage(){
 			{targets: 0,
 				orderable: false}
 		]
+	});
+}
+
+var themeObj = {
+   searchBgColor: "#7386D5", //검색창 배경색
+   queryTextColor: "#FFFFFF" //검색창 글자색
+};
+
+function DaumAddr(){
+	var width = 500; //팝업의 너비
+	var height = 600; //팝업의 높이
+	new daum.Postcode({
+	    oncomplete: function(data) {
+	        // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	    	var roadAddr = data.roadAddress; // 도로명 주소 변수
+	    	var extraRoadAddr = ''; // 참고 항목 변수
+	    	// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+            
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById("addrZoneCode").value = data.zonecode;
+            document.getElementById("addrRoad").value = roadAddr + extraRoadAddr;
+	    },
+	    theme: themeObj
+	}).open({
+	    left: (window.screen.width / 2) - (width / 2)
+	    ,top: (window.screen.height / 2) - (height / 2)
+	    ,popupName: 'postcodePopup' //팝업 이름을 설정(영문,한글,숫자 모두 가능, 영문 추천)
 	});
 }

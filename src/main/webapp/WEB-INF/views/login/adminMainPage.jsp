@@ -18,11 +18,9 @@
 			<div class="box1 box">
 				<div class="bg"></div>
 				<div class="details">
-					<h1>I'm the first Box</h1>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Integer lacinia dui lectus. Donec scelerisque ipsum diam, ac
-						mattis orci pellentesque eget.</p>
-					<button>Check Now</button>
+					<h1>직원 근태 현황</h1>
+					<p>직원들의 출근/지각/결근/휴가 현황을 확인하실수 있습니다.</p>
+					<button onclick="location.href='/hrm/officehour/offhr'">Check Now</button>
 				</div>
 
 				<div class="illustration">

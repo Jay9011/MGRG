@@ -35,8 +35,10 @@
 		
 		<security:intercept-url pattern="/login/adminMainPage" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/notice/**" access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/office/**" access="hasRole('ROLE_ADMIN')"/>
-
+		<security:intercept-url pattern="/officehour/**" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/staff/**" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/login/member" access="hasRole('ROLE_MEMBER')" />
+		
 		<security:form-login
 			login-page="/login/mainLoginPage"
 			authentication-success-handler-ref="customLoginSuccess" />
@@ -45,7 +47,8 @@
 			ref="customAccessDenied" />
 
 		<security:logout logout-url="/customLogout"
-			invalidate-session="true" />
+			invalidate-session="true"  
+				 logout-success-url="/login/mainLoginPage"/>
 
 	</security:http>
 
