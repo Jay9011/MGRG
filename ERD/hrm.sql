@@ -663,7 +663,9 @@ ORDER BY category.W_START ASC;
 
 SELECT * FROM EMPLOYEES e ;
 
+select e.emp_uid "uid", e.emp_name name, p.p_name position, e.emp_salary salary, e.emp_birthdate birth from employees e, positionrank p where e.p_uid = p.p_uid
 
+select emp_pw from EMPLOYEES where emp_id = 'insa@insa.com';
 
 
 
