@@ -410,15 +410,41 @@ SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) , oh.EMP_UID
 ;
 -- 직원 이름과 직책을 통합한 근태 현황 뽑기 --
 SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, oh.W_START, oh.W_END, category.status 
-FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p, OFFICE_HOUR oh, (SELECT  
-	CASE WHEN h.ohno < 900 THEN '출근'
-		WHEN h.ohno >= 900 THEN '지각'
-		WHEN h.ohno >= 1030 THEN '결근'
-		END AS status
-FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.EMP_UID
-		FROM OFFICE_HOUR oh ) h) category
-WHERE e.EMP_UID = oh.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID 
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p, OFFICE_HOUR oh, 
+	(SELECT  
+		h.EMP_UID,
+		CASE WHEN h.ohno < 900 THEN '1'
+			WHEN h.ohno >= 900 THEN '2'
+			WHEN h.ohno >= 1030 THEN '3'
+			END AS status
+	FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.EMP_UID
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = oh.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID AND category.EMP_UID = e.EMP_UID 
 ORDER BY oh.W_START ASC;
+
+
+SELECT  
+	h.*,
+	CASE WHEN h.ohno < 900 THEN '1'
+		WHEN h.ohno >= 900 THEN '2'
+		WHEN h.ohno >= 1030 THEN '3'
+		END AS status
+FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
+		FROM OFFICE_HOUR oh ) h
+;
+
+SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, category.W_START, category.W_END, category.status 
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+	(SELECT  
+		h.*,
+		CASE WHEN h.ohno < 900 THEN '출근'
+			WHEN h.ohno >= 900 THEN '지각'
+			WHEN h.ohno >= 1030 THEN '결근'
+			END AS status
+	FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+ORDER BY category.W_START ASC;
 
 -- 근태 현황이 나오는 테이블 --
 SELECT e.EMP_NAME, d.DEP_NAME, p.P_NAME, oh.W_START, oh.W_END
@@ -478,8 +504,31 @@ DROP VIEW ontime;
 
 SELECT * FROM ontime;
 
+			SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME posRank, p.P_NAME dept, category.W_START "start", category.W_END "end", category.stat "status" 
+			FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+				(SELECT  
+					h.*,
+					CASE WHEN h.ohno < 900 THEN '출근'
+						WHEN h.ohno >= 900 THEN '지각'
+						WHEN h.ohno >= 1030 THEN '결근'
+						END AS stat
+				FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
+						FROM OFFICE_HOUR oh ) h) category
+			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+			ORDER BY category.W_START ASC;
 
-
+SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, category.W_START, category.W_END, category.stat 
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+	(SELECT  
+		h.*,
+		CASE WHEN h.ohno < 900 THEN '출근'
+			WHEN h.ohno >= 900 THEN '지각'
+			WHEN h.ohno >= 1030 THEN '결근'
+			END AS stat
+	FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+ORDER BY category.W_START ASC;
 
 
 
