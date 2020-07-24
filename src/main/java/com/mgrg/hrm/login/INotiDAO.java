@@ -1,11 +1,13 @@
 package com.mgrg.hrm.login;
 
+import java.util.List;
+
 import org.mybatis.spring.annotation.MapperScan;
 
 @MapperScan
 public interface INotiDAO {
 
 	
-	public NoticeDTO selectNoti(int puid);
+	public List<NoticeDTO> selectNoti(int puid);
 	
 }
