@@ -91,8 +91,8 @@ CREATE TABLE notice
 CREATE TABLE office_hour
 (
 	w_uid number NOT NULL,
-	w_start timestamp,
-	w_end timestamp,
+	w_start date,
+	w_end date,
 	emp_uid number NOT NULL,
 	PRIMARY KEY (w_uid)
 );
@@ -341,6 +341,7 @@ FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID
 
 SELECT * FROM emp;
 
+-----------------------------------------------
 -- Office HOUR Dummy Variables --
 SELECT * FROM POSITIONRANK p ;
 
@@ -353,6 +354,10 @@ FROM EMPLOYEES e , POSITIONRANK p
 WHERE e.P_UID = p.P_UID ;
 
 SELECT * FROM OFFICE_HOUR;
+
+INSERT INTO OFFICE_HOUR (w_uid, w_start, EMP_UID )
+VALUES
+(SEQ_office_hour_w_uid.nextval, to_date('2020-07-22 08:50:00', 'yyyy/mm/dd HH24:Mi:ss'), 2);
 
 --------------------------------------------------
 -- 휴가 테이블 --
@@ -368,13 +373,15 @@ VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date(
 
 -- 금일날짜에 휴가인 사람 뽑기 --
 SELECT * FROM HOLIDAY
-WHERE TO_CHAR(H_END, 'yyyy/mm/dd') <= TO_CHAR(SYSDATE, 'yyyy/mm/dd');
+WHERE TO_CHAR(H_START, 'yyyy/mm/dd') <= TO_CHAR(SYSDATE , 'yyyy/mm/dd') AND 
+TO_CHAR(H_END, 'yyyy/mm/dd') >= TO_CHAR(SYSDATE, 'yyyy/mm/dd');
 
 ---------------------------------------------------
 -- 출근 버튼 클릭 --
 INSERT INTO OFFICE_HOUR (w_uid, w_start, EMP_UID )
 VALUES
-(SEQ_office_hour_w_uid.nextval, to_char(systimestamp, 'yyyy-mm-dd hh24:mi:ss'), 4);
+(SEQ_office_hour_w_uid.nextval, to_date('2020-07-23 10:30:00', 'yyyy/mm/dd HH24:Mi:ss'), 4);
+
 
 -- 9시 30 "이후"로 찍었을 경우 == 지각
 -- 10시 30분 "이후"로 찍엇을 경우 == 결근
@@ -383,20 +390,93 @@ VALUES
 
 -- 퇴근 버튼 클릭 --
 UPDATE OFFICE_HOUR 
-SET w_end = TO_CHAR(SYSTIMESTAMP, 'yyyy-mm-dd hh24:mi:ss')
-WHERE emp_uid = 4; 
+SET w_end = TO_CHAR(SYSDATE, 'yyyy-mm-dd hh24:mi:ss')
+WHERE emp_uid = 4;
 
 SELECT * FROM OFFICE_HOUR oh ;
+SELECT *
+FROM (SELECT  
+	CASE WHEN h.ohno < 900 THEN '출근'
+		WHEN h.ohno >= 900 THEN '지각'
+		WHEN h.ohno >= 1030 THEN '결근'
+		END AS status
+FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.EMP_UID
+		FROM OFFICE_HOUR oh ) h) category
+;
 
+
+SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) , oh.EMP_UID
+		FROM OFFICE_HOUR oh
+;
 -- 직원 이름과 직책을 통합한 근태 현황 뽑기 --
+SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, oh.W_START, oh.W_END, category.status 
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p, OFFICE_HOUR oh, (SELECT  
+	CASE WHEN h.ohno < 900 THEN '출근'
+		WHEN h.ohno >= 900 THEN '지각'
+		WHEN h.ohno >= 1030 THEN '결근'
+		END AS status
+FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.EMP_UID
+		FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = oh.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID 
+ORDER BY oh.W_START ASC;
+
+-- 근태 현황이 나오는 테이블 --
 SELECT e.EMP_NAME, d.DEP_NAME, p.P_NAME, oh.W_START, oh.W_END
 FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p, OFFICE_HOUR oh 
 WHERE oh.EMP_UID = e.EMP_UID AND d.DEP_UID = e.dep_uid AND e.P_UID = p.P_UID 
 ORDER BY e.EMP_NAME ASC;
 
 CREATE OR REPLACE VIEW officehour AS
+SELECT 
+
+CREATE OR REPLACE VIEW officehour AS;
+
+-- alias three 시간 + : 자른 시간
+SELECT W_UID, to_char(w_start, 'Hh24:mi:ss') AS one, 
+		to_char(to_date('20201010090000','yyyymmddhh24miss'),'Hh24:mi:ss') AS two,
+		replace(to_char(w_start, 'Hh24:mi:ss'),':','') AS three
+FROM OFFICE_HOUR
+WHERE TO_NUMBER(replace(to_char(w_start, 'Hh24:mi:ss'),':','')) > TO_NUMBER(REPLACE(to_char(to_date('20201010090000','yyyymmddhh24miss'),'Hh24:mi:ss'),':','')); 
 
 
+
+
+SELECT to_char(to_date('20201010090000','yyyymmddhh24miss'),'Hh24:mi:ss') FROM dual;
+
+SELECT * FROM OFFICE_HOUR oh ;
+
+-- 근태테이블에 있는 시작 날짜 + 시간으로 자르기 성공!! --
+SELECT e.EMP_NAME , TO_CHAR(oh.W_START, 'yyyy-mm-dd' ), SUBSTR(to_char(oh.w_start, 'yyyy-mm-dd HH24:mi:ss'), 11)
+FROM OFFICE_HOUR oh, EMPLOYEES e 
+WHERE e.EMP_UID = oh.EMP_UID;
+
+SELECT SUBSTR(TO_CHAR(w_start, 'yyyy-mm-dd HH24:mi:ss'), 11) AS on_time
+FROM OFFICE_HOUR oh 
+WHERE on_time < TO_CHAR('09:00:00', 'HH24:mi:ss');
+
+CREATE OR REPLACE FUNCTION on_time (w_start NUMBER)
+	RETURN varchar2
+IS 
+	ontime varchar2(15);
+BEGIN 
+	SELECT SUBSTR(TO_CHAR(w_start, 'yyyy-mm-dd HH24:mi:ss'), 11)
+	INTO ontime
+	FROM OFFICE_HOUR oh;
+
+	RETURN ontime;
+END;
+
+
+
+
+
+CREATE OR REPLACE VIEW ontime AS
+SELECT W_START FROM OFFICE_HOUR; 
+WHERE w_start < TO_DATE('09:00:00', 'hh24:mi:ss');
+
+DROP VIEW ontime;
+
+SELECT * FROM ontime;
 
 
 
