@@ -1,21 +1,16 @@
 /**
  * 
  */
-
-var viewItem = undefined; // 가장 최근에 view 한 글 데이터
+var viewItem = undefined; 
+var editor;
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+var xhr = new XMLHttpRequest(); 
 $(document).ready(function() {
-	
+//	$(document).ajaxSend(function(e, xhr, options) {
+//        xhr.setRequestHeader(header, token);
+//    });
 	boardRord();
-	
-	let table = $('#list').DataTable();
-	$('#list tbody').on('click','td span',function(){
-		let data = table.row(this).data();
-		alert(data.uid + ' 클릭함.');
-		
-	});
-	$('#sidebarCollapse').on('click', function() {
-		$('#sidebar').toggleClass('active');
-	});
 
 	// 게시판 목록 1페이지 로딩
 	// 글 작성 버튼 누르면 팝업
@@ -32,7 +27,6 @@ $(document).ready(function() {
 
 	// 글 작성 submit 처리(db저장, action은 없으나)
 	$("#frmWrite").submit(function() {
-		
 		$(this).parents(".modal").hide(); // 저장 처리를하면
 		return chkWrite(); // 페이지 리로딩이 발생되면 안된다. but 리쿼스트는 할거기 때문에 fun 이용
 	});
@@ -62,11 +56,15 @@ $(document).ready(function() {
 	});
 	
 	
+	 CKEDITOR.on('instanceReady', function(ev) {
+		 editor = ev.editor;
+	 });
+	
 	
 });
 
 function boardRord() {
-	
+	$('#tlc').DataTable().destroy();
 	var n_uid;
 	$('#tlc').DataTable({
 		ajax : {
@@ -105,13 +103,9 @@ function boardRord() {
 			}
 		}
 	});
-	
+	addViewEvent();
 }
 
-function changePageRows() {
-	window.pageRows = $("#rows").val();
-	loadPage(window.page);
-}// end changePageRows()
 
 // 새글 등록 처리
 function chkWrite() {
@@ -140,12 +134,11 @@ function chkWrite() {
 	});
 
 	$('#frmWrite')[0].reset();
-	$('#tlc').DataTable().destroy();
+
 	return false; 
 }// end chkWrite()
 
-// check 된 uid 의 게시글들만 삭제
-// .each() 그 각각에 대해서 함수를 진행햐라
+
 function chkDelete() {
 	var uids = [] // 빈 배열 준비
 	$('#list tbody input[name=uid]').each(function() {
@@ -166,7 +159,7 @@ function chkDelete() {
 		// uid=1010&uid=1111
 
 		$.ajax({
-			url : 'deleteOk.ajax',
+			url : 'delete.ajax',
 			type : "POST",
 			data : data,
 			cache : false,
@@ -188,10 +181,8 @@ function chkDelete() {
 
 // 현재 글 목록 list에 대해 이벤트 등록
 function addViewEvent() {
-	alert("들어는 오니?");
 	
-	$('#list td > .subject').click(
-			function() {
+	$('#tlc tbody').on('click','td span.subject',function(){
 				//alert($(this).text() + " : " + $(this).attr('data-uid')); //
 				// 확인용
 
@@ -205,6 +196,7 @@ function addViewEvent() {
 									if (data.status == "OK") {
 										// 읽어온 view 데이터를 전역변수에 세팅
 										viewItem = data.data[0]; 
+										//alert(viewItem.uid + " : " + viewItem.department+ " : " + viewItem.position + " : " + viewItem.content);
 										// 팝업에 보여주기
 										setPopup("view");
 										$("#dlg_write").show();
@@ -230,39 +222,57 @@ function setPopup(mode) {
 		$('#dlg_write .btn_group_write').show();
 		$('#dlg_write .btn_group_view').hide();
 		$('#dlg_write .btn_group_update').hide();
-
+		// 부서
+		$("#dlg_write input:radio[name='dep_uid']").removeAttr('disabled').css("display", "inline-block");
+		$("#dlg_write input:radio[name='dep_uid']").parents("label").css("display", "inline-block");
+		
+		//직책		
+		$("#dlg_write input:radio[name='p_uid']").removeAttr('disabled').css("display", "inline-block");
+		$("#dlg_write input:radio[name='p_uid']").parents("label").css("display", "inline-block");
+		
+		$("#dlg_write #regdate").text("");
+		
 		$("#dlg_write input[name='subject']").attr("readonly", false);
-		// $("#dlg_write input[name='subject']").css("border", "1px solid
-		// #ffd");
-
+		
+		CKEDITOR.instances.editor.setData("");
+		editor.setReadOnly(false);
+		
 		$("#dlg_write textarea[name='content']").attr("readonly", false);
-		$("#dlg_write textarea[name='content']")
-				.css("border", "1px solid #ffd");
 	}
 
 	// 글 읽기
 	if (mode == 'view') {
+
 		$('#frmWrite')[0].reset(); // from 안의 기존 내용 reset
-		$("#dlg_write .title").text('공지 읽기');
+		$("#dlg_write .title").text('공지 보기');
 		$('#dlg_write .btn_group_header').show();
 		$('#dlg_write .btn_group_write').hide();
 		$('#dlg_write .btn_group_view').show();
 		$('#dlg_write .btn_group_update').hide();
-
-		// 조회수와 날짜
-		$("#dlg_write #viewcnt").text(
-				"#" + viewItem.uid + " - 조회수: " + viewItem.viewcnt);
+		// 부서
+		$("#dlg_write input:radio[name='dep_uid']").attr('disabled', 'true').css("display", "none");
+		$("#dlg_write input:radio[name='dep_uid']").parents("label").css("display", "none");
+		$("#dlg_write input:radio[name='dep_uid'][value='"+viewItem.department +"']").parents("label").css({"display":"inline-block"});
+		$("#dlg_write input:radio[name='dep_uid'][value='"+viewItem.department +"']").prop('checked', true); // 선택하기
+		//직책
+		//$("#dlg_write input:radio[name='p_uid']").attr('disabled', 'true').parents("label").css("display", "none");
+		$("#dlg_write input:radio[name='p_uid']").attr('disabled', 'true').css("display", "none");
+		$("#dlg_write input:radio[name='p_uid']").parents("label").css("display", "none");
+		$("#dlg_write input:radio[name='p_uid'][value='"+viewItem.position +"']").removeAttr('disabled').parents("label").css("display", "inline-block");
+		$("#dlg_write input:radio[name='p_uid'][value='"+viewItem.position +"']").prop('checked', true); // 선택하기
+	
+		// 날짜
 		$("#dlg_write #regdate").text(viewItem.regdate);
 		$("#dlg_write input[name='uid']").val(viewItem.uid); // 나중에 삭제/수정을 위해
 																// 필요
 
 		$("#dlg_write input[name='subject']").val(viewItem.subject);
 		$("#dlg_write input[name='subject']").attr("readonly", true);
-		$("#dlg_write input[name='subject']").css("border", "none");
 
-		$("#dlg_write textarea[name='content']").val(viewItem.content);
+		CKEDITOR.instances.editor.setData(viewItem.content);
+		editor.setReadOnly();
 		$("#dlg_write textarea[name='content']").attr("readonly", true);
-		$("#dlg_write textarea[name='content']").css("border", "none");
+		
 
 	}
 
@@ -275,30 +285,52 @@ function setPopup(mode) {
 		$('#dlg_write .btn_group_write').hide();
 		$('#dlg_write .btn_group_view').hide();
 		$('#dlg_write .btn_group_update').show();
+		
+		// 부서
+		$("#dlg_write input:radio[name='dep_uid']").removeAttr('disabled').css("display", "inline-block");
+		$("#dlg_write input:radio[name='dep_uid']").parents("label").css("display", "inline-block");
+		
+		//직책		
+		$("#dlg_write input:radio[name='p_uid']").removeAttr('disabled').css("display", "inline-block");
+		$("#dlg_write input:radio[name='p_uid']").parents("label").css("display", "inline-block");
+	
+		// 날짜
+		$("#dlg_write #regdate").text(viewItem.regdate);
+		$("#dlg_write input[name='uid']").val(viewItem.uid); // 나중에 삭제/수정을 위해
+																// 필요
 
+		$("#dlg_write input[name='subject']").val(viewItem.subject);
 		$("#dlg_write input[name='subject']").attr("readonly", false);
-		$("#dlg_write input[name='subject']").css("border", "1px solid #ffd");
 
+		CKEDITOR.instances.editor.setData(viewItem.content);
+		editor.setReadOnly(false);
 		$("#dlg_write textarea[name='content']").attr("readonly", false);
-		$("#dlg_write textarea[name='content']")
-				.css("border", "1px solid #ffd");
+		
 	}
 }// end setPopup()
 
 // 특정 uid 의 글 삭제하기
 function deleteUid(uid) {
-	if (!confirm(uid + "글을 삭제 하시겠습니까?"))
+	if (!confirm(uid + "번 글을 삭제 하시겠습니까?"))
 		return false;
-
+	
+	
+	$.ajaxSetup({
+        beforeSend: function(xhr) {
+        	xhr.setRequestHeader(header, token);
+        }
+    });
+	
 	// POST 방식
 	$.ajax({
-		url : "deleteOk.ajax",
+		url : "delete.ajax",
 		type : "POST",
 		data : "uid=" + uid,
 		cache : false,
 		success : function(data, status) {
 			if (status == "success") {
 				if (data.status == "OK") {
+					//xhr.setRequestHeader(header, token);
 					alert("DELETE 성공" + data.count + "개");
 					boardRord();
 				} else {
@@ -314,11 +346,12 @@ function deleteUid(uid) {
 
 // 글 수정
 function chkUpdate() {
-
+	
+	CKEDITOR.instances.editor.updateElement(); //ckeditor 에서 쓴글을 가져올때 사용 
 	var data = $("#frmWrite").serialize();
 
 	$.ajax({
-		url : "updateOk.ajax",
+		url : "update.ajax",
 		type : "POST",
 		cache : false,
 		data : data,

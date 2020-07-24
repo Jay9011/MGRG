@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 /* 테이블 사이즈 */
 #list {
 	margin: auto;
@@ -15,7 +16,7 @@
 	border-bottom: 1px solid olive;
 }
 #list th, #list td{
-	padding: 10px;
+	padding: 7px;
 }
 
 #list .subject:hover{
@@ -78,32 +79,18 @@ ul.pagination a:hover:not(.active) {background-color: #ddd;}
 }
 
 /* 기본 버튼 */
-.btn {
-  border: none;
-  color: white;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-}
 
-.success {background-color: #4CAF50;} /* Green */
-.success:hover {background-color: #46a049;}
-
-.info {background-color: #2196F3;} /* Blue */
-.info:hover {background: #0b7dda;}
-
-.warning {background-color: #ff9800;} /* Orange */
-.warning:hover {background: #e68a00;}
-
-.danger {background-color: #f44336;} /* Red */ 
-.danger:hover {background: #da190b;}
-
-.default {background-color: #e7e7e7; color: black;} /* Gray */ 
-.default:hover {background: #ddd;}
 
 /* 버튼 그룹 */
 .d01{
 	margin: 5px 0px;
+}
+.d01 .btn2{
+	display: inline-block;
+}
+/*  모달의 사이즈 조절시 스크롤 안생기게 하기 */
+#dlg_write::-webkit-scrollbar {
+	width: 0px;
 }
 
 /* 모달 팝업 */
@@ -140,8 +127,8 @@ ul.pagination a:hover:not(.active) {background-color: #ddd;}
 	font-weight: bold;
 	color: #000;
 	position: absolute;
-	right: 25px;
-	top: 0px;
+	right: 10px;
+    top: 5px;
 }
 
 .modal .close:hover,
