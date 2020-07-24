@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.ui.Model;
 
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 
@@ -19,7 +20,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		System.out.println("login success");
 
 		// authentication 객체를 이용해서 사용자가 가진 모든 권한을 문자열로 체크 가능.
-
+		String id = request.getParameter("username");
+		String pw = request.getParameter("password");
+		
+		System.out.println("CustomLoginSuccessHandler : "+id);
+		System.out.println("CustomLoginSuccessHandler : "+pw);
 		List<String> roleNames = new ArrayList<>();
 		authentication.getAuthorities().forEach(authority -> {
 			roleNames.add(authority.getAuthority());
@@ -35,6 +40,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		//아니면 /sample/member 로 이동
 		if(roleNames.contains("ROLE_MEMBER")) {
+			request.setAttribute("id", id);
+			request.setAttribute("pw", pw);
 			response.sendRedirect(request.getContextPath()+"/login/member");
 			return;
 		}
