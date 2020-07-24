@@ -20,7 +20,7 @@
 				<div class="details">
 					<h1>직원 근태 현황</h1>
 					<p>직원들의 출근/지각/결근/휴가 현황을 확인하실수 있습니다.</p>
-					<button onclick="location.href='/hrm/officehour/offhr'">Check Now</button>
+					<button onclick="location.href='/hrm/officehour/list'">Check Now</button>
 				</div>
 
 				<div class="illustration">

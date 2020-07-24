@@ -7,7 +7,7 @@ public class OhDTO {
 	private String name;
 	private String posRank;
 	private String dept;
-	private String category;
+	private String status;
 	private Timestamp start;
 	private Timestamp end;
 	public int getUid() {
@@ -34,11 +34,11 @@ public class OhDTO {
 	public void setDept(String dept) {
 		this.dept = dept;
 	}
-	public String getCategory() {
-		return category;
+	public String getStatus() {
+		return status;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public Timestamp getStart() {
 		return start;
