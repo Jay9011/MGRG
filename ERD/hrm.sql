@@ -476,7 +476,11 @@ WHERE w_start < TO_DATE('09:00:00', 'hh24:mi:ss');
 
 DROP VIEW ontime;
 
+
+select n_uid, n_subject, n_content, n_regdate, dep_uid, p_uid from notice where p_uid = 1;
+
 SELECT * FROM ontime;
+
 
 
 
