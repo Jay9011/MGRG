@@ -1,34 +1,72 @@
 @charset "UTF-8";
 
-#staff_list {
-	width:100% !important;
+#content {
+	max-width: max-content;
+} 
+
+#staff_list td {
+	border-bottom: 1px solid olive;
+}
+
+.table thead th {
+	border-top: 2px solid olive;
+	border-bottom: 2px solid olive;
 }
 
 .pagination {
 	justify-content: flex-start !important;
 }
+.modal-header {
+	color: #FFF;
+	background-color: #7386D5;
+	border: 1px solid #FDFDFD;
+}
 
 .modal-body input {
-	border: 1px solid #0000;
+	border: none;
+	border-bottom: 1px solid #223259;
 }
 
 .modal-body input:focus {
 	border: 1px solid #000;
 }
 
+.modal-body label {
+	align-self: center;
+	margin-bottom: 0;
+	width: 120px;
+	text-align: end;
+	margin-right: 10px;
+}
+
+.input-group {
+	margin: 5px 0 10px 0;
+}
+
 div.password {
     position: relative;
-    padding: 20px;
 }
 div.password input {
     width: 300px;
     height: 30px;
-    border: 0;
     text-indent: 10px;
 }
 div.password svg {
 	position: relative;
-	top: 0;
+	top: 5px;
 	right: 0;
 	font-size: 1.2em;
+}
+
+div.addLable {
+	float: left;
+	width: 120px;
+	margin-right: 10px;
+	text-align: end;
+	line-height: 45px;
+}
+
+div.addBody {
+	float: left;
+	width: 70%;
 }
