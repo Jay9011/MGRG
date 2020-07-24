@@ -1,13 +1,19 @@
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
 $(document).ready(function($)
 {
 	//ajax row data
-	var ajax_data =
-	[
-		{name:"한수빈", position:"사원", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
-		{name:"임상빈", position:"대리", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
-		{name:"홍성용", position:"과장", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
-		{name:"윤종섭", position:"대표", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
-	]
+	var ajax_data;
+	
+	// ajax를 보내기전에 header세팅해주기
+	$.ajaxSetup({
+        beforeSend: function(xhr) {
+        	xhr.setRequestHeader(header, token);
+        }
+    });
+	
+	loadPage(ajax_data);
 	
 	var random_id = function  () 
 	{
@@ -18,81 +24,6 @@ $(document).ready(function($)
 	}
 
 
-	//--->create data table > start
-	var tbl = '';
-	tbl +='<table class="table table-hover">'
-
-		//--->create table header > start
-		tbl +='<thead>';
-			tbl +='<tr>';
-			tbl +='<th>이름</th>';
-			tbl +='<th>직책</th>';
-			tbl +='<th>근태현황</th>';
-			tbl +='<th>출근 시간</th>';
-			tbl +='<th>퇴근 시간</th>';
-			tbl +='<th>수정 및 삭제</th>';
-			tbl +='</tr>';
-		tbl +='</thead>';
-		//--->create table header > end
-
-		
-		//--->create table body > start
-		tbl +='<tbody>';
-
-			//--->create table body rows > start
-			$.each(ajax_data, function(index, val) 
-			{
-				//for(i = 0; i < ajax_data.length; i++ ){
-					var startTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
-										 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['startTime'] + "/>" + 
-										 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
-					var endTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
-					 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['endTime'] + "/>" + 
-					 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
-
-				
-				//you can replace with your database row id
-				var row_id = random_id();
-
-				//loop through ajax row data
-				tbl +='<tr row_id="'+row_id+'">';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="fname">'+val['name']+'</div></td>';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="lname">'+val['position']+'</div></td>';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['currStat']+'</div></td>';
-					tbl +='<td >' + startTime + '</td>';
-					tbl +='<td >' + endTime + '</td>';
-
-					//--->edit options > start
-					tbl +='<td>';
-					 
-						tbl +='<span class="btn_edit" > <a href="#" class="btn btn-link" row_id="'+row_id+'" > 수정</a> </span>';
-
-						//only show this button if edit button is clicked
-						tbl +='<span class="btn_save"> <a href="#" class="btn btn-link"  row_id="'+row_id+'"> 저장</a> | </span>';
-						tbl +='<span class="btn_cancel"> <a href="#" class="btn btn-link" row_id="'+row_id+'"> 취소</a> </span>';
-
-					tbl +='</td>';
-					//--->edit options > end
-					
-				tbl +='</tr>';
-				//}
-				
-			});
-
-			//--->create table body rows > end
-
-		tbl +='</tbody>';
-		//--->create table body > end
-
-	tbl +='</table>'	
-	//--->create data table > end
-			
-
-	//out put table data
-	$(document).find('.tbl_user_data').html(tbl);
-
-	$(document).find('.btn_save').hide();
-	$(document).find('.btn_cancel').hide(); 
 	
 //	datetimepicker();
 	//datetimepicker2();
@@ -261,3 +192,98 @@ $(document).ready(function($)
 	//--->save whole row entery > end
 
 }); 
+
+function loadPage(data){
+	$.ajax({
+		url : "/hrm/offhr/list",
+		type : "POST",
+		cache : false,
+		success : function(data, status){
+			if(status == "success"){
+				makeTable(data);
+			}
+		}
+		
+	});
+}
+
+
+function makeTable(ajax_data){
+	//--->create data table > start
+	var tbl = '';
+	tbl +='<table class="table table-hover">'
+
+		//--->create table header > start
+		tbl +='<thead>';
+			tbl +='<tr>';
+			tbl +='<th>이름</th>';
+			tbl +='<th>부서</th>';
+			tbl +='<th>직책</th>';
+			tbl +='<th>근태현황</th>';
+			tbl +='<th>출근 시간</th>';
+			tbl +='<th>퇴근 시간</th>';
+			tbl +='<th>수정 및 삭제</th>';
+			tbl +='</tr>';
+		tbl +='</thead>';
+		//--->create table header > end
+
+		
+		//--->create table body > start
+		tbl +='<tbody>';
+
+			//--->create table body rows > start
+			$.each(ajax_data.data, function(index, val) 
+			{
+				//for(i = 0; i < ajax_data.length; i++ ){
+					var startTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
+										 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['start'] + "/>" + 
+										 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
+					var endTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
+					 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['end'] + "/>" + 
+					 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
+
+				
+				//you can replace with your database row id
+
+				//loop through ajax row data
+				tbl +='<tr>';
+					tbl +='<td ><div class="row_data" edit_type="click" col_name="fname">'+val['name']+'</div></td>';
+					tbl +='<td ><div class="row_data" edit_type="click" col_name="lname">'+val['dept']+'</div></td>';
+					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['posRank']+'</div></td>';
+					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['status']+'</div></td>';
+					tbl +='<td >' + startTime + '</td>';
+					tbl +='<td >' + endTime + '</td>';
+
+					//--->edit options > start
+					tbl +='<td>';
+					 
+						tbl +='<span class="btn_edit" > <a href="#" class="btn btn-link"> 수정</a> </span>';
+
+						//only show this button if edit button is clicked
+						tbl +='<span class="btn_save"> <a href="#" class="btn btn-link"> 저장</a> | </span>';
+						tbl +='<span class="btn_cancel"> <a href="#" class="btn btn-link"> 취소</a> </span>';
+
+					tbl +='</td>';
+					//--->edit options > end
+					
+				tbl +='</tr>';
+				//}
+				
+			});
+
+			//--->create table body rows > end
+
+		tbl +='</tbody>';
+		//--->create table body > end
+
+	tbl +='</table>'	
+	//--->create data table > end
+			
+
+	//out put table data
+	$(document).find('.tbl_user_data').html(tbl);
+
+	$(document).find('.btn_save').hide();
+	$(document).find('.btn_cancel').hide(); 
+	
+}
