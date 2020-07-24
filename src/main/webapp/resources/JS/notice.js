@@ -278,8 +278,7 @@ function setPopup(mode) {
 
 	// 글 수정
 	if (mode == 'update') {
-		// $('#frmWrite')[0].reset(); // from 안의 기존 내용 reset 인데 수정은 reset하면
-		// 담겨져있던 val이 사라짐
+		
 		$("#dlg_write .title").text('공지 수정');
 		$('#dlg_write .btn_group_header').show();
 		$('#dlg_write .btn_group_write').hide();
