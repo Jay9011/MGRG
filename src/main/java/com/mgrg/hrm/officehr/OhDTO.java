@@ -1,6 +1,7 @@
 package com.mgrg.hrm.officehr;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 public class OhDTO {
@@ -9,8 +10,8 @@ public class OhDTO {
 	private String posRank;
 	private String dept;
 	private String status;
-	private Date start;
-	private Date end;
+	private Timestamp start;
+	private Timestamp end;
 
 	public int getUid() {
 		return uid;
@@ -53,23 +54,44 @@ public class OhDTO {
 	}
 
 	public String getStart() {
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(start);
+//		int year = end.getYear() + 1900;
+//		int month = end.getMonth() + 1;
+//		int day = end.getDate();
+//		int hour = end.getHours();
+//		int min = end.getMinutes();
+//		int sec = end.getSeconds();
+//		String startTime = "";
+//		if (start == null) {
+//			return "";
+//		} else {
+//			startTime = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+//		}
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date(start.getTime()));
 	}
 
-	public void setStart(Date start) {
+	public void setStart(Timestamp start) {
 		this.start = start;
 	}
 
 	public String getEnd() {
-		if (end == null) {
-			return "";
-		} else {
-			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(end);
-		}
+//		int year = end.getYear() + 1900;
+//		int month = end.getMonth() + 1;
+//		int day = end.getDate();
+//		int hour = end.getHours();
+//		int min = end.getMinutes();
+//		int sec = end.getSeconds();
+//		String endTime = "";
+//		if (end == null) {
+//			return "";
+//		} else {
+//			endTime = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+//		}
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date(end.getTime()));
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(Timestamp end) {
 		this.end = end;
+		
 	}
 
 }
