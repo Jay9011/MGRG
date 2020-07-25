@@ -631,37 +631,34 @@ select n_uid, n_subject, n_content, n_regdate, dep_uid, p_uid from notice where 
 
 SELECT * FROM ontime;
 
-			SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME posRank, p.P_NAME dept, category.W_START "start", category.W_END "end", category.stat "status" 
-			FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
-				(SELECT  
-					h.*,
-					CASE WHEN h.ohno < 900 THEN '출근'
-						WHEN h.ohno >= 900 THEN '지각'
-						WHEN h.ohno >= 1030 THEN '결근'
-						END AS stat
-				FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, oh.*
-						FROM OFFICE_HOUR oh ) h) category
-			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
-			ORDER BY category.W_START ASC;
+
+-- 퇴근 버튼이 클릭된 직원들은 퇴근이라고 찍혀야한다 --
+SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME posRank, p.P_NAME dept, category.W_START "start", category.W_END "end", category.stat "status" 
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+	(SELECT  
+		h.*,
+		CASE
+			WHEN h.endTime IS NOT NULL THEN '4'
+			WHEN h.startTime < 900 THEN '1'
+			WHEN h.startTime > 900 THEN '2'
+			WHEN h.startTime > 1030 THEN '3'
+			END AS stat
+	FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+ORDER BY category.W_START ASC;
 		
 
-SELECT  h.*,
-	CASE WHEN h.ohno < 900 THEN '출근'
-		WHEN h.ohno >= 900 THEN '지각'
-		WHEN h.ohno >= 1030 THEN '결근'
-		END AS stat
-FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, TO_NUMBER(TO_CHAR(oh.W_END, 'hh24mi')) AS ohno2, oh.*
-		FROM OFFICE_HOUR oh ) h
-;
 
 INSERT INTO OFFICE_HOUR (w_uid, W_START , W_END , EMP_UID )
 VALUES 
-(SEQ_office_hour_w_uid.nextval, '2020-07-24 07:58:22', to_date(sysdate, 'yyyy-mm-dd HH24:MI:SS'), 5) ;
+(SEQ_office_hour_w_uid.nextval, '2020-07-23 07:58:22', to_char(systimestamp, 'yyyy-mm-dd HH24:MI:SS'), 3) ;
 		
 -- 퇴근 버튼 클릭 --
 UPDATE OFFICE_HOUR 
 SET w_end = TO_CHAR(SYStimestamp ,'yyyy-mm-dd HH24:mi:ss')
-WHERE emp_uid = 2;
+WHERE emp_uid = 5;
 
 INSERT INTO OFFICE_HOUR (W_END )
 VALUES (to_char(systimestamp, 'yyyy-mm-dd hh24:mi:ss'))

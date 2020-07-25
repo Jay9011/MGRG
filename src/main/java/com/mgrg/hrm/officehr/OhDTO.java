@@ -54,6 +54,7 @@ public class OhDTO {
 	}
 
 	public String getStart() {
+//		java.sql.Timestamp t;
 //		int year = end.getYear() + 1900;
 //		int month = end.getMonth() + 1;
 //		int day = end.getDate();
@@ -62,11 +63,14 @@ public class OhDTO {
 //		int sec = end.getSeconds();
 //		String startTime = "";
 //		if (start == null) {
-//			return "";
+//			t = java.sql.Timestamp.valueOf(startTime);
+//			return t;
 //		} else {
 //			startTime = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+//			t = java.sql.Timestamp.valueOf(startTime);
+//			return t;
 //		}
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date(start.getTime()));
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(start);
 	}
 
 	public void setStart(Timestamp start) {
@@ -81,12 +85,12 @@ public class OhDTO {
 //		int min = end.getMinutes();
 //		int sec = end.getSeconds();
 //		String endTime = "";
-//		if (end == null) {
-//			return "";
-//		} else {
-//			endTime = year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
-//		}
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date(end.getTime()));
+		if (end == null) {
+			return "";
+		} else {
+			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(end);
+		}
+//		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date(end.getTime()));
 	}
 
 	public void setEnd(Timestamp end) {
