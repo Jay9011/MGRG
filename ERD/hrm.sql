@@ -515,10 +515,7 @@ VALUES
 -- ****************************
 -- 11시까지 출근이 안찍었을 경우 == 결근
 
--- 퇴근 버튼 클릭 --
-UPDATE OFFICE_HOUR 
-SET w_end = TO_CHAR(SYSDATE, 'yyyy-mm-dd hh24:mi:ss')
-WHERE emp_uid = 4;
+
 
 SELECT * FROM OFFICE_HOUR oh ;
 SELECT *
@@ -646,6 +643,39 @@ SELECT * FROM ontime;
 						FROM OFFICE_HOUR oh ) h) category
 			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
 			ORDER BY category.W_START ASC;
+		
+
+SELECT  h.*,
+	CASE WHEN h.ohno < 900 THEN '출근'
+		WHEN h.ohno >= 900 THEN '지각'
+		WHEN h.ohno >= 1030 THEN '결근'
+		END AS stat
+FROM (SELECT TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS ohno, TO_NUMBER(TO_CHAR(oh.W_END, 'hh24mi')) AS ohno2, oh.*
+		FROM OFFICE_HOUR oh ) h
+;
+
+INSERT INTO OFFICE_HOUR (w_uid, W_START , W_END , EMP_UID )
+VALUES 
+(SEQ_office_hour_w_uid.nextval, '2020-07-24 07:58:22', to_date(sysdate, 'yyyy-mm-dd HH24:MI:SS'), 5) ;
+		
+-- 퇴근 버튼 클릭 --
+UPDATE OFFICE_HOUR 
+SET w_end = TO_CHAR(SYStimestamp ,'yyyy-mm-dd HH24:mi:ss')
+WHERE emp_uid = 2;
+
+INSERT INTO OFFICE_HOUR (W_END )
+VALUES (to_char(systimestamp, 'yyyy-mm-dd hh24:mi:ss'))
+WHERE EMP_UID = 3;
+
+SELECT * FROM OFFICE_HOUR oh ;
+
+SELECT COLUMN_NAME, DATA_TYPE FROM all_tab_columns where table_name='OFFICE_HOUR'; 
+ALTER TABLE OFFICE_HOUR modify(w_start timestamp, w_end timestamp);
+
+
+
+SELECT TO_CHAR(SYSDATE ,'yyyy-mm-dd hh24:mi:ss') FROM DUAL ; 
+		
 
 SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, category.W_START, category.W_END, category.stat 
 FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,

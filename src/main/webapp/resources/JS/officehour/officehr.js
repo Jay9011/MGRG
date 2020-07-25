@@ -23,7 +23,7 @@ $(document).ready(function($)
 		return id_num + id_str;
 	}
 
-
+	
 	
 //	datetimepicker();
 	//datetimepicker2();
