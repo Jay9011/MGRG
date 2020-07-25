@@ -15,44 +15,6 @@ $(document).ready(function($)
 	
 	loadPage(ajax_data);
 	
-	var random_id = function  () 
-	{
-		var id_num = Math.random().toString(9).substr(2,3);
-		var id_str = Math.random().toString(36).substr(2);
-		
-		return id_num + id_str;
-	}
-
-	
-	
-//	datetimepicker();
-	//datetimepicker2();
-	$(".date").datetimepicker({
-		
-		// TODO datetimepicker가 설정 되었으면 DB에 저장이 되어야한다
-	});
-	
-
-	//--->make div editable > start
-	$(document).on('click', '.row_data', function(event) 
-	{
-		event.preventDefault(); 
-
-		if($(this).attr('edit_type') == 'button')
-		{
-			return false; 
-		}
-
-		//make div editable
-		$(this).closest('div').attr('contenteditable', 'true');
-		//add bg css
-		$(this).addClass('bg-white').css('padding','5px');
-
-		$(this).focus();
-	})	
-	//--->make div editable > end
-
-
 	//--->save single field data > start
 	$(document).on('focusout', '.row_data', function(event) 
 	{
@@ -90,21 +52,24 @@ $(document).ready(function($)
 	{
 		event.preventDefault();
 		var tbl_row = $(this).closest('tr');
-
 		var row_id = tbl_row.attr('row_id');
-
+		var tbl_row_edit = tbl_row.find('.row_data');
+		
 		tbl_row.find('.btn_save').show();
 		tbl_row.find('.btn_cancel').show();
 
 		//hide edit button
 		tbl_row.find('.btn_edit').hide(); 
-
+		
 		//make the whole row editable
 		tbl_row.find('.row_data')
 		.attr('contenteditable', 'true')
-		.attr('edit_type', 'button')
 		.addClass('bg-white')
 		.css('padding','3px')
+		
+		tbl_row_edit.focus(function(){
+			$(this).addClass('bg-white').css('padding', '3px');
+		});
 
 		//--->add the original entry > start
 		tbl_row.find('.row_data').each(function(index, val) 
@@ -142,7 +107,7 @@ $(document).ready(function($)
 
 		tbl_row.find('.row_data').each(function(index, val) 
 		{   
-			$(this).html( $(this).attr('original_entry') ); 
+			$(this).html( $(this).attr('original_entry') ).attr('contenteditable', 'false'); 
 		});  
 	});
 	//--->button > cancel > end
@@ -167,7 +132,7 @@ $(document).ready(function($)
 
 		//make the whole row editable
 		tbl_row.find('.row_data')
-		.attr('edit_type', 'click')
+		.attr('contenteditable', 'false')
 		.removeClass('bg-white')
 		.css('padding','')
 
@@ -190,8 +155,12 @@ $(document).ready(function($)
 
 	});
 	//--->save whole row entery > end
-
+	
 }); 
+
+
+// ----------------------------------------------------------------
+
 
 function loadPage(data){
 	$.ajax({
@@ -222,7 +191,7 @@ function makeTable(ajax_data){
 			tbl +='<th>근태현황</th>';
 			tbl +='<th>출근 시간</th>';
 			tbl +='<th>퇴근 시간</th>';
-			tbl +='<th>수정 및 삭제</th>';
+			tbl +='<th>퇴근 버튼</th>';
 			tbl +='</tr>';
 		tbl +='</thead>';
 		//--->create table header > end
@@ -247,21 +216,23 @@ function makeTable(ajax_data){
 
 				//loop through ajax row data
 				tbl +='<tr>';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="fname">'+val['name']+'</div></td>';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="lname">'+val['dept']+'</div></td>';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['posRank']+'</div></td>';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['status']+'</div></td>';
-					tbl +='<td >' + startTime + '</td>';
-					tbl +='<td >' + endTime + '</td>';
+					tbl +='<td ><div col_name="fname">'+val['name']+'</div><input type="hidden" value=' + val['uid'] + '></td>';
+					tbl +='<td ><div col_name="lname">'+val['dept']+'</div></td>';
+					tbl +='<td ><div col_name="email">'+val['posRank']+'</div></td>';
+					tbl +='<td ><div class="status" col_name="email">'+val['status']+'</div></td>';
+					tbl +='<td ><div col_name="email">'+val['start']+'</div></td>';
+					tbl +='<td ><div class="row_data" col_name="email">'+val['end']+'</div></td>';
+//					tbl +='<td >' + startTime + '</td>';
+//					tbl +='<td >' + endTime + '</td>';
 
 					//--->edit options > start
 					tbl +='<td>';
-					 
-						tbl +='<span class="btn_edit" > <a href="#" class="btn btn-link"> 수정</a> </span>';
+					 //<a href="#" class="btn btn-link"> 퇴근</a>
+						tbl +='<span class="btn_edit" > <input type="button" class="btn btn-primary" value="퇴근"> </span>';
 
 						//only show this button if edit button is clicked
-						tbl +='<span class="btn_save"> <a href="#" class="btn btn-link"> 저장</a> | </span>';
-						tbl +='<span class="btn_cancel"> <a href="#" class="btn btn-link"> 취소</a> </span>';
+						tbl +='<span class="btn_save"> <input type="button" class="btn btn-primary" value="확인">&nbsp;</span>';
+						tbl +='<span class="btn_cancel"> <input type="button" class="btn btn-primary" value="취소"> </span>';
 
 					tbl +='</td>';
 					//--->edit options > end
@@ -282,6 +253,10 @@ function makeTable(ajax_data){
 
 	//out put table data
 	$(document).find('.tbl_user_data').html(tbl);
+	$('div.status:contains("출근")').addClass('bg-success');
+	$('div.status:contains("지각")').addClass('bg-warning');
+	$('div.status:contains("결근")').addClass('bg-danger');
+	$('div.status:contains("퇴근")').addClass('bg-secondary');
 
 	$(document).find('.btn_save').hide();
 	$(document).find('.btn_cancel').hide(); 

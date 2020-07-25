@@ -29,8 +29,9 @@
 <div class="search">
     <form action="" class="search-content">
         <select class="form-control">
-            <option value="">직원이름</option>
-            <option value="">직책</option>
+            <option value="">직원 이름</option>
+            <option value="">부서명</option>
+            <option value="">직책명</option>
         </select>
         <input type="text" class="form-control">
         <input type="button" value="검색" class="btn btn-primary">

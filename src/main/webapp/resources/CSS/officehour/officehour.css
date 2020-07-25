@@ -21,3 +21,12 @@ div.panel {
 div.container {
 	width: 100%;
 }
+
+table th, td {
+	text-align: center;
+}
+
+div.status {
+	border-radius: 20px;
+	color: white;
+}
