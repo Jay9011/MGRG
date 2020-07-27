@@ -85,3 +85,10 @@
 .center input.color{
 	background-color: #fff;
 }
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+
