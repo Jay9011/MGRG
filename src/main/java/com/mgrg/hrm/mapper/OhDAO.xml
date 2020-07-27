@@ -7,7 +7,7 @@
 	<select id="select_officehr"
 		resultType="com.mgrg.hrm.officehr.OhDTO" flushCache="true">
 		<![CDATA[
-			SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME posRank, p.P_NAME dept, category.W_START "start", category.W_END "end", category.stat "status" 
+			SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME dept, p.P_NAME posRank, category.W_START "start", category.W_END "end", category.stat "status", category.w_uid 
 			FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
 				(SELECT  
 					h.*,
@@ -21,15 +21,31 @@
 							 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
 						FROM OFFICE_HOUR oh ) h) category
 			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
-			ORDER BY category.w_start DESC
+			ORDER BY category.w_start DESC	
 		]]>
 	</select>
 	
 	<update id="updateHour" flushCache="true">
 		UPDATE OFFICE_HOUR 
-		SET w_start = TO_CHAR(#{w_start} ,'yyyy-mm-dd HH24:mi:ss'), 
-		SET w_end = TO_CHAR(#{w_end} ,'yyyy-mm-dd HH24:mi:ss'), 
-		WHERE emp_uid = #{emp_uid}
+		SET
+		<choose>
+			<when test="w_start == null" >
+				w_start = NULL, 
+			</when>
+			<otherwise>
+				w_start = #{w_start},
+			</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="w_end == null">
+				w_end = NULL
+			</when>
+			<otherwise>
+				w_end = #{w_end}
+			</otherwise>
+		</choose>
+		WHERE emp_uid = #{emp_uid} AND w_uid = #{w_uid}
 	</update>
 
 
