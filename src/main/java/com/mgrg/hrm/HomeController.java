@@ -30,6 +30,7 @@ public class HomeController {
 	@Autowired
 	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
+		D.mailSender = mailSender;
 	} // end setMailSender()
 	
 

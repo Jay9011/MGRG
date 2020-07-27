@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/staff/Main.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/table.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/JS/staff/validation.js"></script>
 <jsp:include page="../topend.jsp" />
 <script>
 	$(document).ready(function(){
@@ -33,17 +34,17 @@
 		
 		<div class="clearfix"></div>
 		
-		<table id="staff_list" class="table table-hover nowrap">
+		<table id="staff_list" class="table table-hover nowrap" style="width:100%">
 			<thead>
 				<tr>
-					<th>*</th>
-					<th>이름</th>
-					<th>직책</th>
-					<th>전화번호</th>
-					<th>이메일</th>
-					<th>남은 휴가일수</th>
-					<th>생년월일</th>
-					<th>주소</th>
+					<th style="width:1%; text-align:center;">*</th>
+					<th style="width:10%; text-align:center;">이름</th>
+					<th style="width:5%; text-align:center;">직책</th>
+					<th style="width:12%; text-align:center;">전화번호</th>
+					<th style="width:15%; text-align:center;">이메일</th>
+					<th style="width:5%; text-align:center;">남은 휴가일수</th>
+					<th style="width:10%; text-align:center;">생년월일</th>
+					<th style="width:42%">주소</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -72,7 +73,7 @@
 						<form id="addStaff" name="addStaff">
 							<div class="input-group text">
 								<label for="staff_name"><span class="requied"></span>이름 </label>
-								<input  class="editForm" name="name" class="editForm" id="staff_name" type="text" style="width:160px"/>
+								<input  class="editForm" name="name" class="editForm" id="staff_name" type="text" placeholder="이름을 입력하세요." style="width:160px"/>
 							</div>
 							<div class="input-group date">
 								<label for="staff_birthday"><span class="requied"></span>생일 </label>
@@ -80,15 +81,15 @@
 							</div>
 							<div class="input-group text">
 								<label for="staff_phone">휴대폰 번호 </label>
-								<input  class="editForm" name="phonenum" class="editForm" id="staff_phone" type="text" style="width:300px"/>
+								<input  class="editForm" name="phonenum" class="editForm" id="staff_phone" type="text" placeholder="휴대번호는 숫자만 입력하기를 권장합니다." style="width:300px"/>
 							</div>
 							<div class="input-group text">
 								<label for="staff_email"><span class="requied"></span>E-mail </label>
-								<input  class="editForm" name="email" class="editForm" id="staff_email" type="text" style="width:300px"/>
+								<input  class="editForm" name="email" class="editForm" id="staff_email" type="text" placeholder="E-mail 주소를 입력해 주세요." style="width:300px"/>
 							</div>
 							<div class="input-group text">
 								<label for="staff_id"><span class="requied"></span>아이디 </label>
-								<input  class="editForm" name="id" class="editForm" id="staff_id" type="text" style="width:300px"/>
+								<input  class="editForm" name="id" class="editForm" id="staff_id" type="text" placeholder="아이디를 입력해 주세요." style="width:300px"/>
 							</div>
 							<!-- <div class="input-group password">
 								<label for="staff_pw">비밀번호 </label>
@@ -108,13 +109,13 @@
 							</div> -->
 							<div class="addLable">주소</div>
 							<div class="input-group text addBody">
-								<div class="input-group">
+								<div class="input-group addBtnLine">
 									<input class="editForm" name="addrZoneCode" id="addrZoneCode" type="text" readonly="readonly" style="width: 80px;"/>
 									<input id="addrBtn" class="btn btn-light" type="button" onclick="DaumAddr(this)" value="주소 찾기"/>
 								</div>
 								<div class="input-group">
 									<input class="editForm" name="addrRoad" id="addrRoad" type="text" readonly="readonly" style="width:100%; margin-bottom:10px;"/>
-									<input class="editForm" name="addrDetail" id="addrDetail" type="text" style="width:100%"/>
+									<input class="editForm" name="addrDetail" id="addrDetail" type="text" placeholder="상세주소 입력란 입니다." style="width:100%"/>
 								</div>
 							</div>
 							<div class="input-group date">
@@ -169,26 +170,26 @@
 					<div class="modal-body">
 						<form id="modiStaff" name="modiStaff">
 							<input name="uid" type="hidden" value="" />
-							<div class="input-group text">
+							<div class="input-group text input-group-viewr">
 								<label for="staff_name">이름 </label>
 								<input  class="editForm" name="name" id="staff_name" type="text" style="width:160px"/>
 							</div>
-							<div class="input-group date">
+							<div class="input-group date input-group-viewr">
 								<label for="staff_birthday">생일 </label>
 								<input  class="editForm" name="birthday" id="staff_birthday" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 								<span class="birthday"></span>
 							</div>
-							<div class="input-group text">
+							<div class="input-group text input-group-viewr">
 								<label for="staff_phone">휴대폰 번호 </label>
 								<input  class="editForm" name="phonenum" id="staff_phone" type="text" style="width:300px"/>
 							</div>
-							<div class="input-group text">
+							<div class="input-group text input-group-viewr">
 								<label for="staff_email">E-mail </label>
 								<input  class="editForm" name="email" id="staff_email" type="text" style="width:300px"/>
 							</div>
-							<div class="input-group text">
+							<div class="input-group text input-group-viewr">
 								<label for="staff_id">아이디 </label>
-								<input  class="editForm" name="id" id="staff_id" type="text" style="width:300px"/>
+								<input  class="editForm" name="id" id="staff_id" type="text" style="width:300px; border: none;" readonly="readonly"/>
 							</div>
 							<!-- <div class="input-group password">
 								<label for="staff_pw">비밀번호 </label>
@@ -207,8 +208,8 @@
 								</svg>
 							</div> -->
 							<div class="addLable">주소</div>
-							<div class="input-group text addBody">
-								<div class="input-group">
+							<div class="input-group text addBody input-group-viewr">
+								<div class="input-group addBtnLine">
 									<input  class="editForm" name="addrZoneCode" id="addrZoneCode" type="text" readonly="readonly" style="width: 80px; border: none"/>
 									<input id="addrBtn" class="btn btn-light" type="button" onclick="DaumAddr(this)" value="주소 변경"/>
 								</div>
@@ -217,12 +218,12 @@
 									<input  class="editForm" name="addrDetail" id="addrDetail" type="text" style="width:100%"/>
 								</div>
 							</div>
-							<div class="input-group date">
+							<div class="input-group date input-group-viewr">
 								<label for="staff_hiredate">입사 날짜 </label>
 								<input  class="editForm" name="hiredate" id="staff_hiredate" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 								<span class="hiredate"></span>
 							</div>
-							<div class="input-group text">
+							<div class="input-group text input-group-viewr">
 								<label for="staff_salary">연봉 </label>
 								<input  class="editForm" name="salary" id="staff_salary" type="number" style="width:300px"/>
 								<span class="salary"></span>
