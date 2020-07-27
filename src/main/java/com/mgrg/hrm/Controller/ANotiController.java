@@ -18,7 +18,7 @@ import com.mgrg.hrm.notice.NoticeJSON;
 @RestController
 @RequestMapping("/notice")
 public class ANotiController {
-	@RequestMapping("list.ajax")
+	@RequestMapping("/list.ajax")
 	public NoticeJSON bList(HttpServletRequest request,Model model) {
 		//System.out.println("들어는 오니??");
 		new BListCommand().execute(model);
@@ -26,7 +26,7 @@ public class ANotiController {
 		return list;
 	}
 
-	@PostMapping("writeOk.ajax")
+	@PostMapping("/writeOk.ajax")
 	public NoticeJSON bWriteOk(BoardDTO dto, Model model) {
 		//System.out.println("들어는 오니?");
 		model.addAttribute("dto",dto);
@@ -35,7 +35,7 @@ public class ANotiController {
 		return list;
 	}
 	
-	@RequestMapping("view.ajax")
+	@RequestMapping("/view.ajax")
 	public NoticeJSON bView(int uid, Model model) {
 		//System.out.println("view 에오");
 		model.addAttribute("uid",uid);
@@ -43,7 +43,7 @@ public class ANotiController {
 		NoticeJSON list = (NoticeJSON) model.getAttribute("list");
 		return list;
 	}
-	@RequestMapping("update.ajax")
+	@RequestMapping("/update.ajax")
 	public NoticeJSON bupdate(BoardDTO dto, Model model) {
 		model.addAttribute("dto",dto);
 		new BupdateCommand().execute(model);
@@ -51,7 +51,7 @@ public class ANotiController {
 		return list;
 	}
 	
-	@RequestMapping("delete.ajax")
+	@RequestMapping("/delete.ajax")
 	public NoticeJSON bDelete(int[] uid, Model model) {
 		model.addAttribute("uids",uid);
 		new BdeleteCommand().execute(model);

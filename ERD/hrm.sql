@@ -377,6 +377,8 @@ SELECT * FROM POSITIONRANK;
 SELECT * FROM HOLIDAY;
 SELECT * FROM OFFICE_HOUR;
 SELECT n_uid "uid", n_subject subject, n_content content,n_regdate regdate,dep_uid department, p_uid "position"  FROM NOTICE;
+select n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid from notice where p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC ;
+SELECT * FROM (SELECT n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid FROM notice WHERE p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC) WHERE ROWNUM <= 5;
 
 
 -- 공통과 해당되는 부서의 목록보기

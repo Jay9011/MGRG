@@ -3,7 +3,17 @@
 <mapper namespace="com.mgrg.hrm.login.INotiDAO">
 
 	<select id="selectNoti" resultType="com.mgrg.hrm.login.NoticeDTO">
-		select n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid from notice where p_uid = #{parma1}
+		SELECT 
+			n_uid "uid",
+			n_subject subject,
+			n_content content,
+			n_regdate regdate,
+			dep_uid depuid,
+			p_uid puid
+		FROM notice
+		WHERE p_uid = #{puid}
+		AND (DEP_UID IS NULL OR DEP_UID = #{depuid})
+		ORDER BY N_REGDATE DESC
 	</select>
 
 

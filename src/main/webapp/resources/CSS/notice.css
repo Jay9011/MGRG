@@ -78,8 +78,6 @@ ul.pagination a:hover:not(.active) {background-color: #ddd;}
 	height: 100%;
 }
 
-/* 기본 버튼 */
-
 
 /* 버튼 그룹 */
 .d01{
@@ -87,6 +85,9 @@ ul.pagination a:hover:not(.active) {background-color: #ddd;}
 }
 .d01 .btn2{
 	display: inline-block;
+}
+#dlg_write{
+	overflow: auto !important;
 }
 /*  모달의 사이즈 조절시 스크롤 안생기게 하기 */
 #dlg_write::-webkit-scrollbar {

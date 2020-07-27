@@ -13,15 +13,8 @@ import com.mgrg.hrm.notice.BoardDTO;
 @RequestMapping("/notice")
 public class NoticeController {
 	
-	private SqlSession sqlSession;
-	@Autowired  
-	public void setSqlSession(SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
-		D.sqlSession = sqlSession;
-	}
-	@RequestMapping("/noti")
+	@RequestMapping("/")
 	public String read(Model model) {
-		model.addAttribute("BoardDTO",new BoardDTO());
-		return "notice/noti";
+		return "noti";
 	}
 }
