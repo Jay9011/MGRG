@@ -22,15 +22,6 @@ table.dataTable.nowrap td {
 	justify-content: flex-start !important;
 }
 
-.dt-body-center {
-	text-align: center;
-}
-
-.dt-body-right {
-	text-align: right;
-	
-}
-
 #btnWrite {
 	float: right;
 	background-color: #9569CC;
@@ -123,21 +114,6 @@ button.addBtn {
 	border-bottom: 1px solid #a9adb9;
 }
 
-.addBtnLine {
-	height: 36px;
-}
-.input-group-viewr {
-	height:30px;
-}
-.input-group-viewr.addBody {
-	height:135px;
-}
-.input-group span {
-	align-self: center;
-}
-.input-group.select {
-	height: 30px;
-}
 #viewStaff select{
 	border: none;
 	-webkit-appearance: none; /* 화살표 없애기 for chrome*/
