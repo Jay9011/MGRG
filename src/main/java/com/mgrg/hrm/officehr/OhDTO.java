@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 
 public class OhDTO {
 	private int uid;
+	private int w_uid;
 	private String name;
 	private String posRank;
 	private String dept;
@@ -70,7 +71,11 @@ public class OhDTO {
 //			t = java.sql.Timestamp.valueOf(startTime);
 //			return t;
 //		}
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(start);
+		if (start == null) {
+			return "";
+		} else {
+			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(start);
+		}
 	}
 
 	public void setStart(Timestamp start) {
@@ -97,5 +102,15 @@ public class OhDTO {
 		this.end = end;
 		
 	}
+
+	public int getW_uid() {
+		return w_uid;
+	}
+
+	public void setW_uid(int w_uid) {
+		this.w_uid = w_uid;
+	}
+	
+	
 
 }
