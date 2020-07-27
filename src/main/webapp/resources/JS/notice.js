@@ -68,7 +68,7 @@ function boardRord() {
 	var n_uid;
 	$('#tlc').DataTable({
 		ajax : {
-			url : '/hrm/notice/list.ajax',
+			url : path+'/notice/list.ajax',
 			dataSrc : 'data'
 				
 		},
@@ -118,7 +118,7 @@ function chkWrite() {
 
 	// ajax request
 	$.ajax({
-		url : 'writeOk.ajax',
+		url : path+'/notice/writeOk.ajax',
 		type : "POST",
 		cache : false,
 		data : data, // post 로 ajax request 하는 경우 parameter 담기
@@ -160,7 +160,7 @@ function chkDelete() {
 		// uid=1010&uid=1111
 
 		$.ajax({
-			url : 'delete.ajax',
+			url : path+'/notice/delete.ajax',
 			type : "POST",
 			data : data,
 			cache : false,
@@ -189,7 +189,7 @@ function addViewEvent() {
 
 				// 읽어오기
 				$.ajax({
-							url : "view.ajax?uid=" + $(this).attr('data-uid'),
+							url : path+"/notice/view.ajax?uid=" + $(this).attr('data-uid'),
 							type : "GET",
 							cache : false,
 							success : function(data, status) {
@@ -323,7 +323,7 @@ function deleteUid(uid) {
 	
 	// POST 방식
 	$.ajax({
-		url : "delete.ajax",
+		url : path+"/notice/delete.ajax",
 		type : "POST",
 		data : "uid=" + uid,
 		cache : false,
@@ -351,7 +351,7 @@ function chkUpdate() {
 	var data = $("#frmWrite").serialize();
 
 	$.ajax({
-		url : "update.ajax",
+		url :path+"/notice/update.ajax",
 		type : "POST",
 		cache : false,
 		data : data,

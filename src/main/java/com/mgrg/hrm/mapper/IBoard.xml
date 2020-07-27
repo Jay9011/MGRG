@@ -54,7 +54,7 @@
 		FROM
 			notice
 		WHERE
-			 (dep_uid IS NULL OR dep_uid = #{param2}) AND p_uid <= #{param3};
+			 (dep_uid IS NULL OR dep_uid = #{param1}) AND p_uid <= #{param2};
 		]]>
 	</select>
 	

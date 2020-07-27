@@ -59,5 +59,12 @@ public class HomeController {
 	public String mem(Model model) {
 		return "login/mem";
 	}
-	
-}
+	@RequestMapping("/login/admain")
+	public String admain(Model model) {
+		return "login/admain";
+	}
+	@RequestMapping("/notice")
+	public String notice(Model model) {
+		return "notice/noti";
+	}
+}	

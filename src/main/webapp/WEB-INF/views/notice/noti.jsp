@@ -33,9 +33,6 @@
 <%--버튼 --%>
 		<div class="d01 float-right ">
 			<div class="btn2">
-				<button type="button" id="btnDel" class="btn">공지 삭제</button>
-			</div>
-			<div class="btn2">
 				<button type="button" id="btnWrite" class="btn">공지 작성</button>
 			</div>
 		</div>
@@ -52,7 +49,9 @@
 
 			</table>
 		</form>
-		
+			<div class="btn2">
+				<button type="button" id="btnDel" class="btn">공지 삭제</button>
+			</div>
 
 
 	</div>
