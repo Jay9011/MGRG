@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
+import com.mgrg.hrm.officehr.OhDTO;
+
 public class BSelectCommand implements BCommand {
 
 	@Override
@@ -24,6 +26,10 @@ public class BSelectCommand implements BCommand {
 		List<NoticeDTO>arr = dao2.selectNoti(dto.getP_uid(),dto.getDep_uid());
 		model.addAttribute("list", arr);
 		
+		//int dto2 = dao.present(dto.getEmp_uid());
+		
+		
+		
 		//dao2.selectNoti(dto.getP_uid()); // 2개의 <NoticeDTO> 결과
 		
 		
@@ -36,6 +42,8 @@ public class BSelectCommand implements BCommand {
 
 		session.setAttribute("puid", dto.getP_uid());
 		session.setAttribute("depuid", dto.getDep_uid());
+		session.setAttribute("empuid", dto.getEmp_uid());
+		session.setAttribute("empname", dto.getEmp_name());
 		/////////////////////////////////////////////////
 
 
