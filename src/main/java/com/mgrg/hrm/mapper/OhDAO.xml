@@ -21,7 +21,7 @@
 							 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
 						FROM OFFICE_HOUR oh ) h) category
 			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
-			ORDER BY category.W_START DESC
+			ORDER BY category.w_start DESC
 		]]>
 	</select>
 	

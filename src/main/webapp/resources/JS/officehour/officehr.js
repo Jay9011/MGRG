@@ -54,7 +54,6 @@ $(document).ready(function($)
 	{
 		
 		var leave = $('.end').text();
-		alert(leave);
 		
 		event.preventDefault();
 		var tbl_row = $(this).closest('tr');
@@ -96,8 +95,6 @@ $(document).ready(function($)
 
 		var tbl_row = $(this).closest('tr');
 
-		var row_id = tbl_row.attr('row_id');
-
 		//hide save and cacel buttons
 		tbl_row.find('.btn_save').hide();
 		tbl_row.find('.btn_cancel').hide();
@@ -119,6 +116,7 @@ $(document).ready(function($)
 	//--->button > cancel > end
 
 	
+	// TODO
 	//--->save whole row entery > start	
 	$(document).on('click', '.btn_save', function(event) 
 	{
@@ -144,13 +142,50 @@ $(document).ready(function($)
 
 		//--->get row data > start
 		var arr = {}; 
+		var timeArr = [];
+		var param ;
 		tbl_row.find('.row_data').each(function(index, val) 
 		{   
 			var col_name = $(this).attr('col_name');  
-			var col_val  =  $(this).html();
-			arr[col_name] = col_val;
+			var col_val  =  $(this).text();
+			arr[index] = col_val;
+			var e_uid = $(this).closest('tr').find('.e_uid').val();
+			var start = $(this).closest('tr').find('.start').text();
+			var end = $(this).closest('tr').find('.end').text();
+			alert(start);
+			/*alert(e_uid);
+			alert(col_name);
+			alert(index);
+			alert(arr[index]);
+			
+			alert(col_val);*/
+			
+			arr = {
+				uid : e_uid,
+				start : start,
+				end : arr[1]
+			}
+		
+		/*	alert(arr[0]);
+			alert(col_val);
+			alert(typeof(col_val));*/
 		});
+		
+		
 		//--->get row data > end
+		
+		$.ajax({
+			url : "/hrm/offhr/update",
+			type : "GET",
+			cache : false,
+			data : arr,
+			success : function(data, status){
+				if(status == "success"){
+					alert('수정 성공');
+				}
+			}
+			
+		});
 
 		//use the "arr"	object for your ajax call
 		$.extend(arr, {row_id:row_id});
@@ -197,7 +232,7 @@ function makeTable(ajax_data){
 			tbl +='<th>근태현황</th>';
 			tbl +='<th>출근 시간</th>';
 			tbl +='<th>퇴근 시간</th>';
-			tbl +='<th>퇴근 버튼</th>';
+			tbl +='<th>수정</th>';
 			tbl +='</tr>';
 		tbl +='</thead>';
 		//--->create table header > end
@@ -222,22 +257,20 @@ function makeTable(ajax_data){
 
 				//loop through ajax row data
 				tbl +='<tr>';
-					tbl +='<td ><div col_name="fname">'+val['name']+'</div><input type="hidden" value=' + val['uid'] + '></td>';
+					tbl +='<td ><div col_name="fname">'+val['name']+'</div><input class="e_uid" type="hidden" value=' + val['uid'] + '></td>';
 					tbl +='<td ><div col_name="lname">'+val['dept']+'</div></td>';
 					tbl +='<td ><div col_name="email">'+val['posRank']+'</div></td>';
 					tbl +='<td ><div class="status" col_name="email">'+val['status']+'</div></td>';
-					tbl +='<td ><div col_name="email">'+val['start']+'</div></td>';
-					tbl +='<td ><div class="row_data end" col_name="email">'+val['end']+'</div></td>';
+					tbl +='<td ><div class="row_data start" col_name="start" value="' + val['start'] + '">'+val['start']+'</div></td>';
+					tbl +='<td ><div class="row_data end" col_name="end">'+val['end']+'</div></td>';
 //					tbl +='<td >' + startTime + '</td>';
 //					tbl +='<td >' + endTime + '</td>';
 
 					//--->edit options > start
 					tbl +='<td>';
-					 //<a href="#" class="btn btn-link"> 퇴근</a>
-						tbl +='<span class="btn_edit" > <input type="button" class="btn btn-primary" value="퇴근"> </span>';
-
+						tbl +='<span class="btn_edit" > <input type="button" class="btn btn-primary" value="수정"> </span>';
 						//only show this button if edit button is clicked
-						tbl +='<span class="btn_save"> <input type="button" class="btn btn-primary" value="확인">&nbsp;</span>';
+						tbl +='<span class="btn_save"> <input type="button" class="btn btn-primary" value="저장">&nbsp;</span>';
 						tbl +='<span class="btn_cancel"> <input type="button" class="btn btn-primary" value="취소"> </span>';
 
 					tbl +='</td>';
@@ -268,3 +301,5 @@ function makeTable(ajax_data){
 	$(document).find('.btn_cancel').hide(); 
 	
 }
+
+

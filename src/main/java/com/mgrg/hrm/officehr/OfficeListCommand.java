@@ -4,11 +4,10 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.mgrg.hrm.Command;
 import com.mgrg.hrm.D;
-import com.mgrg.hrm.staff.StaffCommand;
-import com.mgrg.hrm.staff.StaffJSON;
 
-public class OfficeListCommand implements StaffCommand{
+public class OfficeListCommand implements Command{
 
 	@Override
 	public void execute(Model model) {
