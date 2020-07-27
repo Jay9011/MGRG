@@ -47,9 +47,15 @@ $(document).ready(function($)
 	//--->save single field data > end
 
  
+	
+	
 	//--->button > edit > start	
 	$(document).on('click', '.btn_edit', function(event) 
 	{
+		
+		var leave = $('.end').text();
+		alert(leave);
+		
 		event.preventDefault();
 		var tbl_row = $(this).closest('tr');
 		var row_id = tbl_row.attr('row_id');
@@ -221,7 +227,7 @@ function makeTable(ajax_data){
 					tbl +='<td ><div col_name="email">'+val['posRank']+'</div></td>';
 					tbl +='<td ><div class="status" col_name="email">'+val['status']+'</div></td>';
 					tbl +='<td ><div col_name="email">'+val['start']+'</div></td>';
-					tbl +='<td ><div class="row_data" col_name="email">'+val['end']+'</div></td>';
+					tbl +='<td ><div class="row_data end" col_name="email">'+val['end']+'</div></td>';
 //					tbl +='<td >' + startTime + '</td>';
 //					tbl +='<td >' + endTime + '</td>';
 

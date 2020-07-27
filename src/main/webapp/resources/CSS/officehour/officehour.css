@@ -7,6 +7,14 @@ form.search-content{
 	margin: 0 auto;
 }
 
+div.search {
+	float: left;
+}
+
+.clear{
+	clear: both;
+}
+
 .form-control {
 	width:auto;
 	display: inline;

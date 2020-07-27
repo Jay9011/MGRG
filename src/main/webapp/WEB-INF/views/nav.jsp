@@ -25,7 +25,7 @@
              <ul class="list-unstyled components">
                 <!-- <li class="active"> -->
                     <li>
-                    <a href="#homeSubmenu">
+                    <a href="/hrm/officehour/list">
                         <i class="fas fa-home"></i>
                         	근태 관리
                     </a>

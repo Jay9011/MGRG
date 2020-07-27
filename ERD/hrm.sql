@@ -648,12 +648,23 @@ FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
 			FROM OFFICE_HOUR oh ) h) category
 WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
 ORDER BY category.W_START ASC;
-		
+
+SELECT  
+		h.*,
+		CASE
+			WHEN h.endTime IS NOT NULL THEN '4'
+			WHEN h.startTime <= 900 THEN '1'
+			WHEN h.startTime <= 930 THEN '2'
+			ELSE '3'
+			END AS stat
+	FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+			FROM OFFICE_HOUR oh ) h;
 
 
-INSERT INTO OFFICE_HOUR (w_uid, W_START , W_END , EMP_UID )
+INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID )
 VALUES 
-(SEQ_office_hour_w_uid.nextval, '2020-07-23 07:58:22', to_char(systimestamp, 'yyyy-mm-dd HH24:MI:SS'), 3) ;
+(SEQ_office_hour_w_uid.nextval, '2020-07-25 11:58:22', 3) ;
 		
 -- 퇴근 버튼 클릭 --
 UPDATE OFFICE_HOUR 
