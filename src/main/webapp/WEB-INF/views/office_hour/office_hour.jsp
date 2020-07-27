@@ -6,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <jsp:include page="../top.jsp" />
 <!--     <script src="https://code.jquery.com/jquery-2.2.4.min.js"  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="  crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
@@ -27,8 +29,9 @@
 <div class="search">
     <form action="" class="search-content">
         <select class="form-control">
-            <option value="">직원이름</option>
-            <option value="">직책</option>
+            <option value="">직원 이름</option>
+            <option value="">부서명</option>
+            <option value="">직책명</option>
         </select>
         <input type="text" class="form-control">
         <input type="button" value="검색" class="btn btn-primary">

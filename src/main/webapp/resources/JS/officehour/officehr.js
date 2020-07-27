@@ -1,127 +1,20 @@
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
 $(document).ready(function($)
 {
 	//ajax row data
-	var ajax_data =
-	[
-		{name:"한수빈", position:"사원", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
-		{name:"임상빈", position:"대리", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
-		{name:"홍성용", position:"과장", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
-		{name:"윤종섭", position:"대표", currStat:"출근", startTime: "2020-07-21", endTime: "2020-07-21"},
-	]
+	var ajax_data;
 	
-	var random_id = function  () 
-	{
-		var id_num = Math.random().toString(9).substr(2,3);
-		var id_str = Math.random().toString(36).substr(2);
-		
-		return id_num + id_str;
-	}
-
-
-	//--->create data table > start
-	var tbl = '';
-	tbl +='<table class="table table-hover">'
-
-		//--->create table header > start
-		tbl +='<thead>';
-			tbl +='<tr>';
-			tbl +='<th>이름</th>';
-			tbl +='<th>직책</th>';
-			tbl +='<th>근태현황</th>';
-			tbl +='<th>출근 시간</th>';
-			tbl +='<th>퇴근 시간</th>';
-			tbl +='<th>수정 및 삭제</th>';
-			tbl +='</tr>';
-		tbl +='</thead>';
-		//--->create table header > end
-
-		
-		//--->create table body > start
-		tbl +='<tbody>';
-
-			//--->create table body rows > start
-			$.each(ajax_data, function(index, val) 
-			{
-				//for(i = 0; i < ajax_data.length; i++ ){
-					var startTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
-										 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['startTime'] + "/>" + 
-										 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
-					var endTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
-					 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['endTime'] + "/>" + 
-					 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
-
-				
-				//you can replace with your database row id
-				var row_id = random_id();
-
-				//loop through ajax row data
-				tbl +='<tr row_id="'+row_id+'">';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="fname">'+val['name']+'</div></td>';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="lname">'+val['position']+'</div></td>';
-					tbl +='<td ><div class="row_data" edit_type="click" col_name="email">'+val['currStat']+'</div></td>';
-					tbl +='<td >' + startTime + '</td>';
-					tbl +='<td >' + endTime + '</td>';
-
-					//--->edit options > start
-					tbl +='<td>';
-					 
-						tbl +='<span class="btn_edit" > <a href="#" class="btn btn-link" row_id="'+row_id+'" > 수정</a> </span>';
-
-						//only show this button if edit button is clicked
-						tbl +='<span class="btn_save"> <a href="#" class="btn btn-link"  row_id="'+row_id+'"> 저장</a> | </span>';
-						tbl +='<span class="btn_cancel"> <a href="#" class="btn btn-link" row_id="'+row_id+'"> 취소</a> </span>';
-
-					tbl +='</td>';
-					//--->edit options > end
-					
-				tbl +='</tr>';
-				//}
-				
-			});
-
-			//--->create table body rows > end
-
-		tbl +='</tbody>';
-		//--->create table body > end
-
-	tbl +='</table>'	
-	//--->create data table > end
-			
-
-	//out put table data
-	$(document).find('.tbl_user_data').html(tbl);
-
-	$(document).find('.btn_save').hide();
-	$(document).find('.btn_cancel').hide(); 
+	// ajax를 보내기전에 header세팅해주기
+	$.ajaxSetup({
+        beforeSend: function(xhr) {
+        	xhr.setRequestHeader(header, token);
+        }
+    });
 	
-//	datetimepicker();
-	//datetimepicker2();
-	$(".date").datetimepicker({
-		
-		// TODO datetimepicker가 설정 되었으면 DB에 저장이 되어야한다
-	});
+	loadPage(ajax_data);
 	
-
-	//--->make div editable > start
-	$(document).on('click', '.row_data', function(event) 
-	{
-		event.preventDefault(); 
-
-		if($(this).attr('edit_type') == 'button')
-		{
-			return false; 
-		}
-
-		//make div editable
-		$(this).closest('div').attr('contenteditable', 'true');
-		//add bg css
-		$(this).addClass('bg-white').css('padding','5px');
-
-		$(this).focus();
-	})	
-	//--->make div editable > end
-
-
 	//--->save single field data > start
 	$(document).on('focusout', '.row_data', function(event) 
 	{
@@ -159,21 +52,24 @@ $(document).ready(function($)
 	{
 		event.preventDefault();
 		var tbl_row = $(this).closest('tr');
-
 		var row_id = tbl_row.attr('row_id');
-
+		var tbl_row_edit = tbl_row.find('.row_data');
+		
 		tbl_row.find('.btn_save').show();
 		tbl_row.find('.btn_cancel').show();
 
 		//hide edit button
 		tbl_row.find('.btn_edit').hide(); 
-
+		
 		//make the whole row editable
 		tbl_row.find('.row_data')
 		.attr('contenteditable', 'true')
-		.attr('edit_type', 'button')
 		.addClass('bg-white')
 		.css('padding','3px')
+		
+		tbl_row_edit.focus(function(){
+			$(this).addClass('bg-white').css('padding', '3px');
+		});
 
 		//--->add the original entry > start
 		tbl_row.find('.row_data').each(function(index, val) 
@@ -211,7 +107,7 @@ $(document).ready(function($)
 
 		tbl_row.find('.row_data').each(function(index, val) 
 		{   
-			$(this).html( $(this).attr('original_entry') ); 
+			$(this).html( $(this).attr('original_entry') ).attr('contenteditable', 'false'); 
 		});  
 	});
 	//--->button > cancel > end
@@ -236,7 +132,7 @@ $(document).ready(function($)
 
 		//make the whole row editable
 		tbl_row.find('.row_data')
-		.attr('edit_type', 'click')
+		.attr('contenteditable', 'false')
 		.removeClass('bg-white')
 		.css('padding','')
 
@@ -259,5 +155,110 @@ $(document).ready(function($)
 
 	});
 	//--->save whole row entery > end
-
+	
 }); 
+
+
+// ----------------------------------------------------------------
+
+
+function loadPage(data){
+	$.ajax({
+		url : "/hrm/offhr/list",
+		type : "POST",
+		cache : false,
+		success : function(data, status){
+			if(status == "success"){
+				makeTable(data);
+			}
+		}
+		
+	});
+}
+
+
+function makeTable(ajax_data){
+	//--->create data table > start
+	var tbl = '';
+	tbl +='<table class="table table-hover">'
+
+		//--->create table header > start
+		tbl +='<thead>';
+			tbl +='<tr>';
+			tbl +='<th>이름</th>';
+			tbl +='<th>부서</th>';
+			tbl +='<th>직책</th>';
+			tbl +='<th>근태현황</th>';
+			tbl +='<th>출근 시간</th>';
+			tbl +='<th>퇴근 시간</th>';
+			tbl +='<th>퇴근 버튼</th>';
+			tbl +='</tr>';
+		tbl +='</thead>';
+		//--->create table header > end
+
+		
+		//--->create table body > start
+		tbl +='<tbody>';
+
+			//--->create table body rows > start
+			$.each(ajax_data.data, function(index, val) 
+			{
+				//for(i = 0; i < ajax_data.length; i++ ){
+					var startTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
+										 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['start'] + "/>" + 
+										 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
+					var endTime = "<div class='container'><div class='row'><div class='col-sm-6'><div class='form-group'>" + 
+					 "<div class='input-group date' id='datetimepicker"+ (index+1) + "'><input type='text' class='form-control' value=" + val['end'] + "/>" + 
+					 "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span></div></div></div>";
+
+				
+				//you can replace with your database row id
+
+				//loop through ajax row data
+				tbl +='<tr>';
+					tbl +='<td ><div col_name="fname">'+val['name']+'</div><input type="hidden" value=' + val['uid'] + '></td>';
+					tbl +='<td ><div col_name="lname">'+val['dept']+'</div></td>';
+					tbl +='<td ><div col_name="email">'+val['posRank']+'</div></td>';
+					tbl +='<td ><div class="status" col_name="email">'+val['status']+'</div></td>';
+					tbl +='<td ><div col_name="email">'+val['start']+'</div></td>';
+					tbl +='<td ><div class="row_data" col_name="email">'+val['end']+'</div></td>';
+//					tbl +='<td >' + startTime + '</td>';
+//					tbl +='<td >' + endTime + '</td>';
+
+					//--->edit options > start
+					tbl +='<td>';
+					 //<a href="#" class="btn btn-link"> 퇴근</a>
+						tbl +='<span class="btn_edit" > <input type="button" class="btn btn-primary" value="퇴근"> </span>';
+
+						//only show this button if edit button is clicked
+						tbl +='<span class="btn_save"> <input type="button" class="btn btn-primary" value="확인">&nbsp;</span>';
+						tbl +='<span class="btn_cancel"> <input type="button" class="btn btn-primary" value="취소"> </span>';
+
+					tbl +='</td>';
+					//--->edit options > end
+					
+				tbl +='</tr>';
+				//}
+				
+			});
+
+			//--->create table body rows > end
+
+		tbl +='</tbody>';
+		//--->create table body > end
+
+	tbl +='</table>'	
+	//--->create data table > end
+			
+
+	//out put table data
+	$(document).find('.tbl_user_data').html(tbl);
+	$('div.status:contains("출근")').addClass('bg-success');
+	$('div.status:contains("지각")').addClass('bg-warning');
+	$('div.status:contains("결근")').addClass('bg-danger');
+	$('div.status:contains("퇴근")').addClass('bg-secondary');
+
+	$(document).find('.btn_save').hide();
+	$(document).find('.btn_cancel').hide(); 
+	
+}

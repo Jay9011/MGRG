@@ -3,7 +3,7 @@
 <mapper namespace="com.mgrg.hrm.login.INotiDAO">
 
 	<select id="selectNoti" resultType="com.mgrg.hrm.login.NoticeDTO">
-		select n_uid, n_subject, n_content, n_regdate, dep_uid, p_uid from notice where p_uid = #{parma1}
+		select n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid from notice where p_uid = #{parma1}
 	</select>
 
 

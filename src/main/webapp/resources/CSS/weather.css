@@ -183,3 +183,10 @@ span.day {
 	font-size: 1.5em !important;
 	color: red !important;
 }	
+
+.noticea{
+	color : black;
+}
+.noticeCenter{
+	text-align: center;
+}

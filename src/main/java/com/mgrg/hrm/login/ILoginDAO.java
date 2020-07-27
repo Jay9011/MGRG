@@ -7,4 +7,6 @@ public interface ILoginDAO {
 
 	
 	public SessionDTO selectByIdPw(String id);
+	
+	public String findPW(String id);
 }
