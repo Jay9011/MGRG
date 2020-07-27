@@ -22,7 +22,8 @@ public class OfficeHrRestController {
 	 * 
 	 * @GetMapping("/list")
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
+//	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public OhJSON list(Model model) {
 		new OfficeListCommand().execute(model);
 		OhJSON json = (OhJSON) model.getAttribute("json"); 
