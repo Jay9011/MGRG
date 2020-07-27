@@ -51,12 +51,15 @@ CREATE TABLE employees
 (
 	emp_uid number NOT NULL,
 	emp_name varchar2(40) NOT NULL,
-	emp_birthdate varchar2(10) NOT NULL,
+	emp_birthdate date DEFAULT SYSDATE NOT NULL,
 	emp_phonenum number UNIQUE,
 	emp_email varchar2(50) NOT NULL UNIQUE,
 	emp_id varchar2(20) NOT NULL UNIQUE,
 	emp_pw varchar2(20) NOT NULL,
 	emp_addr clob,
+	emp_addrZoneCode clob,
+	emp_addrRoad clob,
+	emp_addrDetail clob,
 	emp_hiredate date DEFAULT SYSDATE NOT NULL,
 	emp_salary number NOT NULL,
 	p_uid number NOT NULL,
@@ -127,12 +130,14 @@ ALTER TABLE notice
 ALTER TABLE holiday
 	ADD FOREIGN KEY (emp_uid)
 	REFERENCES employees (emp_uid)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE office_hour
 	ADD FOREIGN KEY (emp_uid)
 	REFERENCES employees (emp_uid)
+	ON DELETE CASCADE
 ;
 
 
@@ -312,49 +317,49 @@ VALUES (SEQ_notice_n_uid.NEXTVAL, '과)출근시간 변경 공지 입니다.', '
 /* 사원 더미 */
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '사사원', '1990/11/07', 'test@gmail.com', 'test', '123', 50000000, 1, 1);
+VALUES (SEQ_employees_emp_uid.nextval, '사사원', to_date('1990-11-07', 'YYYY-MM-DD'), 'test@gmail.com', 'test', '123', 50000000, 1, 1);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '나사직', '1993/02/28', 'nasa@gmail.com', 'nasa', '123', 50000000, 1, 2);
+VALUES (SEQ_employees_emp_uid.nextval, '나사직', to_date('1993-02-28', 'YYYY-MM-DD'), 'nasa@gmail.com', 'nasa', '123', 50000000, 1, 2);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '사지원', '1995/01/25', 'sup@gmail.com', 'sup', '123', 50000000, 1, 3);
+VALUES (SEQ_employees_emp_uid.nextval, '사지원', to_date('1995-01-25', 'YYYY-MM-DD'), 'sup@gmail.com', 'sup', '123', 50000000, 1, 3);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '영업왕입니다', '1894/11/14', 'king@gmail.com', 'king', '123', 50000000, 1, 4);
+VALUES (SEQ_employees_emp_uid.nextval, '영업왕입니다', to_date('1894-11-14', 'YYYY-MM-DD'), 'king@gmail.com', 'king', '123', 50000000, 1, 4);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, EMP_ADDR, EMP_PHONENUM , emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '공돌이', '1898/10/04', 'gong@gmail.com', 'gong', '123', '123456 서울특별시 강남구 강남로 한강변 초대형 아파트 제일 윗층과 인천광역시 부평구 신생로 새로생긴 아파트 102동 402호에 살고있는 공돌이 입니다.', 01012345678,50000000, 1, 5);
+VALUES (SEQ_employees_emp_uid.nextval, '공돌이', to_date('1898-10-04', 'YYYY-MM-DD'), 'gong@gmail.com', 'gong', '123', '123456 서울특별시 강남구 강남로 한강변 초대형 아파트 제일 윗층과 인천광역시 부평구 신생로 새로생긴 아파트 102동 402호에 살고있는 공돌이 입니다.', 01012345678,50000000, 1, 5);
 ;
 
 SELECT * FROM EMPLOYEES;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '대대리', '1980/01/07', 'bald@gmail.com', 'bald', '123', 60000000, 2, 1);
+VALUES (SEQ_employees_emp_uid.nextval, '대대리', to_date('1980-01-07', 'YYYY-MM-DD'), 'bald@gmail.com', 'bald', '123', 60000000, 2, 1);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '나팀장', '1983/12/08', 'team@gmail.com', 'team', '123', 70000000, 3, 2);
+VALUES (SEQ_employees_emp_uid.nextval, '나팀장', to_date('1983-12-08', 'YYYY-MM-DD'), 'team@gmail.com', 'team', '123', 70000000, 3, 2);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '사부장', '1978/01/25', 'sabu@gmail.com', 'sabu', '123', 80000000, 4, 3);
+VALUES (SEQ_employees_emp_uid.nextval, '사부장', to_date('1978-01-25', 'YYYY-MM-DD'), 'sabu@gmail.com', 'sabu', '123', 80000000, 4, 3);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '과자앙', '1874/10/24', 'jjang@gmail.com', 'jjang', '123', 90000000, 5, 4);
+VALUES (SEQ_employees_emp_uid.nextval, '과자앙', to_date('1874-10-24', 'YYYY-MM-DD'), 'jjang@gmail.com', 'jjang', '123', 90000000, 5, 4);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '사장임', '1868/06/04', 'sajang@gmail.com', 'sajang', '123', 100000000, 6, 5);
+VALUES (SEQ_employees_emp_uid.nextval, '사장임', to_date('1868-06-04', 'YYYY-MM-DD'), 'sajang@gmail.com', 'sajang', '123', 100000000, 6, 5);
 ;
 
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
-VALUES (SEQ_employees_emp_uid.nextval, '인사관리', '2020/06/04', 'dnd194@gmail.com', 'insa@insa.com', '123', 100000000, 7, 1);
+VALUES (SEQ_employees_emp_uid.nextval, '인사관리', to_date('2020-06-04', 'YYYY-MM-DD'), 'dnd194@gmail.com', 'insa@insa.com', '123', 100000000, 7, 1);
 ;
 
 /* 휴가 더미 */
@@ -377,6 +382,8 @@ SELECT * FROM POSITIONRANK;
 SELECT * FROM HOLIDAY;
 SELECT * FROM OFFICE_HOUR;
 SELECT n_uid "uid", n_subject subject, n_content content,n_regdate regdate,dep_uid department, p_uid "position"  FROM NOTICE;
+select n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid from notice where p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC ;
+SELECT * FROM (SELECT n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid FROM notice WHERE p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC) WHERE ROWNUM <= 5;
 
 
 -- 공통과 해당되는 부서의 목록보기
@@ -460,7 +467,7 @@ SELECT * FROM EMPLOYEES
 
 /* 사원목록 VIEW */
 CREATE OR REPLACE VIEW emp AS
-SELECT e.EMP_UID "uid", e.EMP_NAME name, e.EMP_BIRTHDATE birthday, e.EMP_PHONENUM phonenum, e.EMP_EMAIL email, e.EMP_ID id, e.EMP_PW password, e.EMP_ADDR address, e.EMP_HIREDATE hiredate, e.EMP_SALARY salary, p.P_UID p_uid, p.P_NAME "position", d.DEP_NAME department, NVL(h."useHoliday", 0) "useHoliday", p.P_HOLIDAY "total", (p.P_HOLIDAY - NVL(h."useHoliday", 0)) "leftHoliday"
+SELECT e.EMP_UID "uid", e.EMP_NAME name, e.EMP_BIRTHDATE birthday, e.EMP_PHONENUM phonenum, e.EMP_EMAIL email, e.EMP_ID id, e.EMP_PW password, e.EMP_ADDRZONECODE addrZoneCode, e.EMP_ADDRROAD addrRoad, e.EMP_ADDRDETAIL addrDetail, e.EMP_HIREDATE hiredate, e.EMP_SALARY salary, p.P_UID p_uid, p.P_NAME "position", d.DEP_UID ,d.DEP_NAME department, NVL(h."useHoliday", 0) "useHoliday", p.P_HOLIDAY "total", (p.P_HOLIDAY - NVL(h."useHoliday", 0)) "leftHoliday"
 FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID 
 				LEFT OUTER JOIN POSITIONRANK p ON e.P_UID = p.P_UID
 				LEFT OUTER JOIN holi h ON e.EMP_UID = h.EMP_UID
@@ -698,12 +705,8 @@ FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
 WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
 ORDER BY category.W_START ASC;
 
-
 SELECT * FROM EMPLOYEES e ;
 
 select e.emp_uid "uid", e.emp_name name, p.p_name position, e.emp_salary salary, e.emp_birthdate birth from employees e, positionrank p where e.p_uid = p.p_uid
 
 select emp_pw from EMPLOYEES where emp_id = 'insa@insa.com';
-
-
-

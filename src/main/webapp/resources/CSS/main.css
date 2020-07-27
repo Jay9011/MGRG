@@ -130,7 +130,12 @@ ul ul a {
     padding-left: 30px !important;
     background: #6d7fcc;
 }
-
+#sidebar .lio svg{
+display: block;
+    margin: auto;
+    margin-bottom: 10%;
+	
+}
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */

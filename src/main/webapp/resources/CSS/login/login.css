@@ -1,11 +1,12 @@
 @charset "UTF-8";
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 *, *:before, *:after {
 	 box-sizing: border-box;
      margin : 0px;
 }
  body {
 	 min-height: 100vh;
-	 font-family: 'Raleway', sans-serif;
+	     font-family: 'Poppins', sans-serif;
      overflow:hidden;
     
 }
@@ -41,19 +42,19 @@
 }
  .top:before {
 	 transform: rotate(45deg);
-	 background: #e46569;
+	 background:#eed1d2;
 }
  .top:after {
 	 transform: rotate(135deg);
-	 background: #ecaf81;
+	 background:#FFD778;
 }
  .bottom:before {
 	 transform: rotate(-45deg);
-	 background: #60b8d4;
+	 background:#6547A6;
 }
  .bottom:after {
 	 transform: rotate(-135deg);
-	 background: #3745b5;
+	 background: #6D80CC;
 }
  .center {
 	 position: absolute;
@@ -80,4 +81,7 @@
 	 border-radius: 1px;
 	 border: 1px solid #ccc;
 	 font-family: inherit;
+}
+.center input.color{
+	background-color: #fff;
 }

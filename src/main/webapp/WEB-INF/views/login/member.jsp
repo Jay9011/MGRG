@@ -15,15 +15,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <jsp:include page="../top.jsp"/>
-<jsp:include page="../topend.jsp"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/weather.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/mem.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css">
 <script src="${pageContext.request.contextPath}/resources/JS/weather.js"></script>
+<script src="${pageContext.request.contextPath}/resources/JS/umain.js"></script>
+<jsp:include page="../topend.jsp"/>
 
 <title>메인 화면</title>
 </head>
 <body>
-<jsp:include page="../nav.jsp"/>
+<jsp:include page="../navpl.jsp"/>
  <!-- Page Content  -->
         <div id="content">
 
@@ -70,10 +72,14 @@
         </div>
             <div class="line"></div>
 <!--     공지 게시판 -->
-            <h2>공지사항</h2>
-           
-            <div class="col-xs-12 col-md-6 ">
-                <table class="table table-sm table-hover table-borderless" >
+          <div class="col-xs-12 col-md-6 ">
+          	<div>
+            <h2 class="float-left">공지사항</h2>
+           	<div class="float-right">
+      			<button type="button" id="viewnotice" class="btn btnadd"><small>공지 더보기</small> +</button>
+			</div>
+			</div>	
+                <table class="table table-sm table-hover table-borderless tale" >
                   <thead class="table-primary">
                     <tr>
                         <th scope="col">No.</th>
@@ -87,22 +93,72 @@
 				<!-- 			배열이 비어있거나 있긴있지만 길이가 0개 짜리 배열일때를 체크 -->
 			</c:when>
 			<c:otherwise>
-				<c:forEach var ="dto" items="${list }">
+				<c:forEach var ="dto" items="${list}" begin="0" end="3">
 					<tr>
 					<td>${dto.uid }</td>
-					<td class="noticeCenter"><a class="noticea" href="view.do?uid=${dto.uid }">${dto.subject }</a></td>
+					<td class="noticeCenter"><span class="noticea" data-uid="${dto.uid }">${dto.subject }</span></td>
 					<td class="noticeCenter">${dto.regdate }</td>
 					
 				</tr>
 				</c:forEach>
 			</c:otherwise>
-
 		</c:choose>
                   </tbody>
                 </table>
                 </div>
-
             <div class="line"></div>
+            
+            <!-- 공지사항 더보기 모달 -->
+		<div class="modal fade" id="viewmodal" data-keyboard="false"  role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="staticBackdropLabel">공지사항</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body margin">
+		       	 <table class="table table-sm table-hover table-borderless tale tale2" >
+		       	<tbody>
+		       	 <c:forEach var ="dto" items="${list}" >
+					<tr>
+					<td>${dto.uid }</td>
+					<td class="noticeCenter"><span class="noticea" data-uid="${dto.uid }">${dto.subject }</span></td>
+					<td class="noticeCenter">${dto.regdate }</td>
+					
+				</tr>
+				</c:forEach>
+		       	 <tbody>
+		       	 </table>
+		       	
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- 공지사항 내용 보기 -->
+		<div class="modal fade" id="uviewModal" data-keyboard="false"  role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="staticBackdropLabel">제목</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body margin">
+		      <span id="reg">날짜</span>
+			      <div id="cont">
+			       	내용
+			       	<div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+            
+            
+            
         </div>
     </div>
        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>

@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.btnadd{
+	background-color: transparent;
+	padding: 2px 5px;
+    margin-top: 20px;
+}
+.btnadd small {
+	font-size: 12px;
+}
+.noticea{
+	color : black;
+	cursor: pointer;
+}
+#cont{
+	border-radius: 2px;
+	border: 1px solid #6d7fcc;	
+	padding: 10px;
+}
+.margin{
+	margin: 20px 10px;
+}
+.tale2 tr,.tale2 td{
+	border-bottom: 1px solid #6d7fcc;
+}

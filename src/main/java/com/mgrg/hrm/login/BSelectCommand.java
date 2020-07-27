@@ -21,8 +21,7 @@ public class BSelectCommand implements BCommand {
 		System.out.println("BSelectCommand : " + id);
 
 		INotiDAO dao2 = C.sqlSession.getMapper(INotiDAO.class);
-		List<NoticeDTO>arr = dao2.selectNoti(dto.getP_uid());
-
+		List<NoticeDTO>arr = dao2.selectNoti(dto.getP_uid(),dto.getDep_uid());
 		model.addAttribute("list", arr);
 		
 		//dao2.selectNoti(dto.getP_uid()); // 2개의 <NoticeDTO> 결과
