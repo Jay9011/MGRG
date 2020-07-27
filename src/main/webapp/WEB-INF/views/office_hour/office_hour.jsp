@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +24,7 @@
   <jsp:include page="../topend.jsp" />
     <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/CSS/officehour/officehour.css">
     <script src="${pageContext.request.contextPath }/resources/JS/officehour/officehr.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/JS/officehour/currenthr.js"></script>
 	
     <title>출근 현황 페이지</title>
 </head>
@@ -38,10 +45,16 @@
     </form>
 </div>
 
+
+<div class="clear" onload="printClock()">
+	<div id="clock"></div>
+</div>
+
 <div class="panel panel-default">
     <div class="panel-heading"><b> 출근현황 </b>
     </div>
     <div class="tbl_user_data"></div>
+</div>
 </div>
 
 </body>

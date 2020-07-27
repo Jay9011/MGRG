@@ -58,12 +58,22 @@
 		UPDATE EMPLOYEES 
 		SET EMP_NAME = #{name},
 			EMP_BIRTHDATE = #{birthday},
-			EMP_PHONENUM = #{phonenum},
 			EMP_EMAIL = #{email},
-			EMP_ADDRZONECODE = #{addrZoneCode},
-			EMP_ADDRROAD = #{addrRoad},
-			EMP_ADDRDETAIL = #{addrDetail},
-			EMP_HIREDATE = #{hiredate},
+			<if test="phonenum != null">
+				EMP_PHONENUM = #{phonenum},
+			</if>
+			<if test="addrZoneCode != null">
+				EMP_ADDRZONECODE = #{addrZoneCode},
+			</if>
+			<if test="addrRoad != null">
+				EMP_ADDRROAD = #{addrRoad},
+			</if>
+			<if test="addrDetail != null">
+				EMP_ADDRDETAIL = #{addrDetail},
+			</if>
+			<if test="hiredate != null">
+				EMP_HIREDATE = #{hiredate},
+			</if>
 			EMP_SALARY = #{salary},
 			P_UID = #{p_uid},
 			DEP_UID = #{dep_uid}

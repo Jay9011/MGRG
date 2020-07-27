@@ -13,21 +13,22 @@
 					h.*,
 					CASE
 						WHEN h.endTime IS NOT NULL THEN '퇴근'
-						WHEN h.startTime < 900 THEN '출근'
-						WHEN h.startTime > 900 THEN '지각'
-						WHEN h.startTime > 1030 THEN '결근'
+						WHEN h.startTime <= 900 THEN '출근'
+						WHEN h.startTime <= 930 THEN '지각'
+						ELSE '결근'
 						END AS stat
 				FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
 							 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
 						FROM OFFICE_HOUR oh ) h) category
 			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
-			ORDER BY category.W_START ASC
+			ORDER BY category.w_start DESC
 		]]>
 	</select>
 	
 	<update id="updateHour" flushCache="true">
 		UPDATE OFFICE_HOUR 
-		SET w_end = TO_CHAR(SYStimestamp ,'yyyy-mm-dd HH24:mi:ss')
+		SET w_start = TO_CHAR(#{w_start} ,'yyyy-mm-dd HH24:mi:ss'), 
+		SET w_end = TO_CHAR(#{w_end} ,'yyyy-mm-dd HH24:mi:ss'), 
 		WHERE emp_uid = #{emp_uid}
 	</update>
 
