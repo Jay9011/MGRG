@@ -47,10 +47,6 @@ table.dataTable.nowrap td {
 	border-bottom: 1px solid #a9adb9;
 }
 
-.modal-body input:focus {
-	border: 1px solid #000;
-}
-
 .modal-body label {
 	align-self: center;
 	margin-bottom: 0;
@@ -101,6 +97,42 @@ input#addrBtn {
 }
 
 button.addBtn {
+	background-color: #9569CC;
+	color: #F8EBFF;
+}
+
+.table-hover tr:hover {
+	cursor: pointer;
+	background-color: #CCC;
+}
+
+#viewStaff input {
+	border: none;
+}
+
+#viewStaff input:focus {
+	border-bottom: 1px solid #a9adb9;
+}
+
+#viewStaff select{
+	border: none;
+	-webkit-appearance: none; /* 화살표 없애기 for chrome*/
+	-moz-appearance: none; /* 화살표 없애기 for firefox*/
+	appearance: none /* 화살표 없애기 공통*/
+}
+
+#viewStaff select::-ms-expand {
+	display: none;
+}
+
+#viewStaff select:focus{
+	border: 1px solid #000;
+	-webkit-appearance: revert; /* 화살표 없애기 for chrome*/
+	-moz-appearance: revert; /* 화살표 없애기 for firefox*/
+	appearance: revert; /* 화살표 없애기 공통*/
+}
+
+button.modiBtn {
 	background-color: #9569CC;
 	color: #F8EBFF;
 }

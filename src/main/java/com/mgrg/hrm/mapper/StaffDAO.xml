@@ -8,5 +8,76 @@
 		SELECT *
 		FROM emp
 	</select>
+	
+	<insert id="insert" flushCache="true"
+		parameterType="com.mgrg.hrm.staff.StaffDTO"
+		keyProperty="uid"
+		useGeneratedKeys="true"
+		keyColumn="emp_uid">
+		<!-- NotNull : emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_hiredate, emp_salary, p_uid, dep_uid -->
+		INSERT INTO employees 
+			(emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, 
+		<if test="phonenum != null">
+			emp_phonenum,
+		</if>
+		<if test="addrZoneCode != null">
+			emp_addrZoneCode,
+		</if>
+		<if test="addrRoad != null">
+			emp_addrRoad,
+		</if>
+		<if test="addrDetail != null">
+			emp_addrDetail,
+		</if>
+		<if test="hiredate != null">
+			emp_hiredate,
+		</if>
+			emp_salary, p_uid, dep_uid)
+		VALUES 
+			(SEQ_employees_emp_uid.nextval, '${name}', '${birthday}', '${email}', '${id}', '${password}', 
+		<if test="phonenum != null">
+			${phonenum},
+		</if>
+		<if test="addrZoneCode != null">
+			'${addrZoneCode}',
+		</if>
+		<if test="addrRoad != null">
+			'${addrRoad}',
+		</if>
+		<if test="addrDetail != null">
+			'${addrDetail}',
+		</if>
+		<if test="hiredate != null">
+			'${hiredate}',
+		</if>
+			${salary}, ${p_uid}, ${dep_uid})
+	</insert>
+	
+	<update id="update" flushCache="true"
+		parameterType="com.mgrg.hrm.staff.StaffDTO">
+		UPDATE EMPLOYEES 
+		SET EMP_NAME = #{name},
+			EMP_BIRTHDATE = #{birthday},
+			EMP_PHONENUM = #{phonenum},
+			EMP_EMAIL = #{email},
+			EMP_ADDRZONECODE = #{addrZoneCode},
+			EMP_ADDRROAD = #{addrRoad},
+			EMP_ADDRDETAIL = #{addrDetail},
+			EMP_HIREDATE = #{hiredate},
+			EMP_SALARY = #{salary},
+			P_UID = #{p_uid},
+			DEP_UID = #{dep_uid}
+		WHERE EMP_UID = #{uid}
+	</update>
+	
+	<delete id="deleteStaffs" flushCache="true"
+		parameterType="java.util.ArrayList">
+		DELETE FROM EMPLOYEES
+		WHERE EMP_UID IN (
+			<foreach collection="list" item="item" index="index" separator=",">
+				${item}
+			</foreach>
+		)
+	</delete>
 
 </mapper>

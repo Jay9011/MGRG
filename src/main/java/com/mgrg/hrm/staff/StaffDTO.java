@@ -5,15 +5,19 @@ import java.sql.Date;
 public class StaffDTO {
 	private int uid;
 	private String name;
-	private String birthday;
-	private int phonenum;
+	private Date birthday;
+	private Integer phonenum;
 	private String email;
 	private String id;
 	private String password;
 	private String address;
+	private String addrZoneCode;
+	private String addrRoad;
+	private String addrDetail;
 	private Date hiredate;
 	private int salary;
 	private int p_uid;
+	private int dep_uid;
 	private String position;
 	private String department;
 	private int total;
@@ -36,16 +40,16 @@ public class StaffDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	public int getPhonenum() {
+	public Integer getPhonenum() {
 		return phonenum;
 	}
-	public void setPhonenum(int phonenum) {
+	public void setPhonenum(Integer phonenum) {
 		this.phonenum = phonenum;
 	}
 	public String getEmail() {
@@ -72,6 +76,30 @@ public class StaffDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getAddrZoneCode() {
+		return addrZoneCode;
+	}
+
+	public void setAddrZoneCode(String addrZoneCode) {
+		this.addrZoneCode = addrZoneCode;
+	}
+
+	public String getAddrRoad() {
+		return addrRoad;
+	}
+
+	public void setAddrRoad(String addrRoad) {
+		this.addrRoad = addrRoad;
+	}
+
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
+	}
+
 	public Date getHiredate() {
 		return hiredate;
 	}
@@ -89,6 +117,14 @@ public class StaffDTO {
 	}
 	public void setP_uid(int p_uid) {
 		this.p_uid = p_uid;
+	}
+
+	public int getDep_uid() {
+		return dep_uid;
+	}
+
+	public void setDep_uid(int dep_uid) {
+		this.dep_uid = dep_uid;
 	}
 
 	public String getPosition() {

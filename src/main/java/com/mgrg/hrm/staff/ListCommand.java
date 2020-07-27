@@ -18,6 +18,26 @@ public class ListCommand implements StaffCommand{
 		
 		List<StaffDTO> list = dao.select();
 		
+		// 주소 합치기
+		for (StaffDTO dto : list) {
+			String zonCode = dto.getAddrZoneCode();
+			String road = dto.getAddrRoad();
+			String detail = dto.getAddrDetail();
+			StringBuffer addr = new StringBuffer("");
+			
+			if (zonCode != null && !zonCode.equals("")) {
+				addr.append(zonCode);
+			}
+			if (road != null && !road.equals("")) {
+				addr.append(" " + road);
+			}
+			if (detail != null && !detail.equals("")) {
+				addr.append(" " + detail);
+			}
+			
+			dto.setAddress(addr.toString());
+		} // end 주소 합치기
+		
 		if(list.size() == 0) {
 			message.append("[사원 목록을 불러오는데 실패했거나 사원 목록이 없습니다.]");
 		} else {

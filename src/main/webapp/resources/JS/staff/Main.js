@@ -1,15 +1,34 @@
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
 $(document).ready(function(){
+	
 	loadPage();
 	
 	let table = $('#staff_list').DataTable();
+
+	table.on('click','input[type=checkbox]',function(e){
+		if ($(this).is(":checked")){
+			$(this).prop("checked", false);
+		} else {
+			$(this).prop("checked", true);
+		}
+	});
+	
 	$('#staff_list tbody').on('click','tr',function(e){
 		let cell = $(e.target).closest('td');
 		if(cell.index() > 0){
 			let data = table.row(this).data();
-//			alert(data.uid + ' 클릭함.');
-			$('#viewStaff').modal('show');
+			let thisModal = $('#viewStaff');
+			setStaffFrom(thisModal, data);
+			thisModal.modal('show');
 		} else {
-			
+			let checkbox = $(this).find('input[type=checkbox]');
+			if (checkbox.is(":checked")){
+				checkbox.prop("checked", false);
+			} else {
+				checkbox.prop("checked", true);
+			}
 		}
 	});
 	
@@ -28,6 +47,32 @@ $(document).ready(function(){
 			.attr('class', 'bi bi-eye-fill')
 			.prev('input').attr('type', 'password');
 		}
+	});
+	
+	// writeStaff 모달이 hide 가 호출 되었을 때,
+	$('#writeStaff').on('hidden.bs.modal', function(e){
+		initStaffForm($(this));
+	});
+	
+	// viewStaff 모달이 hide 가 호출 되었을 때,
+	$('#viewStaff').on('hidden.bs.modal', function(e){
+		initStaffForm($(this));
+	});
+	
+	// viewStaff 모달 기본 설정
+	initViewStaff();
+	
+	$('button.addBtn').on('click', function(){
+//		$(this).parents('.modal').hide();
+		chkAdd();
+	});
+	
+	$('button.modiBtn').on('click', function(){
+		modiOk();
+	});
+	
+	$('button#btnDelete').on('click', function(){
+		deleteOk();
 	});
 });
 
@@ -51,21 +96,27 @@ function loadPage(){
 		,scrollX:true
 		,autoWidth:true
 		,ajax:{
-			url: path + '/staff/list.json',
+			url: path + '/staff/list',
 			dataSrc: 'data'
 		}
 		,columns:[
 			{data: 'uid'
 				,'render' :  function ( data, type, full, meta ) {
-					n_uid = data;
 	                return '<input type="checkbox" name="uid" value='+data+ '>'
 	        }},
 			{data: 'name'},
 			{data: 'position'},
-			{data: 'phonenum'},
+			{data: 'phonenum'
+				,'render' : function (data, type, full, meta){
+					if(data == 0 || data == null) return '없음';
+					else return '0' + data;
+				}},
 			{data: 'email'},
 			{data: 'leftHoliday'},
-			{data: 'birthday'},
+			{data: 'birthday'
+				,'render' : function (data, type, full, meta){
+					return DateToString(data);
+				}},
 			{data: 'address'}
 		]
 		,columnDefs:[
@@ -82,7 +133,7 @@ var themeObj = {
    queryTextColor: "#FFFFFF" //검색창 글자색
 };
 
-function DaumAddr(){
+function DaumAddr(btn){
 	var width = 500; //팝업의 너비
 	var height = 600; //팝업의 높이
 	new daum.Postcode({
@@ -105,8 +156,8 @@ function DaumAddr(){
             }
             
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById("addrZoneCode").value = data.zonecode;
-            document.getElementById("addrRoad").value = roadAddr + extraRoadAddr;
+            $(btn).parents(".addBody").find("#addrZoneCode").val(data.zonecode);
+            $(btn).parents(".addBody").find("#addrRoad").val(roadAddr + extraRoadAddr);
 	    },
 	    theme: themeObj
 	}).open({
@@ -114,4 +165,176 @@ function DaumAddr(){
 	    ,top: (window.screen.height / 2) - (height / 2)
 	    ,popupName: 'postcodePopup' //팝업 이름을 설정(영문,한글,숫자 모두 가능, 영문 추천)
 	});
+}
+
+function chkAdd(){
+	var data = $('#addStaff').serialize();
+	
+	$.ajaxSetup({
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
+	});
+	
+	$.ajax({
+		url : path + '/staff/addStaff',
+		type : 'POST',
+		cache : false,
+		data : data,
+		success : function(data, status){
+			if(status == 'success'){
+				$('#staff_list').DataTable().ajax.reload();
+				$('#writeStaff').modal('hide');
+			} else {
+				
+			}
+		} 
+	});
+}
+
+function modiOk(){
+	var data = $('#modiStaff').serialize();
+	
+	$.ajaxSetup({
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
+	});
+	
+	$.ajax({
+		url : path + '/staff/modiStaff',
+		type : 'POST',
+		cache : false,
+		data : data,
+		success : function(data, status){
+			if(status == 'success'){
+				$('#staff_list').DataTable().ajax.reload();
+				$('#viewStaff').modal('hide');
+			} else {
+				
+			}
+		} 
+	});
+}
+
+function deleteOk(){
+	var uids = []	// 빈 배열 준비
+	$("tbody input[name=uid]").each(function(){
+		if($(this).is(":checked")){	// JQuery 에서 check 여부 확인방법
+			uids.push($(this).val());	// 배열에 uid 값 추가
+		}
+	});
+	
+	if(uids.length == 0){
+		alert("삭제할 사원을 선택해 주세요");
+	} else {
+		if(confirm(uids.length + "명의 사원 정보를 삭제하시겠습니까?")){
+			$.ajaxSetup({
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader(header, token);
+				}
+			}); // end ajaxSetup
+			
+			$.ajax({
+				url : path + '/staff/deleteStaff',
+				type : 'POST',
+				cache : false,
+				data : {
+					'uids' : uids
+				},
+				success : function(data, status){
+					if(status == 'success'){
+						$('#staff_list').DataTable().ajax.reload();
+					} else {
+						
+					}
+				} 
+			}); // end ajax
+		} // end if(confirm)
+	} // end if(uids.length)
+} // end deleteOk()
+
+function initStaffForm(modal){
+	modal.find('input[class=editForm]').val('');
+	modal.find('#staff_department option:eq(0)').prop('selected', true);
+	modal.find('#staff_position option:eq(0)').prop('selected', true);
+}
+
+function initViewStaff(){
+	$('#viewStaff #staff_birthday').css('display', 'none');
+	$('#viewStaff #staff_hiredate').css('display', 'none');
+	$('#viewStaff #staff_salary').css('display', 'none');
+	
+	$('#viewStaff span.birthday').on('click', function(e){
+		displayOnClickInit($(this));
+	});
+	$('#viewStaff #staff_birthday').blur(function(e){
+		displayBlurInit($(this));
+	});
+	$('#viewStaff span.hiredate').on('click', function(e){
+		displayOnClickInit($(this));
+	});
+	$('#viewStaff #staff_hiredate').blur(function(e){
+		displayBlurInit($(this));
+	});
+	$('#viewStaff span.salary').on('click', function(e){
+		displayOnClickInit($(this));
+	});
+	$('#viewStaff #staff_salary').blur(function(e){
+		displayBlurInit($(this));
+	});
+	$('#viewStaff #addrBtn').css('display', 'none');
+	$('#viewStaff .addBody').hover(
+	function(){
+		$(this).find('#addrBtn').css('display', 'block');
+	}
+	,function(){
+		$(this).find('#addrBtn').css('display', 'none');
+	});
+}
+
+function displayOnClickInit(init){
+	init.css('display', 'none');
+	init.siblings('input[class=editForm]').css('display', 'block');
+	init.siblings('input[class=editForm]').focus();
+}
+
+function displayBlurInit(init){
+	init.siblings('span').css('display', 'block');
+	init.css('display', 'none');
+}
+
+function setStaffFrom(thisModal, data){
+	let form = thisModal.find('form');
+	let hiredate = DateToString(data.hiredate);
+	let birthday = DateToString(data.birthday);
+	
+	form.find('input[name=uid]').val(data.uid);
+	form.find('input[name=name]').val(data.name);
+	form.find('span.birthday').text(birthday);
+	form.find('input[name=birthday]').val(birthday);
+	form.find('input[name=phonenum]').val(data.phonenum);
+	form.find('input[name=email]').val(data.email);
+	form.find('input[name=id]').val(data.id);
+	form.find('input[name=addrZoneCode]').val(data.addrZoneCode);
+	form.find('input[name=addrRoad]').val(data.addrRoad);
+	form.find('input[name=addrDetail]').val(data.addrDetail);
+	form.find('span.hiredate').text(hiredate);
+	form.find('input[name=hiredate]').val(hiredate);
+	form.find('span.salary').text(data.salary);
+	form.find('input[name=salary]').val(data.salary);
+	form.find('#staff_department').val(data.dep_uid).prop("selected", true);;
+	form.find('#staff_position').val(data.p_uid).prop("selected", true);;
+}
+
+function DateToString(date){
+	var originalDate = new Date(date);
+	
+	var year= originalDate.getFullYear();
+	var mon = (originalDate.getMonth()+1)>9 ? ''+(originalDate.getMonth()+1) : '0'+(originalDate.getMonth()+1);
+	var day = originalDate.getDate()>9 ? ''+originalDate.getDate() : '0'+originalDate.getDate();
+	        
+	var StringDate = year + '-' + mon + '-' + day;
+
+	return StringDate;
 }
