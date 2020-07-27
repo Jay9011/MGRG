@@ -49,12 +49,12 @@
         </div>
 
 <script>
-// $(document).ready(function(){
-// 	setTimeout(() => {
-// 		$('#auto').click();
-// 	}, 500);
+$(document).ready(function(){
+	setTimeout(() => {
+		$('#auto').click();
+	}, 500);
 	
-// })
+})
 	
 
 </script>
