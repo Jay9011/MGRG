@@ -15,11 +15,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <jsp:include page="../top.jsp"/>
+<jsp:include page="../datatable.jsp"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/table.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/weather.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/member/evo-calendar.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/mem.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css">
 <script src="${pageContext.request.contextPath}/resources/JS/weather.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/umain.js"></script>
+<script src="${pageContext.request.contextPath}/resources/JS/member/evo-calendar.js"></script>
 <jsp:include page="../topend.jsp"/>
 
 <title>메인 화면</title>
@@ -30,7 +34,18 @@
         <div id="content">
 
             <h2>근태 현황</h2>
+            <div style="display: inline-block;">
+            <div class="text-right">
+      			<button type="button" id="viewcom" class="btn btnadd"><small>현황 더보기</small> +</button>
+			</div>
             <canvas id="myChart" height="400" width="400" style="display: inline-block;"></canvas>
+            </div>
+<!--             	근태현황 테이블 -->
+            <span id="comShow" style="display: none;" >
+            	<div>
+            	근태 현황ㅇ입니다.
+            	</div>
+            </span>
 <!--             날씨 -->
   <div id="san-francisco" class="card">
             <div class="card-header">
@@ -119,13 +134,20 @@
 		        </button>
 		      </div>
 		      <div class="modal-body margin">
-		       	 <table class="table table-sm table-hover table-borderless tale tale2" >
+		       	 <table id="notitable" class="table table-sm table-hover table-borderless tale tale2" >
+		       	 <thead class="table-primary">
+                    <tr>
+                        <th style="width:1%">No.</th>
+                      <th style="width:95%">제목</th>
+                      <th  style="width:4%">날짜</th>
+                    </tr>
+                  </thead>
 		       	<tbody>
 		       	 <c:forEach var ="dto" items="${list}" >
 					<tr>
 					<td>${dto.uid }</td>
-					<td class="noticeCenter"><span class="noticea" data-uid="${dto.uid }">${dto.subject }</span></td>
-					<td class="noticeCenter">${dto.regdate }</td>
+					<td ><span class="noticea" data-uid="${dto.uid }">${dto.subject }</span></td>
+					<td >${dto.regdate }</td>
 					
 				</tr>
 				</c:forEach>
@@ -148,7 +170,8 @@
 		        </button>
 		      </div>
 		      <div class="modal-body margin">
-		      <span id="reg">날짜</span>
+		     <div class="text-right"> 작성일 : <span id="reg">날짜</span></div>
+
 			      <div id="cont">
 			       	내용
 			       	<div>

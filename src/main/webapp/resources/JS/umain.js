@@ -4,13 +4,35 @@
 var nowView = undefined;
 $(document).ready(function() {
 
+	 $('#viewcom').on('click', function() {
+			$('#comShow').toggle('slow').toggleClass('act');
+		});
+		
 	// 더보기 버튼 누르기
 	$('#viewnotice').click(function() {
-		$('#viewmodal').modal('show');
+		$('#viewmodal').modal('show'); 
 	});
+	dataTable();
 	showView();
-	
 });
+function dataTable() {
+	$('#notitable').DataTable({
+		order : [[2, 'desc']],
+		info : false,
+		language : {
+			search : '검색 : ',
+			lengthMenu : '_MENU_씩 보기',
+			zeroRecords : '검색 된 공지사항이 없습니다.',
+			paginate : {
+				first : '<<',
+				last : '>>',
+				previous : '<',
+				next : '>'
+			}
+		}
+	});
+}
+
 function showView() {
 	$('.tale tbody').on('click', 'td span.noticea', function() {
 		$.ajax({
