@@ -25,6 +25,7 @@
              <ul class="list-unstyled components lio">
                 <!-- <li class="active"> -->
                     <li>
+
                     <a href="${pageContext.request.contextPath}/officehour/list">
               <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-briefcase-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				  <path fill-rule="evenodd" d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/>
