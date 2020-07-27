@@ -16,10 +16,14 @@
 	border-radius: 2px;
 	border: 1px solid #6d7fcc;	
 	padding: 10px;
+	margin-top: 10px;
 }
 .margin{
-	margin: 20px 10px;
+	margin: 0px 10px 20px;
 }
 .tale2 tr,.tale2 td{
 	border-bottom: 1px solid #6d7fcc;
+}
+.act{
+	display: inline-block !important;
 }
