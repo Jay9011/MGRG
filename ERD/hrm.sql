@@ -381,7 +381,7 @@ SELECT * FROM NOTICE;
 SELECT * FROM POSITIONRANK;
 SELECT * FROM HOLIDAY;
 SELECT * FROM OFFICE_HOUR;
-SELECT n_uid "uid", n_subject subject, n_content content,n_regdate regdate,dep_uid department, p_uid "position"  FROM NOTICE;
+SELECT n_uid "uid", n_subject subject, n_content content,n_regdate regdate,dep_uid department, p_uid "position"  FROM NOTICE where p_uid = 1  ;
 select n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid from notice where p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC ;
 SELECT * FROM (SELECT n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid FROM notice WHERE p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC) WHERE ROWNUM <= 5;
 
@@ -417,6 +417,11 @@ SELECT (h.H_END - h.H_START) "Day"
 FROM HOLIDAY h 
 WHERE h.EMP_UID = 1 AND h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
 ;
+
+SELECT h.h_uid "uid" ,h.h_start startTime, h.h_end endTime, e.emp_uid emp_uid, e.EMP_NAME name
+FROM HOLIDAY h JOIN EMPLOYEES e ON h.EMP_UID = e.EMP_UID WHERE e.EMP_UID = 1;
+
+
 
 /* 해당 사원의 총 휴가 일수 구하기 */
 
@@ -505,6 +510,8 @@ INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 5)
 ;
 
+SELECT  * FROM HOLIDAY WHERE EMP_UID = 1;
+SELECT h_uid "uid", h_start startTime, h_end endTime, emp_uid emp_uid FROM HOLIDAY WHERE EMP_UID = 1;
 -- 금일날짜에 휴가인 사람 뽑기 --
 SELECT * FROM HOLIDAY
 WHERE TO_CHAR(H_START, 'yyyy/mm/dd') <= TO_CHAR(SYSDATE , 'yyyy/mm/dd') AND 
@@ -677,6 +684,14 @@ UPDATE OFFICE_HOUR
 SET w_end = TO_CHAR(SYStimestamp ,'yyyy-mm-dd HH24:mi:ss')
 WHERE emp_uid = 5;
 
+UPDATE OFFICE_HOUR 
+SET 
+w_start = NULL , 
+w_end = TO_TIMESTAMP('' ,'yyyy-mm-dd HH24:mi:ss') 
+WHERE emp_uid = 5 AND W_UID = 10;
+
+SELECT * FROM OFFICE_HOUR oh ;
+
 INSERT INTO OFFICE_HOUR (W_END )
 VALUES (to_char(systimestamp, 'yyyy-mm-dd hh24:mi:ss'))
 WHERE EMP_UID = 3;
@@ -691,7 +706,7 @@ ALTER TABLE OFFICE_HOUR modify(w_start timestamp, w_end timestamp);
 SELECT TO_CHAR(SYSDATE ,'yyyy-mm-dd hh24:mi:ss') FROM DUAL ; 
 		
 
-SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, category.W_START, category.W_END, category.stat 
+SELECT e.EMP_UID , e.EMP_NAME, d.DEP_NAME, p.P_NAME, category.W_START, category.W_END, category.stat, category.w_uid 
 FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
 	(SELECT  
 		h.*,
@@ -704,8 +719,27 @@ FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
 WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
 ORDER BY category.W_START ASC;
 
+
 SELECT * FROM EMPLOYEES e ;
 
 select e.emp_uid "uid", e.emp_name name, p.p_name position, e.emp_salary salary, e.emp_birthdate birth from employees e, positionrank p where e.p_uid = p.p_uid
 
 select emp_pw from EMPLOYEES where emp_id = 'insa@insa.com';
+
+-- xml mapper 에서가져온 쿼리문 --
+SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME posRank, p.P_NAME dept, category.W_START "start", category.W_END "end", category.stat "status", category.w_uid 
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+	(SELECT  
+		h.*,
+		CASE
+			WHEN h.endTime IS NOT NULL THEN '퇴근'
+			WHEN h.startTime <= 900 THEN '출근'
+			WHEN h.startTime <= 930 THEN '지각'
+			ELSE '결근'
+			END AS stat
+	FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+ORDER BY category.w_start DESC ;
+

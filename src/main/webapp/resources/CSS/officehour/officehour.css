@@ -1,14 +1,17 @@
-div.search{
+div.header {
+	width: 85%;
+	margin: 0 auto;
 	padding: 50px 0 10px 20px;
 }
 
-form.search-content{
-	width: 80%;
-	margin: 0 auto;
+div.search{
+	display: inline;
+	float: left;
 }
 
-div.search {
-	float: left;
+div.datepicker{
+	display: inline;
+	float: right;
 }
 
 .clear{

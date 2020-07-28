@@ -3,7 +3,8 @@
  */
 var nowView = undefined;
 $(document).ready(function() {
-
+	
+	Holiyday();
 	 $('#viewcom').on('click', function() {
 			$('#comShow').toggle('slow').toggleClass('act');
 		});
@@ -14,6 +15,15 @@ $(document).ready(function() {
 	});
 	dataTable();
 	showView();
+	
+	 $('#calendar').evoCalendar({
+         sidebarToggler:true,
+         sidebarDisplayDefault:false,
+         eventListToggler:false,
+          eventDisplayDefault:false,
+          language:'ko'
+     });
+	 dateTime();
 });
 function dataTable() {
 	$('#notitable').DataTable({
@@ -59,5 +69,42 @@ function loadView() {
 	$('#uviewModal .modal-body #cont').html(nowView.content);
 	$('#uviewModal  .modal-body #reg').text(nowView.regdate);
 }
+
+// 휴가 데이터 가져오기
+function Holiyday() {
+	$('#viewcom').on('click', function() {
+		alert("됨당");
+		$.ajax({
+			url : path + "/login/cal.mem?empuid="+$(this).attr('data-emp'),
+			type : "GET",
+			cache : false,
+			success : function(data, status) {
+				if(data.status == "OK"){
+					data.data;
+				}else{
+					alert("CAl 실패");
+				}
+			}
+		
+		});
+	});
+}
+
+function dateTime() {
+	 $("#calendar").evoCalendar('addCalendarEvent', [
+		
+		 {
+	     date:"2020-07-14",
+	     type:"holiday",
+	     everyYear:false
+	     },
+	     {
+	     date:"2020-07-16",
+	     type:"absence",
+	     everyYear:false
+	     },
+	     ]);
+}
+
 
 

@@ -33,7 +33,7 @@
 		</div>
 		
 		<div class="clearfix"></div>
-		
+		[<a style="color: black;"href="<c:url value='/excelDown' />">엑셀</a>]
 		<table id="staff_list" class="table table-hover nowrap" style="width:100%">
 			<thead>
 				<tr>

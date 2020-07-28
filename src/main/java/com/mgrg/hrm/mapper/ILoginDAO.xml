@@ -5,13 +5,26 @@
 <mapper namespace="com.mgrg.hrm.login.ILoginDAO">
 	
 	<select id="selectByIdPw" resultType="com.mgrg.hrm.login.SessionDTO"   >
-		select p_uid, dep_uid from EMPLOYEES where emp_id = #{param1}
+		select p_uid, dep_uid, emp_uid, emp_name from EMPLOYEES where emp_id = #{param1}
 	</select>
 
 	<select id="findPW" resultType="String">
 		select emp_pw from EMPLOYEES where emp_id = #{param1}
 	</select>
 
+	<select id="vali" resultType="com.mgrg.hrm.login.ValiDTO">
+		SELECT emp_id id, emp_pw pw, emp_email email FROM EMPLOYEES WHERE emp_email = #{param1} AND EMP_id = #{param2}
+	</select>
+	
+	<select id="vali2" resultType="com.mgrg.hrm.login.ValiDTO">
+		SELECT emp_id id, emp_pw pw, emp_email email FROM EMPLOYEES
+	</select>
+	
+	<insert id="present" flushCache="true" parameterType="int">
+		INSERT INTO OFFICE_HOUR (W_UID, W_START, EMP_UID) VALUES (SEQ_office_hour_w_uid.nextval, sysdate, #{param1})
+	</insert>
+	
+	
 </mapper>
 
 

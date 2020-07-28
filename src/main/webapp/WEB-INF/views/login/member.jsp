@@ -3,9 +3,13 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 	<%	int puid= (Integer) session.getAttribute("puid") ;
-    	int depuid= (Integer)	session.getAttribute("depuid");
+    	int depuid= (Integer)session.getAttribute("depuid");
+    	int empuid= (Integer) session.getAttribute("empuid");
+    	String empname = (String)session.getAttribute("empname");
     	System.out.println(puid);
     	System.out.println(depuid);
+    	System.out.println(empuid);
+    	System.out.println(empname);
     	
     %>
 <!DOCTYPE html>
@@ -13,7 +17,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <jsp:include page="../top.jsp"/>
 <jsp:include page="../datatable.jsp"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/table.css">
@@ -32,19 +37,19 @@
 <jsp:include page="../navpl.jsp"/>
  <!-- Page Content  -->
         <div id="content">
-
+	
             <h2>근태 현황</h2>
             <div style="display: inline-block;">
             <div class="text-right">
-      			<button type="button" id="viewcom" class="btn btnadd"><small>현황 더보기</small> +</button>
+      			<button type="button" id="viewcom" class="btn btnadd" data-emp="1"><small>현황 더보기</small> +</button>
 			</div>
-            <canvas id="myChart" height="400" width="400" style="display: inline-block;"></canvas>
+            <canvas id="myChart" height="450" width="450" style="display: inline-block;"></canvas>
             </div>
 <!--             	근태현황 테이블 -->
             <span id="comShow" style="display: none;" >
-            	<div>
-            	근태 현황ㅇ입니다.
-            	</div>
+            
+            <span> </span>
+            	<div id="calendar"></div>
             </span>
 <!--             날씨 -->
   <div id="san-francisco" class="card">
@@ -220,6 +225,38 @@
                 
             }
         });
+    </script>
+    <script>
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    	$(document).ready(function(){
+    		// ajax를 보내기전에 header세팅해주기
+    		$.ajaxSetup({
+    	        beforeSend: function(xhr) {
+    	        	xhr.setRequestHeader(header, token);
+    	        }
+    	    });
+    		
+    		$('#present').click(function(){
+    			
+    		$.ajax({
+    			url : "/hrm/offhour/present",
+    			type : "POST",
+    			cache : false,
+    			
+    			success : function(data, status){
+    				if(status == "success"){
+    					//alert('수정 성공');
+    				}
+    			}
+    			
+    		});
+    		})
+    		
+    		
+    		
+    	});
+    	
     </script>
 </body>
 </html>

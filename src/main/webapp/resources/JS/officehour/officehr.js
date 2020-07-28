@@ -148,50 +148,47 @@ $(document).ready(function($)
 		{   
 			var col_name = $(this).attr('col_name');  
 			var col_val  =  $(this).text();
-			arr[index] = col_val;
 			var e_uid = $(this).closest('tr').find('.e_uid').val();
+			var w_uid = $(this).closest('tr').find('.w_uid').val();
 			var start = $(this).closest('tr').find('.start').text();
 			var end = $(this).closest('tr').find('.end').text();
-			alert(start);
-			/*alert(e_uid);
-			alert(col_name);
-			alert(index);
-			alert(arr[index]);
-			
-			alert(col_val);*/
 			
 			arr = {
 				uid : e_uid,
-				start : start,
-				end : arr[1]
+				w_uid : w_uid
+			}
+			
+			if(start != null && start != ''){
+				arr.start = start;
+			}
+			
+			if(end != null && end != ''){
+				arr.end = end;
 			}
 		
-		/*	alert(arr[0]);
-			alert(col_val);
-			alert(typeof(col_val));*/
 		});
 		
 		
 		//--->get row data > end
 		
 		$.ajax({
-			url : "/hrm/offhr/update",
+			url : "/hrm/offhour/update",
 			type : "GET",
 			cache : false,
 			data : arr,
 			success : function(data, status){
 				if(status == "success"){
-					alert('수정 성공');
+					loadPage(ajax_data);
 				}
 			}
 			
 		});
 
-		//use the "arr"	object for your ajax call
+		/*//use the "arr"	object for your ajax call
 		$.extend(arr, {row_id:row_id});
 
 		//out put to show
-		$('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>')
+		$('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>')*/
 		 
 
 	});
@@ -205,7 +202,7 @@ $(document).ready(function($)
 
 function loadPage(data){
 	$.ajax({
-		url : "/hrm/offhr/list",
+		url : "/hrm/offhour/list",
 		type : "POST",
 		cache : false,
 		success : function(data, status){
@@ -257,7 +254,9 @@ function makeTable(ajax_data){
 
 				//loop through ajax row data
 				tbl +='<tr>';
-					tbl +='<td ><div col_name="fname">'+val['name']+'</div><input class="e_uid" type="hidden" value=' + val['uid'] + '></td>';
+					tbl +='<td ><div col_name="fname">'+val['name']+
+						  '</div><input class="e_uid" type="hidden" value=' + val['uid'] + '>' + 
+						  '<input class="w_uid" type="hidden" value=' + val['w_uid'] + '></td>';
 					tbl +='<td ><div col_name="lname">'+val['dept']+'</div></td>';
 					tbl +='<td ><div col_name="email">'+val['posRank']+'</div></td>';
 					tbl +='<td ><div class="status" col_name="email">'+val['status']+'</div></td>';
