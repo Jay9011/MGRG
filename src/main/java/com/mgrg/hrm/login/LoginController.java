@@ -54,58 +54,31 @@ public class LoginController {
 	@GetMapping("/adminMainPage")
 	@PostMapping("/adminMainPage")
 	public void adminMain(HttpServletRequest request) {
-		// 세션 상세 정보 확인
-
-		/////////////////////////////////////////////////////////////////////////
 
 		HttpSession session = request.getSession();
-
 		Enumeration<?> attributeNames = session.getAttributeNames();
-
 		while (attributeNames.hasMoreElements()) {
-
 			String name = (String) attributeNames.nextElement();
-
 			if (name.equals("SPRING_SECURITY_CONTEXT")) {
-
 				SecurityContext value = (SecurityContext) session.getAttribute(name);
-
 				Authentication authentication = value.getAuthentication();
-
 				User principal = (User) authentication.getPrincipal();
-
 				WebAuthenticationDetails details = (WebAuthenticationDetails) authentication.getDetails();
-
 				String username = authentication.getName();
-
 				String password = (String) authentication.getCredentials();
-
 				System.out.println(" \n\n\n ");
-
 				System.out.println("///////////////////////////////////////////////////////////////////");
-
 				System.out.println("////////////////////SPRING_SECURITY_CONTEXT ///////////////////////");
-
 				System.out.println("///////////////////////////////////////////////////////////////////");
-
 				System.out.println("name = " + name + "\n value = " + value.toString());
-
 				System.out.println("authentication : " + authentication.toString());
-
 				System.out.println("principal : " + principal);
-
 				System.out.println("details : " + details.toString());
-
 				System.out.println("username : " + username);
-
 				System.out.println("password : " + password);
-
 				System.out.println(" \n\n\n ");
-
 			}
-
 		}
-
 	}
 
 	@RequestMapping("/member")
@@ -144,9 +117,52 @@ public class LoginController {
 		command = new BSelectCommand();
 		command.execute(model,request);
 		
-		
-		
 		return "login/member";
 
 	}
+	
+	@GetMapping("/ad")
+	public String main2(HttpServletRequest request) {
+				// 세션 상세 정보 확인
+				/////////////////////////////////////////////////////////////////////////
+				HttpSession session = request.getSession();
+
+				Enumeration<?> attributeNames = session.getAttributeNames();
+
+				while (attributeNames.hasMoreElements()) {
+
+					String name = (String) attributeNames.nextElement();
+
+					if (name.equals("SPRING_SECURITY_CONTEXT")) {
+
+						SecurityContext value = (SecurityContext) session.getAttribute(name);
+
+						Authentication authentication = value.getAuthentication();
+
+						User principal = (User) authentication.getPrincipal();
+
+						WebAuthenticationDetails details = (WebAuthenticationDetails) authentication.getDetails();
+
+						String username = authentication.getName();
+
+						String password = (String) authentication.getCredentials();
+
+						System.out.println(" \n\n\n ");
+						System.out.println("///////////////////////////////////////////////////////////////////");
+						System.out.println("////////////////////SPRING_SECURITY_CONTEXT ///////////////////////");
+						System.out.println("///////////////////////////////////////////////////////////////////");
+						System.out.println("name = " + name + "\n value = " + value.toString());
+						System.out.println("authentication : " + authentication.toString());
+						System.out.println("principal : " + principal);
+						System.out.println("details : " + details.toString());
+						System.out.println("username : " + username);
+						System.out.println("password : " + password);
+						System.out.println(" \n\n\n ");
+
+					}
+				}
+		
+		return "login/adminMainPage2";
+	}
+	
 }

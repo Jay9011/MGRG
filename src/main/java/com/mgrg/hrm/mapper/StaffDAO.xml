@@ -90,4 +90,20 @@
 		)
 	</delete>
 
+	<select id="findById"
+		flushCache="true"
+		resultType="int">
+		SELECT count(*) 
+		FROM EMPLOYEES
+		WHERE EMP_ID = #{param1}
+	</select>
+
+	<select id="findByEmail"
+		flushCache="true"
+		resultType="int">
+		SELECT count(*) 
+		FROM EMPLOYEES
+		WHERE EMP_EMAIL = #{param1}
+	</select>
+	
 </mapper>

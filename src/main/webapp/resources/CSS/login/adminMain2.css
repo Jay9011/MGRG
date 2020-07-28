@@ -1,0 +1,171 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+body {
+  overflow:hidden;
+  display: grid;
+  height: 60vh;
+  background: linear-gradient(to bottom right, #e9e5e2, #d5cecb);
+}
+
+.page {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  margin: 80px auto;
+  background: #fff;
+  border-radius: 1.5vw;
+  padding: 2vw;
+  box-shadow: 0 1.5vw 3vw rgba(0, 0, 0, 0.25);
+  width: 60%;
+}
+
+.content {
+  grid-area: 1 / 1 / 1 / 1;
+  padding: 2vw;
+  display: grid;
+  align-items: flex-end;
+}
+.content2 {    /*시계*/
+  grid-area: 2 / 3 / 3 / 1;
+  padding: 10px;
+  display: grid;
+  align-items: flex-end;
+}
+
+.box {
+  width: 100%/6;
+  padding-bottom: 100%;
+  background: yellow;
+  animation: shape-shifter 10s ease-in-out infinite;
+}
+
+@keyframes shape-shifter {
+  0%,
+	100% {
+    border-radius: 100% 0 0 0;
+  }
+  20% {
+    border-radius: 0 100% 0 0;
+  }
+  40% {
+    border-radius: 0 0 100% 0;
+  }
+  60% {
+    border-radius: 0 0 0 100%;
+  }
+  80% {
+    border-radius: 100% 100% 100% 100%;
+  }
+}
+.box-1 {
+  -webkit-animation-delay: -3.3s;
+          animation-delay: -3.3s;
+}
+
+.box-2 {
+  -webkit-animation-delay: -9.9s;
+          animation-delay: -9.9s;
+}
+
+.box-3 {
+  	animation-delay: -19.8s;
+}
+
+.box-4 {
+  -webkit-animation-delay: -6.6s;
+          animation-delay: -6.6s;
+}
+
+
+
+.box-1 {
+  grid-area: 1 / 3 / 2 / 5;
+}
+
+.box-2 {
+  grid-area: 1 / 5 / 2 / 7;
+}
+
+
+.box-3 {
+  grid-area: 2 / 3 / 4 / 5;
+}
+
+.box-4 {
+  grid-area: 2 / 5 / 4 / 7;
+}
+
+
+.navy {
+  background: #1c5066;
+}
+
+.cyan {
+  background: #8fd2db;
+}
+
+.tan {
+  background: #e5d7bc;
+}
+
+.pink {
+  background: #f4b8b9;
+}
+
+.orange {
+  background: #fa7661;
+}
+
+.green {
+  background: #2d5942;
+}
+
+/* /////////////////////////////////////// */
+.clock {
+  height: 200px;
+  color: black;
+  font-size: 10vh;
+  line-height: 20.4vh;
+  display: flex;
+  position: relative;
+  /*background: green;*/
+  overflow: hidden;
+  padding-bottom: 50px
+}
+
+/* .clock::before, .clock::after { */
+/*   content: ''; */
+/*   width: 7ch; */
+/*   height: 3vh; */
+/*   position: absolute; */
+/*   z-index: 2; */
+/* } */
+
+.clock::after {
+  bottom: 0;
+}
+
+.clock > div {
+  display: flex;
+}
+
+.tick {
+  line-height: 17vh;
+}
+
+.tick-hidden {
+  opacity: 0;
+}
+
+.move {
+  animation: move linear 1s infinite;
+}
+
+@keyframes move {
+  from {
+    transform: translateY(0vh);
+  }
+  to {
+    transform: translateY(-20vh);
+  }
+}

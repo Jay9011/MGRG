@@ -9,6 +9,8 @@ public interface StaffDAO {
 	public int insert(StaffDTO dto);
 	public int update(StaffDTO dto);
 	public int deleteStaffs(ArrayList<Integer> uids);
+	public int findById(String id);
+	public int findByEmail(String email);
 
 	
 }

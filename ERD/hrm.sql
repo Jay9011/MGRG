@@ -742,4 +742,38 @@ FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
 			FROM OFFICE_HOUR oh ) h) category
 WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
 ORDER BY category.w_start DESC ;
+update OFFICE_HOUR set w_end = SYSDATE where emp_uid = 1 AND TO_CHAR(sysdate, 'yyyymmdd') = (SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = 1);
+SELECT TO_CHAR(SYSDATE, 'yyyymmdd') FROM dual;
+SELECT TO_CHAR(w_end, 'yyyymmdd') FROM OFFICE_HOUR oh ; 
+SELECT * FROM OFFICE_HOUR;
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM DEPARTMENT d ;
+SELECT * FROM POSITIONRANK p ;
+
+-- 달력을 위한 쿼리문 --
+SELECT e.EMP_UID "uid", category.W_START "start", category.stat "status"
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+	(SELECT  
+		h.*,
+		CASE
+			WHEN h.endTime IS NOT NULL THEN '퇴근'
+			WHEN h.startTime <= 900 THEN '출근'
+			WHEN h.startTime <= 930 THEN '지각'
+			ELSE '결근'
+			END AS stat
+	FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+ORDER BY category.w_start DESC ;
 

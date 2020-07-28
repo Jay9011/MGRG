@@ -9,7 +9,7 @@
             <div id="navbarSupportedContent">
             <ul class="nav ">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">로그아웃</a>
+                        <a class="nav-link" href="<%= request.getContextPath() %>/customLogout">로그아웃</a>
                     </li>
                     <li>
                         <button type="button" id="sidebarCollapse" class="btn btnsh  text-dark">

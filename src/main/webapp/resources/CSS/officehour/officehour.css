@@ -1,14 +1,22 @@
-div.search{
-	padding: 50px 0 10px 20px;
-}
-
-form.search-content{
+div.header {
 	width: 80%;
-	margin: 0 auto;
+	margin: 50px auto;
+	padding: 50px 0 10px 20px;
+	
 }
 
-div.search {
+div.search{
+	display: inline;
 	float: left;
+}
+
+div.datepicker{
+	display: inline;
+	float: right;
+}
+
+div.datepicker input {
+	margin-right: 30px;
 }
 
 .clear{
@@ -35,6 +43,9 @@ table th, td {
 }
 
 div.status {
-	border-radius: 20px;
+	border-radius: 100px;
 	color: white;
+}
+.search-btn{
+	width: 100px;
 }
