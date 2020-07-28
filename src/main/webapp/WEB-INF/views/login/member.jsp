@@ -47,6 +47,7 @@ System.out.println(empname);
             <h2>${empname}님 근태 현황</h2>
             <div style="display: inline-block;">
             <div class="text-right">
+
                <button type="button" id="viewcom" class="btn btnadd" data-emp='${empuid}'><small>현황 더보기</small> +</button>
          </div>
             <canvas id="myChart" height="450" width="450" style="display: inline-block;"></canvas>
@@ -65,6 +66,7 @@ System.out.println(empname);
             </span>
 <!--             날씨 -->
         <div id="san-francisco" class="card">
+
             <div class="card-header">
                 <!-- INFO -->
                 <div class="left-side">
@@ -75,6 +77,7 @@ System.out.println(empname);
                 <div class="weather-icon">
                     <!-- PARTIALLY -->
                     <i id='icon' class="" style="font-size: 100px; padding-right: 20px;"></i>
+
 
             </div>
             <div class="header-bg"
@@ -134,6 +137,7 @@ System.out.println(empname);
                            <td class="noticeCenter"><span class="noticea"
                               data-uid="${dto.uid }">${dto.subject }</span></td>
                            <td class="noticeCenter">${dto.regdate }</td>
+
 
                         </tr>
                      </c:forEach>

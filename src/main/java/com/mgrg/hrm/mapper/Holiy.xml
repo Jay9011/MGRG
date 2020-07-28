@@ -12,6 +12,8 @@
 		WHERE
 			emp_uid = #{param1}
 	</select>
+	
+	
 
 
 </mapper>

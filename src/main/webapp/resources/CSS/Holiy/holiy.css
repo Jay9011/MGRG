@@ -1,0 +1,18 @@
+@charset "UTF-8";
+.bootstrap-datetimepicker-widget.dropdown-menu {
+    display: block;
+    margin: 5px 0;
+    padding: 4px;
+    width: 17rem; }
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover{
+	background-color: #8A6BCD;
+}
+.bootstrap-datetimepicker-widget table td.today:before{
+	border-bottom-color: #F3DD58;
+}
+.bootstrap-datetimepicker-widget table td.disabled, .bootstrap-datetimepicker-widget table td.disabled:hover{
+	 color: #ddd;
+}
+ .bootstrap-datetimepicker-widget table th.picker-switch{
+ color:#6547A6;
+ }

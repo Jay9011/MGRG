@@ -68,4 +68,8 @@ public class HomeController {
 	public String notice(Model model) {
 		return "notice/noti";
 	}
+	@RequestMapping("/holiy")
+	public String holiyday(Model model) {
+		return "holiy/holiyday";
+	}
 }	
