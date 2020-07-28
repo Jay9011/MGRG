@@ -182,7 +182,8 @@ INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-23', 'YYYY-MM-DD'), to_date('2020-07-27', 'YYYY-MM-DD'), 1)
 ;
 
-
+SELECT h_uid "uid", h_start startTime, h_end endTime, emp_uid empuid
+FROM HOLIDAY WHERE emp_uid = 1;
 
 
 

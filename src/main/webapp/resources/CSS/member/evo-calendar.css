@@ -40,7 +40,7 @@ input:focus, textarea:focus, button:focus {
 .calendar-sidebar {
     position: absolute;
     margin-top: 0;
-    width: 200px;
+    width: 150px;
     height: 100%;
     float: left;
     background-color: #8773c1;
@@ -81,13 +81,14 @@ input:focus, textarea:focus, button:focus {
 }
 
 .calendar-sidebar > .calendar-year {
-    padding: 20px;
+    padding: 5px;
     text-align: center;
 }
 .calendar-sidebar > .calendar-year > p {
     margin: 0;
     font-size: 30px;
     display: inline-block;
+     color : white;
 }
 .calendar-sidebar > .calendar-year > button.icon-button {
     display: inline-block;
@@ -127,7 +128,7 @@ input:focus, textarea:focus, button:focus {
     padding: 0;
 }
 .calendar-sidebar > .month-list > .calendar-months > li {
-    padding: 7px 30px;
+    padding: 2.5px 30px;
     cursor: pointer;
     font-size: 16px;
 }
@@ -140,11 +141,11 @@ input:focus, textarea:focus, button:focus {
 
 .calendar-inner {
     position: relative;
-    padding: 40px 30px;
+    padding: 10px;
     float: left;
     width: 100%;
     max-width: calc(100% - 600px);
-    margin-left: 200px;
+    margin-left: 150px;
     background-color: #fff;
     -webkit-box-shadow: 5px 0 18px -3px rgba(0, 0, 0, 0.15);
             box-shadow: 5px 0 18px -3px rgba(0, 0, 0, 0.15);
@@ -167,14 +168,14 @@ input:focus, textarea:focus, button:focus {
     margin-left: 0;
 }
 .event-hide .calendar-inner {
-    max-width: calc(100% - 200px);
+    max-width: calc(100% - 150px);
 }
 .event-hide.sidebar-hide .calendar-inner {
     max-width: 100%;
 }
 .calendar-inner .calendar-table {
     border-collapse: collapse;
-    font-size: 20px;
+    font-size: 18px;
     width: 100%;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -214,13 +215,13 @@ tr.calendar-body {
 
 }
 tr.calendar-body .calendar-day {
-    padding: 10px 0;
+    padding: 5px 0;
 }
 tr.calendar-body .calendar-day .day {
     position: relative;
-    padding: 15px;
-    height: 60px;
-    width: 60px;
+    padding: 10px;
+    height: 50px;
+    width: 50px;
     margin: 0 auto;
     border-radius: 50%;
     text-align: center;
@@ -380,7 +381,7 @@ tr.calendar-body .calendar-day .day[disabled] {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
-    top: 100%;
+    top: 110%;
     left: 50%;
     -webkit-transform: translate(-50%, calc(-100% + -5px));
         -ms-transform: translate(-50%, calc(-100% + -5px));

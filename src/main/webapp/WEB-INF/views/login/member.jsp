@@ -32,19 +32,19 @@
 <jsp:include page="../navpl.jsp"/>
  <!-- Page Content  -->
         <div id="content">
-
+	
             <h2>근태 현황</h2>
             <div style="display: inline-block;">
             <div class="text-right">
-      			<button type="button" id="viewcom" class="btn btnadd"><small>현황 더보기</small> +</button>
+      			<button type="button" id="viewcom" class="btn btnadd" data-emp="1"><small>현황 더보기</small> +</button>
 			</div>
-            <canvas id="myChart" height="400" width="400" style="display: inline-block;"></canvas>
+            <canvas id="myChart" height="450" width="450" style="display: inline-block;"></canvas>
             </div>
 <!--             	근태현황 테이블 -->
             <span id="comShow" style="display: none;" >
-            	<div>
-            	근태 현황ㅇ입니다.
-            	</div>
+            
+            <span> </span>
+            	<div id="calendar"></div>
             </span>
 <!--             날씨 -->
   <div id="san-francisco" class="card">

@@ -381,7 +381,7 @@ SELECT * FROM NOTICE;
 SELECT * FROM POSITIONRANK;
 SELECT * FROM HOLIDAY;
 SELECT * FROM OFFICE_HOUR;
-SELECT n_uid "uid", n_subject subject, n_content content,n_regdate regdate,dep_uid department, p_uid "position"  FROM NOTICE;
+SELECT n_uid "uid", n_subject subject, n_content content,n_regdate regdate,dep_uid department, p_uid "position"  FROM NOTICE where p_uid = 1  ;
 select n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid from notice where p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC ;
 SELECT * FROM (SELECT n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid FROM notice WHERE p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC) WHERE ROWNUM <= 5;
 
@@ -417,6 +417,11 @@ SELECT (h.H_END - h.H_START) "Day"
 FROM HOLIDAY h 
 WHERE h.EMP_UID = 1 AND h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
 ;
+
+SELECT h.h_uid "uid" ,h.h_start startTime, h.h_end endTime, e.emp_uid emp_uid, e.EMP_NAME name
+FROM HOLIDAY h JOIN EMPLOYEES e ON h.EMP_UID = e.EMP_UID WHERE e.EMP_UID = 1;
+
+
 
 /* 해당 사원의 총 휴가 일수 구하기 */
 
@@ -505,6 +510,8 @@ INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 5)
 ;
 
+SELECT  * FROM HOLIDAY WHERE EMP_UID = 1;
+SELECT h_uid "uid", h_start startTime, h_end endTime, emp_uid emp_uid FROM HOLIDAY WHERE EMP_UID = 1;
 -- 금일날짜에 휴가인 사람 뽑기 --
 SELECT * FROM HOLIDAY
 WHERE TO_CHAR(H_START, 'yyyy/mm/dd') <= TO_CHAR(SYSDATE , 'yyyy/mm/dd') AND 
