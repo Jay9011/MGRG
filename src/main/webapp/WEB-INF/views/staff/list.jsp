@@ -74,6 +74,7 @@
 							<div class="input-group text">
 								<label for="staff_name"><span class="requied"></span>이름 </label>
 								<input  class="editForm" name="name" class="editForm" id="staff_name" type="text" placeholder="이름을 입력하세요." style="width:160px"/>
+								<span id="nameChk"></span>
 							</div>
 							<div class="input-group date">
 								<label for="staff_birthday"><span class="requied"></span>생일 </label>
@@ -86,10 +87,12 @@
 							<div class="input-group text">
 								<label for="staff_email"><span class="requied"></span>E-mail </label>
 								<input  class="editForm" name="email" class="editForm" id="staff_email" type="text" placeholder="E-mail 주소를 입력해 주세요." style="width:300px"/>
+								<span id="emailChk"></span>
 							</div>
 							<div class="input-group text">
 								<label for="staff_id"><span class="requied"></span>아이디 </label>
 								<input  class="editForm" name="id" class="editForm" id="staff_id" type="text" placeholder="아이디를 입력해 주세요." style="width:300px"/>
+								<span id="idChk"></span>
 							</div>
 							<!-- <div class="input-group password">
 								<label for="staff_pw">비밀번호 </label>
@@ -173,6 +176,7 @@
 							<div class="input-group text input-group-viewr">
 								<label for="staff_name">이름 </label>
 								<input  class="editForm" name="name" id="staff_name" type="text" style="width:160px"/>
+								<span id="nameChk"></span>
 							</div>
 							<div class="input-group date input-group-viewr">
 								<label for="staff_birthday">생일 </label>

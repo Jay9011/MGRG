@@ -3,6 +3,7 @@ package com.mgrg.hrm.Controller;
 import java.util.ArrayList;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,8 @@ import com.mgrg.hrm.staff.ListCommand;
 import com.mgrg.hrm.staff.StaffDTO;
 import com.mgrg.hrm.staff.StaffJSON;
 import com.mgrg.hrm.staff.UpdateCommand;
+import com.mgrg.hrm.staff.ValidationEmail;
+import com.mgrg.hrm.staff.ValidationId;
 
 @RestController
 @RequestMapping("/staff")
@@ -52,4 +55,19 @@ public class StaffRestController {
 		return json;
 	} // end deleteStaff()
 	
+	@PostMapping("/validationId/{id}")
+	public StaffJSON validationId(Model model, @PathVariable("id")String id ) {
+		model.addAttribute("id", id);
+		new ValidationId().execute(model);
+		StaffJSON json = (StaffJSON) model.getAttribute("json"); 
+		return json;
+	} // end validationId()
+
+	@PostMapping("/validationEmail/{email}")
+	public StaffJSON validationEmail(Model model, @PathVariable("email")String email ) {
+		model.addAttribute("email", email);
+		new ValidationEmail().execute(model);
+		StaffJSON json = (StaffJSON) model.getAttribute("json"); 
+		return json;
+	} // end validationEmail()
 }
