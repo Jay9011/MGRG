@@ -7,9 +7,7 @@ var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 var xhr = new XMLHttpRequest(); 
 $(document).ready(function() {
-//	$(document).ajaxSend(function(e, xhr, options) {
-//        xhr.setRequestHeader(header, token);
-//    });
+
 	boardRord();
 
 	// 게시판 목록 1페이지 로딩
@@ -27,8 +25,20 @@ $(document).ready(function() {
 
 	// 글 작성 submit 처리(db저장, action은 없으나)
 	$("#frmWrite").submit(function() {
-		$(this).parents(".modal").hide(); // 저장 처리를하면
-		return chkWrite(); // 페이지 리로딩이 발생되면 안된다. but 리쿼스트는 할거기 때문에 fun 이용
+		frm = document.forms["frmWrite"];
+		var subject = frm["subject"].value.trim();
+		var chk = document.getElementById("chk");    
+		chk.innerHTML = "";
+		if(subject == "" || CKEDITOR.instances.editor.getData() == '' || CKEDITOR.instances.editor.getData().length ==0){
+			chk.innerHTML = "제목과 내용은 필수 항목입니다.";
+			
+			return false;
+		}else{
+			
+			$(this).parents(".modal").hide(); // 저장 처리를하면
+			return chkWrite(); // 페이지 리로딩이 발생되면 안된다. but 리쿼스트는 할거기 때문에 fun 이용
+		}
+		
 	});
 
 	// 글 삭제 버튼 누르면
@@ -231,6 +241,8 @@ function setPopup(mode) {
 		$("#dlg_write input:radio[name='p_uid']").removeAttr('disabled').css("display", "inline-block");
 		$("#dlg_write input:radio[name='p_uid']").parents("label").css("display", "inline-block");
 		
+		// 날짜
+		$("#dlg_write #reg b").text("");
 		$("#dlg_write #regdate").text("");
 		
 		$("#dlg_write input[name='subject']").attr("readonly", false);
@@ -263,6 +275,7 @@ function setPopup(mode) {
 		$("#dlg_write input:radio[name='p_uid'][value='"+viewItem.position +"']").prop('checked', true); // 선택하기
 	
 		// 날짜
+		$("#dlg_write #reg b").text("날짜");
 		$("#dlg_write #regdate").text(viewItem.regdate);
 		$("#dlg_write input[name='uid']").val(viewItem.uid); // 나중에 삭제/수정을 위해
 																// 필요
@@ -295,6 +308,7 @@ function setPopup(mode) {
 		$("#dlg_write input:radio[name='p_uid']").parents("label").css("display", "inline-block");
 	
 		// 날짜
+		$("#dlg_write #reg b").text("날짜");
 		$("#dlg_write #regdate").text(viewItem.regdate);
 		$("#dlg_write input[name='uid']").val(viewItem.uid); // 나중에 삭제/수정을 위해
 																// 필요
@@ -370,3 +384,23 @@ function chkUpdate() {
 
 }// end chkUpdate()
 
+function chkSubmit() {
+	frm = document.forms["frmWrite"];
+	var subject = frm["subject"].value.trim();
+	var chk = document.getElementById("chk");    
+	chk.innerHTML = "";
+	if(subject == ""){
+		chk.innerHTML = "제목 쓰라";
+		frm["subject"].focus();
+		
+	}
+	alert("하이");
+	alert($('#editor').val());
+	
+	if(CKEDITOR.instances.editor.getData() == '' || CKEDITOR.instances.editor.getData().length ==0){
+		chk.innerHTML = "내용 쓰라";
+		frm["content"].focus();
+		alert("dhormfo");
+	}
+	
+}

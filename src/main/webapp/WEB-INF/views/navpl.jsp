@@ -9,9 +9,11 @@
             <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
             <div id="navbarSupportedContent">
             
+
             <ul class="nav ">
                     <li class="nav-item">
 		           	 <form method="post" id="presentform">
+
             	            <input type="hidden" name="emp_uid" value="<%= empuid%>">
         	                <input id="present" type="submit" class="nav-link rounded" value="출근">
         	                <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}"/>

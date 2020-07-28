@@ -391,7 +391,8 @@ tr.calendar-body .calendar-day .day[disabled] {
     float: left;
     padding: 2px;
 }
-.event-indicator > .type-bullet > div[class*="type-"] {
+.event-indicator > .type-bullet > div[class*="type-"] ,
+.kind div[class*="type-"]{
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -405,19 +406,23 @@ tr.calendar-body .calendar-day .day[disabled] {
     border-radius: 50%;
 }
 .event-container > .event-icon > div.event-bullet-absence,
-.event-indicator > .type-bullet > div.type-absence {
+.event-indicator > .type-bullet > div.type-absence,
+.kind div.type-absence {
     background-color: #ff7575;
 }
 .event-container > .event-icon > div.event-bullet-late,
-.event-indicator > .type-bullet > div.type-late {
+.event-indicator > .type-bullet > div.type-late,
+.kind div.type-late {
     background-color: #ffc107;
 }
 .event-container > .event-icon > div.event-bullet-attend,
-.event-indicator > .type-bullet > div.type-attend {
+.event-indicator > .type-bullet > div.type-attend,
+.kind div.type-attend {
     background-color: #3ca8ff;
 }
 .event-container > .event-icon > div.event-bullet-holiday,
-.event-indicator > .type-bullet > div.type-holiday {
+.event-indicator > .type-bullet > div.type-holiday,
+.kind div.type-holiday{
     background-color: #755eb5;
 }
 

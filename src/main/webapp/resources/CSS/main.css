@@ -16,7 +16,27 @@ p {
     line-height: 1.7em;
     color: #999;
 }
-
+ul.kindlist{
+	list-style: none;
+	margin: 0;
+	margin-bottom: 5px;
+	padding: 0;
+	display: flex;
+    justify-content: flex-end;
+}
+ul.kindlist li {
+	float: left;
+	margin: 0px 5px;
+}
+.kind{
+	font-size: 12px;
+	margin-left: 5px;
+	
+}
+#comShow > ul > li > span > div
+{
+	display: inline-block;
+}
 a,
 a:hover,
 a:focus {
@@ -136,6 +156,10 @@ display: block;
     margin-bottom: 10%;
 	
 }
+
+
+
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */

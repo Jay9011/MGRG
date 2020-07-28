@@ -41,37 +41,40 @@ System.out.println(empname);
 <title>메인 화면</title>
 </head>
 <body>
-	<jsp:include page="../navpl.jsp" />
-	<!-- Page Content  -->
-	<div id="content">
-
-		<h2>근태 현황</h2>
-		<div style="display: inline-block;">
-			<div class="text-right">
-				<button type="button" id="viewcom" class="btn btnadd" data-emp="1">
-					<small>현황 더보기</small> +
-				</button>
+<jsp:include page="../navpl.jsp"/>
+ <!-- Page Content  -->
+        <div id="content">
+            <h2>${empname}님 근태 현황</h2>
+            <div style="display: inline-block;">
+            <div class="text-right">
+      			<button type="button" id="viewcom" class="btn btnadd" data-emp='${empuid}'><small>현황 더보기</small> +</button>
 			</div>
-			<canvas id="myChart" height="450" width="450"
-				style="display: inline-block;"></canvas>
-		</div>
-		<!--             	근태현황 테이블 -->
-		<span id="comShow" style="display: none;"> <span> </span>
-			<div id="calendar"></div>
-		</span>
-		<!--             날씨 -->
-		<div id="san-francisco" class="card">
-			<div class="card-header">
-				<!-- INFO -->
-				<div class="left-side">
-					<h2 class="city">오늘의 날씨</h2>
-					<!-- <span class="temperature">63°</span> -->
-					<span class="temperature"></span>
-				</div>
-				<div class="weather-icon">
-					<!-- PARTIALLY -->
-					<i id='icon' class=""
-						style="font-size: 100px; padding-right: 20px;"></i>
+            <canvas id="myChart" height="450" width="450" style="display: inline-block;"></canvas>
+            </div>
+<!--             	근태현황 테이블 -->
+            <span id="comShow" style="display: none;" >
+              <ul class="kindlist">
+            	<li><span class="kind"><div class="type-absence"></div> 출근</span></li>
+            	<li><span class="kind"><div class="type-late"></div> 지각</span></li>
+            	<li><span class="kind"><div class="type-attend"></div> 결근</span></li>
+            	<li><span class="kind"><div class="type-holiday"></div> 휴가 </span></li>
+            </ul>
+           
+            	<div id="calendar"></div>
+           
+            </span>
+<!--             날씨 -->
+  		<div id="san-francisco" class="card">
+            <div class="card-header">
+                <!-- INFO -->
+                <div class="left-side">
+                    <h2 class="city">오늘의 날씨</h2>
+                    <!-- <span class="temperature">63°</span> -->
+                    <span class="temperature"></span>
+                </div>
+                <div class="weather-icon">
+                    <!-- PARTIALLY -->
+                    <i id='icon' class="" style="font-size: 100px; padding-right: 20px;"></i>
 
 				</div>
 				<div class="header-bg"
