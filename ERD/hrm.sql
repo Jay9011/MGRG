@@ -743,3 +743,23 @@ FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
 WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
 ORDER BY category.w_start DESC ;
 
+SELECT * FROM DEPARTMENT d ;
+SELECT * FROM POSITIONRANK p ;
+
+-- 달력을 위한 쿼리문 --
+SELECT e.EMP_UID "uid", category.W_START "start", category.stat "status"
+FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+	(SELECT  
+		h.*,
+		CASE
+			WHEN h.endTime IS NOT NULL THEN '퇴근'
+			WHEN h.startTime <= 900 THEN '출근'
+			WHEN h.startTime <= 930 THEN '지각'
+			ELSE '결근'
+			END AS stat
+	FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+			FROM OFFICE_HOUR oh ) h) category
+WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+ORDER BY category.w_start DESC ;
+

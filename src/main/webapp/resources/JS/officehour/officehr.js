@@ -13,48 +13,13 @@ $(document).ready(function($)
         }
     });
 	
-	loadPage(ajax_data);
-	
-	//--->save single field data > start
-	$(document).on('focusout', '.row_data', function(event) 
-	{
-		event.preventDefault();
-
-		if($(this).attr('edit_type') == 'button')
-		{
-			return false; 
-		}
-
-		var row_id = $(this).closest('tr').attr('row_id'); 
-		
-		var row_div = $(this)				
-		.removeClass('bg-white') //add bg css
-		.css('padding','')
-
-		var col_name = row_div.attr('col_name'); 
-		var col_val = row_div.html(); 
-
-		var arr = {};
-		arr[col_name] = col_val;
-
-		//use the "arr"	object for your ajax call
-		$.extend(arr, {row_id:row_id});
-
-		//out put to show
-		$('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>');
-		
-	})	
-	//--->save single field data > end
-
- 
-	
+	loadList(ajax_data);
 	
 	//--->button > edit > start	
 	$(document).on('click', '.btn_edit', function(event) 
 	{
 		
 		var leave = $('.end').text();
-		
 		event.preventDefault();
 		var tbl_row = $(this).closest('tr');
 		var row_id = tbl_row.attr('row_id');
@@ -114,9 +79,7 @@ $(document).ready(function($)
 		});  
 	});
 	//--->button > cancel > end
-
 	
-	// TODO
 	//--->save whole row entery > start	
 	$(document).on('click', '.btn_save', function(event) 
 	{
@@ -170,15 +133,14 @@ $(document).ready(function($)
 		
 		
 		//--->get row data > end
-		
 		$.ajax({
 			url : "/hrm/offhour/update",
-			type : "GET",
+			type : "POST",
 			cache : false,
 			data : arr,
 			success : function(data, status){
 				if(status == "success"){
-					loadPage(ajax_data);
+					loadList(ajax_data);
 				}
 			}
 			
@@ -194,13 +156,43 @@ $(document).ready(function($)
 	});
 	//--->save whole row entery > end
 	
+	// 검색 기능 추가
+	var srch_option;
+	var srch_input;
+	var srch_startDate;
+	var srch_endDate;
+	$('#search-opt').on('change', function(){
+		srch_option = $(this).val();
+	});
+	
+	$(document).on('click', '.search-btn', function(){
+		srch_option = $('form [name="searchOpt"').val();
+		srch_input = $('form [name="searchInput"').val();
+		srch_startDate = $('form [name="startDate"').val();
+		srch_endDate = $('form [name="endDate"').val();
+		
+		var param = $('.search-content').serialize();
+		$.ajax({
+			url : '/hrm/offhour/search',
+			type : 'GET',
+			cache : false,
+			data : param,
+			success : function(data, status){
+				if(status == "success"){
+					makeTable(data);
+				}
+			}
+		});
+		
+	});
+	
 }); 
 
 
 // ----------------------------------------------------------------
 
 
-function loadPage(data){
+function loadList(data){
 	$.ajax({
 		url : "/hrm/offhour/list",
 		type : "POST",
