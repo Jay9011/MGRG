@@ -23,10 +23,11 @@
 	src="${pageContext.request.contextPath }/resources/JS/officehour/officehr.js"></script>
 <script
 	src="${pageContext.request.contextPath }/resources/JS/officehour/currenthr.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <title>출근 현황 페이지</title>
 </head>
@@ -36,25 +37,28 @@
 	<!-- Page Content  -->
 	<div id="content">
 		<div class="header">
-			<div class="search">
-			<form action="" class="search-content">
-				<select class="form-control">
-					<option value="">직원 이름</option>
-					<option value="">부서명</option>
-					<option value="">직책명</option>
-				</select> <input type="text" class="form-control"> <input
-					type="button" value="검색" class="btn btn-primary">
-			</form>
-			</div>
-			<div class="datepicker">
-			<form action="" class="datepicker-content">
-				<label for="startDate">From</label> <input type="text"
-					id="startDate" name="startDate" class="form-control"> <label for="endDate">To</label>
-				<input type="text" id="endDate" name="endDate" class="form-control">
-			</form>
-			</div>
-		</div>
+			<form action="" class="search-content datepicker-content">
+				<div class="search">
+					<select id="search-opt" name="searchOpt" class="form-control">
+						<option value="0" selected>::: 분류별 검색 :::</option>
+						<option value="1">직원 이름</option>
+						<option value="2">부서명</option>
+						<option value="3">직책명</option>
+					</select> <input type="text" id="search-input" name="searchInput"
+						class="form-control">
+				</div>
 
+				<div class="datepicker">
+					<label for="startDate">From</label> <input type="text"
+						id="startDate" name="startDate" class="form-control"> <label
+						for="endDate">To</label> <input type="text" id="endDate"
+						name="endDate" class="form-control">
+						<input type="button" value="검색" class="search-btn btn btn-primary">
+				</div>
+
+			</form>
+
+		</div>
 
 		<div class="clear" onload="printClock()">
 			<div id="clock"></div>
