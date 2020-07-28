@@ -173,7 +173,7 @@ System.out.println(empname);
 
 									</tr>
 								</c:forEach>
-							<tbody>
+							</tbody>
 						</table>
 
 					</div>
@@ -311,5 +311,6 @@ System.out.println(empname);
 
 			});
 		</script>
+		</div>
 </body>
 </html>
