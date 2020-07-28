@@ -64,7 +64,9 @@ $(document).ready(function(){
 	
 	$('button.addBtn').on('click', function(){
 //		$(this).parents('.modal').hide();
-		chkAdd();
+		if(validationChk()){
+			chkAdd();
+		}
 	});
 	
 	$('button.modiBtn').on('click', function(){
@@ -108,19 +110,57 @@ function loadPage(){
 			{data: 'position'},
 			{data: 'phonenum'
 				,'render' : function (data, type, full, meta){
+					if(data == 0 || data == null) {
+						return '없음';
+					} else {
+						let telNum = '' + data;
+						let formatNum = '';
+
+						if(telNum.length == 8){
+							formatNum = telNum.replace(/(\d{4})(\d{4})/, '$1-$2');
+						} else if(telNum.length == 10){
+							formatNum = telNum.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+							formatNum = '0' + formatNum;
+						} else {
+							if(telNum.indexOf('2') == 0){
+								formatNum = telNum.replace(/(\d{1})(\d{4})(\d{4})/, '$1-$2-$3');
+								formatNum = '0' + formatNum;
+							} else {
+								formatNum = telNum.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+								formatNum = '0' + formatNum;
+							}
+						}
+
+						return formatNum;
+					}
 					if(data == 0 || data == null) return '없음';
 					else return '0' + data;
 				}},
 			{data: 'email'},
-			{data: 'leftHoliday'},
+			{data: 'leftHoliday'
+				,'render' : function(data, type, full, meta){
+					return full.leftHoliday + ' / ' + full.total + '<span style="margin-right:15px"></span>';
+				}},
 			{data: 'birthday'
 				,'render' : function (data, type, full, meta){
-					return DateToString(data);
+					return DateToString(data) + '<span style="margin-right:15px"></span>';
 				}},
 			{data: 'address'}
 		]
 		,columnDefs:[
-			{targets: 0, orderable: false}
+			{targets: 0, orderable: false},
+			{targets: 1
+				,className: 'dt-body-center'},
+			{targets: 2
+				,className: 'dt-body-center'},
+			{targets: 3
+				,className: 'dt-body-center'},
+			{targets: 4
+				,className: 'dt-body-center'},
+			{targets: 5
+				,className: 'dt-body-right'},
+			{targets: 6
+				,className: 'dt-body-right'}
 		]
 		,fixedColumns: {
 			leftColumns: 3
@@ -183,8 +223,11 @@ function chkAdd(){
 		data : data,
 		success : function(data, status){
 			if(status == 'success'){
-				$('#staff_list').DataTable().ajax.reload();
+				$('#staff_list').DataTable().ajax.reload().columns.adjust();
 				$('#writeStaff').modal('hide');
+				$('#toast #toast_img').html('<img src="' + path + '/resources/Img/smile.svg">');
+				$('#toast #toast_message').text(data.message);
+				launch_toast();
 			} else {
 				
 			}
@@ -208,8 +251,11 @@ function modiOk(){
 		data : data,
 		success : function(data, status){
 			if(status == 'success'){
-				$('#staff_list').DataTable().ajax.reload();
+				$('#staff_list').DataTable().ajax.reload().columns.adjust();
 				$('#viewStaff').modal('hide');
+				$('#toast #toast_img').html('<img src="' + path + '/resources/Img/smile.svg">');
+				$('#toast #toast_message').text(data.message);
+				launch_toast();
 			} else {
 				
 			}
@@ -245,6 +291,9 @@ function deleteOk(){
 				success : function(data, status){
 					if(status == 'success'){
 						$('#staff_list').DataTable().ajax.reload();
+						$('#toast #toast_img').html('<img src="' + path + '/resources/Img/smile.svg">');
+						$('#toast #toast_message').text(data.message);
+						launch_toast();
 					} else {
 						
 					}
@@ -287,9 +336,25 @@ function initViewStaff(){
 	$('#viewStaff .addBody').hover(
 	function(){
 		$(this).find('#addrBtn').css('display', 'block');
+		$(this).find('#addrDetail').css('border-bottom', '1px solid #a9adb9');
 	}
 	,function(){
 		$(this).find('#addrBtn').css('display', 'none');
+		if(!$(this).find('#addrDetail').is(':focus')){
+			$(this).find('#addrDetail').css('border', 'none');
+		}
+	});
+	
+	$('#viewStaff .addBody #addrDetail').on('focus', function(){
+		$(this).css({
+			'border-bottom': '1px solid #a9adb9'
+		});
+	});
+
+	$('#viewStaff .addBody #addrDetail').on('blur', function(){
+		$(this).css({
+			'border': 'none'
+		});
 	});
 }
 
@@ -313,7 +378,7 @@ function setStaffFrom(thisModal, data){
 	form.find('input[name=name]').val(data.name);
 	form.find('span.birthday').text(birthday);
 	form.find('input[name=birthday]').val(birthday);
-	form.find('input[name=phonenum]').val(data.phonenum);
+	form.find('input[name=phonenum]').val('0' + data.phonenum);
 	form.find('input[name=email]').val(data.email);
 	form.find('input[name=id]').val(data.id);
 	form.find('input[name=addrZoneCode]').val(data.addrZoneCode);

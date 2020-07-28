@@ -38,15 +38,16 @@ public class InsertCommand implements Command {
 			
 			if(result > 0) {
 				status = "OK";
-				json.setCount(result);
+				message.append(dto.getName() + "님을 성공적으로 추가하였습니다.");
 			} else {
 				message.append("[데이터를 추가하는데 실패했습니다.]");
-				json.setMessage(message.toString());
 			} // end if-else(result > 0)
 		} else {
 			message.append("[이메일을 보내는데 실패했습니다.]");
 		}
 
+		json.setCount(result);
+		json.setMessage(message.toString());
 		json.setStatus(status);
 		model.addAttribute("json", json);
 	} // end execute();
