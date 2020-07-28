@@ -18,7 +18,7 @@
         <div class="bottom"></div>
         <div class="center">
             <h2>MR.hrms</h2>
-            <form method="post" action="${pageContext.request.contextPath}/login" name="login" id="login" onsubmit="return ValidateEmail(document.login.email);">
+            <form method="post" action="${pageContext.request.contextPath}/login" name="login" id="login">
 <%--             <form method="post" action="${pageContext.request.contextPath}/login" name="login" id="login"> --%>
             
 <!-- 	            <input type="email" placeholder="email" name="username" id="email"/> -->
