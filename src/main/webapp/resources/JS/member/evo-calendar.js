@@ -31,7 +31,7 @@
             var _ = this;
             _.defaults = {
                 theme: null,
-                format: 'mm/dd/yyyy',
+                format: 'yyyy-mm-dd',
                 titleFormat: 'MM yyyy',
                 eventHeaderFormat: 'MM d, yyyy',
                 firstDayOfWeek: 0,
