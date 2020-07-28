@@ -10,15 +10,19 @@
             <div id="navbarSupportedContent">
             
             <ul class="nav ">
-                    <li class="nav-item active">
-		           	 <form action="<%= request.getContextPath() %>/officehour/present" method="post">
+                    <li class="nav-item">
+		           	 <form method="post" id="presentform">
             	            <input type="hidden" name="emp_uid" value="<%= empuid%>">
-        	                <input id="present" type="submit" class="nav-link" value="출근"></a>
+        	                <input id="present" type="submit" class="nav-link rounded" value="출근">
         	                <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}"/>
                     </form>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">퇴근</a>
+                        <form id="offform" method="post">
+            	            <input type="hidden" name="emp_uid" value="<%= empuid%>">
+        	                <input id="off" type="submit" class="nav-link rounded" value="퇴근" disabled>
+        	                <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}"/>
+                    	</form>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="<%=request.getContextPath() %>/customLogout">로그아웃</a>
