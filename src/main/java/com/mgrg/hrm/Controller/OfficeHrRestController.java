@@ -1,7 +1,5 @@
 package com.mgrg.hrm.Controller;
 
-import java.sql.Timestamp;
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +22,8 @@ public class OfficeHrRestController {
 	 * 
 	 * @GetMapping("/list")
 	 */
-//	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	//@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = {RequestMethod.POST, RequestMethod.GET })
 	public OhJSON list(Model model) {
 		new OfficeListCommand().execute(model);
 		OhJSON json = (OhJSON) model.getAttribute("json");
@@ -40,7 +38,7 @@ public class OfficeHrRestController {
 		return json;
 	}
 
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public OhJSON search(OhDTO dto, Model model, @RequestParam("searchOpt") int option,
 			@RequestParam("searchInput") String input, @RequestParam("startDate") String startD,
 			@RequestParam("endDate") String endD) {

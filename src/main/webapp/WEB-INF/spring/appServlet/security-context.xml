@@ -37,7 +37,7 @@
 		<security:intercept-url pattern="/login/ad" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/notice/**" access="hasRole('ROLE_ADMIN')" />
 		<!-- <security:intercept-url pattern="/officehour/**" access="hasRole('ROLE_ADMIN')"/> -->
-		<security:intercept-url pattern="/officehour/**" access="permitAll"/>
+		<security:intercept-url pattern="/officehour/**" access="hasRole('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/staff/**" access="hasRole('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/login/member" access="hasRole('ROLE_MEMBER')" />
 		
