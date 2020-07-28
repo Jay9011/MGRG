@@ -1,8 +1,7 @@
 div.header {
-	width: 80%;
-	margin: 50px auto;
+	width: 85%;
+	margin: 0 auto;
 	padding: 50px 0 10px 20px;
-	
 }
 
 div.search{
@@ -13,10 +12,6 @@ div.search{
 div.datepicker{
 	display: inline;
 	float: right;
-}
-
-div.datepicker input {
-	margin-right: 30px;
 }
 
 .clear{
@@ -43,9 +38,6 @@ table th, td {
 }
 
 div.status {
-	border-radius: 100px;
+	border-radius: 20px;
 	color: white;
-}
-.search-btn{
-	width: 100px;
 }

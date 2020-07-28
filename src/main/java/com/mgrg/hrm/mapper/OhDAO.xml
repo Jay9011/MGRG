@@ -47,40 +47,6 @@
 		</choose>
 		WHERE emp_uid = #{emp_uid} AND w_uid = #{w_uid}
 	</update>
-	
-	<select id="select_By_Search" resultType="com.mgrg.hrm.officehr.OhDTO" flushCache="true">
-			<![CDATA[
-			SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME dept, p.P_NAME posRank, category.W_START "start", category.W_END "end", category.stat "status", category.w_uid 
-			FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
-				(SELECT  
-					h.*,
-					CASE
-						WHEN h.endTime IS NOT NULL THEN '퇴근'
-						WHEN h.startTime <= 900 THEN '출근'
-						WHEN h.startTime <= 930 THEN '지각'
-						ELSE '결근'
-						END AS stat
-				FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
-							 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
-						FROM OFFICE_HOUR oh ) h) category
-			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
-			]]>
-				  <choose>
-				  	<when test="option == 1"> <!-- 직원 이름 (emp_name -->
-				  		AND EMP_NAME = #{input} AND category.W_START BETWEEN #{startDate} AND #{endDate}
-				  	</when>
-				  	<when test="option == 2"> <!-- 직원 이름 (emp_name -->
-				  		AND DEP_NAME = #{input} AND category.W_START BETWEEN #{startDate} AND #{endDate}
-				  	</when>
-				  	<when test="option == 3"> <!-- 직원 이름 (emp_name -->
-				  		AND P_NAME = #{input} AND category.W_START BETWEEN #{startDate} AND #{endDate}
-				  	</when>
-				  	<when test="option == 1 and start == null and end == null">
-				  		AND 
-				  	</when>
-				  </choose> 
-			ORDER BY category.w_start DESC	
-	</select>
 
 
 </mapper>
