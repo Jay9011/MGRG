@@ -33,7 +33,7 @@
 <%--버튼 --%>
 		<div class="d01 float-right ">
 			<div class="btn2">
-				<button type="button" id="btnWrite" class="btn">공지 작성</button>
+				<button type="button" id="btnWrite" class="btn addBtn">공지 작성</button>
 			</div>
 		</div>
 		</div>
@@ -50,7 +50,7 @@
 			</table>
 		</form>
 			<div class="btn2">
-				<button type="button" id="btnDel" class="btn">공지 삭제</button>
+				<button type="button" id="btnDel" class="btn delBtn">공지 삭제</button>
 			</div>
 
 
@@ -68,10 +68,10 @@
 					<input type="hidden" name="uid" value="0">
 
 					<div class="d01 btn_group_header">
-						<div class="right">
-							<p id="regdate"></p>
+						<div class="float-left">
+							<label for="regdate" id="reg"><b>날짜</b></label> <p id="regdate" class="pcol"></p>
 						</div>
-						<div class="clear"></div>
+						<div class="clearfix"></div>
                     </div>
 					<input id="csrf" type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}"/>
                     <div>
@@ -97,23 +97,23 @@
 						placeholder="글 제목(필수)" name="subject" required>
 					<label for="content"><b>내용</b></label>
 					<textarea id="editor" name="content"></textarea>
-					<p id="chkit"></p>
+					<p id="chk"></p>
 					<div class="d01 btn_group_write">
-						<button type="submit" class="btn success">작성</button>
+						<button type="submit" class="btn addBtn">작성</button>
 					</div>
 					<div class="d01 btn_group_view">
-						<div class="left">
-							<button type='button' class="btn danger" id="viewDelete">삭제</button>
+						<div class="float-left">
+							<button type='button' class="btn delBtn" id="viewDelete">삭제</button>
 						</div>
-						<div class="right">
-							<button type='button' class="btn info" id="viewUpdate">수정</button>
+						<div class="float-right">
+							<button type='button' class="btn upBtn" id="viewUpdate">수정</button>
 						</div>
-						<div class="clear"></div>
+						<div class="clearfix"></div>
 					</div>
 
 					<div class="d01 btn_group_update">
 						<div>
-							<button type="button" class="btn info fullbtn" id="updateOk">수정 완료</button>
+							<button type="button" class="btn upBtn fullbtn" id="updateOk">수정 완료</button>
 						</div>
 					</div>
 				</div>

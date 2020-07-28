@@ -21,6 +21,8 @@ public class HcalCommand implements Command{
 		StringBuffer message = new StringBuffer();
 		String status = "FAIL"; // 기본 FAIL
 		List<HoliyDTO> dto = null;
+		
+		ArrayList<StatusDTO> dates = new ArrayList<StatusDTO>();
 		int emp_uid = (Integer)model.getAttribute("emp_uid");
 		try {
 			if(emp_uid == 0) {
@@ -33,18 +35,16 @@ public class HcalCommand implements Command{
 					SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
 					Date startDate = sdf.parse(inputStartDate);
 					Date endDate = sdf.parse(inputEndDate);
-					ArrayList<String> dates = new ArrayList<String>();
 					Date currentDate = startDate;
 					while (currentDate.compareTo(endDate) <= 0) {
-						dates.add(sdf.format(currentDate));
+						StatusDTO sDto = new StatusDTO(sdf.format(currentDate),"holiday",false);
+						dates.add(sDto);
 						Calendar c = Calendar.getInstance();
 						c.setTime(currentDate);
 						c.add(Calendar.DAY_OF_MONTH, 1);
 						currentDate = c.getTime();
 					}
-					for (String date : dates) {
-						System.out.println(date);
-					}
+					
 				}
 				
 				status = "OK";
@@ -56,7 +56,8 @@ public class HcalCommand implements Command{
 		Hlist.setStatus(status);
 		Hlist.setData(dto);
 		
-		model.addAttribute("Hlist",Hlist);
+		model.addAttribute("dates",dates);
+		//model.addAttribute("Hlist",Hlist);
 		
 	}
 

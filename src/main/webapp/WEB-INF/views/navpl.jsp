@@ -9,7 +9,7 @@
             <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
             <div id="navbarSupportedContent">
             
-            <ul class="nav ">
+            <ul class="nav">
                     <li class="nav-item active">
 		           	 <form action="<%= request.getContextPath() %>/officehour/present" method="post">
             	            <input type="hidden" name="emp_uid" value="<%= empuid%>">

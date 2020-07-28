@@ -64,6 +64,7 @@ circle,line,path {
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     margin: 2em;
+    margin-left: 5em;
     display: inline-block;
 }
 
@@ -181,7 +182,7 @@ span.day {
 	
 .coming-weather .wi{
 	font-size: 1.5em !important;
-	color: red !important;
+    color: #3144ad !important;
 }	
 
 .noticeCenter{
