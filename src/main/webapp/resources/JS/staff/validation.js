@@ -118,8 +118,11 @@ function validateIdChk(form){
 		}); // end ajaxSetup
 		
 		$.ajax({
-			url : path + '/staff/validationId/' + form.val(),
+			url : path + '/staff/validationId/',
 			type : 'POST',
+			data : {
+				email : form.val()
+			},
 			cache : false,
 			success : function(data, status){
 				if(status == "success"){
