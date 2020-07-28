@@ -26,10 +26,28 @@ public class OfficeHrController {
 	@PostMapping("/present")
 	public String present(HttpServletRequest request,HttpServletResponse response) {
 		String empuid = request.getParameter("emp_uid");
+		
 		System.out.println("present() => "+empuid);
 		int empuid2= Integer.parseInt(empuid);
 		ILoginDAO dao = C.sqlSession.getMapper(ILoginDAO.class);
 		dao.present(empuid2);
+		try {
+			response.sendRedirect(request.getContextPath()+"/login/member");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "login/member";
+	}
+	
+	@PostMapping("/off")
+	public String off(HttpServletRequest request,HttpServletResponse response) {
+		String empuid = request.getParameter("emp_uid");
+		
+		System.out.println("present() => "+empuid);
+		int empuid2= Integer.parseInt(empuid);
+		ILoginDAO dao = C.sqlSession.getMapper(ILoginDAO.class);
+		dao.off(empuid2);
 		try {
 			response.sendRedirect(request.getContextPath()+"/login/member");
 		} catch (IOException e) {

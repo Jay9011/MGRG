@@ -17,4 +17,6 @@ public interface ILoginDAO {
 	public List<ValiDTO> vali2();
 	
 	public int present(int uid);
+	
+	public int off(int uid2);
 }
