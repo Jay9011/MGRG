@@ -34,6 +34,7 @@ System.out.println(empname);
    href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css">
 <script src="${pageContext.request.contextPath}/resources/JS/weather.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/umain.js"></script>
+<script src="${pageContext.request.contextPath}/resources/JS/member/chart.js"></script>
 <script
    src="${pageContext.request.contextPath}/resources/JS/member/evo-calendar.js"></script>
 <jsp:include page="../topend.jsp" />
@@ -44,12 +45,13 @@ System.out.println(empname);
 <jsp:include page="../navpl.jsp"/>
  <!-- Page Content  -->
         <div id="content">
+        	<input type="hidden" id="empUid"  value="${empuid }">
             <h2>${empname}님 근태 현황</h2>
             <div style="display: inline-block;">
             <div class="text-right">
 
                <button type="button" id="viewcom" class="btn btnadd" data-emp='${empuid}'><small>현황 더보기</small> +</button>
-         </div>
+         	</div>
             <canvas id="myChart" height="450" width="450" style="display: inline-block;"></canvas>
             </div>
 <!--                근태현황 테이블 -->
@@ -222,35 +224,7 @@ System.out.println(empname);
       <script type="text/javascript"
          src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
       <script type="text/javascript">
-         var ctx = document.getElementById('myChart');
-         var myChart = new Chart(ctx, {
-            type : 'doughnut',
-            data : {
-               labels : [ 'Red', 'Blue', 'Yellow', 'Green', 'Purple',
-                     'Orange' ],
-               datasets : [ {
-                  label : '# of Votes',
-                  data : [ 12, 19, 3, 5, 2, 3 ],
-                  backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)' ],
-                  borderColor : [ 'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)' ],
-                  borderWidth : 1
-               } ]
-            },
-            options : {
-               responsive : false,
-
-            }
-         });
+        
       </script>
       <script>
          var token = $("meta[name='_csrf']").attr("content");

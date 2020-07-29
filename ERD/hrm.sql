@@ -748,7 +748,39 @@ FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
 			FROM OFFICE_HOUR oh ) h) category
 WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
 ORDER BY category.w_start DESC ;
+
+-- 오늘 날짜에 모든 직원들의 출근 현황 뽑기 --
+SELECT e.EMP_UID "uid", e.EMP_NAME name, category.W_START "start", d.DEP_NAME posRank, p.P_NAME dept, category.W_END "end", category.stat "status", category.w_uid 
+FROM DEPARTMENT d , POSITIONRANK p , EMPLOYEES e LEFT OUTER JOIN 
+	(SELECT  
+		h.*,
+		CASE
+			WHEN h.endTime IS NOT NULL THEN '퇴근'
+			WHEN h.startTime <= 900 THEN '출근'
+			WHEN h.startTime <= 930 THEN '지각'
+			ELSE '결근'
+			END AS stat
+	FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+			FROM OFFICE_HOUR oh 
+			WHERE to_char(oh.W_START, 'yyyy-mm-dd') =  '2020-07-25') h) category ON e.EMP_UID = category.EMP_UID
+			WHERE e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+ORDER BY e.EMP_NAME;
+
+DELETE FROM OFFICE_HOUR oh WHERE EMP_UID = 3;
+
+SELECT * FROM OFFICE_HOUR oh ;
+
+SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+			FROM OFFICE_HOUR oh 
+		WHERE to_char(oh.W_START, 'yyyy-mm-dd') =  '2020-07-25';
+	
+	
+
 update OFFICE_HOUR set w_end = SYSDATE where emp_uid = 1 AND TO_CHAR(sysdate, 'yyyymmdd') = (SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = 1);
+
+
 SELECT TO_CHAR(SYSDATE, 'yyyymmdd') FROM dual;
 SELECT TO_CHAR(w_end, 'yyyymmdd') FROM OFFICE_HOUR oh ; 
 SELECT * FROM OFFICE_HOUR;
@@ -757,7 +789,7 @@ SELECT * FROM OFFICE_HOUR;
 
 
 
-
+SELECT * FROM EMPLOYEES e ;
 
 
 

@@ -1,5 +1,7 @@
 package com.mgrg.hrm.officehr;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.ui.Model;
@@ -17,7 +19,11 @@ public class OfficeListCommand implements Command{
 		StringBuffer message = new StringBuffer();
 		String status = "FAIL";
 		
-		List<OhDTO> list = dao.select_officehr();
+		Date d = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+		String date = format.format(d);
+		
+		List<OhDTO> list = dao.select_officehr(date);
 		
 		if(list.size() == 0) {
 			message.append("[직원들의 근태현황 목록이 없습니다.]");

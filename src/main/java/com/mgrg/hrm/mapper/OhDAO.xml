@@ -7,8 +7,8 @@
 	<select id="select_officehr"
 		resultType="com.mgrg.hrm.officehr.OhDTO" flushCache="true">
 		<![CDATA[
-			SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME dept, p.P_NAME posRank, category.W_START "start", category.W_END "end", category.stat "status", category.w_uid 
-			FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
+			SELECT e.EMP_UID "uid", e.EMP_NAME name, category.W_START "start", d.DEP_NAME posRank, p.P_NAME dept, category.W_END "end", category.stat "status", category.w_uid 
+			FROM DEPARTMENT d , POSITIONRANK p , EMPLOYEES e LEFT OUTER JOIN 
 				(SELECT  
 					h.*,
 					CASE
@@ -19,9 +19,10 @@
 						END AS stat
 				FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
 							 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
-						FROM OFFICE_HOUR oh ) h) category
-			WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
-			ORDER BY category.w_start DESC	
+						FROM OFFICE_HOUR oh 
+						WHERE to_char(oh.W_START, 'yyyy-mm-dd') =  #{date}) h) category ON e.EMP_UID = category.EMP_UID
+						WHERE e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+			ORDER BY e.EMP_NAME
 		]]>
 	</select>
 	
@@ -82,5 +83,8 @@
 			ORDER BY category.w_start DESC	
 	</select>
 
+	<select id="">
+		SELECT COUNT()
+	</select>
 
 </mapper>

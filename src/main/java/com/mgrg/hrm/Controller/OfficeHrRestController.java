@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mgrg.hrm.officehr.OfficeChartCommand;
 import com.mgrg.hrm.officehr.OfficeListCommand;
 import com.mgrg.hrm.officehr.OfficeSearchCommand;
 import com.mgrg.hrm.officehr.OfficeUpdateCommand;
@@ -49,6 +50,14 @@ public class OfficeHrRestController {
 		model.addAttribute("dto", dto);
 		new OfficeSearchCommand().execute(model);
 		OhJSON json = (OhJSON) model.getAttribute("json");
+		return json;
+	}
+	
+	@RequestMapping(value = "/chart", method = RequestMethod.GET)
+	public OhJSON chart(@RequestParam("uid") int uid, Model model) {
+		model.addAttribute("uid", uid);
+		new OfficeChartCommand().execute(model);
+		OhJSON json = (OhJSON)model.getAttribute("json");
 		return json;
 	}
 }
