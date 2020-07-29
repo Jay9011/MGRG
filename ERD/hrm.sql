@@ -510,11 +510,12 @@ VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-20', 'YYYY-MM-DD'), to_date(
 ;
 
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 5)
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-06-29', 'YYYY-MM-DD'), to_date('2020-07-02', 'YYYY-MM-DD'), 2)
 ;
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 5)
 ;
+
 
 SELECT  * FROM HOLIDAY WHERE EMP_UID = 1;
 SELECT h_uid "uid", h_start startTime, h_end endTime, emp_uid emp_uid FROM HOLIDAY WHERE EMP_UID = 1;
