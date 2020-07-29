@@ -28,6 +28,10 @@ $(document).ready(function(){
 	$('#writeStaff #staff_salary').blur(function(e){
 		validateSalaryChk($(this));
 	});
+	
+	$(".numberOnly").on("keyup", function() {
+	    $(this).val($(this).val().replace(/[^0-9]/g,""));
+	});
 });
  /**
   * 유효성 검사 진행

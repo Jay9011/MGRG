@@ -41,7 +41,23 @@ SELECT A.DT
     AND A.D NOT IN ('1', '7')  -- 토/일요일 제외
     AND B.DT IS NULL;
    
+   
+SELECT *
+FROM HOLIDAY 
+;
+-- 이번 달 주말 제외한 모든 날짜의 출근 현황 뽑기
+SELECT *
+FROM (SELECT mon.*
+		FROM (SELECT TRUNC(SYSDATE ,'mm') + LEVEL - 1 AS IN_DATE
+			FROM DUAL CONNECT BY LEVEL <= SYSDATE - TRUNC(SYSDATE,'mm')) mon
+		WHERE TO_CHAR(mon.IN_DATE, 'd') NOT IN (1, 7)) work_day
+	LEFT OUTER JOIN (SELECT * FROM OFFICE_HOUR WHERE EMP_UID = 2) oh 
+	ON oh.W_START BETWEEN work_day.in_date AND work_day.in_date + 1
+;
 
-	
-	
-	
+-- 휴일 뺀 이번 월 모든 날짜 뽑기
+SELECT mon.*
+FROM (SELECT TRUNC(SYSDATE ,'mm') + LEVEL - 1 AS IN_DATE
+	FROM DUAL CONNECT BY LEVEL <= SYSDATE - TRUNC(SYSDATE,'mm')) mon
+WHERE TO_CHAR(mon.IN_DATE, 'd') NOT IN (1, 7)
+;

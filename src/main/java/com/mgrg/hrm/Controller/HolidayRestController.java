@@ -20,8 +20,7 @@ public class HolidayRestController {
 //		param.get("startDay"), param.get("endDay")
 //		model.getAttribute("startDay"), model.getAttribute("endDay")
 		model.addAllAttributes(param);
-		System.out.println(model.getAttribute("startDay") + " ~ " + model.getAttribute("endDay"));
-//		new HolidayCommand().execute(model);
+		new HolidayCommand().execute(model);
 		HolidayJSON json = (HolidayJSON) model.getAttribute("json");
 		return json;
 	} // end addHoliday()
