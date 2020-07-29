@@ -11,5 +11,4 @@ import org.mybatis.spring.annotation.MapperScan;
 public interface OhDAO {
 	public ArrayList<OhDTO> select_officehr();
 	public int updateHour(@Param("emp_uid")int uid, @Param("w_uid")int w_uid, @Param("w_start")Timestamp start, @Param("w_end")Timestamp end);
-	public ArrayList<OhDTO> select_By_Search(@Param("option")int option, @Param("input")String input, @Param("startDate")Timestamp startDate, @Param("endDate")Timestamp endDate);
 }
