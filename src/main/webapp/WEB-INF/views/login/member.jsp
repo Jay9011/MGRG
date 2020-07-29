@@ -21,6 +21,24 @@ System.out.println(empname);
 <meta id="_csrf_header" name="_csrf_header"
    content="${_csrf.headerName}" />
 <jsp:include page="../top.jsp" />
+<script type="text/javascript">
+	$(document).ready(function(){
+		var compare = sessionStorage.getItem("present");
+		if(compare == 'present'){
+	    	$('#present').attr('disabled',true);
+			$('#off').attr('disabled',false);
+		}
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var compare = sessionStorage.getItem("off");
+		if(compare == 'off'){
+	    	$('#present').attr('disabled',false);
+			$('#off').attr('disabled',true);
+		}
+	});
+</script>
 <jsp:include page="../datatable.jsp" />
 <link rel="stylesheet"
    href="${pageContext.request.contextPath}/resources/CSS/table.css">
@@ -238,6 +256,10 @@ System.out.println(empname);
                }
             });
 
+            var sessionData = "present";
+            //
+            
+            //
             $('#present').click(function() {
                var data = $('#presentform').serialize();
                //alert(data);
@@ -249,12 +271,19 @@ System.out.println(empname);
                   success : function(data, status) {
                      if (status == "success") {
                         //alert('수정 성공');
+                        sessionStorage.removeItem("off");
+		               sessionStorage.setItem("present", sessionData);
+		               //alert(sessionStorage.getItem("present"));
+               			
                      }
                   }
 
                });
-               $('#present').attr('disabled',true);
-               $('#off').attr('disabled',false);
+              var compare = sessionStorage.getItem("present");
+              console.log(typeof(compare));
+			  $('#present').attr('disabled',true);
+			  $('#off').attr('disabled',false);
+              	
                
             })
 
@@ -270,7 +299,9 @@ System.out.println(empname);
                   xhr.setRequestHeader(header, token);
                }
             });
-
+			
+            var sessionData = "off";
+            
             $('#off').click(function() {
                var data = $('#offform').serialize();
                //alert(data);
@@ -282,10 +313,15 @@ System.out.println(empname);
                   success : function(data, status) {
                      if (status == "success") {
                         //alert('수정 성공');
+                        sessionStorage.removeItem("present");
+                    	 sessionStorage.setItem("off", sessionData);
+                    	 
                      }
                   }
 
                });
+               var compare = sessionStorage.getItem("off");
+               console.log(typeof(compare));
                $('#present').attr('disabled',false);
                $('#off').attr('disabled',true);
                
