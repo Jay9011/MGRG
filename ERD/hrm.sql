@@ -94,8 +94,8 @@ CREATE TABLE notice
 CREATE TABLE office_hour
 (
 	w_uid number NOT NULL,
-	w_start date,
-	w_end date,
+	w_start timestamp,
+	w_end timestamp,
 	emp_uid number NOT NULL,
 	PRIMARY KEY (w_uid)
 );
@@ -733,21 +733,39 @@ select e.emp_uid "uid", e.emp_name name, p.p_name position, e.emp_salary salary,
 select emp_pw from EMPLOYEES where emp_id = 'insa@insa.com';
 
 -- xml mapper 에서가져온 쿼리문 --
-SELECT e.EMP_UID "uid", e.EMP_NAME name, d.DEP_NAME posRank, p.P_NAME dept, category.W_START "start", category.W_END "end", category.stat "status", category.w_uid 
-FROM EMPLOYEES e, DEPARTMENT d, POSITIONRANK p,
-	(SELECT  
-		h.*,
-		CASE
-			WHEN h.endTime IS NOT NULL THEN '퇴근'
-			WHEN h.startTime <= 900 THEN '출근'
-			WHEN h.startTime <= 930 THEN '지각'
-			ELSE '결근'
-			END AS stat
-	FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
-				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
-			FROM OFFICE_HOUR oh ) h) category
-WHERE e.EMP_UID = category.EMP_UID AND e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
-ORDER BY category.w_start DESC ;
+SELECT e.EMP_UID "uid", e.EMP_NAME name, category.W_START "start", d.DEP_NAME posRank, p.P_NAME dept, category.W_END "end", category.stat "status", category.w_uid 
+			FROM DEPARTMENT d , POSITIONRANK p , EMPLOYEES e LEFT OUTER JOIN 
+				(SELECT  
+					h.*,
+					CASE
+						WHEN h.endTime IS NOT NULL THEN '퇴근'
+						WHEN h.endTime < 1800 THEN '조퇴'
+						WHEN h.startTime IS NULL THEN '미출근'
+						WHEN h.startTime <= 900 THEN '출근'
+						WHEN h.startTime <= 930 THEN '지각'
+						ELSE '결근'
+						END AS stat
+				FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+							 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+						FROM OFFICE_HOUR oh 
+						WHERE to_char(oh.W_START, 'yyyy-mm-dd') =  '2020-07-29') h) category ON e.EMP_UID = category.EMP_UID
+						WHERE e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID
+			ORDER BY e.EMP_NAME;
+		
+		SELECT  
+					h.*,
+					CASE
+						WHEN h.endTime IS NOT NULL THEN '퇴근'
+						WHEN h.endTime < 1800 THEN '조퇴'
+						WHEN h.startTime IS NULL THEN '미출근'
+						WHEN h.startTime <= 900 THEN '출근'
+						WHEN h.startTime <= 930 THEN '지각'
+						ELSE '결근'
+						END AS stat
+				FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+							 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+						FROM OFFICE_HOUR oh 
+						WHERE to_char(oh.W_START, 'yyyy-mm-dd') =  '2020-07-29') h;
 
 -- 오늘 날짜에 모든 직원들의 출근 현황 뽑기 --
 SELECT e.EMP_UID "uid", e.EMP_NAME name, category.W_START "start", d.DEP_NAME posRank, p.P_NAME dept, category.W_END "end", category.stat "status", category.w_uid 

@@ -20,7 +20,7 @@ public class OfficeListCommand implements Command{
 		String status = "FAIL";
 		
 		Date d = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String date = format.format(d);
 		
 		List<OhDTO> list = dao.select_officehr(date);
