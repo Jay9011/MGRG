@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 찾기</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 	integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -21,11 +21,11 @@
 	<!--     /////////////////////////////////// -->
 	<div class="wrapper">
 		<div class="container">
-			<h1>Find..</h1>
+			<h2>비밀번호 찾기</h2>
 
 			<form class="form" action="mailSending" method="post" id="mail" name="mail">
-				<input type="email" name="tomail" placeholder="email.." id="tomail"> 
-				<input type="text" name="findid" placeholder="ID.." id="findid">
+				<input type="email" name="tomail" placeholder="email" id="tomail"> 
+				<input type="text" name="findid" placeholder="ID" id="findid">
 				<!-- 제목 -->
 				<input type="hidden" name="title" value="비밀번호 입니다">
 				<button type="submit" id="login-button">Send</button>
