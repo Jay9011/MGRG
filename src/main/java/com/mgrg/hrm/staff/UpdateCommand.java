@@ -21,12 +21,13 @@ public class UpdateCommand implements Command {
 		
 		if(result > 0) {
 			status = "OK";
-			json.setCount(result);
+			message.append(dto.getName() + "님의 정보를 성공적으로 수정했습니다.");
 		} else {
-			message.append("[데이터를 추가하는데 실패했습니다.]");
-			json.setMessage(message.toString());
+			message.append("[데이터를 수정하는데 실패했습니다.]");
 		} // end if-else(result > 0)
 		
+		json.setCount(result);
+		json.setMessage(message.toString());
 		json.setStatus(status);
 		
 		model.addAttribute("json", json);

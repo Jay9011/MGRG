@@ -1,36 +1,28 @@
 @charset "UTF-8";
-
 #content {
 	max-width: 95%;
 } 
-
 table.dataTable.nowrap th, table.dataTable.nowrap td {
 	white-space: nowrap;
 	background-color: #fbfbfb;
 }
-
 table.dataTable.nowrap td {
 	border-bottom: 1px solid olive;
 }
-
 .table thead th {
 	border-top: 2px solid olive;
 	border-bottom: 2px solid olive;
 }
-
 .pagination {
 	justify-content: flex-start !important;
 }
-
 .dt-body-center {
 	text-align: center;
 }
-
 .dt-body-right {
 	text-align: right;
 	
 }
-
 #btnWrite {
 	float: right;
 	background-color: #9569CC;
@@ -38,24 +30,20 @@ table.dataTable.nowrap td {
 	margin: 15px 0;
 	/* font-weight: bold; */
 }
-
 #btnDelete {
 	float: right;
 	background-color: #ffcd57;
 	color: white;
 }
-
 .modal-header {
 	color: #FFF;
 	background-color: #7386D5;
 	border: 1px solid #FDFDFD;
 }
-
 .modal-body input {
 	border: none;
 	border-bottom: 1px solid #a9adb9;
 }
-
 .modal-body label {
 	align-self: center;
 	margin-bottom: 0;
@@ -63,16 +51,13 @@ table.dataTable.nowrap td {
 	text-align: end;
 	margin-right: 10px;
 }
-
 .input-group {
 	margin: 5px 0 10px 0;
 }
-
 span.requied::before {
 	content: "* ";
 	color: red;
 }
-
 div.password {
     position: relative;
 }
@@ -87,7 +72,6 @@ div.password svg {
 	right: 0;
 	font-size: 1.2em;
 }
-
 div.addLable {
 	float: left;
 	width: 120px;
@@ -95,34 +79,27 @@ div.addLable {
 	text-align: end;
 	line-height: 55px;
 }
-
 div.addBody {
 	float: left;
 	width: 70%;
 }
-
 input#addrBtn {
 	border: none;
 }
-
 button.addBtn {
 	background-color: #9569CC;
 	color: #F8EBFF;
 }
-
 .table-hover tr:hover {
 	cursor: pointer;
 	background-color: #CCC;
 }
-
 #viewStaff input {
 	border: none;
 }
-
 #viewStaff input:focus {
 	border-bottom: 1px solid #a9adb9;
 }
-
 .addBtnLine {
 	height: 36px;
 }
@@ -144,19 +121,32 @@ button.addBtn {
 	-moz-appearance: none; /* 화살표 없애기 for firefox*/
 	appearance: none /* 화살표 없애기 공통*/
 }
-
 #viewStaff select::-ms-expand {
 	display: none;
 }
-
 #viewStaff select:focus{
 	border: 1px solid #000;
 	-webkit-appearance: revert; /* 화살표 없애기 for chrome*/
 	-moz-appearance: revert; /* 화살표 없애기 for firefox*/
 	appearance: revert; /* 화살표 없애기 공통*/
 }
-
 button.modiBtn {
 	background-color: #9569CC;
 	color: #F8EBFF;
+}
+.hint {
+	height: 1.25em;
+	margin-top: .25rem;
+	font-size: 80%;
+	width: 100%;
+	padding-left: 130px;
+}
+.invalid-text {
+	color: #dc3545;
+}
+.valid-text {
+	color: #28a745;
+}
+.invalid-form {
+	border-bottom: 1px solid #dc3545 !important;
 }

@@ -63,8 +63,8 @@ public class StaffRestController {
 		return json;
 	} // end validationId()
 
-	@PostMapping("/validationEmail/{email}")
-	public StaffJSON validationEmail(Model model, @PathVariable("email")String email ) {
+	@PostMapping("/validationEmail")
+	public StaffJSON validationEmail(Model model, String email ) {
 		model.addAttribute("email", email);
 		new ValidationEmail().execute(model);
 		StaffJSON json = (StaffJSON) model.getAttribute("json"); 

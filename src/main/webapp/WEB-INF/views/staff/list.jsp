@@ -12,6 +12,8 @@
 <jsp:include page="../datatable.jsp"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/JS/staff/Main.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/staff/Main.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/JS/staff/Toast.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/staff/Toast.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/table.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/JS/staff/validation.js"></script>
@@ -73,26 +75,28 @@
 						<form id="addStaff" name="addStaff">
 							<div class="input-group text">
 								<label for="staff_name"><span class="requied"></span>이름 </label>
-								<input  class="editForm" name="name" class="editForm" id="staff_name" type="text" placeholder="이름을 입력하세요." style="width:160px"/>
-								<span id="nameChk"></span>
+								<input  class="editForm" name="name" class="editForm" id="staff_name" type="text" placeholder="이름을 입력하세요." maxlength="10"/>
+								<span id="nameChk" class="hint"></span>
 							</div>
 							<div class="input-group date">
 								<label for="staff_birthday"><span class="requied"></span>생일 </label>
-								<input  class="editForm" name="birthday" class="editForm" id="staff_birthday" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								<input  class="editForm" name="birthday" class="editForm" id="staff_birthday" type="date" class="form-control" style="flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								<span id="birthChk" class="hint"></span>
 							</div>
 							<div class="input-group text">
 								<label for="staff_phone">휴대폰 번호 </label>
-								<input  class="editForm" name="phonenum" class="editForm" id="staff_phone" type="text" placeholder="휴대번호는 숫자만 입력하기를 권장합니다." style="width:300px"/>
+								<input  class="editForm" name="phonenum" class="editForm" id="staff_phone" type="text" placeholder="휴대번호는 숫자만 입력하기를 권장합니다."/>
+								<span class="hint"></span>
 							</div>
 							<div class="input-group text">
 								<label for="staff_email"><span class="requied"></span>E-mail </label>
-								<input  class="editForm" name="email" class="editForm" id="staff_email" type="text" placeholder="E-mail 주소를 입력해 주세요." style="width:300px"/>
-								<span id="emailChk"></span>
+								<input  class="editForm" name="email" class="editForm" id="staff_email" type="text" placeholder="E-mail 주소를 입력해 주세요."/>
+								<span id="emailChk" class="hint"></span>
 							</div>
 							<div class="input-group text">
 								<label for="staff_id"><span class="requied"></span>아이디 </label>
-								<input  class="editForm" name="id" class="editForm" id="staff_id" type="text" placeholder="아이디를 입력해 주세요." style="width:300px"/>
-								<span id="idChk"></span>
+								<input  class="editForm" name="id" class="editForm" id="staff_id" type="text" placeholder="아이디를 입력해 주세요." maxlength="15"/>
+								<span id="idChk" class="hint"></span>
 							</div>
 							<!-- <div class="input-group password">
 								<label for="staff_pw">비밀번호 </label>
@@ -113,21 +117,24 @@
 							<div class="addLable">주소</div>
 							<div class="input-group text addBody">
 								<div class="input-group addBtnLine">
-									<input class="editForm" name="addrZoneCode" id="addrZoneCode" type="text" readonly="readonly" style="width: 80px;"/>
+									<input class="editForm" name="addrZoneCode" id="addrZoneCode" type="text" readonly="readonly"/>
 									<input id="addrBtn" class="btn btn-light" type="button" onclick="DaumAddr(this)" value="주소 찾기"/>
 								</div>
 								<div class="input-group">
-									<input class="editForm" name="addrRoad" id="addrRoad" type="text" readonly="readonly" style="width:100%; margin-bottom:10px;"/>
-									<input class="editForm" name="addrDetail" id="addrDetail" type="text" placeholder="상세주소 입력란 입니다." style="width:100%"/>
+									<input class="editForm" name="addrRoad" id="addrRoad" type="text" readonly="readonly" style="margin-bottom:10px;"/>
+									<input class="editForm" name="addrDetail" id="addrDetail" type="text" placeholder="상세주소 입력란 입니다."/>
 								</div>
+								<span class="hint"></span>
 							</div>
 							<div class="input-group date">
 								<label for="staff_hiredate"><span class="requied"></span>입사 날짜 </label>
-								<input class="editForm" name="hiredate" id="staff_hiredate" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								<input class="editForm" name="hiredate" id="staff_hiredate" type="date" class="form-control" style="flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								<span id="hiredateChk" class="hint"></span>
 							</div>
 							<div class="input-group text">
 								<label for="staff_salary"><span class="requied"></span>연봉 </label>
-								<input class="editForm" name="salary" id="staff_salary" type="number" style="width:300px"/>
+								<input class="editForm" name="salary" id="staff_salary" type="number"/>
+								<span id="salaryChk" class="hint"></span>
 							</div>
 							<div class="input-group select" style="margin-left:125px">
 								<select name="dep_uid" id="staff_department" style="margin:0 5px">
@@ -259,6 +266,11 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<div id="toast">
+			<div id="toast_img"></div>
+			<div id="toast_message"></div>
 		</div>
 	</div>
 </body>
