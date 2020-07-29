@@ -13,6 +13,9 @@
 .bootstrap-datetimepicker-widget table td.disabled, .bootstrap-datetimepicker-widget table td.disabled:hover{
 	 color: #ddd;
 }
- .bootstrap-datetimepicker-widget table th.picker-switch{
- color:#6547A6;
- }
+.bootstrap-datetimepicker-widget table th.picker-switch{
+	color:#6547A6;
+}
+.inline-flex {
+	display: inline-flex;
+}
