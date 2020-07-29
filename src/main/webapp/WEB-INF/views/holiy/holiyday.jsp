@@ -6,8 +6,7 @@
 <meta charset="utf-8">
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <!-- default header name is X-CSRF-TOKEN -->
-<meta id="_csrf_header" name="_csrf_header"
-	content="${_csrf.headerName}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <jsp:include page="../top.jsp" />
 <jsp:include page="../datatable.jsp" />
 <jsp:include page="../topend.jsp" />
@@ -50,7 +49,7 @@
 						</div>
 					</div>
 				</div>
-				<button type="button" class="btn btn-secondary">휴가 추가</button>
+				<button type="button" id="addHoliday" class="btn btn-secondary">휴가 추가</button>
 			</div>
 		</div>
 	</div>

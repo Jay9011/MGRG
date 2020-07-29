@@ -17,8 +17,7 @@ public class MailSendDefault {
 
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
-					true, "UTF-8");
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(tomail); // 받는사람 이메일

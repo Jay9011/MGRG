@@ -27,7 +27,7 @@ public class InsertCommand implements Command {
 		
 		// 메일 보내기
 		String setfrom = "ddnd194@naver.com";
-		String tomail = dto.getEmail();
+		String tomail = dto.getEmail().trim();
 		String title = "본사에 입사를 축하합니다.";
 		String content = "아이디 : " + dto.getId() + "<br>" +
 						"비밀번호 : <h2>" + pw + "</h2><br>";
