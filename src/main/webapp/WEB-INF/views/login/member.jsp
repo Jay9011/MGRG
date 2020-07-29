@@ -56,6 +56,7 @@ System.out.println(empname);
             </div>
 <!--                근태현황 테이블 -->
             <span id="comShow" style="display: none;" >
+            
               <ul class="kindlist">
                <li><span class="kind"><div class="type-absence"></div> 출근</span></li>
                <li><span class="kind"><div class="type-late"></div> 지각</span></li>
