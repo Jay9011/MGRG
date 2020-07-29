@@ -13,6 +13,7 @@
 <jsp:include page="../topend.jsp" />
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/JS/Holiy/holiyday.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" />
 <link rel="stylesheet"  type="text/css" href="${pageContext.request.contextPath}/resources/CSS/Holiy/holiy.css">
@@ -60,24 +61,6 @@
 
 	</div>
 
-		<script type="text/javascript">
-			$(function() {
-				$('#datetimepicker1').datetimepicker({
-					format : 'YYYY-MM-DD',
-					minDate : new Date()
-				});
-				$('#datetimepicker2').datetimepicker({
-					format : 'YYYY-MM-DD',
-					useCurrent : false,
-					minDate : new Date()
-				});
-				$("#datetimepicker1").on("change.datetimepicker", function(e) {
-					$('#datetimepicker2').datetimepicker('minDate', e.date);
-				});
-				$("#datetimepicker2").on("change.datetimepicker", function(e) {
-					$('#datetimepicker1').datetimepicker('maxDate', e.date);
-				});
-			});
-		</script>
+		
 </body>
 </html>

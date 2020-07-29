@@ -22,14 +22,26 @@ SELECT "useHoliday" , EMP_UID empuid FROM holi;
 
 -- 휴가를 이번달 사용했는지 
 SELECT * FROM HOLIDAY;
+8
 
-SELECT (h.H_END - h.H_START = 0) "Momth", h.EMP_UID EMP_UID
-	FROM HOLIDAY h 
-	WHERE h.H_START BETWEEN TO_DATE(TO_CHAR(SYSDATE ,'YYYY') , 'YYYY') AND TO_DATE(TO_CHAR(SYSDATE ,'YYYY') + 1, 'YYYY')
- 
-SELECT TO_CHAR() FROM HOLIDAY;
+
+SELECT TO_CHAR(H_START, 'yyyy-mm') AS "START", TO_CHAR(H_END , 'yyyy-mm') AS "END" FROM HOLIDAY WHERE EMP_UID =2;
 	
-	
+SELECT A.DT
+  FROM (    SELECT TO_CHAR (SDT + LEVEL - 1, 'YYYYMMDD') DT,
+                   TO_CHAR (SDT + LEVEL - 1, 'D') D
+              FROM (SELECT TO_DATE ((TO_CHAR(SYSDATE , 'YYYY')||'01-01'),'YYYY-MM-DD') SDT,
+                           TO_DATE ((TO_CHAR(SYSDATE, 'YYYY')||'12-31'),'YYYY-MM-DD')EDT
+                      FROM DUAL)
+        CONNECT BY LEVEL <= EDT - SDT + 1) A,
+       (
+        (SELECT TO_DATE((TO_CHAR( '2020-05-05', 'YYYY-MM-DD') AS DT, '어린이날' CMT FROM DUAL 
+       ) B
+ WHERE TO_DATE(A.DT, 'YYYY-MM-DD') = B.DT(+) 
+    AND A.D NOT IN ('1', '7')  -- 토/일요일 제외
+    AND B.DT IS NULL;
+   
+
 	
 	
 	

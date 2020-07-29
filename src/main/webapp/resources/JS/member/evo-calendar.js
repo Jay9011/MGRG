@@ -192,6 +192,7 @@
     }
 
     // v1.0.0 - Limit title (...)
+    /*
     EvoCalendar.prototype.limitTitle = function(title, limit) {
         var newTitle = [];
         limit = limit === undefined ? 18 : limit;
@@ -206,7 +207,7 @@
         }
         return title;
     }
-            
+      */      
     // v1.0.0 - Parse format (date)
     EvoCalendar.prototype.parseFormat = function(format) {
         var _ = this;
