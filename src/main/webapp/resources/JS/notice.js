@@ -6,6 +6,7 @@ var editor;
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 var xhr = new XMLHttpRequest(); 
+
 $(document).ready(function() {
 
 	boardRord();
@@ -135,10 +136,18 @@ function chkWrite() {
 		success : function(data, status) {
 			if (status == "success") {
 				if (data.status == "OK") {
-					alert("INSERT 성공" + data.count + "개:" + data.status);
+					Swal.fire({
+						  icon: 'success',
+						  title: '공지 작성 성공',
+						  text: data.count + "개의 공지가 작성 되었습니다." 
+						})
 					boardRord();
 				} else {
-					alert("INSERT 실패" + data.status + " : " + data.message);
+					Swal.fire({
+						  icon: 'error',
+						  title: '공지 작성 실패',
+						  text:  data.status + " : " + data.message
+						})
 				}
 			}
 		}
@@ -161,11 +170,23 @@ function chkDelete() {
 
 	// alert(uids);
 	if (uids.length == 0) {
-		alert("삭제할 글을 체크해 주세여");
+			Swal.fire({
+			  icon: 'error',
+			  text: "삭제할 글을 체크해 주세여"
+			})
 	} else {
-		if (!confirm(uids.length + "개의 글을 삭제하시겠습니까?"))
-			return false; // 취소를 누르면 체크된 상태로 취소
-
+		Swal.fire({
+			  title: '공지 삭제',
+			  text: uids.length + "개의 글을 삭제하시겠습니까?",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#6D80CC',
+			  cancelButtonColor: '#F3C458',
+			  confirmButtonText: '삭제',
+			cancelButtonText : '취소'
+			}).then((result) => {
+			  if (result.value) {
+			
 		var data = $('#frmList').serialize();
 		// uid=1010&uid=1111
 
@@ -177,15 +198,25 @@ function chkDelete() {
 			success : function(data, status) {
 				if (status == "success") {
 					if (data.status == "OK") {
-						alert("DELETE 성공 " + data.count + "개");
+						Swal.fire({
+							  icon: 'success',
+							  title: '공지 삭제 성공',
+							  text: data.count + "개의 공지가 삭제 되었습니다." 
+							})
 						boardRord();
 					} else {
-						alert("DELETE 실패 " + data.message);
+						Swal.fire({
+							  icon: 'error',
+							  title: '공지 삭제 실패',
+							  text: ""+ data.message
+							})
 					}
 				}
 			}
 		});
-
+		  
+	  }
+	})
 	}
 
 }// end chkDelete()
@@ -212,7 +243,11 @@ function addViewEvent() {
 										setPopup("view");
 										$("#dlg_write").show();
 									} else {
-										alert("VIEW 실패" + data.message);
+										Swal.fire({
+											  icon: 'error',
+											  title: '공지 읽기 실패',
+											  text: ""+ data.message
+											})
 									}
 								}
 							}
@@ -240,7 +275,7 @@ function setPopup(mode) {
 		//직책		
 		$("#dlg_write input:radio[name='p_uid']").removeAttr('disabled').css("display", "inline-block");
 		$("#dlg_write input:radio[name='p_uid']").parents("label").css("display", "inline-block");
-		
+		$("#dlg_write #chk").text("");	
 		// 날짜
 		$("#dlg_write #reg b").text("");
 		$("#dlg_write #regdate").text("");
@@ -279,7 +314,7 @@ function setPopup(mode) {
 		$("#dlg_write #regdate").text(viewItem.regdate);
 		$("#dlg_write input[name='uid']").val(viewItem.uid); // 나중에 삭제/수정을 위해
 																// 필요
-
+		$("#dlg_write #chk").text("");	
 		$("#dlg_write input[name='subject']").val(viewItem.subject);
 		$("#dlg_write input[name='subject']").attr("readonly", true);
 
@@ -311,7 +346,8 @@ function setPopup(mode) {
 		$("#dlg_write #reg b").text("날짜");
 		$("#dlg_write #regdate").text(viewItem.regdate);
 		$("#dlg_write input[name='uid']").val(viewItem.uid); // 나중에 삭제/수정을 위해
-																// 필요
+		
+		$("#dlg_write #chk").text("");												// 필요
 
 		$("#dlg_write input[name='subject']").val(viewItem.subject);
 		$("#dlg_write input[name='subject']").attr("readonly", false);
@@ -325,9 +361,6 @@ function setPopup(mode) {
 
 // 특정 uid 의 글 삭제하기
 function deleteUid(uid) {
-	if (!confirm(uid + "번 글을 삭제 하시겠습니까?"))
-		return false;
-	
 	
 	$.ajaxSetup({
         beforeSend: function(xhr) {
@@ -335,6 +368,18 @@ function deleteUid(uid) {
         }
     });
 	
+	Swal.fire({
+		  title: '공지 삭제',
+		  text: uid + "번 글을 삭제 하시겠습니까?",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#6D80CC',
+		  cancelButtonColor: '#F3C458',
+		  confirmButtonText: '삭제',
+		cancelButtonText : '취소'
+		}).then((result) => {
+		  if (result.value) {
+		   
 	// POST 방식
 	$.ajax({
 		url : path+"/notice/delete.ajax",
@@ -345,16 +390,25 @@ function deleteUid(uid) {
 			if (status == "success") {
 				if (data.status == "OK") {
 					//xhr.setRequestHeader(header, token);
-					alert("DELETE 성공" + data.count + "개");
+					Swal.fire({
+						  icon: 'success',
+						  title: '공지 삭제 성공',
+						  text: data.count + "개의 공지가 삭제 되었습니다." 
+						})
 					boardRord();
 				} else {
-					alert("DELETE 실패" + data.message);
+					Swal.fire({
+						  icon: 'error',
+						  title: '공지 삭제 실패',
+						  text: ""+ data.message
+						})
 					return false;
 				}
 			}
 		}
 	});
-
+		  }
+		})
 	return true;
 }// end deleteUid
 
@@ -372,10 +426,19 @@ function chkUpdate() {
 		success : function(data, status) {
 			if (status == "success") {
 				if (data.status == "OK") {
-					alert("UPDATE 성공" + data.count + "개: " + data.status);
+					Swal.fire({
+						  icon: 'success',
+						  title: '공지 수정 성공',
+						  text: data.count + "개의 공지가 수정 되었습니다." 
+						})
 					boardRord();
 				} else {
-					alert("UPDATE 실패" + data.status + " : " + data.message);
+					Swal.fire({
+						  icon: 'error',
+						  title: '공지 수정 실패',
+						  text: ""+ data.message
+						})
+
 				}
 				$("#dlg_write").hide(); // 현재 팝업닫기
 			}

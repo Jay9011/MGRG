@@ -55,7 +55,7 @@ public class MailController {
 			printWriter.println("<script>\r\n" + 
 					"		 $(document).ready(function () {\r\n" + 
 					"	            swal({\r\n" + 
-					"	                title: '찾지못했습니다..',\r\n" + 
+					"	                title: '존재하지 않는 Email, ID 입니다.',\r\n" + 
 					"	                text: 'Incorrect ID or Email.',\r\n" + 
 					"	                icon: 'warning',\r\n" + 
 					"	                button:{\r\n" + 
@@ -93,7 +93,7 @@ public class MailController {
 				printWriter.println("<script>\r\n" + 
 						"		 $(document).ready(function () {\r\n" + 
 						"	            swal({\r\n" + 
-						"	                title: '성공..',\r\n" + 
+						"	                title: '성공',\r\n" + 
 						"	                text: '메일을 확인해보세요.',\r\n" + 
 						"	                icon: 'success',\r\n" + 
 						"	                button:{\r\n" + 
