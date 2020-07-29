@@ -26,12 +26,12 @@
 	<!-- Page Content  -->
 	<div id="content">
 
-		<div class='col-md-3 col-xs-4'>
+		<div class='col-md-11 col-xs-12'>
 			<div class="form-group">
-				<div class="input-group date" id="datetimepicker1"
+				<div class="input-group date col-md-2 col-xs-2 inline-flex" id="datetimepicker1"
 					data-target-input="nearest">
 					<input type="text" class="form-control datetimepicker-input"
-						data-target="#datetimepicker1" name="startTime" >
+						data-target="#datetimepicker1" name="startTime">
 					<div class="input-group-append" data-target="#datetimepicker1"
 						data-toggle="datetimepicker">
 						<div class="input-group-text">
@@ -39,11 +39,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class='col-md-3 col-xs-4'>
-			<div class="form-group">
-				<div class="input-group date" id="datetimepicker2"
+				<div class="input-group date col-md-2 col-xs-2 inline-flex" id="datetimepicker2"
 					data-target-input="nearest">
 					<input type="text" class="form-control datetimepicker-input"
 						data-target="#datetimepicker2" name="endTime">
@@ -54,13 +50,9 @@
 						</div>
 					</div>
 				</div>
+				<button type="button" class="btn btn-secondary">휴가 추가</button>
 			</div>
 		</div>
-	
-
-
 	</div>
-
-		
 </body>
 </html>
