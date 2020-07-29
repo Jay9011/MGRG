@@ -150,3 +150,6 @@ button.modiBtn {
 .invalid-form {
 	border-bottom: 1px solid #dc3545 !important;
 }
+.editForm:not([type=date]) {
+    width: 60%;
+}

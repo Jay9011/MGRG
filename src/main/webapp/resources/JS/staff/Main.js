@@ -272,9 +272,23 @@ function deleteOk(){
 	});
 	
 	if(uids.length == 0){
-		alert("삭제할 사원을 선택해 주세요");
+		Swal.fire({
+			  icon: 'error',
+			  text: "삭제할 직원을 선택해 주세요"
+			})
 	} else {
-		if(confirm(uids.length + "명의 사원 정보를 삭제하시겠습니까?")){
+		
+			Swal.fire({
+				  title: '직원 삭제',
+				  text: uids.length + "명의 직원 정보를 삭제하시겠습니까?",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#6D80CC',
+				  cancelButtonColor: '#F3C458',
+				  confirmButtonText: '삭제',
+				cancelButtonText : '취소'
+				}).then((result) => {
+				  if (result.value) {
 			$.ajaxSetup({
 				beforeSend: function(xhr) {
 					xhr.setRequestHeader(header, token);
@@ -299,7 +313,8 @@ function deleteOk(){
 					}
 				} 
 			}); // end ajax
-		} // end if(confirm)
+				  }
+				}) // end Swal
 	} // end if(uids.length)
 } // end deleteOk()
 
