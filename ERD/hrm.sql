@@ -466,6 +466,9 @@ GROUP BY EMP_UID
 SELECT * FROM holi
 ;
 
+SELECT "useHoliday" , EMP_UID empuid FROM holi;
+
+
 /* 사원목록 */
 SELECT * FROM EMPLOYEES
 ;
@@ -506,6 +509,9 @@ INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-20', 'YYYY-MM-DD'), to_date('2020-07-28', 'YYYY-MM-DD'), 4)
 ;
 
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 5)
+;
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 5)
 ;

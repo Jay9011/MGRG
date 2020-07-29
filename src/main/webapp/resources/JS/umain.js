@@ -87,11 +87,11 @@ function Holiyday() {
 		});
 	});
 }
-var a = [{ date: "07/01/2020",type: "holiday", repeat: false},
-	 { date: "2020-07-02",type: "holiday", repeat: false}];
+//var a = [{ date: "07/01/2020",type: "holiday", repeat: false}, { date: "2020-07-02",type: "holiday", repeat: false}];
 function dateTime(data) {
-	var b = data.concat(a);
-	 $("#calendar").evoCalendar('addCalendarEvent', b);
+	//var b = data.concat(a);
+	// $("#calendar").evoCalendar('addCalendarEvent', b);
+	 $("#calendar").evoCalendar('addCalendarEvent', data);
 }
 
 
