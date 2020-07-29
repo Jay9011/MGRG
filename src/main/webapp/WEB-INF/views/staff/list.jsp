@@ -85,7 +85,7 @@
 							</div>
 							<div class="input-group text">
 								<label for="staff_phone">휴대폰 번호 </label>
-								<input  class="editForm" name="phonenum" class="editForm" id="staff_phone" type="text" placeholder="휴대번호는 숫자만 입력하기를 권장합니다."/>
+								<input  class="editForm numberOnly" name="phonenum" class="editForm" id="staff_phone" type="text" placeholder="휴대번호는 숫자만 입력해 주세요."/>
 								<span class="hint"></span>
 							</div>
 							<div class="input-group text">
@@ -182,25 +182,25 @@
 							<input name="uid" type="hidden" value="" />
 							<div class="input-group text input-group-viewr">
 								<label for="staff_name">이름 </label>
-								<input  class="editForm" name="name" id="staff_name" type="text" style="width:160px"/>
+								<input class="editForm" name="name" id="staff_name" type="text" style="width:160px"/>
 								<span id="nameChk"></span>
 							</div>
 							<div class="input-group date input-group-viewr">
 								<label for="staff_birthday">생일 </label>
-								<input  class="editForm" name="birthday" id="staff_birthday" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								<input class="editForm" name="birthday" id="staff_birthday" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 								<span class="birthday"></span>
 							</div>
 							<div class="input-group text input-group-viewr">
 								<label for="staff_phone">휴대폰 번호 </label>
-								<input  class="editForm" name="phonenum" id="staff_phone" type="text" style="width:300px"/>
+								<input class="editForm numberOnly" name="phonenum" id="staff_phone" type="text" style="width:300px"/>
 							</div>
 							<div class="input-group text input-group-viewr">
 								<label for="staff_email">E-mail </label>
-								<input  class="editForm" name="email" id="staff_email" type="text" style="width:300px"/>
+								<input class="editForm" name="email" id="staff_email" type="text" style="width:300px"/>
 							</div>
 							<div class="input-group text input-group-viewr">
 								<label for="staff_id">아이디 </label>
-								<input  class="editForm" name="id" id="staff_id" type="text" style="width:300px; border: none;" readonly="readonly"/>
+								<input class="editForm" name="id" id="staff_id" type="text" style="width:300px; border: none;" readonly="readonly"/>
 							</div>
 							<!-- <div class="input-group password">
 								<label for="staff_pw">비밀번호 </label>
@@ -221,22 +221,22 @@
 							<div class="addLable">주소</div>
 							<div class="input-group text addBody input-group-viewr">
 								<div class="input-group addBtnLine">
-									<input  class="editForm" name="addrZoneCode" id="addrZoneCode" type="text" readonly="readonly" style="width: 80px; border: none"/>
+									<input class="editForm" name="addrZoneCode" id="addrZoneCode" type="text" readonly="readonly" style="width: 80px; border: none"/>
 									<input id="addrBtn" class="btn btn-light" type="button" onclick="DaumAddr(this)" value="주소 변경"/>
 								</div>
 								<div class="input-group">
-									<input  class="editForm" name="addrRoad" id="addrRoad" type="text" readonly="readonly" style="width:100%; margin-bottom:10px; border: none"/>
-									<input  class="editForm" name="addrDetail" id="addrDetail" type="text" style="width:100%"/>
+									<input class="editForm" name="addrRoad" id="addrRoad" type="text" readonly="readonly" style="width:100%; margin-bottom:10px; border: none"/>
+									<input class="editForm" name="addrDetail" id="addrDetail" type="text" style="width:100%"/>
 								</div>
 							</div>
 							<div class="input-group date input-group-viewr">
 								<label for="staff_hiredate">입사 날짜 </label>
-								<input  class="editForm" name="hiredate" id="staff_hiredate" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								<input class="editForm" name="hiredate" id="staff_hiredate" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 								<span class="hiredate"></span>
 							</div>
 							<div class="input-group text input-group-viewr">
 								<label for="staff_salary">연봉 </label>
-								<input  class="editForm" name="salary" id="staff_salary" type="number" style="width:300px"/>
+								<input class="editForm" name="salary" id="staff_salary" type="number" style="width:300px"/>
 								<span class="salary"></span>
 							</div>
 							<div class="input-group select" style="margin-left:125px">
