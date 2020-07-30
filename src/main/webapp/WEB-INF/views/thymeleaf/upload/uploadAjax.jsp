@@ -30,7 +30,6 @@ small {
 				<div class="container">
 					<h3 class="title">새 공지 작성</h3>
 					<div class="d01 btn_group_header">
-						
 						<div class="clearfix"></div>
                     </div>
 					<input id="csrf" type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}"/>
@@ -39,7 +38,8 @@ small {
                 <div>
                 </div>
 					<label for="subject"><b>제목</b></label> <input type="text"
-						placeholder="글 제목(필수)" name="subject" required>
+						placeholder="글 제목(필수)" name="title" required>
+						<br>
 					<label for="content"><b>내용</b></label>
 					<textarea id="editor" name="content"></textarea>
 					<p id="chk"></p>
@@ -52,22 +52,6 @@ small {
 			</form>
 		</div>
 
-<!-- 	<form id="form" action="uploadForm" method="post" -->
-<!-- 		enctype="multipart/form-data"> -->
-<!-- 		<div class="box-body"> -->
-<!-- 			<div class="form-group"> -->
-<%-- 				<input type="hidden" name="${_csrf.parameterName }" --%>
-<%-- 					value="${_csrf.token}" /> --%>
-<!-- 				<div class="uploadedList"></div> -->
-<!-- 				<input id="taa" type="file" name="file" onchange="chkchange();"> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-	
-<!-- 		<div class="box-footer"> -->
-<!-- 			<button type="submit" class="btn btn-warning">제출</button> -->
-<!-- 		</div> -->
-<!-- 	</form> -->
-
 </body>
 
 
@@ -75,8 +59,7 @@ small {
 <jsp:include page="../../topend.jsp"/>
 <script >
 CKEDITOR.replace('editor',{
-		allowedContent: true,	// HTML 태그 자동 삭제 방지 설정
-		readOnly : true
+		allowedContent: true	// HTML 태그 자동 삭제 방지 설정
 	}); // 에디터로 생성
 
 </script >
