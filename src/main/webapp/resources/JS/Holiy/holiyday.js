@@ -39,7 +39,7 @@ $(function() {
 	});
 	$("#datetimepicker1").on("change.datetimepicker", function(e) {
 		$('#datetimepicker2').datetimepicker('minDate', e.date);
-		$('#datetimepicker2').datetimepicker('mixDate','20200805');
+	
 	});
 	$("#datetimepicker2").on("change.datetimepicker", function(e) {
 		$('#datetimepicker1').datetimepicker('maxDate', e.date);
@@ -158,7 +158,7 @@ function loadtable() {
 						if(today ==  parseInt(full.startTime.replace(/-/gi,"")) || today >= parseInt(full.startTime.replace(/-/gi,""))){
 								return '<button type="button" style="display:none;"  value='+ full.startTime + ' disabled>삭제</button>'
 							}else{
-								return '<button type="button" class="btn btncol Hdel" value="'+ full.startTime + '" onclick="return Hdel('+ full.uid+', \'' + full.name+ '\');">삭제</button><button type="button" class="btn btncol Hup" style="display:none" value="'+ full.startTime + '" onclick="return Hup();">수정</button>'
+								return '<button type="button" class="btn btncol Hdel" value="'+ full.startTime + '" onclick="return Hdel('+ full.uid+', \'' + full.name+ '\');">삭제</button><button type="button" class="btn btncol Hup" style="display:none" value="'+ full.startTime + '" onclick="return Hup('+ full.uid+', \'' + full.name+ '\');">수정</button>'
 								
 							}}}
 			],
@@ -251,18 +251,16 @@ function  Hdel(uid, name) {// Hdel(name)
 				  }
 			}
 		  })
-		  
-		  
 	  }
 	})
 }
 
 
 
-function Hup() {
-	alert("up");
+function Hup(uid, name) {
+	alert("up"+ uid + " : "+ name +$(this) );
 	
-
+	
 	del.css('display','block');
 	up.css('display','none');
 	indate.attr("readonly",true);
