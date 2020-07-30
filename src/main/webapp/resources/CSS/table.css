@@ -17,3 +17,8 @@
 ul.pagination a:hover:not(.active) {
     background-color: #ddd;
 }
+.btncol{
+	background-color: #9569CC;
+    color: #F8EBFF;
+}
+    

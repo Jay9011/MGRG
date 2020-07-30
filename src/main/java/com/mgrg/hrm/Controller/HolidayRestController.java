@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mgrg.hrm.commute.HElistCommand;
+import com.mgrg.hrm.commute.HEmJSON;
 import com.mgrg.hrm.commute.HolidayCommand;
 import com.mgrg.hrm.commute.HolidayJSON;
 
@@ -21,8 +23,15 @@ public class HolidayRestController {
 //		model.getAttribute("startDay"), model.getAttribute("endDay")
 		model.addAllAttributes(param);
 		System.out.println(model.getAttribute("startDay") + " ~ " + model.getAttribute("endDay"));
-//		new HolidayCommand().execute(model);
+		new HolidayCommand().execute(model);
 		HolidayJSON json = (HolidayJSON) model.getAttribute("json");
 		return json;
 	} // end addHoliday()
+	
+	@RequestMapping("Hlist.hol")
+	public HEmJSON Hlist(Model model) {
+		new HElistCommand().execute(model);
+		HEmJSON list = (HEmJSON) model.getAttribute("list");
+		return list;
+	}
 }

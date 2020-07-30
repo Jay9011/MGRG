@@ -14,7 +14,7 @@ FROM DEPARTMENT d , POSITIONRANK p , EMPLOYEES e LEFT OUTER JOIN
 	FROM (SELECT oh.*, TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
 				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
 		  FROM OFFICE_HOUR oh 
-		  WHERE to_char(oh.W_START, 'yyyy-mm-dd') =  '2020-07-29') h) category ON e.EMP_UID = category.EMP_UID
+		  WHERE to_char(oh.W_START, 'yyyy-mm-dd') = TO_CHAR(SYSDATE,'yyyy-mm-dd') h) category ON e.EMP_UID = category.EMP_UID
 		  WHERE e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID AND e.P_UID NOT IN (6, 7)
 ORDER BY e.EMP_NAME;
 			
