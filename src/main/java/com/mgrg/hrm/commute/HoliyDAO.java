@@ -1,10 +1,12 @@
 package com.mgrg.hrm.commute;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.mgrg.hrm.officehr.OhDTO;
+import com.mgrg.hrm.staff.StaffBasicDTO;
 
 public interface HoliyDAO {
 	
@@ -27,5 +29,14 @@ public interface HoliyDAO {
 	
 	// 해당 직원 휴가 삭제하기
 	public int Hdeluid(int uid);
+
+	// 부서 전부 뽑아오기
+	public List<DepartmentDTO> selectDepartment();
+
+	public List<PositionDTO> selectPosition();
+
+	public List<StaffBasicDTO> selectStaff(@Param("dep_uid") Integer dep_uid, @Param("p_uid") Integer p_uid);
+
+	public int insertHoliday(@Param("startDay") LocalDate startDay, @Param("endDay") LocalDate endDay, @Param("emp_uid") Integer emp_uid);
 
 }
