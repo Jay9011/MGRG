@@ -3,7 +3,24 @@
  */
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
+var start;
+var del;
+var up;
+var indate ;
+var date = new Date();
+var year = date.getFullYear();
+var month = date.getMonth()+1
+var day = date.getDate();
+if(month < 10){
+    month = "0"+month;
+}
+if(day < 10){
+    day = "0"+day;
+}
 
+var today = year+""+month+""+day;
+var today1 =  year+"-"+month+"-"+(day+1);
+ today = parseInt(today);
 $(function() {
 	
 	loadtable();
@@ -23,6 +40,7 @@ $(function() {
 	});
 	$("#datetimepicker1").on("change.datetimepicker", function(e) {
 		$('#datetimepicker2').datetimepicker('minDate', e.date);
+		$('#datetimepicker2').datetimepicker('mixDate','20200805');
 	});
 	$("#datetimepicker2").on("change.datetimepicker", function(e) {
 		$('#datetimepicker1').datetimepicker('maxDate', e.date);
@@ -83,24 +101,7 @@ function addHoliday(){
 		} 
 	});
 }
-var start;
-var del;
-var up;
-var indate ;
-var date = new Date();
-var year = date.getFullYear();
-var month = date.getMonth()+1
-var day = date.getDate();
-if(month < 10){
-    month = "0"+month;
-}
-if(day < 10){
-    day = "0"+day;
-}
 
-var today = year+""+month+""+day;
-var today1 =  year+"-"+month+"-"+(day+1);
- today = parseInt(today);
 function loadtable() {
 //alert(today);
 	$('#holiday').DataTable({
@@ -235,14 +236,16 @@ function  Hdel(uid, name) {// Hdel(name)
 					  if (data.status == "OK") {
 						  Swal.fire({
 							  icon: 'success',
-							  title: name + '휴가 삭제 성공',
-							  text: data.count + "개의 공지가 삭제 되었습니다." 
+							  title: '휴가 삭제 성공',
+							  text: name +  data.message
 							})
+							// table 수정
+							$('#holiday').DataTable().ajax.reload();
 					  }else{
 						  Swal.fire({
 							  icon: 'error',
-							  title: name + '휴가  삭제 실패',
-							  text: ""+ data.message
+							  title: '휴가  삭제 실패',
+							  text: name + data.message
 							})
 						return false;
 					  }
@@ -254,6 +257,9 @@ function  Hdel(uid, name) {// Hdel(name)
 	  }
 	})
 }
+
+
+
 function Hup() {
 	alert("up");
 	
