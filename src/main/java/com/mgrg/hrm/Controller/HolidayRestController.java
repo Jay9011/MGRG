@@ -22,6 +22,7 @@ import com.mgrg.hrm.commute.SelectOptionPosition;
 import com.mgrg.hrm.commute.SelectOptionStaff;
 import com.mgrg.hrm.staff.StaffBasicDTO;
 import com.mgrg.hrm.staff.StaffDTO;
+import com.mgrg.hrm.staff.StaffHolidayDTO;
 
 @RestController
 @RequestMapping("/holiy")
@@ -66,11 +67,11 @@ public class HolidayRestController {
 	}
 
 	@PostMapping("setSelectOptionStaff")
-	public ArrayList<StaffBasicDTO> selectOptionStaff(Model model, @RequestParam("dep_uid") Integer dep_uid, @RequestParam("p_uid") Integer p_uid){
+	public ArrayList<StaffHolidayDTO> selectOptionStaff(Model model, @RequestParam("dep_uid") Integer dep_uid, @RequestParam("p_uid") Integer p_uid){
 		model.addAttribute("dep_uid", dep_uid);
 		model.addAttribute("p_uid", p_uid);
 		new SelectOptionStaff().execute(model);
-		ArrayList<StaffBasicDTO> list = (ArrayList<StaffBasicDTO>) model.getAttribute("list");
+		ArrayList<StaffHolidayDTO> list = (ArrayList<StaffHolidayDTO>) model.getAttribute("list");
 		return list;
 	}
 

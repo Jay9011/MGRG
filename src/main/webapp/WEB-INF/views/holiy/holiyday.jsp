@@ -30,14 +30,14 @@
 	<form action="" class="form-inline">
 		<div class='col-md-11 col-xs-12'>
 			<div class="form-group">
-				<div class="input-group col-md-4 col-xs-4">
-					<select id="s_department" class="form-control col-md-4 col-xs-4" style="margin-right:15px;">
+				<div class="input-group col-md-5 col-xs-5">
+					<select id="s_department" class="form-control col-md-3 col-xs-3" style="margin-right:15px;">
 						<option value="0" selected="selected" disabled="disabled" hidden="true">부서</option>
 					</select>
-					<select id="s_position" class="form-control col-md-4 col-xs-4" style="margin:0 15px;">
+					<select id="s_position" class="form-control col-md-3 col-xs-3" style="margin:0 15px;">
 						<option value="0">직책</option>
 					</select>
-					<select id="s_staff" class="form-control col-md-4 col-xs-4" style="margin-left:15px;">
+					<select id="s_staff" class="form-control col-md-6 col-xs-6" style="margin-left:15px;">
 						<option value="0">직원</option>
 					</select>
 				</div>

@@ -8,16 +8,17 @@ $(function() {
 	
 	loadtable();
 	 changeinput();
+	 var today = new Date();
 	
 	$('#datetimepicker1').datetimepicker({
 		format : 'YYYY-MM-DD',
-		minDate : new Date(),
+		minDate : today.setDate(today.getDate() + 1),
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$('#datetimepicker2').datetimepicker({
 		format : 'YYYY-MM-DD',
 		useCurrent : false,
-		minDate : new Date(),
+		minDate : today.setDate(today.getDate() + 1),
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$("#datetimepicker1").on("change.datetimepicker", function(e) {
@@ -340,7 +341,7 @@ function selectedOption(){
 				if(data.length > 0) {
 					$('#s_staff').html('');
 					for (var i = 0; i < data.length; i++) {
-						$('#s_staff').append('<option value="' + data[i].uid + '">' + data[i].name + '</option')
+						$('#s_staff').append('<option value="' + data[i].uid + '">' + data[i].name + ' (' + data[i].leftHoliday + '/' + data[i].total + ')</option>');
 					}
 				} else {
 					$('#s_staff').html('<option value="0">직원 없음</option>');
