@@ -93,7 +93,7 @@
 	<insert id="insertHoliday"
 		flushCache="true">
 		INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-		VALUES (SEQ_HOLIDAY_H_UID.nextval, #{startDay}, #{endDay}, #{emp_uid})
+		VALUES (SEQ_HOLIDAY_H_UID.nextval, #{startTime}, #{endTime}, #{empuid})
 	</insert>
 
 </mapper>

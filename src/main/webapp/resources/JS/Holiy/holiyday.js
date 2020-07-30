@@ -28,22 +28,30 @@ $(function() {
 	
 	$('#datetimepicker1').datetimepicker({
 		format : 'YYYY-MM-DD',
-		minDate : date.setDate(date.getDate() + 1),
+		minDate : date,
+		date : today1,
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$('#datetimepicker2').datetimepicker({
 		format : 'YYYY-MM-DD',
 		useCurrent : false,
-		minDate : date.setDate(date.getDate() + 1),
+		minDate : today1,
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$("#datetimepicker1").on("change.datetimepicker", function(e) {
-		$('#datetimepicker2').datetimepicker('minDate', e.date);
-	
+		if(new Date(e.date) < new Date($('#datetimepicker2').find("input").val())){
+			$('#datetimepicker2').datetimepicker('minDate', e.date);
+			$('#datetimepicker2').datetimepicker('date', e.date);
+			maxDateSetting(e);
+		} else {
+			maxDateSetting(e);
+			$('#datetimepicker2').datetimepicker('minDate', e.date);
+			$('#datetimepicker2').datetimepicker('date', e.date);
+		}
+
 	});
-	$("#datetimepicker2").on("change.datetimepicker", function(e) {
-		$('#datetimepicker1').datetimepicker('maxDate', e.date);
-	});
+	$('#datetimepicker1').datetimepicker('date', today1);
+	$('#datetimepicker2').datetimepicker('date', today1);
 	
 	$('#addHoliday').on('click', function(){
 		addHoliday();
@@ -59,9 +67,44 @@ $(function() {
 	$('#s_position').change(function(){
 		selectedOption();
 	});
+	$('#s_staff').change(function(){
+		initDateSetting();
+	});
 	
 	
 });
+
+function initDateSetting(){
+	$('#datetimepicker1').datetimepicker('date', today1);
+	$('#datetimepicker2').datetimepicker('date', today1);
+	maxDateSetting();
+	$('#datetimepicker1').datetimepicker('maxDate', false);
+}
+
+function maxDateSetting(e){
+	var leftHoliday = $('#s_staff').find('option:selected').data('sub');
+	var selectedDay;
+	var tempDay;
+	var maxDay;
+	var addWeekend = 0;
+	if(e != null) {
+		selectedDay = new Date(e.date);
+	} else {
+		selectedDay = new Date();
+	}
+	tempDay = new Date(selectedDay);
+	maxDay = new Date(selectedDay);
+	maxDay.setDate(maxDay.getDate() + leftHoliday);
+	for(var i = 0; tempDay <= maxDay; i++){
+		var DayOfWeek = tempDay.getDay();
+		if(DayOfWeek == 0 || DayOfWeek == 6){
+			addWeekend++;
+			maxDay.setDate(maxDay.getDate() + 1);
+		}
+		tempDay.setDate(tempDay.getDate() + 1);
+	}
+	$('#datetimepicker2').datetimepicker('maxDate', maxDay);
+}
 
 function addHoliday(){
 	var startDay = $('div.form-group input[name=startTime]').val();
@@ -87,6 +130,8 @@ function addHoliday(){
 			if(status == 'success'){
 				if(data.status == "OK"){
 					$('#holiday').DataTable().ajax.reload().columns.adjust();
+					selectedOption();
+					initDateSetting();
 				} else if(data.status == "FAIL") {
 					Swal.fire({
 						  icon: 'error',
@@ -344,7 +389,8 @@ function selectedOption(){
 				if(data.length > 0) {
 					$('#s_staff').html('');
 					for (var i = 0; i < data.length; i++) {
-						$('#s_staff').append('<option value="' + data[i].uid + '">' + data[i].name + ' (' + data[i].leftHoliday + '/' + data[i].total + ')</option>');
+						$('#s_staff').append('<option value="' + data[i].uid + '" data-sub="' + data[i].leftHoliday + '">' + data[i].name + ' (' + data[i].leftHoliday + '/' + data[i].total + ')</option>');
+						maxDateSetting();
 					}
 				} else {
 					$('#s_staff').html('<option value="0">직원 없음</option>');
