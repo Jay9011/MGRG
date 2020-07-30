@@ -15,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import org.springframework.ui.Model;
 
 import com.mgrg.hrm.Command;
+import com.mgrg.hrm.D;
 
 public class HolidayCommand implements Command {
 
@@ -28,18 +29,27 @@ public class HolidayCommand implements Command {
 		String status = "FAIL";
 		
 		try {
-			startDay = LocalDate.parse((String)model.getAttribute("startDay"));
+			startDay = LocalDate.parse((String) model.getAttribute("startDay"));
 			endDay = LocalDate.parse((String) model.getAttribute("endDay"));
-			/* 추가하는 부분 */
-			status = "OK";
-			long monthBetween = ChronoUnit.MONTHS.between(YearMonth.from(startDay), YearMonth.from(endDay));
-			int startMonth = startDay.getMonthValue();
-			int endMonth = endDay.getMonthValue();
-			System.out.println(startMonth + "월 부터 " + endMonth + "월 까지 " + monthBetween + "개월 차이");
-			System.out.println(startDay.toString() + " ~ " + endDay.toString());
+			String sEmp_uid = (String) model.getAttribute("emp_uid");
+			int emp_uid = 0;
+			if(sEmp_uid != null && !sEmp_uid.trim().equals("")) {
+				/* 추가하는 부분 */
+				HoliyDAO dao = D.sqlSession.getMapper(HoliyDAO.class);
+				emp_uid = Integer.parseInt(sEmp_uid);
+				status = "OK";
+	//			long monthBetween = ChronoUnit.MONTHS.between(YearMonth.from(startDay), YearMonth.from(endDay));
+	//			int startMonth = startDay.getMonthValue();
+	//			int endMonth = endDay.getMonthValue();
+	//			System.out.println(startMonth + "월 부터 " + endMonth + "월 까지 " + monthBetween + "개월 차이");
+	//			System.out.println(startDay.toString() + " ~ " + endDay.toString());
+				dao.insertHoliday(startDay, endDay, emp_uid);
+			} else {
+				message.append("회원 정보가 없습니다. 잠시 후 다시 시도해 주세요.");
+			}
 		} catch (DateTimeParseException de) {
 			/* 에러 부분*/
-			message.append("[시간이 잘못 되었거나 비어있습니다.] : " + de.getMessage());
+			message.append("시간이 잘못 되었거나 비어있습니다.");
 		}
 		/* JSON 보내기 */
 		json.setStatus(status);

@@ -31,9 +31,16 @@ $(function() {
 		addHoliday();
 	});
 	
+	setSelectOptionDepartment();
+	setSelectOptionPosition();
+	selectedOption()
 	
-	
-	
+	$('#s_department').change(function(){
+		selectedOption();
+	});
+	$('#s_position').change(function(){
+		selectedOption();
+	});
 	
 	
 });
@@ -41,6 +48,7 @@ $(function() {
 function addHoliday(){
 	var startDay = $('div.form-group input[name=startTime]').val();
 	var endDay = $('div.form-group input[name=endTime]').val();
+	var emp_uid = $('#s_staff').val();
 	
 	$.ajaxSetup({
 		beforeSend: function(xhr) {
@@ -54,10 +62,20 @@ function addHoliday(){
 		cache : false,
 		data : {
 			startDay : startDay,
-			endDay : endDay
+			endDay : endDay,
+			emp_uid : emp_uid
 		},
 		success : function(data, status){
 			if(status == 'success'){
+				if(data.status == "OK"){
+					$('#holiday').DataTable().ajax.reload().columns.adjust();
+				} else if(data.status == "FAIL") {
+					Swal.fire({
+						  icon: 'error',
+						  title: '일정 추가를 실패했습니다.',
+						  text: data.message
+						});
+				}
 			} else {
 				
 			}
@@ -170,4 +188,82 @@ function loadtable() {
 	
 	
 	
+}
+
+function setSelectOptionDepartment(){
+	$.ajaxSetup({
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
+	});
+	
+	$.ajax({
+		url : path + '/holiy/setSelectOptionDepartment',
+		type : 'POST',
+		cache : false,
+		success : function(data, status){
+			if(status == 'success'){
+				$('#s_department').html('<option value="0" selected="selected">부서 전체</option>');
+				for (var i = 0; i < data.length; i++) {
+					$('#s_department').append('<option value="' + data[i].dep_uid + '">' + data[i].dep_name + '</option')
+				}
+			} else {
+			}
+		} 
+	});
+}
+function setSelectOptionPosition(){
+	$.ajaxSetup({
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
+	});
+	
+	$.ajax({
+		url : path + '/holiy/setSelectOptionPosition',
+		type : 'POST',
+		cache : false,
+		success : function(data, status){
+			if(status == 'success'){
+				$('#s_position').html('<option value="0" selected="selected">직책 전체</option>');
+				for (var i = 0; i < data.length; i++) {
+					$('#s_position').append('<option value="' + data[i].p_uid + '">' + data[i].p_name + '</option')
+				}
+			} else {
+			}
+		} 
+	});
+}
+function selectedOption(){
+	let dep_uid = $('#s_department').val();
+	let p_uid = $('#s_position').val();
+	
+	$.ajaxSetup({
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		}
+	});
+	
+	$.ajax({
+		url : path + '/holiy/setSelectOptionStaff',
+		type : 'POST',
+		cache : false,
+		data : {
+			dep_uid : dep_uid,
+			p_uid : p_uid
+		},
+		success : function(data, status){
+			if(status == 'success'){
+				if(data.length > 0) {
+					$('#s_staff').html('');
+					for (var i = 0; i < data.length; i++) {
+						$('#s_staff').append('<option value="' + data[i].uid + '">' + data[i].name + '</option')
+					}
+				} else {
+					$('#s_staff').html('<option value="0">직원 없음</option>');
+				}
+			} else {
+			}
+		} 
+	});
 }

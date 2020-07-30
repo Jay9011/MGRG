@@ -27,9 +27,20 @@
 	<div id="content">
 	<h1>휴가 관리</h1>
 	
-	<form action="">
+	<form action="" class="form-inline">
 		<div class='col-md-11 col-xs-12'>
 			<div class="form-group">
+				<div class="input-group col-md-4 col-xs-4">
+					<select id="s_department" class="form-control col-md-4 col-xs-4" style="margin-right:15px;">
+						<option value="0" selected="selected" disabled="disabled" hidden="true">부서</option>
+					</select>
+					<select id="s_position" class="form-control col-md-4 col-xs-4" style="margin:0 15px;">
+						<option value="0">직책</option>
+					</select>
+					<select id="s_staff" class="form-control col-md-4 col-xs-4" style="margin-left:15px;">
+						<option value="0">직원</option>
+					</select>
+				</div>
 				<div class="input-group date col-md-2 col-xs-2 inline-flex" id="datetimepicker1"
 					data-target-input="nearest">
 					<input type="text" class="form-control datetimepicker-input"
@@ -56,8 +67,8 @@
 			</div>
 		</div>
 	</form>
-	
-		<div class="clearfix"></div>
+	<div style="margin: 20px 0;"></div>
+	<div class="clearfix"></div>
 		<table id="holiday" class="table table-hover nowrap" style="width: 100%">
 			<thead>
 				<tr>
@@ -71,12 +82,7 @@
 					<th></th>
 				</tr>
 			</thead>
-			
 		</table>
-
-		
-		
-		
 	</div>
 </body>
 </html>

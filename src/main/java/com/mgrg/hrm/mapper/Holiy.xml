@@ -55,5 +55,39 @@
 		ON h.EMP_UID = e."uid" 
 	</select>	
 
+	<select id="selectDepartment"
+		resultType="com.mgrg.hrm.commute.DepartmentDTO"
+		flushCache="true">
+		SELECT * 
+		FROM DEPARTMENT
+	</select>
+	
+	<select id="selectPosition"
+		resultType="com.mgrg.hrm.commute.PositionDTO"
+		flushCache="true">
+		SELECT P_UID, P_NAME, P_LEVEL, P_HOLIDAY
+		FROM POSITIONRANK
+	</select>
+	
+	<select id="selectStaff"
+		resultType="com.mgrg.hrm.staff.StaffBasicDTO"
+		flushCache="true">
+		SELECT EMP_UID "uid", EMP_NAME "name"
+		FROM EMPLOYEES
+		<where>
+			<if test="p_uid != null and p_uid != 0">
+				AND P_UID = #{p_uid}
+			</if>
+			<if test="dep_uid != null and dep_uid != 0">
+				AND DEP_UID = #{dep_uid}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insertHoliday"
+		flushCache="true">
+		INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+		VALUES (SEQ_HOLIDAY_H_UID.nextval, #{startDay}, #{endDay}, #{emp_uid})
+	</insert>
 
 </mapper>
