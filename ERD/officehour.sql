@@ -99,6 +99,7 @@ FROM (SELECT mon.*
       WHERE TO_CHAR(mon.IN_DATE, 'd') NOT IN (1, 7)) work_day
    LEFT OUTER JOIN (SELECT * FROM OFFICE_HOUR WHERE EMP_UID = 4) oh 
    ON oh.W_START BETWEEN work_day.in_date AND work_day.in_date + 1
+   
 ;
 
 -- 휴일 뺀 이번 월 모든 날짜 뽑기
@@ -107,4 +108,29 @@ FROM (SELECT TRUNC(SYSDATE ,'mm') + LEVEL - 1 AS IN_DATE
    FROM DUAL CONNECT BY LEVEL <= SYSDATE - TRUNC(SYSDATE,'mm')) mon
 WHERE TO_CHAR(mon.IN_DATE, 'd') NOT IN (1, 7)
 ;
+
+-- 8월까지 휴가인 직원 INSERT
+INSERT INTO HOLIDAY (H_UID , H_START , H_END , EMP_UID )
+VALUES
+(
+	SEQ_HOLIDAY_H_UID.nextval, to_date('2020-07-28', 'yyyy-mm-dd'), to_date('2020-08-03', 'yyyy-mm-dd'), 1
+)
+
+
+SELECT * FROM HOLIDAY h ;
+SELECT * FROM POSITIONRANK p2 ;
+-- 휴가테이블이랑 직원 테이블 조인해서 뽑기 --
+SELECT e.EMP_UID , h.H_UID , e.EMP_NAME "name", h.H_START "startDay", h.H_END "endDay", (TO_NUMBER(TO_CHAR(h.H_END , 'dd') ) - TO_NUMBER(TO_CHAR(h.H_START , 'dd') ) + 1) AS days 
+FROM EMPLOYEES e , HOLIDAY h 
+WHERE e.EMP_UID = h.EMP_UID AND e.EMP_UID = 1 AND (TO_DATE('2020-07-15', 'yyyy-mm-dd') BETWEEN h.H_START AND h.H_END)
+ORDER BY h.H_START asc;
+
+--  --
+SELECT e.EMP_UID , h.H_UID , e.EMP_NAME "name", h.H_START "startDay", h.H_END "endDay", p.P_HOLIDAY - (TO_NUMBER(TO_CHAR(h.H_END , 'dd') ) - TO_NUMBER(TO_CHAR(h.H_START , 'dd') ) + 1) AS days  
+FROM EMPLOYEES e , HOLIDAY h , POSITIONRANK p
+WHERE e.P_UID = p.P_UID AND e.EMP_UID = h.EMP_UID AND e.EMP_UID = 1 AND ((h.H_START BETWEEN TO_DATE('2020-08', 'yyyy-mm') AND TO_DATE('2020-08-15', 'yyyy-mm-dd')) OR (h.H_END BETWEEN TO_DATE('2020-08', 'yyyy-mm') AND TO_DATE('2020-08-15', 'yyyy-mm-dd') ) )
+ORDER BY h.H_START asc;
+
+-- 해당 직원의 휴가 사용일 --
+SELECT * FROM HOLI h ;
 
