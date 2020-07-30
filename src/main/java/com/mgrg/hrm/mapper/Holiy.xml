@@ -37,7 +37,23 @@
 		WHERE e.EMP_UID = #{param1}
 	]]>
 	</select>
-	
+	<select id="heSelect" resultType="com.mgrg.hrm.commute.HEmDTO">
+		SELECT
+			h.H_UID "uid",
+			e."uid" "euid",
+			e.NAME name,
+			e.PHONENUM phonenum,
+			e."position" "position",
+			e.DEPARTMENT department,
+			h.H_START startTime,
+			h.H_END endTime,
+			e."total",
+			e."leftHoliday",
+			e."useHoliday"
+		FROM
+			HOLIDAY h JOIN EMP e
+		ON h.EMP_UID = e."uid" 
+	</select>	
 
 
 </mapper>

@@ -10,6 +10,7 @@
 <jsp:include page="../top.jsp" />
 <jsp:include page="../datatable.jsp" />
 <jsp:include page="../topend.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/table.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/Holiy/holiyday.js"></script>
@@ -24,7 +25,9 @@
 	<jsp:include page="../nav.jsp" />
 	<!-- Page Content  -->
 	<div id="content">
-
+	<h1>휴가 관리</h1>
+	
+	<form action="">
 		<div class='col-md-11 col-xs-12'>
 			<div class="form-group">
 				<div class="input-group date col-md-2 col-xs-2 inline-flex" id="datetimepicker1"
@@ -52,6 +55,28 @@
 				<button type="button" id="addHoliday" class="btn btn-secondary">휴가 추가</button>
 			</div>
 		</div>
+	</form>
+	
+		<div class="clearfix"></div>
+		<table id="holiday" class="table table-hover nowrap" style="width: 100%">
+			<thead>
+				<tr>
+					<th>*</th>
+					<th>이름</th>
+					<th>부서</th>
+					<th>직책</th>
+					<th>시작일</th>
+					<th>종료일</th>
+					<th>연락처</th>
+					<th></th>
+				</tr>
+			</thead>
+			
+		</table>
+
+		
+		
+		
 	</div>
 </body>
 </html>

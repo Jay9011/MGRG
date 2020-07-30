@@ -160,6 +160,11 @@ function chkWrite() {
 
 
 function chkDelete() {
+	$.ajaxSetup({
+        beforeSend: function(xhr) {
+        	xhr.setRequestHeader(header, token);
+        }
+    });
 	var uids = [] // 빈 배열 준비
 	$('#list tbody input[name=uid]').each(function() {
 		// $(this) 는 checkbox
@@ -186,7 +191,6 @@ function chkDelete() {
 			cancelButtonText : '취소'
 			}).then((result) => {
 			  if (result.value) {
-			
 		var data = $('#frmList').serialize();
 		// uid=1010&uid=1111
 
@@ -223,7 +227,6 @@ function chkDelete() {
 
 // 현재 글 목록 list에 대해 이벤트 등록
 function addViewEvent() {
-	
 	$('#tlc tbody').on('click','td span.subject',function(){
 				//alert($(this).text() + " : " + $(this).attr('data-uid')); //
 				// 확인용

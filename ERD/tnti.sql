@@ -21,21 +21,22 @@ WHERE e.EMP_UID = 1;
 SELECT "useHoliday" , EMP_UID empuid FROM holi;
 
 -- 휴가를 이번달 사용했는지 
-SELECT * FROM HOLIDAY;
-8
+SELECT * FROM HOLIDAY ;
+SELECT h.H_UID "uid", e."uid" "euid",e.NAME name, e."position" "position",e.PHONENUM PHONENUM,e.DEPARTMENT DEPARTMENT, h.H_START startTime, h.H_END endTime, e."total" ,e."leftHoliday" ,e."useHoliday" FROM HOLIDAY h JOIN EMP e ON h.EMP_UID = e."uid" ;
+SELECT * FROM HOLIDAY h JOIN EMP e ON h.EMP_UID = e."uid" ;
 
 
 SELECT TO_CHAR(H_START, 'yyyy-mm') AS "START", TO_CHAR(H_END , 'yyyy-mm') AS "END" FROM HOLIDAY WHERE EMP_UID =2;
 	
 SELECT A.DT
-  FROM (    SELECT TO_CHAR (SDT + LEVEL - 1, 'YYYYMMDD') DT,
+  FROM (    SELECT TO_CHAR (SDT + LEVEL - 1, 'YYYY-MM-DD') DT,
                    TO_CHAR (SDT + LEVEL - 1, 'D') D
               FROM (SELECT TO_DATE ((TO_CHAR(SYSDATE , 'YYYY')||'01-01'),'YYYY-MM-DD') SDT,
                            TO_DATE ((TO_CHAR(SYSDATE, 'YYYY')||'12-31'),'YYYY-MM-DD')EDT
                       FROM DUAL)
         CONNECT BY LEVEL <= EDT - SDT + 1) A,
        (
-        (SELECT TO_DATE((TO_CHAR( '2020-05-05', 'YYYY-MM-DD') AS DT, '어린이날' CMT FROM DUAL 
+        (SELECT TO_DATE((TO_CHAR( '20200505', 'YYYY-MM-DD') AS DT, '어린이날' CMT FROM DUAL 
        ) B
  WHERE TO_DATE(A.DT, 'YYYY-MM-DD') = B.DT(+) 
     AND A.D NOT IN ('1', '7')  -- 토/일요일 제외
@@ -55,9 +56,22 @@ FROM (SELECT mon.*
 	ON oh.W_START BETWEEN work_day.in_date AND work_day.in_date + 1
 ;
 
+
+SELECT A.DT
+  FROM (    SELECT TO_CHAR (SDT + LEVEL - 1, 'YYYY-MM-DD') DT,
+                   TO_CHAR (SDT + LEVEL - 1, 'D') D
+              FROM (SELECT TO_DATE ('2020-07-31' , 'YYYY-MM-DD') SDT,
+                           TO_DATE ('2020-08-03', 'YYYY-MM-DD') EDT
+                      FROM DUAL)
+        CONNECT BY LEVEL <= EDT - SDT + 1) A
+   WHERE A.D NOT IN ('1', '7')  -- 토/일요일 제외
+   ;
+   
+
 -- 휴일 뺀 이번 월 모든 날짜 뽑기
 SELECT mon.*
 FROM (SELECT TRUNC(SYSDATE ,'mm') + LEVEL - 1 AS IN_DATE
 	FROM DUAL CONNECT BY LEVEL <= SYSDATE - TRUNC(SYSDATE,'mm')) mon
 WHERE TO_CHAR(mon.IN_DATE, 'd') NOT IN (1, 7)
 ;
+

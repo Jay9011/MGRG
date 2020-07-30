@@ -123,7 +123,8 @@ span.temperature {
 	
 .weather-icon {
     position: absolute;
-    right: 50px;
+/*     right: 50px; */
+    right: 20%;
     top: 50%;
     width: 30%;
     transform: translateY(-50%);
