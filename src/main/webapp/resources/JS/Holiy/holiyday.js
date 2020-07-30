@@ -35,19 +35,22 @@ $(function() {
 	$('#datetimepicker2').datetimepicker({
 		format : 'YYYY-MM-DD',
 		useCurrent : false,
-		minDate : date,
+		minDate : today1,
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$("#datetimepicker1").on("change.datetimepicker", function(e) {
-		$('#datetimepicker2').datetimepicker('minDate', e.date);
-		var leftHoliday = $('#s_staff').find('option:selected').data('sub');
-		var selectedDay = new Date(e.date);
-		var maxDate = new Date(selectedDay.setDate(selectedDay.getDate() + leftHoliday));
-		$('#datetimepicker2').datetimepicker('maxDate', maxDate);
+		if(new Date(e.date) < new Date($('#datetimepicker2').find("input").val())){
+			$('#datetimepicker2').datetimepicker('minDate', e.date);
+			$('#datetimepicker2').datetimepicker('date', e.date);
+			maxDateSetting(e);
+		} else {
+			maxDateSetting(e);
+			$('#datetimepicker2').datetimepicker('minDate', e.date);
+			$('#datetimepicker2').datetimepicker('date', e.date);
+		}
 	});
-	$("#datetimepicker2").on("change.datetimepicker", function(e) {
-		$('#datetimepicker1').datetimepicker('maxDate', e.date);
-	});
+	$('#datetimepicker1').datetimepicker('date', today1);
+	$('#datetimepicker2').datetimepicker('date', today1);
 	
 	$('#addHoliday').on('click', function(){
 		addHoliday();
@@ -63,15 +66,43 @@ $(function() {
 	$('#s_position').change(function(){
 		selectedOption();
 	});
+	$('#s_staff').change(function(){
+		initDateSetting();
+	});
 	
 	
 });
 
-function maxDateSetting(today){
+function initDateSetting(){
+	$('#datetimepicker1').datetimepicker('date', today1);
+	$('#datetimepicker2').datetimepicker('date', today1);
+	maxDateSetting();
+	$('#datetimepicker1').datetimepicker('maxDate', false);
+}
+
+function maxDateSetting(e){
 	var leftHoliday = $('#s_staff').find('option:selected').data('sub');
-	var selectedDay = new Date();
-	var maxDate = new Date(selectedDay.setDate(selectedDay.getDate() + leftHoliday));
-	$('#datetimepicker2').datetimepicker('maxDate', maxDate);
+	var selectedDay;
+	var tempDay;
+	var maxDay;
+	var addWeekend = 0;
+	if(e != null) {
+		selectedDay = new Date(e.date);
+	} else {
+		selectedDay = new Date();
+	}
+	tempDay = new Date(selectedDay);
+	maxDay = new Date(selectedDay);
+	maxDay.setDate(maxDay.getDate() + leftHoliday);
+	for(var i = 0; tempDay <= maxDay; i++){
+		var DayOfWeek = tempDay.getDay();
+		if(DayOfWeek == 0 || DayOfWeek == 6){
+			addWeekend++;
+			maxDay.setDate(maxDay.getDate() + 1);
+		}
+		tempDay.setDate(tempDay.getDate() + 1);
+	}
+	$('#datetimepicker2').datetimepicker('maxDate', maxDay);
 }
 
 function addHoliday(){
@@ -98,6 +129,8 @@ function addHoliday(){
 			if(status == 'success'){
 				if(data.status == "OK"){
 					$('#holiday').DataTable().ajax.reload().columns.adjust();
+					selectedOption();
+					initDateSetting();
 				} else if(data.status == "FAIL") {
 					Swal.fire({
 						  icon: 'error',

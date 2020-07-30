@@ -37,6 +37,6 @@ public interface HoliyDAO {
 
 	public List<StaffHolidayDTO> selectStaff(@Param("dep_uid") Integer dep_uid, @Param("p_uid") Integer p_uid);
 
-	public int insertHoliday(@Param("startDay") LocalDate startDay, @Param("endDay") LocalDate endDay, @Param("emp_uid") Integer emp_uid);
+	public int insertHoliday(HoliyDTO holiyDTO);
 
 }

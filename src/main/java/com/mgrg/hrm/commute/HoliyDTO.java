@@ -63,7 +63,11 @@ public class HoliyDTO {
 		this.empuid = empuid;
 	}
 	
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return startTime + " - " + endTime + " by " + empuid;
+	}
 	
 	
 	
