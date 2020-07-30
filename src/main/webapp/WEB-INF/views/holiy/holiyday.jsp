@@ -72,7 +72,6 @@
 		<table id="holiday" class="table table-hover nowrap" style="width: 100%">
 			<thead>
 				<tr>
-					<th>*</th>
 					<th>이름</th>
 					<th>부서</th>
 					<th>직책</th>

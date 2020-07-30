@@ -19,3 +19,24 @@
 .inline-flex {
 	display: inline-flex;
 }
+.datapik{
+	border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 2px 10px;
+}
+.datapik:read-only{
+	border: none;
+	background-color:transparent;
+}
+.table th, .table td{
+	padding: 0.5rem;
+}
+#holiday > tbody > tr> td:nth-child(7){
+	padding: 0px;
+}
+.btncol{
+	margin: 4px;
+}
+.spanno{
+	display: none;
+}

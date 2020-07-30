@@ -53,7 +53,19 @@
 		FROM
 			HOLIDAY h JOIN EMP e
 		ON h.EMP_UID = e."uid" 
-	</select>	
+	</select>
+	<delete id="Hdeluid" flushCache="true">
+	DELETE 
+		h_uid "uid",
+		h_start startTime,
+		h_end endTime,
+		emp_uid "empuid"
+	FROM
+		HOLIDAY
+	WHERE
+		h_uid = #{param1};
+	
+	</delete>
 
 	<select id="selectDepartment"
 		resultType="com.mgrg.hrm.commute.DepartmentDTO"

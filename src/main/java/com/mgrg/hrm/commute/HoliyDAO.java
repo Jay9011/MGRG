@@ -26,6 +26,9 @@ public interface HoliyDAO {
 	
 	// 모든 사원의 휴가 가져오기
 	public List<HEmDTO> heSelect();
+	
+	// 해당 직원 휴가 삭제하기
+	public int Hdeluid(int uid);
 
 	// 부서 전부 뽑아오기
 	public List<DepartmentDTO> selectDepartment();

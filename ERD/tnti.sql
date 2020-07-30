@@ -42,10 +42,7 @@ SELECT A.DT
     AND A.D NOT IN ('1', '7')  -- 토/일요일 제외
     AND B.DT IS NULL;
    
-   
-SELECT *
-FROM HOLIDAY 
-;
+
 -- 이번 달 주말 제외한 모든 날짜의 출근 현황 뽑기
 SELECT *
 FROM (SELECT mon.*

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mgrg.hrm.commute.DepartmentDTO;
 import com.mgrg.hrm.commute.HElistCommand;
 import com.mgrg.hrm.commute.HEmJSON;
+import com.mgrg.hrm.commute.HdelCommand;
 import com.mgrg.hrm.commute.HolidayCommand;
 import com.mgrg.hrm.commute.HolidayJSON;
 import com.mgrg.hrm.commute.PositionDTO;
@@ -42,6 +43,13 @@ public class HolidayRestController {
 		HEmJSON list = (HEmJSON) model.getAttribute("list");
 		return list;
 	}
+
+	@RequestMapping("Hdel.hol")
+	public HolidayJSON Hdel(Model model) {
+		new HdelCommand().execute(model);
+		HolidayJSON list = (HolidayJSON) model.getAttribute("list");
+		return list;
+	}
 	
 	@PostMapping("setSelectOptionDepartment")
 	public ArrayList<DepartmentDTO> selectOptionDepartment(Model model){
@@ -65,4 +73,5 @@ public class HolidayRestController {
 		ArrayList<StaffBasicDTO> list = (ArrayList<StaffBasicDTO>) model.getAttribute("list");
 		return list;
 	}
+
 }
