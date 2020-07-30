@@ -25,17 +25,16 @@ $(function() {
 	
 	loadtable();
 	 changeinput();
-	 var today = new Date();
 	
 	$('#datetimepicker1').datetimepicker({
 		format : 'YYYY-MM-DD',
-		minDate : today.setDate(today.getDate() + 1),
+		minDate : date.setDate(date.getDate() + 1),
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$('#datetimepicker2').datetimepicker({
 		format : 'YYYY-MM-DD',
 		useCurrent : false,
-		minDate : today.setDate(today.getDate() + 1),
+		minDate : date.setDate(date.getDate() + 1),
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$("#datetimepicker1").on("change.datetimepicker", function(e) {
