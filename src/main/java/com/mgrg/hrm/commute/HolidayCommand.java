@@ -1,10 +1,16 @@
 package com.mgrg.hrm.commute;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 
 import org.springframework.ui.Model;
 
@@ -14,33 +20,31 @@ public class HolidayCommand implements Command {
 
 	@Override
 	public void execute(Model model) {
-		final String DATE_PATTERN = "yyyy-MM";
-		Date startDay = null;
-		Date endDay = null;
-		Date firstDay = null;
-		try {
-			startDay = new SimpleDateFormat("yyyy-MM-dd").parse((String) model.getAttribute("startDay"));
-			endDay = new SimpleDateFormat("yyyy-MM-dd").parse((String) model.getAttribute("endDay"));
-			firstDay = startDay;
-			SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
-			ArrayList<String> dates = new ArrayList<String>();
-			while (firstDay.compareTo(endDay) <= 0) {
-				dates.add(sdf.format(firstDay));
-				Calendar c = Calendar.getInstance();
-				c.setTime(firstDay);
-				c.add(Calendar.DAY_OF_MONTH, 1);
-				firstDay = c.getTime();
-			}
-			for (String date : dates) {
-				System.out.println(date);
-			}
-			
-			
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		HolidayJSON json = new HolidayJSON();
+		LocalDate startDay = null;
+		LocalDate endDay = null;
 		
+		StringBuffer message = new StringBuffer();
+		String status = "FAIL";
+		
+		try {
+			startDay = LocalDate.parse((String)model.getAttribute("startDay"));
+			endDay = LocalDate.parse((String) model.getAttribute("endDay"));
+			/* 추가하는 부분 */
+			status = "OK";
+			long monthBetween = ChronoUnit.MONTHS.between(YearMonth.from(startDay), YearMonth.from(endDay));
+			int startMonth = startDay.getMonthValue();
+			int endMonth = endDay.getMonthValue();
+			System.out.println(startMonth + "월 부터 " + endMonth + "월 까지 " + monthBetween + "개월 차이");
+			System.out.println(startDay.toString() + " ~ " + endDay.toString());
+		} catch (DateTimeParseException de) {
+			/* 에러 부분*/
+			message.append("[시간이 잘못 되었거나 비어있습니다.] : " + de.getMessage());
+		}
+		/* JSON 보내기 */
+		json.setStatus(status);
+		json.setMessage(message.toString());
+		model.addAttribute("json", json);
 		
 	} // end execute()
 } // end Command
