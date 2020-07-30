@@ -1,4 +1,4 @@
-package com.mgrg.hrm.file;
+package com.mgrg.hrm.fileupload;
 
 import java.util.HashMap;
 import java.util.Map;
