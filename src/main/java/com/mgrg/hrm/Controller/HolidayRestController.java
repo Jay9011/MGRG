@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mgrg.hrm.commute.HElistCommand;
 import com.mgrg.hrm.commute.HEmJSON;
+import com.mgrg.hrm.commute.HdelCommand;
 import com.mgrg.hrm.commute.HolidayCommand;
 import com.mgrg.hrm.commute.HolidayJSON;
 
@@ -36,4 +37,11 @@ public class HolidayRestController {
 		HEmJSON list = (HEmJSON) model.getAttribute("list");
 		return list;
 	}
+	@RequestMapping("Hdel.hol")
+	public HolidayJSON Hdel(Model model) {
+		new HdelCommand().execute(model);
+		HolidayJSON list = (HolidayJSON) model.getAttribute("list");
+		return list;
+	}
+	
 }
