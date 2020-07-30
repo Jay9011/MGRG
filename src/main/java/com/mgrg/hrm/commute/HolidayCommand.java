@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 
 import com.mgrg.hrm.Command;
 import com.mgrg.hrm.D;
+import com.mgrg.hrm.DateMathod;
 
 public class HolidayCommand implements Command {
 
@@ -38,12 +40,18 @@ public class HolidayCommand implements Command {
 				HoliyDAO dao = D.sqlSession.getMapper(HoliyDAO.class);
 				emp_uid = Integer.parseInt(sEmp_uid);
 				status = "OK";
-	//			long monthBetween = ChronoUnit.MONTHS.between(YearMonth.from(startDay), YearMonth.from(endDay));
-	//			int startMonth = startDay.getMonthValue();
-	//			int endMonth = endDay.getMonthValue();
-	//			System.out.println(startMonth + "월 부터 " + endMonth + "월 까지 " + monthBetween + "개월 차이");
-	//			System.out.println(startDay.toString() + " ~ " + endDay.toString());
-				dao.insertHoliday(startDay, endDay, emp_uid);
+//				long monthBetween = ChronoUnit.MONTHS.between(YearMonth.from(startDay), YearMonth.from(endDay));
+//				int startMonth = startDay.getMonthValue();
+//				int endMonth = endDay.getMonthValue();
+//				System.out.println(startMonth + "월 부터 " + endMonth + "월 까지 " + monthBetween + "개월 차이");
+//				System.out.println(startDay.toString() + " ~ " + endDay.toString());
+				
+				
+//				dao.insertHoliday(startDay, endDay, emp_uid);
+				DateMathod dm = new DateMathod();
+				List<LocalDate> list = dm.getAllDates(startDay, endDay);
+				for (LocalDate date : list) {
+				}
 			} else {
 				message.append("회원 정보가 없습니다. 잠시 후 다시 시도해 주세요.");
 			}
