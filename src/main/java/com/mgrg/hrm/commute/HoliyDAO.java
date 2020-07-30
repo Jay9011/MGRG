@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.mgrg.hrm.officehr.OhDTO;
-import com.mgrg.hrm.staff.StaffBasicDTO;
+import com.mgrg.hrm.staff.StaffHolidayDTO;
 
 public interface HoliyDAO {
 	
@@ -35,7 +35,7 @@ public interface HoliyDAO {
 
 	public List<PositionDTO> selectPosition();
 
-	public List<StaffBasicDTO> selectStaff(@Param("dep_uid") Integer dep_uid, @Param("p_uid") Integer p_uid);
+	public List<StaffHolidayDTO> selectStaff(@Param("dep_uid") Integer dep_uid, @Param("p_uid") Integer p_uid);
 
 	public int insertHoliday(@Param("startDay") LocalDate startDay, @Param("endDay") LocalDate endDay, @Param("emp_uid") Integer emp_uid);
 
