@@ -329,6 +329,7 @@ System.out.println(empname);
 
          });
       </script>
+      <script type="text/javascript" src="<%= request.getContextPath()%>/resources/JS/login/clsSessionStorage.js"></script>
       </div>
 </body>
 </html>
