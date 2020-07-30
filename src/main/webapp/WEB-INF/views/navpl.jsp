@@ -27,7 +27,7 @@
                     	</form>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="<%=request.getContextPath() %>/customLogout">로그아웃</a>
+                        <a id="cls" class="nav-link" href="<%=request.getContextPath() %>/customLogout">로그아웃</a>
                     </li>
                 </ul>
             
