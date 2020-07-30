@@ -28,18 +28,22 @@ $(function() {
 	
 	$('#datetimepicker1').datetimepicker({
 		format : 'YYYY-MM-DD',
-		minDate : date.setDate(date.getDate() + 1),
+		minDate : date,
+		date : today1,
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$('#datetimepicker2').datetimepicker({
 		format : 'YYYY-MM-DD',
 		useCurrent : false,
-		minDate : date.setDate(date.getDate() + 1),
+		minDate : date,
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$("#datetimepicker1").on("change.datetimepicker", function(e) {
 		$('#datetimepicker2').datetimepicker('minDate', e.date);
-		$('#datetimepicker2').datetimepicker('mixDate','20200805');
+		var leftHoliday = $('#s_staff').find('option:selected').data('sub');
+		var selectedDay = new Date(e.date);
+		var maxDate = new Date(selectedDay.setDate(selectedDay.getDate() + leftHoliday));
+		$('#datetimepicker2').datetimepicker('maxDate', maxDate);
 	});
 	$("#datetimepicker2").on("change.datetimepicker", function(e) {
 		$('#datetimepicker1').datetimepicker('maxDate', e.date);
@@ -62,6 +66,13 @@ $(function() {
 	
 	
 });
+
+function maxDateSetting(today){
+	var leftHoliday = $('#s_staff').find('option:selected').data('sub');
+	var selectedDay = new Date();
+	var maxDate = new Date(selectedDay.setDate(selectedDay.getDate() + leftHoliday));
+	$('#datetimepicker2').datetimepicker('maxDate', maxDate);
+}
 
 function addHoliday(){
 	var startDay = $('div.form-group input[name=startTime]').val();
@@ -346,7 +357,8 @@ function selectedOption(){
 				if(data.length > 0) {
 					$('#s_staff').html('');
 					for (var i = 0; i < data.length; i++) {
-						$('#s_staff').append('<option value="' + data[i].uid + '">' + data[i].name + ' (' + data[i].leftHoliday + '/' + data[i].total + ')</option>');
+						$('#s_staff').append('<option value="' + data[i].uid + '" data-sub="' + data[i].leftHoliday + '">' + data[i].name + ' (' + data[i].leftHoliday + '/' + data[i].total + ')</option>');
+						maxDateSetting();
 					}
 				} else {
 					$('#s_staff').html('<option value="0">직원 없음</option>');
