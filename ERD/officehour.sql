@@ -133,4 +133,24 @@ ORDER BY h.H_START asc;
 
 -- 해당 직원의 휴가 사용일 --
 SELECT * FROM HOLI h ;
+SELECT * FROM HOLIDAY h ;
 
+SELECT * FROM EMP e ;
+
+SELECT e.NAME , e."position" , e.DEPARTMENT , h.H_START , h.H_END , e."useHoliday" , e."total" , e."leftHoliday" 
+FROM EMP e , HOLIDAY h
+WHERE e."uid" = h.EMP_UID AND e."uid" = 1
+;
+
+SELECT LAST_DAY(to_date(SYSDATE, 'yy-mm-dd') ), ADD_MONTHS(to_date(sysdate), + 1) FROM dual; 
+
+-- 만약 휴가가 다음달까지 연장 되어있을때 이번달 말일 - 이번달 휴가 시작일 + 1 해주기
+SELECT 
+	CASE 
+		WHEN last_day(to_date(SYSDATE, 'yy-mm-dd') ) BETWEEN h.H_START AND h.H_END THEN last_day(to_date(SYSDATE, 'yy-mm-dd') ) - h.H_START + 1
+		ELSE h.H_END - h.H_START + 1
+		END AS holidayCnt 
+FROM HOLIDAY h 
+WHERE EMP_UID = 1;
+
+SELECT * FROM HOLIDAY h ;
