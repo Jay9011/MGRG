@@ -22,3 +22,10 @@ ul.pagination a:hover:not(.active) {
     color: #F8EBFF;
 }
     
+table.table th{
+	border-top: 2px solid olive;
+	border-bottom: 2px solid olive;
+}
+table td{
+	border-bottom: 1px solid olive;
+}
