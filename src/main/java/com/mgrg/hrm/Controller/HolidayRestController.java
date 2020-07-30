@@ -45,7 +45,8 @@ public class HolidayRestController {
 	}
 
 	@RequestMapping("Hdel.hol")
-	public HolidayJSON Hdel(Model model) {
+	public HolidayJSON Hdel(int uid,Model model) {
+		model.addAttribute("uid",uid);
 		new HdelCommand().execute(model);
 		HolidayJSON list = (HolidayJSON) model.getAttribute("list");
 		return list;
