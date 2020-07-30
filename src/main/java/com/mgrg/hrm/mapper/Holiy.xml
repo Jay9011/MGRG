@@ -77,18 +77,17 @@
 	</select>
 	
 	<select id="selectStaff"
-		resultType="com.mgrg.hrm.staff.StaffBasicDTO"
+		resultType="com.mgrg.hrm.staff.StaffHolidayDTO"
 		flushCache="true">
-		SELECT EMP_UID "uid", EMP_NAME "name"
-		FROM EMPLOYEES
-		<where>
-			<if test="p_uid != null and p_uid != 0">
-				AND P_UID = #{p_uid}
-			</if>
-			<if test="dep_uid != null and dep_uid != 0">
-				AND DEP_UID = #{dep_uid}
-			</if>
-		</where>
+		SELECT "uid" ,NAME ,"total" ,"useHoliday" ,"leftHoliday" 
+		FROM EMP
+		WHERE P_UID NOT IN (6, 7)
+		<if test="p_uid != null and p_uid != 0">
+			AND P_UID = #{p_uid}
+		</if>
+		<if test="dep_uid != null and dep_uid != 0">
+			AND DEP_UID = #{dep_uid}
+		</if>
 	</select>
 	
 	<insert id="insertHoliday"
