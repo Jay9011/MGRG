@@ -34,23 +34,23 @@
 		</if>
 			emp_salary, p_uid, dep_uid)
 		VALUES 
-			(SEQ_employees_emp_uid.nextval, '${name}', '${birthday}', '${email}', '${id}', '${password}', 
+			(SEQ_employees_emp_uid.nextval, #{name}, #{birthday}, #{email}, #{id}, #{password}, 
 		<if test="phonenum != null">
-			${phonenum},
+			#{phonenum},
 		</if>
 		<if test="addrZoneCode != null">
-			'${addrZoneCode}',
+			#{addrZoneCode},
 		</if>
 		<if test="addrRoad != null">
-			'${addrRoad}',
+			#{addrRoad},
 		</if>
 		<if test="addrDetail != null">
-			'${addrDetail}',
+			#{addrDetail},
 		</if>
 		<if test="hiredate != null">
-			'${hiredate}',
+			#{hiredate},
 		</if>
-			${salary}, ${p_uid}, ${dep_uid})
+			#{salary}, #{p_uid}, #{dep_uid})
 	</insert>
 	
 	<update id="update" flushCache="true"
@@ -104,6 +104,30 @@
 		SELECT count(*) 
 		FROM EMPLOYEES
 		WHERE EMP_EMAIL = #{param1}
+	</select>
+
+	<select id="findByPhonenum"
+		flushCache="true"
+		resultType="int">
+		SELECT count(*) 
+		FROM EMPLOYEES
+		WHERE emp_phonenum = #{param1}
+	</select>
+	
+	<select id="findByEmailWithoutUid"
+		flushCache="true"
+		resultType="int">
+		SELECT count(*) 
+		FROM EMPLOYEES
+		WHERE EMP_EMAIL = #{param1} AND NOT EMP_UID = #{param2}
+	</select>
+
+	<select id="findByPhonenumWithoutUid"
+		flushCache="true"
+		resultType="int">
+		SELECT count(*) 
+		FROM EMPLOYEES
+		WHERE emp_phonenum = #{param1} AND NOT EMP_UID = #{param2}
 	</select>
 	
 </mapper>

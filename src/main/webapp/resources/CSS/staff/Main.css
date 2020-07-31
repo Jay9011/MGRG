@@ -23,6 +23,16 @@ table.dataTable.nowrap td {
 	text-align: right;
 	
 }
+.bottom_btn {
+	margin-right: 15px;
+}
+.excel_btn {
+	background-color: #47d047;
+	color: #fff;
+}
+.tooltip-inner {
+	max-width: initial;
+}
 #btnWrite {
 	float: right;
 	background-color: #9569CC;

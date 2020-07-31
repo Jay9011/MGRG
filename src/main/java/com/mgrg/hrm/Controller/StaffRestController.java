@@ -42,6 +42,7 @@ public class StaffRestController {
 	@PostMapping("/modiStaff")
 	public StaffJSON modiStaff(Model model, StaffDTO dto) {
 		model.addAttribute("dto", dto);
+		System.out.println(dto.getBirthday());
 		new UpdateCommand().execute(model);
 		StaffJSON json = (StaffJSON) model.getAttribute("json"); 
 		return json;

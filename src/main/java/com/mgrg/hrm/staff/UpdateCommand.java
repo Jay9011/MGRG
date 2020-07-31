@@ -16,15 +16,24 @@ public class UpdateCommand implements Command {
 		
 		StringBuffer message = new StringBuffer();
 		String status = "FAIL";
+		int result = 0;
 		
-		int result = dao.update(dto);
-		
-		if(result > 0) {
-			status = "OK";
-			message.append(dto.getName() + "님의 정보를 성공적으로 수정했습니다.");
+		if(dto.getEmail() != null && dao.findByEmailWithoutUid(dto.getEmail(), dto.getUid()) > 0) {
+			message.append("이미 존재하는 E-mail 입니다. 다시 확인해 주세요.");
+			status = "Err_Em";
+		} else if(dto.getPhonenum() != null && dao.findByPhonenumWithoutUid(dto.getPhonenum(), dto.getUid()) > 0) {
+			message.append("이미 존재하는 전화번호 입니다. 다시 확인해 주세요.");
+			status = "Err_Pn";
 		} else {
-			message.append("[데이터를 수정하는데 실패했습니다.]");
-		} // end if-else(result > 0)
+			result = dao.update(dto);
+			
+			if(result > 0) {
+				status = "OK";
+				message.append(dto.getName() + "님의 정보를 성공적으로 수정했습니다.");
+			} else {
+				message.append("[데이터를 수정하는데 실패했습니다.]");
+			} // end if-else(result > 0)
+		}
 		
 		json.setCount(result);
 		json.setMessage(message.toString());

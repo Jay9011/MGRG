@@ -11,6 +11,9 @@ public interface StaffDAO {
 	public int deleteStaffs(ArrayList<Integer> uids);
 	public int findById(String id);
 	public int findByEmail(String email);
+	public int findByPhonenum(int phonenum);
+	public int findByEmailWithoutUid(String email, int uid);
+	public int findByPhonenumWithoutUid(int phonenum, int uid);
 
 	
 }
