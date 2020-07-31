@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
+import com.mgrg.hrm.fileupload.IDocDAO;
+import com.mgrg.hrm.fileupload.docDTO;
 import com.mgrg.hrm.officehr.OhDTO;
 
 public class BSelectCommand implements BCommand {
@@ -28,13 +30,8 @@ public class BSelectCommand implements BCommand {
 		
 		//int dto2 = dao.present(dto.getEmp_uid());
 		
-		
-		
 		//dao2.selectNoti(dto.getP_uid()); // 2개의 <NoticeDTO> 결과
 		
-		
-		// NoticeDTO dto2 = dao2.selectNoti(dto.getP_uid());
-
 		// 세션을 받기 위해 request에서 세션을 받아옴
 		HttpSession session = request.getSession(true);
 
@@ -45,7 +42,11 @@ public class BSelectCommand implements BCommand {
 		session.setAttribute("empuid", dto.getEmp_uid());
 		session.setAttribute("empname", dto.getEmp_name());
 		/////////////////////////////////////////////////
-
+		IDocDAO dao3 = C.sqlSession.getMapper(IDocDAO.class);
+		List<docDTO> arr2 = dao3.select();
+		model.addAttribute("doclist", arr2);
+		
+		
 
 		System.out.println("결과: " + (SessionDTO) model.getAttribute("puid"));
 
