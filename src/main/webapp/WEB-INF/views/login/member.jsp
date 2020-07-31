@@ -193,8 +193,8 @@ System.out.println(empname);
                      <c:forEach var="dto2" items="${doclist}" begin="0" end="5">
                         <tr>
                            <td>${dto2.doc_uid }</td>
-                           <td class="noticeCenter"><span class="noticea"
-                              data-uid="${dto2.doc_uid }">${dto2.doc_title }</span></td>
+                           <td class="noticeCenter"><span class="doc"
+                              data-uid="${dto2.doc_uid }" onclick="location.href='../upload/down?fileName=${dto2.doc_file}'">${dto2.doc_title }</span></td>
                            <td class="noticeCenter">${dto2.doc_file }</td>
 
                         </tr>
@@ -234,7 +234,7 @@ System.out.println(empname);
                         <c:forEach var="dto" items="${list}">
                            <tr>
                               <td>${dto.uid }</td>
-                              <td><span class="noticea" data-uid="${dto.uid }">${dto.subject }</span></td>
+                              <td><span class="doc" data-uid="${dto.uid }">${dto.subject }</span></td>
                               <td>${dto.regdate }</td>
 
                            </tr>
@@ -275,7 +275,7 @@ System.out.println(empname);
                         <c:forEach var="dto2" items="${doclist}">
                            <tr>
                               <td>${dto2.doc_uid }</td>
-                              <td style="text-align: center;"><span class="noticea doc" data-uid="${dto2.doc_uid }">${dto2.doc_title }</span></td>
+                              <td style="text-align: center;"><span class="doc" data-uid="${dto2.doc_uid }" onclick="location.href='./upload/down?fileName=${dto2.doc_file}'">${dto2.doc_title }</span></td>
                               <td>${dto2.doc_file }</td>
                            </tr>
                         </c:forEach>
@@ -310,8 +310,6 @@ System.out.println(empname);
                   </div>
                </div>
             </div>
-
-
 
          </div>
       </div>

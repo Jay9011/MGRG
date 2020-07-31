@@ -46,6 +46,7 @@ public class BSelectCommand implements BCommand {
 		List<docDTO> arr2 = dao3.select();
 		model.addAttribute("doclist", arr2);
 		
+
 		
 
 		System.out.println("결과: " + (SessionDTO) model.getAttribute("puid"));
