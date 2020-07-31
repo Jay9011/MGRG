@@ -38,7 +38,6 @@ today1 = today1Year + "-" + today1Month + "-" + today1Day;
 $(function() {
 	
 	loadtable();
-	 changeinput();
 	
 	$('#datetimepicker1').datetimepicker({
 		format : 'YYYY-MM-DD',
@@ -181,51 +180,45 @@ function loadtable() {
 				{data : "name"},
 				{data : "department"},
 				{data : "position"},
-				{data : "startTime",
+				{data : "startTime"},
+				{data : "endTime"},
+				{data: 'phonenum'
+				,'render' : function (data, type, full, meta){
+					if(data == 0 || data == null) {
+						return '없음';
+					} else {
+						let telNum = '' + data;
+						let formatNum = '';
+
+						if(telNum.length == 8){
+							formatNum = telNum.replace(/(\d{4})(\d{4})/, '$1-$2');
+						} else if(telNum.length == 10){
+							formatNum = telNum.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+							formatNum = '0' + formatNum;
+						} else {
+							if(telNum.indexOf('2') == 0){
+								formatNum = telNum.replace(/(\d{1})(\d{4})(\d{4})/, '$1-$2-$3');
+								formatNum = '0' + formatNum;
+							} else {
+								formatNum = telNum.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+								formatNum = '0' + formatNum;
+							}
+						}
+
+						return formatNum;
+					}
+					if(data == 0 || data == null) return '없음';
+					else return '0' + data;
+				}},
+				{
+					data : "uid",
 					"render" : function(data, type, full, meta) {
-						start = data;
-					return '<span class="spanno">'+data+'</span><input type="date" class="datapik" name="startTime" data-uid ="'+ full.uid+'"  min="'+ today1 +'" value='+ data + ' readonly>'}},
-					{data : "endTime",
-						render : function(data, type, full, meta){
-							return '<span class="spanno">'+data+'</span><input type="date" class="datapik" name="endTime" data-uid1 ="'+ full.uid+'" min="'+ full.startTime +'" value='+ data + ' readonly>'
-						}},
-						{data: 'phonenum'
-							,'render' : function (data, type, full, meta){
-								if(data == 0 || data == null) {
-									return '없음';
-								} else {
-									let telNum = '' + data;
-									let formatNum = '';
-
-									if(telNum.length == 8){
-										formatNum = telNum.replace(/(\d{4})(\d{4})/, '$1-$2');
-									} else if(telNum.length == 10){
-										formatNum = telNum.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
-										formatNum = '0' + formatNum;
-									} else {
-										if(telNum.indexOf('2') == 0){
-											formatNum = telNum.replace(/(\d{1})(\d{4})(\d{4})/, '$1-$2-$3');
-											formatNum = '0' + formatNum;
-										} else {
-											formatNum = telNum.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
-											formatNum = '0' + formatNum;
-										}
-									}
-
-									return formatNum;
-								}
-								if(data == 0 || data == null) return '없음';
-								else return '0' + data;
-							}},
-							{
-								data : "uid",
-								"render" : function(data, type, full, meta) {
-						if(today ==  parseInt(full.startTime.replace(/-/gi,"")) || today >= parseInt(full.startTime.replace(/-/gi,""))){
-								return '<button type="button" style="display:none;"  value='+ full.startTime + ' disabled>삭제</button>'
-							}else{
-								return '<button type="button" class="btn addBtn Hdel" value="'+ full.startTime + '" onclick="return Hdel('+ full.uid+', \'' + full.name+ '\');">삭제</button><button type="button" class="btn upBtn Hup" style="display:none" value="'+ full.startTime + '" onclick="return Hup('+ full.uid+', \'' + full.name+ '\');">수정</button>'
-								
-							}}}
+			if(today ==  parseInt(full.startTime.replace(/-/gi,"")) || today >= parseInt(full.startTime.replace(/-/gi,""))){
+					return '<button type="button" style="display:none;"  value='+ full.startTime + ' disabled>삭제</button>'
+				}else{
+					return '<button type="button" class="btn delBtn Hdel" value="'+ full.startTime + '" onclick="return Hdel('+ full.uid+', \'' + full.name+ '\');">삭제</button>'
+					
+				}}}
 			],
 			columnDefs : [
 		        
@@ -254,25 +247,6 @@ function loadtable() {
 	
 }
 
-function changeinput() {
-		$('#holiday tbody').on('dblclick', 'tr',function() {
-			del = $(this).find('.Hdel');
-			up = $(this).find('.Hup');
-			if(del.length == 1){
-				indate = $(this).find('input[type=date]');
-				del.css('display','none');
-				up.css('display','block');
-				indate.attr("readonly",false);
-			}else{
-				Swal.fire({
-					icon: 'error',
-					text: "수정하실 수 없는 휴가 입니다."
-				})
-			}
-			
-		});
-	
-}
 function  Hdel(uid, name) {// Hdel(name)
 	$.ajaxSetup({
 		beforeSend: function(xhr) {
@@ -318,17 +292,6 @@ function  Hdel(uid, name) {// Hdel(name)
 		  })
 	  }
 	})
-}
-
-
-
-function Hup(uid, name) {
-	alert("up"+ uid + " : "+ name +$(this) );
-	
-	
-	del.css('display','block');
-	up.css('display','none');
-	indate.attr("readonly",true);
 }
 
 

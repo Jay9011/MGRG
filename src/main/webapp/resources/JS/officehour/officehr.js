@@ -38,7 +38,7 @@ $(document).ready(function($)
       .css('padding','3px')
       
       tbl_row_edit.focus(function(){
-         $(this).addClass('bg-white').css('padding', '3px');
+         $(this).addClass('bg-white').css('padding', '3px 20px');    
       });
 
       //--->add the original entry > start
@@ -234,13 +234,13 @@ function makeTable(ajax_data){
       //--->create table header > start
       tbl +='<thead>';
          tbl +='<tr>';
-         tbl +='<th>이름</th>';
-         tbl +='<th>부서</th>';
-         tbl +='<th>직책</th>';
-         tbl +='<th>근태현황</th>';
-         tbl +='<th>출근 시간</th>';
-         tbl +='<th>퇴근 시간</th>';
-         tbl +='<th>수정</th>';
+         tbl +='<th style="width:10%">이름</th>';
+         tbl +='<th style="width:10%">부서</th>';
+         tbl +='<th style="width:10%">직책</th>';
+         tbl +='<th style="width:10%;text-align:center">근태현황</th>';
+         tbl +='<th style="width:25%;text-align:center">출근 시간</th>';
+         tbl +='<th style="width:25%; text-align:center;">퇴근 시간</th>';
+         tbl +='<th style="width:10%">수정</th>';
          tbl +='</tr>';
       tbl +='</thead>';
       //--->create table header > end

@@ -27,3 +27,6 @@
 .act{
 	display: inline-block !important;
 }
+.calendar-header-day, .calendar-day,.calendar-body td{
+	border-bottom: transparent;
+}

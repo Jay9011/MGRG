@@ -125,8 +125,9 @@ System.out.println(empname);
       <div class="line"></div>
       
       <div class="row ">
+        <div class="col-12  col-md-1"></div>
       <!--     공지 게시판 -->
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-5">
          <div>
             <h2 class="float-left">공지사항</h2>
             <div class="float-right">
