@@ -25,8 +25,8 @@
             <thead class="table-primary">
                <tr>
                   <th scope="col">No.</th>
-                  <th class="noticeCenter" scope="col">제목</th>
-                  <th class="noticeCenter" scope="col">문서</th>
+                  <th class="noticeCenter" scope="col">문서 양식</th>
+                  <th class="noticeCenter" scope="col">문서 파일</th>
                </tr>
             </thead>
             <tbody>
