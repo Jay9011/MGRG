@@ -50,6 +50,7 @@
          <button class="btn " style="clear: both;" onclick="location.href='uploadAjax'">글작성</button>
 </div>
 </div>
+
 </body>
 
 </html>

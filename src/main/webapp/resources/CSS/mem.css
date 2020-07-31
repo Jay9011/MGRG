@@ -8,7 +8,7 @@
 .btnadd small {
 	font-size: 12px;
 }
-.noticea{
+.noticea, .doc{
 	color : black;
 	cursor: pointer;
 }
