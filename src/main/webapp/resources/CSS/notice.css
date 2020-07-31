@@ -11,10 +11,6 @@
 
 #list table{width: 100%;}
 
-#list table, #list th, #list td{
-	border-top: 1px solid olive;
-	border-bottom: 1px solid olive;
-}
 #list th, #list td{
 	padding: 7px;
 }
@@ -83,19 +79,7 @@ ul.pagination a:hover:not(.active) {background-color: #ddd;}
 #dlg_write::-webkit-scrollbar {
 	width: 0px;
 }
-button.addBtn {
-    background-color: #9569CC;
-    color: #F8EBFF;
-}
-button.delBtn { 
-	background-color: #ffcd57;
-    color: white;
-   }
 
-button.upBtn{
-	background-color: #9BAAE9;
-	color: white;
-}
 
 /* 모달 팝업 */
 .modal {   /* 모달 전체 적용 */	
@@ -135,7 +119,7 @@ button.upBtn{
     top: 5px;
 }
 
-.modal input[type=text] {
+.modal input[type=text], .up input[type=text]{
 	width: 95%;
 	margin: 8px 0;
     padding: 12px 5px;
@@ -167,4 +151,5 @@ button.upBtn{
 .modal .modal-content{
 	width: 90%;  
 }
+
 	}

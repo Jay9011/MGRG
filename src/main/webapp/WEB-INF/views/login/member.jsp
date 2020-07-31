@@ -40,16 +40,11 @@ System.out.println(empname);
 	});
 </script>
 <jsp:include page="../datatable.jsp" />
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/CSS/table.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/CSS/weather.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/CSS/member/evo-calendar.css" />
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/CSS/mem.css">
-<link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css">
+<link rel="stylesheet"  href="${pageContext.request.contextPath}/resources/CSS/table.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/weather.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/member/evo-calendar.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/mem.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css">
 <script src="${pageContext.request.contextPath}/resources/JS/weather.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/umain.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/member/chart.js"></script>
@@ -129,7 +124,9 @@ System.out.println(empname);
       </div>
       <div class="line"></div>
       <!--     공지 게시판 -->
-      <div class="col-xs-12 col-md-6 ">
+      <div class="row ">
+       <div class="col-12 col-md-6">
+      
          <div>
             <h2 class="float-left">공지사항</h2>
             <div class="float-right">
@@ -139,7 +136,7 @@ System.out.println(empname);
             </div>
          </div>
          <table class="table table-sm table-hover table-borderless tale">
-            <thead class="table-primary">
+            <thead >
                <tr>
                   <th scope="col">No.</th>
                   <th class="noticeCenter" scope="col">제목</th>
@@ -166,6 +163,48 @@ System.out.println(empname);
                </c:choose>
             </tbody>
          </table>
+         </div>
+           <div class="col-12 col-md-1"></div>
+       <!--     공지 게시판 -->
+        <div class="col-12 col-md-4">
+     	<div>
+            <h2 class="float-left">공지사항</h2>
+            <div class="float-right">
+               <button type="button" id="viewnotice" class="btn btnadd">
+                  <small>공지 더보기</small> +
+               </button>
+            </div>
+         </div>
+         <table class="table table-sm table-hover table-borderless tale">
+            <thead >
+               <tr>
+                  <th scope="col">No.</th>
+                  <th class="noticeCenter" scope="col">제목</th>
+                  <th class="noticeCenter" scope="col">날짜</th>
+               </tr>
+            </thead>
+            <tbody>
+               <c:choose>
+                  <c:when test="${empty list || fn:length(list) == 0 }">
+                     <!--          배열이 비어있거나 있긴있지만 길이가 0개 짜리 배열일때를 체크 -->
+                  </c:when>
+                  <c:otherwise>
+                     <c:forEach var="dto" items="${list}" begin="0" end="3">
+                        <tr>
+                           <td>${dto.uid }</td>
+                           <td class="noticeCenter"><span class="noticea"
+                              data-uid="${dto.uid }">${dto.subject }</span></td>
+                           <td class="noticeCenter">${dto.regdate }</td>
+
+
+                        </tr>
+                     </c:forEach>
+                  </c:otherwise>
+               </c:choose>
+            </tbody>
+         </table>
+    </div>
+    
       </div>
       <div class="line"></div>
 
@@ -185,7 +224,7 @@ System.out.println(empname);
                <div class="modal-body margin">
                   <table id="notitable"
                      class="table table-sm table-hover table-borderless tale tale2">
-                     <thead class="table-primary">
+                     <thead class="">
                         <tr>
                            <th style="width: 1%">No.</th>
                            <th style="width: 95%">제목</th>

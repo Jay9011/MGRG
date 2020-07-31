@@ -1,7 +1,8 @@
 div.header {
-	width: 80%;
-	margin: 50px auto;
-	padding: 50px 0 10px 20px;
+	width: 97%;
+	margin: auto;
+/* 	margin: 50px auto; */
+/* 	padding: 50px 0 10px 20px; */
 	
 }
 
@@ -18,10 +19,18 @@ div.datepicker{
 div.datepicker input {
 	margin-right: 30px;
 }
-
-.clear{
-	clear: both;
+.table th, .table td {
+    padding: 0.5rem;
+    vertical-align: baseline;
 }
+.table{
+	width: 97%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    margin: auto;
+}
+
 
 .form-control {
 	width:auto;
@@ -29,8 +38,7 @@ div.datepicker input {
 }
 
 div.panel {
-	width: 80%;
-	margin: 0 auto;
+    margin: 10px 0;
 }
 
 

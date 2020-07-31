@@ -278,10 +278,10 @@ function makeTable(ajax_data){
 
                //--->edit options > start
                tbl +='<td>';
-                  tbl +='<span class="btn_edit" > <input type="button" class="btn btn-primary" value="수정"> </span>';
+                  tbl +='<span class="btn_edit" > <input type="button" class="btn upBtn" value="수정"> </span>';
                   //only show this button if edit button is clicked
-                  tbl +='<span class="btn_save"> <input type="button" class="btn btn-primary" value="저장">&nbsp;</span>';
-                  tbl +='<span class="btn_cancel"> <input type="button" class="btn btn-primary" value="취소"> </span>';
+                  tbl +='<span class="btn_save"> <input type="button" class="btn addBtn" value="저장">&nbsp;</span>';
+                  tbl +='<span class="btn_cancel"> <input type="button" class="btn delBtn" value="취소"> </span>';
 
                tbl +='</td>';
                //--->edit options > end
