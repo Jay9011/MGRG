@@ -19,8 +19,22 @@ if(day < 10){
 }
 
 var today = year+""+month+""+day;
-var today1 =  year+"-"+month+"-"+(day+1);
- today = parseInt(today);
+today = parseInt(today);
+
+
+var today1 = new Date();
+today1.setDate(today1.getDate() + 1);
+var today1Year = today1.getFullYear();
+var today1Month = today1.getMonth()+1
+var today1Day = today1.getDate();
+if(today1Month < 10){
+	today1Month = "0" + today1Month;
+}
+if(today1Day < 10){
+	today1Day = "0" + today1Day;
+}
+today1 = today1Year + "-" + today1Month + "-" + today1Day;
+
 $(function() {
 	
 	loadtable();
@@ -28,8 +42,8 @@ $(function() {
 	
 	$('#datetimepicker1').datetimepicker({
 		format : 'YYYY-MM-DD',
-		minDate : date,
-		date : today1,
+		useCurrent : false,
+		minDate : today1,
 		daysOfWeekDisabled : [ 0, 6 ]
 	});
 	$('#datetimepicker2').datetimepicker({
@@ -50,8 +64,6 @@ $(function() {
 		}
 
 	});
-	$('#datetimepicker1').datetimepicker('date', today1);
-	$('#datetimepicker2').datetimepicker('date', today1);
 	
 	$('#addHoliday').on('click', function(){
 		addHoliday();
@@ -75,8 +87,6 @@ $(function() {
 });
 
 function initDateSetting(){
-	$('#datetimepicker1').datetimepicker('date', today1);
-	$('#datetimepicker2').datetimepicker('date', today1);
 	maxDateSetting();
 	$('#datetimepicker1').datetimepicker('maxDate', false);
 }
@@ -94,7 +104,7 @@ function maxDateSetting(e){
 	}
 	tempDay = new Date(selectedDay);
 	maxDay = new Date(selectedDay);
-	maxDay.setDate(maxDay.getDate() + leftHoliday);
+	maxDay.setDate(maxDay.getDate() + leftHoliday - 1);
 	for(var i = 0; tempDay <= maxDay; i++){
 		var DayOfWeek = tempDay.getDay();
 		if(DayOfWeek == 0 || DayOfWeek == 6){
