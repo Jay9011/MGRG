@@ -121,6 +121,15 @@ function addHoliday(){
 	var endDay = $('div.form-group input[name=endTime]').val();
 	var emp_uid = $('#s_staff').val();
 	
+	$('body').loadingModal({
+		position:'auto',
+		text:'',
+		color:'#fff',
+		opacity:'0.7',
+		backgroundColor:'rgb(0,0,0)',
+		animation:'cubeGrid'
+	});
+	
 	$.ajaxSetup({
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader(header, token);
@@ -137,6 +146,7 @@ function addHoliday(){
 			emp_uid : emp_uid
 		},
 		success : function(data, status){
+			$('body').loadingModal('hide');
 			if(status == 'success'){
 				if(data.status == "OK"){
 					$('#holiday').DataTable().ajax.reload().columns.adjust();
