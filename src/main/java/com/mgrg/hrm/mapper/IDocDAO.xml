@@ -8,7 +8,7 @@
 	</insert>
 
 	<select id="select" resultType="com.mgrg.hrm.fileupload.docDTO">
-	   	 	select doc_uid, doc_title, doc_content, doc_file from doc_table
+	   	 	select doc_uid, doc_title, doc_content, doc_file from doc_table order by doc_uid asc
 	</select>
 
 
