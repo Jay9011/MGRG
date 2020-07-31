@@ -1,10 +1,11 @@
 package com.mgrg.hrm.staff;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class StaffDTO extends StaffBasicDTO{
 	
-	private Date birthday;
+	private Timestamp birthday;
 	private Integer phonenum;
 	private String email;
 	private String id;
@@ -13,7 +14,7 @@ public class StaffDTO extends StaffBasicDTO{
 	private String addrZoneCode;
 	private String addrRoad;
 	private String addrDetail;
-	private Date hiredate;
+	private Timestamp hiredate;
 	private int salary;
 	private int p_uid;
 	private int dep_uid;
@@ -26,11 +27,10 @@ public class StaffDTO extends StaffBasicDTO{
 	public StaffDTO() {
 		super();
 	}
-	
-	public Date getBirthday() {
-		return birthday;
+	public String getBirthday() {
+		return new SimpleDateFormat("yyyy-MM-dd").format(birthday);
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(Timestamp birthday) {
 		this.birthday = birthday;
 	}
 	public Integer getPhonenum() {
@@ -86,11 +86,10 @@ public class StaffDTO extends StaffBasicDTO{
 	public void setAddrDetail(String addrDetail) {
 		this.addrDetail = addrDetail;
 	}
-
-	public Date getHiredate() {
+	public Timestamp getHiredate() {
 		return hiredate;
 	}
-	public void setHiredate(Date hiredate) {
+	public void setHiredate(Timestamp hiredate) {
 		this.hiredate = hiredate;
 	}
 	public int getSalary() {

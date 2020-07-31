@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/CSS/table.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/JS/staff/validation.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 <jsp:include page="../topend.jsp" />
 <script>
 	$(document).ready(function(){
@@ -30,12 +31,12 @@
 	<jsp:include page="../nav.jsp" />
 	<!-- Page Content  -->
 	<div id="content">
+		<h1 class="float-left">직원 목록</h1>
 		<div class="float-right">
 			<button type="button" id="btnWrite" class="btn">직원 추가</button>
 		</div>
 		
 		<div class="clearfix"></div>
-		[<a style="color: black;"href="<c:url value='/excelDown' />">엑셀</a>]
 		<table id="staff_list" class="table table-hover nowrap" style="width:100%">
 			<thead>
 				<tr>
@@ -54,7 +55,8 @@
 		</table>
 		<div class="clearfix"></div>
 		<div class="float-left">
-			<button type="button" id="btnDelete" class="btn">직원 삭제</button>
+			<a href="${pageContext.request.contextPath}/excelDown"><button type="button" class="btn bottom_btn excel_btn" data-toggle="tooltip" data-placement="bottom" title="모든 직원의 정보를 엑셀로 뽑아냅니다.">엑셀 다운로드</button></a>
+			<button type="button" id="btnDelete" class="btn bottom_btn" data-toggle="tooltip" data-placement="bottom" title="선택된 직원을 삭제합니다.">직원 삭제</button>
 		</div>
 		<div class="clearfix"></div>
 	
@@ -188,11 +190,12 @@
 							<div class="input-group date input-group-viewr">
 								<label for="staff_birthday">생일 </label>
 								<input class="editForm" name="birthday" id="staff_birthday" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-								<span class="birthday"></span>
+								<span class="birthday showText"></span>
 							</div>
 							<div class="input-group text input-group-viewr">
 								<label for="staff_phone">휴대폰 번호 </label>
 								<input class="editForm numberOnly" name="phonenum" id="staff_phone" type="text" style="width:300px"/>
+								<span class="phonenum showText"></span>
 							</div>
 							<div class="input-group text input-group-viewr">
 								<label for="staff_email">E-mail </label>
@@ -232,12 +235,12 @@
 							<div class="input-group date input-group-viewr">
 								<label for="staff_hiredate">입사 날짜 </label>
 								<input class="editForm" name="hiredate" id="staff_hiredate" type="date" class="form-control" style="width: 160px; flex: none;"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-								<span class="hiredate"></span>
+								<span class="hiredate showText"></span>
 							</div>
 							<div class="input-group text input-group-viewr">
 								<label for="staff_salary">연봉 </label>
 								<input class="editForm" name="salary" id="staff_salary" type="number" style="width:300px"/>
-								<span class="salary"></span>
+								<span class="salary showText"></span>
 							</div>
 							<div class="input-group select" style="margin-left:125px">
 								<select name="dep_uid" id="staff_department" style="margin:0 5px">

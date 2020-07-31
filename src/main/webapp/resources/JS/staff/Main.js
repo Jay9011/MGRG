@@ -76,6 +76,8 @@ $(document).ready(function(){
 	$('button#btnDelete').on('click', function(){
 		deleteOk();
 	});
+	
+	$('[data-toggle="tooltip"]').tooltip();
 });
 
 function loadPage(){
@@ -110,31 +112,7 @@ function loadPage(){
 			{data: 'position'},
 			{data: 'phonenum'
 				,'render' : function (data, type, full, meta){
-					if(data == 0 || data == null) {
-						return '없음';
-					} else {
-						let telNum = '' + data;
-						let formatNum = '';
-
-						if(telNum.length == 8){
-							formatNum = telNum.replace(/(\d{4})(\d{4})/, '$1-$2');
-						} else if(telNum.length == 10){
-							formatNum = telNum.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
-							formatNum = '0' + formatNum;
-						} else {
-							if(telNum.indexOf('2') == 0){
-								formatNum = telNum.replace(/(\d{1})(\d{4})(\d{4})/, '$1-$2-$3');
-								formatNum = '0' + formatNum;
-							} else {
-								formatNum = telNum.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
-								formatNum = '0' + formatNum;
-							}
-						}
-
-						return formatNum;
-					}
-					if(data == 0 || data == null) return '없음';
-					else return '0' + data;
+					return numberFormatting(data);
 				}},
 			{data: 'email'},
 			{data: 'leftHoliday'
@@ -208,7 +186,14 @@ function DaumAddr(btn){
 }
 
 function chkAdd(){
-	var data = $('#addStaff').serialize();
+	var timeStampBirthday = $('#writeStaff #staff_birthday').val();
+	timeStampBirthday = moment(new Date(timeStampBirthday)).format('YYYY-MM-DD HH:mm:ss');
+	var timeStampHiredate = $('#writeStaff #staff_hiredate').val();
+	timeStampHiredate = moment(new Date(timeStampHiredate)).format('YYYY-MM-DD HH:mm:ss');
+	
+	var data = $('#addStaff').serializeArray();
+	data = changeSerialize(data, 'birthday', timeStampBirthday);
+	data = changeSerialize(data, 'hiredate', timeStampHiredate);
 	
 	$.ajaxSetup({
 		beforeSend: function(xhr) {
@@ -236,7 +221,14 @@ function chkAdd(){
 }
 
 function modiOk(){
-	var data = $('#modiStaff').serialize();
+	var timeStampBirthday = $('#modiStaff #staff_birthday').val();
+	timeStampBirthday = moment(new Date(timeStampBirthday)).format('YYYY-MM-DD HH:mm:ss');
+	var timeStampHiredate = $('#modiStaff #staff_hiredate').val();
+	timeStampHiredate = moment(new Date(timeStampHiredate)).format('YYYY-MM-DD HH:mm:ss');
+	
+	var data = $('#modiStaff').serializeArray();
+	data = changeSerialize(data, 'birthday', timeStampBirthday);
+	data = changeSerialize(data, 'hiredate', timeStampHiredate);
 	
 	$.ajaxSetup({
 		beforeSend: function(xhr) {
@@ -251,11 +243,23 @@ function modiOk(){
 		data : data,
 		success : function(data, status){
 			if(status == 'success'){
-				$('#staff_list').DataTable().ajax.reload().columns.adjust();
-				$('#viewStaff').modal('hide');
-				$('#toast #toast_img').html('<img src="' + path + '/resources/Img/smile.svg">');
-				$('#toast #toast_message').text(data.message);
-				launch_toast();
+				switch(data.status){
+				case 'Err_Em' :
+				case 'Err_Pn' :
+					Swal.fire({
+						  icon: 'error',
+						  title: '저장 실패',
+						  text: data.message
+						})
+					break;
+				case 'OK' :
+					$('#staff_list').DataTable().ajax.reload().columns.adjust();
+					$('#viewStaff').modal('hide');
+					$('#toast #toast_img').html('<img src="' + path + '/resources/Img/smile.svg">');
+					$('#toast #toast_message').text(data.message);
+					launch_toast();
+					break;
+				}
 			} else {
 				
 			}
@@ -329,6 +333,7 @@ function initViewStaff(){
 	$('#viewStaff #staff_birthday').css('display', 'none');
 	$('#viewStaff #staff_hiredate').css('display', 'none');
 	$('#viewStaff #staff_salary').css('display', 'none');
+	$('#viewStaff #staff_phone').css('display', 'none');
 	
 	$('#viewStaff span.birthday').on('click', function(e){
 		displayOnClickInit($(this));
@@ -346,6 +351,12 @@ function initViewStaff(){
 		displayOnClickInit($(this));
 	});
 	$('#viewStaff #staff_salary').blur(function(e){
+		displayBlurInit($(this));
+	});
+	$('#viewStaff span.phonenum').on('click', function(e){
+		displayOnClickInit($(this));
+	});
+	$('#viewStaff #staff_phone').blur(function(e){
 		displayBlurInit($(this));
 	});
 	$('#viewStaff #addrBtn').css('display', 'none');
@@ -376,11 +387,12 @@ function initViewStaff(){
 
 function displayOnClickInit(init){
 	init.css('display', 'none');
-	init.siblings('input[class=editForm]').css('display', 'block');
-	init.siblings('input[class=editForm]').focus();
+	init.siblings('input[class^=editForm]').css('display', 'block');
+	init.siblings('input[class^=editForm]').focus();
 }
 
 function displayBlurInit(init){
+	init.siblings('span.showText').text(numberFormatting(init.val()));
 	init.siblings('span').css('display', 'block');
 	init.css('display', 'none');
 }
@@ -389,12 +401,12 @@ function setStaffFrom(thisModal, data){
 	let form = thisModal.find('form');
 	let hiredate = DateToString(data.hiredate);
 	let birthday = DateToString(data.birthday);
-	
 	form.find('input[name=uid]').val(data.uid);
 	form.find('input[name=name]').val(data.name);
 	form.find('span.birthday').text(birthday);
 	form.find('input[name=birthday]').val(birthday);
-	form.find('input[name=phonenum]').val('0' + data.phonenum);
+	form.find('span.phonenum').text(numberFormatting(data.phonenum));
+	form.find('input[name=phonenum]').val(data.phonenum);
 	form.find('input[name=email]').val(data.email);
 	form.find('input[name=id]').val(data.id);
 	form.find('input[name=addrZoneCode]').val(data.addrZoneCode);
@@ -418,4 +430,52 @@ function DateToString(date){
 	var StringDate = year + '-' + mon + '-' + day;
 
 	return StringDate;
+}
+
+function changeSerialize( values, k, v ) {
+	var found = false;
+	for (i = 0; i < values.length && !found; i++) {
+		if ( values[i].name == k ) { 
+			values[i].value = v;
+			found = true;
+		}
+	}
+	if (!found) {
+		values.push({
+			name: k,
+			value: v
+		});
+	}
+	return values;
+}
+
+function numberFormatting(data){
+	let telNum = '' + data;
+	
+	if(data == 0 || data == null) {
+		return '없음';
+	} else {
+		let formatNum = '';
+		if(telNum.indexOf('0') == 0){
+			if(telNum.length == 11 || telNum.length == 10 || telNum.length == 9){
+				telNum = telNum.substring(1, telNum.length);
+				if(telNum.length == 8){
+					formatNum = telNum.replace(/(\d{4})(\d{4})/, '$1-$2');
+				} else if(telNum.length == 10){
+					formatNum = telNum.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+					formatNum = '0' + formatNum;
+				} else {
+					if(telNum.indexOf('2') == 0){
+						formatNum = telNum.replace(/(\d{1})(\d{4})(\d{4})/, '$1-$2-$3');
+						formatNum = '0' + formatNum;
+					} else {
+						formatNum = telNum.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+						formatNum = '0' + formatNum;
+					}
+				}
+				return formatNum;
+			}
+		}
+		return data;
+	}
 }
