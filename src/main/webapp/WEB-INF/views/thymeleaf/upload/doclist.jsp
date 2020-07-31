@@ -11,15 +11,17 @@
 <meta id="_csrf_header" name="_csrf_header"
 	content="${_csrf.headerName}" />
 <jsp:include page="../../top.jsp" />
-<jsp:include page="../../nav.jsp" />
 <script src="<%=request.getContextPath()%>/resources/JS/ajaxSetting.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/notice.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/notice.css">
-<title>Insert title here</title>
+<jsp:include page="../../topend.jsp"/>
+<title>파일 업로드</title>
 </head>
 <body>
-
-	<table class="table table-sm table-hover table-borderless tale">
+<jsp:include page="../../nav.jsp" />
+<div id="content">
+      <div class="col-xs-12 col-md-6" style="margin: auto;">
+	<table class="table table-sm table-hover table-borderless tale col-ms-6" >
             <thead class="table-primary">
                <tr>
                   <th scope="col">No.</th>
@@ -45,7 +47,9 @@
                </c:choose>
             </tbody>
          </table>
-         <button class="btn btn-primary" style="clear: both;" onclick="location.href='uploadAjax'">글작성</button>
+         <button class="btn " style="clear: both;" onclick="location.href='uploadAjax'">글작성</button>
+</div>
+</div>
 </body>
-<jsp:include page="../../topend.jsp"/>
+
 </html>

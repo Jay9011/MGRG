@@ -11,6 +11,7 @@ var date = new Date();
 var year = date.getFullYear();
 var month = date.getMonth()+1
 var day = date.getDate();
+var day1 = new Date().setDate(date.getDate() + 1);
 if(month < 10){
     month = "0"+month;
 }
@@ -20,7 +21,6 @@ if(day < 10){
 
 var today = year+""+month+""+day;
 today = parseInt(today);
-
 
 var today1 = new Date();
 today1.setDate(today1.getDate() + 1);
@@ -223,7 +223,7 @@ function loadtable() {
 						if(today ==  parseInt(full.startTime.replace(/-/gi,"")) || today >= parseInt(full.startTime.replace(/-/gi,""))){
 								return '<button type="button" style="display:none;"  value='+ full.startTime + ' disabled>삭제</button>'
 							}else{
-								return '<button type="button" class="btn btncol Hdel" value="'+ full.startTime + '" onclick="return Hdel('+ full.uid+', \'' + full.name+ '\');">삭제</button><button type="button" class="btn btncol Hup" style="display:none" value="'+ full.startTime + '" onclick="return Hup('+ full.uid+', \'' + full.name+ '\');">수정</button>'
+								return '<button type="button" class="btn addBtn Hdel" value="'+ full.startTime + '" onclick="return Hdel('+ full.uid+', \'' + full.name+ '\');">삭제</button><button type="button" class="btn upBtn Hup" style="display:none" value="'+ full.startTime + '" onclick="return Hup('+ full.uid+', \'' + full.name+ '\');">수정</button>'
 								
 							}}}
 			],
@@ -255,23 +255,23 @@ function loadtable() {
 }
 
 function changeinput() {
-	$('#holiday tbody').on('dblclick', 'tr',function() {
-		del = $(this).find('.Hdel');
-		up = $(this).find('.Hup');
-		if(del.length == 1){
-		indate = $(this).find('input[type=date]');
-		del.css('display','none');
-		up.css('display','block');
-		indate.attr("readonly",false);
-		}else{
-			Swal.fire({
-				  icon: 'error',
-				  text: "수정하실 수 없는 휴가 입니다."
+		$('#holiday tbody').on('dblclick', 'tr',function() {
+			del = $(this).find('.Hdel');
+			up = $(this).find('.Hup');
+			if(del.length == 1){
+				indate = $(this).find('input[type=date]');
+				del.css('display','none');
+				up.css('display','block');
+				indate.attr("readonly",false);
+			}else{
+				Swal.fire({
+					icon: 'error',
+					text: "수정하실 수 없는 휴가 입니다."
 				})
-		}
-		
-	});
-		
+			}
+			
+		});
+	
 }
 function  Hdel(uid, name) {// Hdel(name)
 	$.ajaxSetup({
@@ -331,15 +331,6 @@ function Hup(uid, name) {
 	indate.attr("readonly",true);
 }
 
-
-
-
-
-
-
-
-	
-	
 
 
 function setSelectOptionDepartment(){

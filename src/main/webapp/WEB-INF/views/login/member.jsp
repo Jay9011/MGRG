@@ -40,16 +40,11 @@ System.out.println(empname);
 	});
 </script>
 <jsp:include page="../datatable.jsp" />
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/CSS/table.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/CSS/weather.css">
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/CSS/member/evo-calendar.css" />
-<link rel="stylesheet"
-   href="${pageContext.request.contextPath}/resources/CSS/mem.css">
-<link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css">
+<link rel="stylesheet"  href="${pageContext.request.contextPath}/resources/CSS/table.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/weather.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/member/evo-calendar.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/mem.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.css">
 <script src="${pageContext.request.contextPath}/resources/JS/weather.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/umain.js"></script>
 <script src="${pageContext.request.contextPath}/resources/JS/member/chart.js"></script>
@@ -141,7 +136,7 @@ System.out.println(empname);
             </div>
          </div>
          <table class="table table-sm table-hover table-borderless tale">
-            <thead class="table-primary">
+            <thead >
                <tr>
                   <th scope="col">No.</th>
                   <th class="noticeCenter" scope="col">제목</th>
@@ -160,8 +155,6 @@ System.out.println(empname);
                            <td class="noticeCenter"><span class="noticea"
                               data-uid="${dto.uid }">${dto.subject }</span></td>
                            <td class="noticeCenter">${dto.regdate }</td>
-
-
                         </tr>
                      </c:forEach>
                   </c:otherwise>
@@ -178,11 +171,13 @@ System.out.println(empname);
             <div class="float-right">
                <button type="button" id="viewnotice" class="btn btnadd">
                   <small>문서 더보기</small> +
+
                </button>
             </div>
          </div>
          <table class="table table-sm table-hover table-borderless tale">
-            <thead class="table-primary">
+
+            <theads>
                <tr>
                   <th scope="col">No.</th>
                   <th class="noticeCenter" scope="col">문서 양식</th>
@@ -208,7 +203,7 @@ System.out.println(empname);
                </c:choose>
             </tbody>
          </table>
-      </div>	
+     </div>
       </div>
       <div class="line"></div>
 
@@ -228,7 +223,7 @@ System.out.println(empname);
                <div class="modal-body margin">
                   <table id="notitable"
                      class="table table-sm table-hover table-borderless tale tale2">
-                     <thead class="table-primary">
+                     <thead class="">
                         <tr>
                            <th style="width: 1%">No.</th>
                            <th style="width: 95%">제목</th>

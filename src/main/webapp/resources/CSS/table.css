@@ -21,11 +21,25 @@ ul.pagination a:hover:not(.active) {
 	background-color: #9569CC;
     color: #F8EBFF;
 }
-    
+button.addBtn, .addBtn {
+    background-color: #9569CC;
+    color: #F8EBFF;
+}
+button.delBtn , .delBtn{ 
+	background-color: #ffcd57;
+    color: white;
+   }
+
+button.upBtn, .upBtn {
+	background-color: #9BAAE9;
+	color: white;
+}
+ 
+   
 table.table th{
-	border-top: 2px solid olive;
-	border-bottom: 2px solid olive;
+	border-top: 2px solid #6D80CC;
+	border-bottom: 2px solid #6D80CC;
 }
 table td{
-	border-bottom: 1px solid olive;
+	border-bottom: 1px solid #6D80CC;
 }

@@ -35,7 +35,7 @@
 #holiday > tbody > tr> td:nth-child(7){
 	padding: 0px;
 }
-.btncol{
+.addBtn, .delBtn, .upBtn{
 	margin: 4px;
 }
 .spanno{

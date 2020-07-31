@@ -17,17 +17,13 @@
 	content="${_csrf.headerName}" />
 <jsp:include page="../top.jsp" />
 <jsp:include page="../topend.jsp" />
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/CSS/officehour/officehour.css">
-<script
-	src="${pageContext.request.contextPath }/resources/JS/officehour/officehr.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/JS/officehour/currenthr.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/CSS/officehour/officehour.css">
+<script src="${pageContext.request.contextPath }/resources/JS/officehour/officehr.js"></script>
+<script src="${pageContext.request.contextPath }/resources/JS/officehour/currenthr.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet"  href="${pageContext.request.contextPath}/resources/CSS/table.css">
 
 <title>출근 현황 페이지</title>
 </head>
@@ -36,6 +32,8 @@
 	<jsp:include page="../nav.jsp" />
 	<!-- Page Content  -->
 	<div id="content">
+	<h1 class="float-left" style="margin: 10px 20px;">근태 관리</h1>
+	<div class="clearfix"></div>
 		<div class="header">
 			<form action="" class="search-content datepicker-content">
 				<div class="search">
@@ -53,21 +51,18 @@
 						id="startDate" name="startDate" class="form-control"> <label
 						for="endDate">To</label> <input type="text" id="endDate"
 						name="endDate" class="form-control">
-						<input type="button" value="검색" class="search-btn btn btn-primary">
+						<input type="button" value="검색" class="search-btn btn">
 				</div>
 
 			</form>
 
 		</div>
 
-		<div class="clear" onload="printClock()">
+		<div class="clearfix" onload="printClock()">
 			<div id="clock"></div>
 		</div>
 
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<b> 출근현황 </b>
-			</div>
 			<div class="tbl_user_data"></div>
 		</div>
 	</div>
