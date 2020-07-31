@@ -128,8 +128,10 @@ System.out.println(empname);
          </div>
       </div>
       <div class="line"></div>
+      
+      <div class="row ">
       <!--     공지 게시판 -->
-      <div class="col-xs-12 col-md-6 ">
+      <div class="col-12 col-md-6">
          <div>
             <h2 class="float-left">공지사항</h2>
             <div class="float-right">
@@ -166,6 +168,47 @@ System.out.println(empname);
                </c:choose>
             </tbody>
          </table>
+         </div>
+           <div class="col-12  col-md-1"></div>
+           	  <!--     문서 게시판 -->
+    
+           <div class="col-12 col-md-4">
+         <div>
+            <h2 class="float-left">문서</h2>
+            <div class="float-right">
+               <button type="button" id="viewnotice" class="btn btnadd">
+                  <small>문서 더보기</small> +
+               </button>
+            </div>
+         </div>
+         <table class="table table-sm table-hover table-borderless tale">
+            <thead class="table-primary">
+               <tr>
+                  <th scope="col">No.</th>
+                  <th class="noticeCenter" scope="col">문서 양식</th>
+                  <th class="noticeCenter" scope="col">문서 파일</th>
+               </tr>
+            </thead>
+            <tbody>
+               <c:choose>
+                  <c:when test="${empty doclist || fn:length(list) == 0 }">
+                     <!--          배열이 비어있거나 있긴있지만 길이가 0개 짜리 배열일때를 체크 -->
+                  </c:when>
+                  <c:otherwise>
+                     <c:forEach var="dto2" items="${doclist}" begin="0" end="5">
+                        <tr>
+                           <td>${dto2.doc_uid }</td>
+                           <td class="noticeCenter"><span class="noticea"
+                              data-uid="${dto2.doc_uid }">${dto2.doc_title }</span></td>
+                           <td class="noticeCenter">${dto2.doc_file }</td>
+
+                        </tr>
+                     </c:forEach>
+                  </c:otherwise>
+               </c:choose>
+            </tbody>
+         </table>
+      </div>	
       </div>
       <div class="line"></div>
 
@@ -203,11 +246,12 @@ System.out.println(empname);
                         </c:forEach>
                      </tbody>
                   </table>
-
+			
                </div>
             </div>
          </div>
       </div>
+<!--                ///////////////////////////////////////////////////// -->
 
       <!-- 공지사항 내용 보기 -->
       <div class="modal fade" id="uviewModal" data-keyboard="false"
