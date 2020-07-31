@@ -305,8 +305,9 @@ function makeTable(ajax_data){
    $('div.status:contains("출근")').addClass('bg-success');
    $('div.status:contains("지각")').addClass('bg-warning');
    $('div.status:contains("결근")').addClass('bg-danger');
-   $('div.status:contains("퇴근")').addClass('bg-secondary');
+   $('div.status:contains("퇴근")').addClass('bg-primary');
    $('div.status:contains("미출근")').addClass('bg-light').css('color', '#8C8C8C' );
+   $('div.status:contains("조퇴")').addClass('bg-').css('color', '#EAEAEA');
    
 
    $(document).find('.btn_save').hide();
