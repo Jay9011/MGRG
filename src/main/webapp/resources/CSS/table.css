@@ -43,3 +43,6 @@ table.table th{
 table td{
 	border-bottom: 1px solid #6D80CC;
 }
+ul.pagination a {
+	color: black;
+}

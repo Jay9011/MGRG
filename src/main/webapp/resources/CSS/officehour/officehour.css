@@ -46,14 +46,71 @@ div.container {
 	width: 100%;
 }
 
-table th, td {
-	text-align: center;
-}
+/* table th, td { */
+/* 	text-align: center; */
+/* } */
 
 div.status {
-	border-radius: 100px;
-	color: white;
+    border-radius: 5px;
+    color: white;
+    padding: 2px;
+    text-align: center;
+    width: 70%;
+     margin: auto;
 }
 .search-btn{
 	width: 100px;
 }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+    border: 1px solid #D2DAFB;
+    background: #D2DAFB;
+    font-weight: normal;
+    color: #454545;
+}
+.ui-widget-header {
+    border: 1px solid #9569CC !important;
+    background: #9569CC;
+    color: #333333;
+    font-weight: bold;
+}
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus,
+.ui-button:hover,
+.ui-button:focus {
+	border: 1px solid #9569CC;
+	background: #DFD1FB;
+	font-weight: normal;
+	color: #2b2b2b;
+}
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+	border: 1px solid #6D80CC;
+	background: #6D80CC;
+	font-weight: normal;
+
+}
+.ui-icon-background,
+.ui-state-active .ui-icon-background {
+	border: #6D80CC;
+	background-color: #2b2b2b;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    border: 1px solid #fffa90;
+    background: #fffa90;
+    color: #777620;
+}
+
+
+
+
+
+

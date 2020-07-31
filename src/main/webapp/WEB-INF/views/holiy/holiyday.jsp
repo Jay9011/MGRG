@@ -28,9 +28,9 @@
 	<h1>휴가 관리</h1>
 	
 	<form action="" class="form-inline">
-		<div class='col-md-11 col-xs-12'>
-			<div class="form-group">
-
+	<div class="col-md-1"></div>
+		<div class='col-md-11 col-xs-12 float-right'>
+			<div class="form-group ">
 				<div class="input-group col-md-5 col-xs-5">
 					<select id="s_department" class="form-control col-md-3 col-xs-3 selpik" style="margin-right:15px;">
 						<option value="0" selected="selected" disabled="disabled" hidden="true">부서</option>
@@ -65,7 +65,7 @@
 						</div>
 					</div>
 				</div>
-				<button type="button" id="addHoliday" class="btn btn-secondary">휴가 추가</button>
+				<button type="button" id="addHoliday" class="btn addBtn">휴가 추가</button>
 			</div>
 		</div>
 	</form>

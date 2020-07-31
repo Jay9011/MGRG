@@ -7,7 +7,7 @@
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 <meta charset="UTF-8">
@@ -17,12 +17,12 @@
 	content="${_csrf.headerName}" />
 <jsp:include page="../top.jsp" />
 <jsp:include page="../topend.jsp" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/CSS/officehour/officehour.css">
 <script src="${pageContext.request.contextPath }/resources/JS/officehour/officehr.js"></script>
 <script src="${pageContext.request.contextPath }/resources/JS/officehour/currenthr.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/CSS/officehour/officehour.css">
 <link rel="stylesheet"  href="${pageContext.request.contextPath}/resources/CSS/table.css">
 
 <title>출근 현황 페이지</title>
@@ -51,7 +51,7 @@
 						id="startDate" name="startDate" class="form-control"> <label
 						for="endDate">To</label> <input type="text" id="endDate"
 						name="endDate" class="form-control">
-						<input type="button" value="검색" class="search-btn btn">
+						<input type="button" value="검색" class="search-btn btn addBtn">
 				</div>
 
 			</form>
