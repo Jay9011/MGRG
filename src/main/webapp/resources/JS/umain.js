@@ -9,9 +9,13 @@ $(document).ready(function() {
 			$('#comShow').toggle('slow').toggleClass('act');
 		});
 		
-	// 더보기 버튼 누르기
+	// 공지 더보기 버튼 누르기
 	$('#viewnotice').click(function() {
 		$('#viewmodal').modal('show'); 
+	});
+	// 문서 더보기 버튼 누르기
+	$('#viewdoc').click(function() {
+		$('#viewdocmodal').modal('show'); 
 	});
 	dataTable();
 	showView();
