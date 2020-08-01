@@ -42,7 +42,8 @@ VALUES
  */
 SELECT * FROM OFFICE_HOUR;
 
-SELECT COUNT(CASE 
+SELECT  
+		COUNT(CASE 
 			 WHEN STAT = '출근' THEN '출근' END ) AS intime, 
 	   COUNT(CASE 
 			 WHEN STAT = '퇴근' THEN '퇴근' END ) AS off, 
@@ -65,6 +66,24 @@ FROM (SELECT
 		  FROM OFFICE_HOUR oh 
 		  WHERE (oh.W_START BETWEEN TRUNC(SYSDATE, 'mm') AND TRUNC(SYSDATE, 'dd')) AND oh.EMP_UID = 4) h)
 ;
+
+SELECT e.EMP_UID "uid", e.EMP_NAME name, category.W_START "start", category.W_END "end", d.DEP_NAME posRank, p.P_NAME dept, category.stat "status", category.w_uid 
+FROM DEPARTMENT d , POSITIONRANK p , EMPLOYEES e LEFT OUTER JOIN 
+	(SELECT  
+		h.*,
+		CASE
+			WHEN h.startTime IS NULL THEN '미출근'
+			WHEN h.endTime < 1800 THEN '조퇴'
+			WHEN h.startTime <= 900 AND h.endTime >= 1800 THEN '퇴근'
+			WHEN h.endtime IS NULL AND h.startTime <= 900 THEN '출근'
+			WHEN h.startTime > 900 THEN '지각'
+			ELSE '결근'
+			END AS stat
+	FROM (SELECT e.emp_uid , oh.W_UID , oh.W_START , oh.W_END , TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
+				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
+			FROM (SELECT * FROM EMPLOYEES e WHERE e.EMP_UID NOT IN (10, 11))e LEFT OUTER JOIN OFFICE_HOUR oh ON e.emp_uid = oh.EMP_UID
+			ORDER BY e.EMP_UID) h) category ON e.EMP_UID = category.EMP_UID
+			WHERE e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID AND e.P_UID NOT IN (6, 7) AND e.EMP_UID = 4;
 		  
 		 
 SELECT * FROM OFFICE_HOUR oh WHERE EMP_UID = 4;
