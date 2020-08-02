@@ -195,6 +195,15 @@ function chkAdd(){
 	data = changeSerialize(data, 'birthday', timeStampBirthday);
 	data = changeSerialize(data, 'hiredate', timeStampHiredate);
 	
+	$('body').loadingModal({
+		position:'auto',
+		text:'',
+		color:'#fff',
+		opacity:'0.7',
+		backgroundColor:'rgb(0,0,0)',
+		animation:'cubeGrid'
+	});
+	
 	$.ajaxSetup({
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader(header, token);
@@ -207,6 +216,7 @@ function chkAdd(){
 		cache : false,
 		data : data,
 		success : function(data, status){
+			$('body').loadingModal('destroy');
 			if(status == 'success'){
 				$('#staff_list').DataTable().ajax.reload().columns.adjust();
 				$('#writeStaff').modal('hide');
@@ -230,6 +240,15 @@ function modiOk(){
 	data = changeSerialize(data, 'birthday', timeStampBirthday);
 	data = changeSerialize(data, 'hiredate', timeStampHiredate);
 	
+	$('body').loadingModal({
+		position:'auto',
+		text:'',
+		color:'#fff',
+		opacity:'0.7',
+		backgroundColor:'rgb(0,0,0)',
+		animation:'cubeGrid'
+	});
+	
 	$.ajaxSetup({
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader(header, token);
@@ -242,6 +261,7 @@ function modiOk(){
 		cache : false,
 		data : data,
 		success : function(data, status){
+			$('body').loadingModal('destroy');
 			if(status == 'success'){
 				switch(data.status){
 				case 'Err_Em' :
@@ -293,6 +313,15 @@ function deleteOk(){
 				cancelButtonText : '취소'
 				}).then((result) => {
 				  if (result.value) {
+					  $('body').loadingModal({
+							position:'auto',
+							text:'',
+							color:'#fff',
+							opacity:'0.7',
+							backgroundColor:'rgb(0,0,0)',
+							animation:'cubeGrid'
+						});
+					  
 			$.ajaxSetup({
 				beforeSend: function(xhr) {
 					xhr.setRequestHeader(header, token);
@@ -307,6 +336,7 @@ function deleteOk(){
 					'uids' : uids
 				},
 				success : function(data, status){
+					$('body').loadingModal('destroy');
 					if(status == 'success'){
 						$('#staff_list').DataTable().ajax.reload();
 						$('#toast #toast_img').html('<img src="' + path + '/resources/Img/smile.svg">');
@@ -459,20 +489,27 @@ function numberFormatting(data){
 		if(telNum.indexOf('0') == 0){
 			if(telNum.length == 11 || telNum.length == 10 || telNum.length == 9){
 				telNum = telNum.substring(1, telNum.length);
-				if(telNum.length == 8){
-					formatNum = telNum.replace(/(\d{4})(\d{4})/, '$1-$2');
-				} else if(telNum.length == 10){
-					formatNum = telNum.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
-					formatNum = '0' + formatNum;
-				} else {
-					if(telNum.indexOf('2') == 0){
-						formatNum = telNum.replace(/(\d{1})(\d{4})(\d{4})/, '$1-$2-$3');
-						formatNum = '0' + formatNum;
-					} else {
-						formatNum = telNum.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
-						formatNum = '0' + formatNum;
-					}
-				}
+			}
+		}
+		if(telNum.length == 8 && telNum.indexOf('2') != 0){
+			formatNum = telNum.replace(/(\d{4})(\d{4})/, '$1-$2');
+			return formatNum;
+		} else if(telNum.length == 10){
+			formatNum = telNum.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+			formatNum = '0' + formatNum;
+			return formatNum;
+		} else {
+			if(telNum.indexOf('2') == 0 && telNum.length == 9){
+				formatNum = telNum.replace(/(\d{1})(\d{4})(\d{4})/, '$1-$2-$3');
+				formatNum = '0' + formatNum;
+				return formatNum;
+			} else if(telNum.indexOf('2') == 0 && telNum.length == 8){
+				formatNum = telNum.replace(/(\d{1})(\d{3})(\d{4})/, '$1-$2-$3');
+				formatNum = '0' + formatNum;
+				return formatNum;
+			} else {
+				formatNum = telNum.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+				formatNum = '0' + formatNum;
 				return formatNum;
 			}
 		}
