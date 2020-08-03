@@ -2,8 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%
-   int puid = (Integer) session.getAttribute("puid");
+<%   int puid = (Integer) session.getAttribute("puid");
 int depuid = (Integer) session.getAttribute("depuid");
 int empuid = (Integer) session.getAttribute("empuid");
 String empname = (String) session.getAttribute("empname");
@@ -21,24 +20,7 @@ System.out.println(empname);
 <meta id="_csrf_header" name="_csrf_header"
    content="${_csrf.headerName}" />
 <jsp:include page="../top.jsp" />
-<script type="text/javascript">
-	$(document).ready(function(){
-		var compare = sessionStorage.getItem("present");
-		if(compare == 'present'){
-	    	$('#present').attr('disabled',true);
-			$('#off').attr('disabled',false);
-		}
-	});
-</script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		var compare = sessionStorage.getItem("off");
-		if(compare == 'off'){
-	    	$('#present').attr('disabled',false);
-			$('#off').attr('disabled',true);
-		}
-	});
-</script>
+
 <jsp:include page="../datatable.jsp" />
 <link rel="stylesheet"  href="${pageContext.request.contextPath}/resources/CSS/table.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/CSS/weather.css">
@@ -58,9 +40,9 @@ System.out.println(empname);
 <jsp:include page="../navpl.jsp"/>
  <!-- Page Content  -->
         <div id="content">
-        	<input type="hidden" id="empUid"  value="${empuid }">
+        	<input type="hidden" id="empUid"  value="${empuid}">
             <h2>${empname}님 근태 현황</h2>
-            <div style="display: inline-block;">
+            <div style="display: inline-block; margin-left: 8.333333%;">
             <div class="text-right">
 
                <button type="button" id="viewcom" class="btn btnadd" data-emp='${empuid}'><small>현황 더보기</small> +</button>
@@ -125,7 +107,7 @@ System.out.println(empname);
       <div class="line"></div>
       
       <div class="row ">
-        <div class="col-12  col-md-1"></div>
+       <div class="col-12  col-md-1"></div>
       <!--     공지 게시판 -->
       <div class="col-12 col-md-5">
          <div>
@@ -170,7 +152,7 @@ System.out.println(empname);
          <div>
             <h2 class="float-left">문서</h2>
             <div class="float-right">
-               <button type="button" id="viewdoc" class="btn btnadd">
+               <button type="button" id="viewnotice" class="btn btnadd">
                   <small>문서 더보기</small> +
 
                </button>
@@ -194,8 +176,8 @@ System.out.println(empname);
                      <c:forEach var="dto2" items="${doclist}" begin="0" end="5">
                         <tr>
                            <td>${dto2.doc_uid }</td>
-                           <td class="noticeCenter"><span class="doc"
-                              data-uid="${dto2.doc_uid }" onclick="location.href='../upload/down?fileName=${dto2.doc_file}'">${dto2.doc_title }</span></td>
+                           <td class="noticeCenter"><span class="noticea"
+                              data-uid="${dto2.doc_uid }">${dto2.doc_title }</span></td>
                            <td class="noticeCenter">${dto2.doc_file }</td>
 
                         </tr>
@@ -235,7 +217,7 @@ System.out.println(empname);
                         <c:forEach var="dto" items="${list}">
                            <tr>
                               <td>${dto.uid }</td>
-                              <td><span class="doc" data-uid="${dto.uid }">${dto.subject }</span></td>
+                              <td><span class="noticea" data-uid="${dto.uid }">${dto.subject }</span></td>
                               <td>${dto.regdate }</td>
 
                            </tr>
@@ -247,46 +229,8 @@ System.out.println(empname);
             </div>
          </div>
       </div>
-		<!--   ///////////////////////////////////////////////////// -->
-		
-		<!-- 문서 더보기 모달 -->
-      <div class="modal fade" id="viewdocmodal" data-keyboard="false"
-         role="dialog" aria-labelledby="staticBackdropLabel"
-         aria-hidden="true">
-         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">문서 양식</h5>
-                  <button type="button" class="close" data-dismiss="modal"
-                     aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <div class="modal-body margin">
-                  <table id="notitable"
-                     class="table table-sm table-hover table-borderless tale tale2">
-                     <thead class="table-primary">
-                        <tr>
-                           <th style="width: 1%">No.</th>
-                           <th style="width: 95%; text-align: center;">문서 양식</th>
-                           <th style="width: 4%">문서 파일</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <c:forEach var="dto2" items="${doclist}">
-                           <tr>
-                              <td>${dto2.doc_uid }</td>
-                              <td style="text-align: center;"><span class="doc" data-uid="${dto2.doc_uid }" onclick="location.href='./upload/down?fileName=${dto2.doc_file}'">${dto2.doc_title }</span></td>
-                              <td>${dto2.doc_file }</td>
-                           </tr>
-                        </c:forEach>
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-         </div>
-      </div>	
-		<!-- ///////////////////////////////////////////////////// -->
+<!--                ///////////////////////////////////////////////////// -->
+
       <!-- 공지사항 내용 보기 -->
       <div class="modal fade" id="uviewModal" data-keyboard="false"
          role="dialog" aria-labelledby="staticBackdropLabel"
@@ -311,6 +255,8 @@ System.out.println(empname);
                   </div>
                </div>
             </div>
+
+
 
          </div>
       </div>
@@ -357,8 +303,8 @@ System.out.println(empname);
                });
               var compare = sessionStorage.getItem("present");
               console.log(typeof(compare));
-			  $('#present').attr('disabled',true);
-			  $('#off').attr('disabled',false);
+// 			  $('#present').attr('disabled',true);
+// 			  $('#off').attr('disabled',false);
               	
                
             })
@@ -380,15 +326,15 @@ System.out.println(empname);
             
             $('#off').click(function() {
                var data = $('#offform').serialize();
-               //alert(data);
+             // alert(data);
                $.ajax({
-                  url : "/hrm/officehour/off",
+                  url : path + "/officehour/off",
                   type : "POST",
                   cache : false,
                   data : data,
                   success : function(data, status) {
                      if (status == "success") {
-                        //alert('수정 성공');
+                        alert('수정 성공');
                         sessionStorage.removeItem("present");
                     	 sessionStorage.setItem("off", sessionData);
                     	 
@@ -398,8 +344,8 @@ System.out.println(empname);
                });
                var compare = sessionStorage.getItem("off");
                console.log(typeof(compare));
-               $('#present').attr('disabled',false);
-               $('#off').attr('disabled',true);
+//                $('#present').attr('disabled',false);
+//                $('#off').attr('disabled',true);
                
             })
 

@@ -21,13 +21,25 @@
 	</select>
 	
 	<insert id="present" flushCache="true" parameterType="int">
-		INSERT INTO OFFICE_HOUR (W_UID, W_START, EMP_UID) VALUES (SEQ_office_hour_w_uid.nextval, sysdate, #{param1})
+		INSERT INTO OFFICE_HOUR (W_UID, W_START, EMP_UID) VALUES (SEQ_office_hour_w_uid.nextval, SYSDATE, #{param1})
 	</insert>
 	
 	<update id="off" flushCache="true" parameterType="int">
-		
-		update OFFICE_HOUR set w_end = SYSDATE where emp_uid = #{param1} AND TO_CHAR(sysdate, 'yyyymmdd') = (SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = #{param1})
+		UPDATE
+		 	OFFICE_HOUR
+	  	set w_end = SYSDATE where emp_uid = #{param}
+		 AND TO_CHAR(W_START,'yyyy-mm-dd') = TO_CHAR(SYSDATE, 'yyyy-mm-dd')
 	</update>
+	
+	<select id="loginCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM  OFFICE_HOUR WHERE EMP_UID =  #{param1} AND TO_CHAR(W_START,'yyyy-mm-dd')= TO_CHAR(SYSDATE, 'yyyy-mm-dd')
+	</select>
+	
+	<select id="outCount" resultType="java.lang.Integer">
+	SELECT COUNT(*) FROM  OFFICE_HOUR WHERE EMP_UID = #{param1} AND TO_CHAR(W_END,'yyyy-mm-dd')= TO_CHAR(SYSDATE, 'yyyy-mm-dd')
+	</select>
+	
+	
 	
 	
 </mapper>
