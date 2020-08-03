@@ -58,6 +58,9 @@ div.status {
     width: 70%;
      margin: auto;
 }
+div.start, div.end{
+	 text-align: center;
+}
 .search-btn{
 	width: 100px;
 }

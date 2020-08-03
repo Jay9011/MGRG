@@ -85,7 +85,7 @@ update OFFICE_HOUR set w_end = SYSDATE where emp_uid = 1 AND TO_CHAR(SYSDATE, 'y
 update OFFICE_HOUR set w_end = SYSDATE where emp_uid = 1 AND TO_CHAR(SYSDATE, 'yyyymmdd') = (SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = 1 AND TO_CHAR(W_START,'yyyy-mm-dd')= TO_CHAR(SYSDATE, 'yyyy-mm-dd'));
 update OFFICE_HOUR set w_end = SYSDATE where emp_uid = 1 AND TO_CHAR(W_START,'yyyy-mm-dd') = TO_CHAR(SYSDATE, 'yyyy-mm-dd');
 
-SELECT * FROM OFFICE_HOUR;
+SELECT * FROM OFFICE_HOUR WHERE EMP_UID = 1;
 SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = 1 AND TO_CHAR(W_START,'yyyy-mm-dd')= TO_CHAR(SYSDATE, 'yyyy-mm-dd') ;
 
 
