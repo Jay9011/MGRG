@@ -41,7 +41,7 @@ System.out.println(empname);
  <!-- Page Content  -->
         <div id="content">
         	<input type="hidden" id="empUid"  value="${empuid}">
-            <h2>${empname}님 근태 현황</h2>
+            <h2><span id="profile" class="profile">${empname}</span>님 근태 현황</h2>
             <div style="display: inline-block; margin-left: 8.333333%;">
             <div class="text-right">
 
@@ -292,11 +292,10 @@ System.out.println(empname);
                   </div>
                </div>
             </div>
-
-
-
          </div>
       </div>
+
+      
       <script type="text/javascript"
          src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
       <script type="text/javascript"

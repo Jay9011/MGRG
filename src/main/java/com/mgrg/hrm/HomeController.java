@@ -59,4 +59,8 @@ public class HomeController {
 	public String holiyday(Model model) {
 		return "holiy/holiyday";
 	}
+	@RequestMapping("/changePw")
+	public String pwChange(Model model) {
+		return "login/pwChange";
+	}
 }	
