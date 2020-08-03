@@ -62,7 +62,7 @@ public class HcalCommand implements Command{
 						 inputStartDate = oHdto.getStart();
 						 sdf = new SimpleDateFormat(DATE_PATTERN);
 						 startDate = sdf.parse(inputStartDate);
-						 if(oHdto.getStatus().equals("출근") || oHdto.getStatus().equals("퇴근")  ) {
+						 if(oHdto.getStatus().equals("출근") || oHdto.getStatus().equals("퇴근")) {
 							 StatusDTO sDto = new StatusDTO(sdf.format(startDate),"absence",false);
 							//System.out.println(sdf.format(startDate));
 							 dates.add(sDto);							 
