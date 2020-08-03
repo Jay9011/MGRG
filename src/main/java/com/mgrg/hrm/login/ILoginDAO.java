@@ -1,8 +1,11 @@
 package com.mgrg.hrm.login;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.annotation.MapperScan;
+
+import com.mgrg.hrm.member.AttendanceDTO;
 
 
 @MapperScan
@@ -22,5 +25,7 @@ public interface ILoginDAO {
 	
 	public int loginCount(int uid);
 	public int outCount(int uid);
+
+	public ArrayList<AttendanceDTO> selectAttendByUid(int uid);
 	
 }
