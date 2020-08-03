@@ -12,6 +12,7 @@ DROP TABLE positionrank CASCADE CONSTRAINTS;
 DROP VIEW holi
 ;
 
+SELECT * FROM attendance;
 
 
 /* Drop Sequences */

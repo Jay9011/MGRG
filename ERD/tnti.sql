@@ -72,6 +72,13 @@ FROM (SELECT TRUNC(SYSDATE ,'mm') + LEVEL - 1 AS IN_DATE
 WHERE TO_CHAR(mon.IN_DATE, 'd') NOT IN (1, 7)
 ;
 
+
+update OFFICE_HOUR set w_end = SYSDATE 
+where emp_uid = 7 AND TO_CHAR(sysdate, 'yyyymmdd') = (
+SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = 7);
+
+SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = 7;
+
 INSERT INTO OFFICE_HOUR (W_UID, W_START, EMP_UID) VALUES (SEQ_office_hour_w_uid.nextval, sysdate, #{param1});
 SELECT W_UID, W_START, EMP_UID FROM  OFFICE_HOUR WHERE EMP_UID = 1 AND TO_CHAR(W_START,'yyyy-mm-dd')= TO_CHAR(SYSDATE, 'yyyy-mm-dd') ;
 SELECT COUNT(*) FROM  OFFICE_HOUR WHERE EMP_UID = 1 AND TO_CHAR(W_START,'yyyy-mm-dd')= TO_CHAR(SYSDATE, 'yyyy-mm-dd') ;
@@ -87,15 +94,6 @@ update OFFICE_HOUR set w_end = SYSDATE where emp_uid = 1 AND TO_CHAR(W_START,'yy
 
 SELECT * FROM OFFICE_HOUR;
 SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = 1 AND TO_CHAR(W_START,'yyyy-mm-dd')= TO_CHAR(SYSDATE, 'yyyy-mm-dd') ;
-
-
-
-
-
-
-
-
-
 
 
 
