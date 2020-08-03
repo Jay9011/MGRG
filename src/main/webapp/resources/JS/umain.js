@@ -83,19 +83,7 @@ function loadView() {
 // 휴가 데이터 가져오기
 function Holiyday() {
 	$('#viewcom').on('click', function() {
-		$.ajax({
-			url : path + "/login/cal.mem?empuid="+$(this).attr('data-emp'),
-			type : "GET",
-			cache : false,
-			success : function(data, status) {
-				if(status == "success"){
-					dateTime(data);
-				}else{
-					alert("CAl 실패");
-				}
-			}
-		
-		});
+		holidayReload();
 	});
 }
 //var a = [{ date: "07/01/2020",type: "holiday", repeat: false}, { date: "2020-07-02",type: "holiday", repeat: false}];
@@ -105,7 +93,21 @@ function dateTime(data) {
 	 $("#calendar").evoCalendar('addCalendarEvent', data);
 }
 
-
+function holidayReload(){
+	$.ajax({
+		url : path + "/login/cal.mem?empuid=" + $('#viewcom').attr('data-emp'),
+		type : "GET",
+		cache : false,
+		success : function(data, status) {
+			if(status == "success"){
+				dateTime(data);
+			}else{
+				alert("CAl 실패");
+			}
+		}
+	
+	});
+}
 
 
 

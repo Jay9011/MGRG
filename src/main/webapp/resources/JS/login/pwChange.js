@@ -75,13 +75,25 @@ function change_user_Pw(form_id, form_pw, form_pwnew){
 		success : function(data, status){
 			if(status == 'success'){
 				if(data.status == 'OK'){
-					form_id.attr('disabled', false);
-					form_pw.attr('disabled', false);
-					form_btn.attr('disabled', false);
+					Swal.fire({
+					  title: '비밀번호 변경 완료',
+					  text: data.message,
+					  icon: 'success',
+					  showCancelButton: false,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: '완료'
+					}).then((result) => {
+					  if (result.value) {
+					    location.replace('./');
+					  }
+					});
 				} else if(data.status == 'FAIL'){
-					form_id.attr('disabled', true);
-					form_pw.attr('disabled', true);
-					form_btn.attr('disabled', true);
+					Swal.fire({
+					  icon: 'error',
+					  title: '비밀번호 변경 실패',
+					  text: data.message
+					});
 				} // end data == OK
 			} // end success
 		} 
