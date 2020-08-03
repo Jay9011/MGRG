@@ -74,9 +74,9 @@
 		<table id="holiday" class="table table-hover nowrap" style="width: 100%">
 			<thead>
 				<tr>
-					<th style="width: 20%">이름</th>
+					<th style="width: 15%">이름</th>
 					<th style="width: 10%">부서</th>
-					<th style="width: 5%">직책</th>
+					<th style="width: 10%">직책</th>
 					<th style="width: 20%">시작일</th>
 					<th style="width: 20%">종료일</th>
 					<th style="width: 20%">연락처</th>

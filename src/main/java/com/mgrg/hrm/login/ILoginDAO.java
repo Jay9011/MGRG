@@ -19,4 +19,8 @@ public interface ILoginDAO {
 	public int present(int uid);
 	
 	public int off(int uid2);
+	
+	public int loginCount(int uid);
+	public int outCount(int uid);
+	
 }
