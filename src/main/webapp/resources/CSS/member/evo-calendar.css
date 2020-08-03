@@ -400,7 +400,9 @@ tr.calendar-body .calendar-day .day[disabled] {
 .event-container > .event-icon > div.event-bullet-absence,
 .event-container > .event-icon > div.event-bullet-late,
 .event-container > .event-icon > div.event-bullet-holiday,
-.event-container > .event-icon > div.event-bullet-attend {
+.event-container > .event-icon > div.event-bullet-attend,
+.event-container > .event-icon > div.event-bullet-eleave 
+{
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -424,6 +426,11 @@ tr.calendar-body .calendar-day .day[disabled] {
 .event-indicator > .type-bullet > div.type-holiday,
 .kind div.type-holiday{
     background-color: #755eb5;
+}
+.event-container > .event-icon > div.event-bullet-eleave,
+.event-indicator > .type-bullet > div.type-eleave,
+.kind div.type-eleave{
+    background-color: #3FAF6C;
 }
 
 

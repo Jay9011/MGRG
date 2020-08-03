@@ -81,7 +81,9 @@ FROM DEPARTMENT d , POSITIONRANK p , EMPLOYEES e LEFT OUTER JOIN
 
 -------------------------------------------------------------------------------------------------------------		
 -- attendance VIEW를 활용해서 직원 한달 출결 횟수 뽑기--------------------------------------------------------------------
-SELECT * FROM attendance WHERE "uid" = 4;
+SELECT * FROM attendance WHERE "uid" = 1;
+SELECT "uid", "status", "start" FROM attendance WHERE "uid" = 1;
+
 SELECT count(*) FROM attendance WHERE "uid" = 4 AND TO_CHAR("start", 'mm') = TO_CHAR(SYSDATE, 'mm') ;
 
 SELECT COUNT(CASE 

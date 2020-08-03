@@ -75,7 +75,9 @@ $(document).ready(function() {
 });
 
 function boardRord() {
-	$('#tlc').DataTable().destroy();
+	
+	
+//	$('#tlc').DataTable().destroy();
 	var n_uid;
 	$('#tlc').DataTable({
 		ajax : {
@@ -83,6 +85,7 @@ function boardRord() {
 			dataSrc : 'data'
 				
 		},
+		scrollX : true,
 		autoWidth:true,
 		columns : [{
 					data : "uid",
@@ -113,8 +116,11 @@ function boardRord() {
 				previous : '<',
 				next : '>'
 			}
+		},
+		fixedColumns: {
+			leftColumns : 2
 		}
-	});
+	}).columns.adjust();
 	addViewEvent();
 }
 

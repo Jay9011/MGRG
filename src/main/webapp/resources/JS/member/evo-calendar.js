@@ -578,7 +578,7 @@
         _.$active.events.push(event_data);
         markup = '<div class="event-container" role="button" data-event-index="'+(event_data.id)+'">';
         markup += '<div class="event-icon"><div class="event-bullet-'+event_data.type+'"></div></div>';
-        markup += '<div class="event-info"><p>'+_.limitTitle(event_data.name)+'</p></div>';
+      //  markup += '<div class="event-info"><p>'+_.limitTitle(event_data.name)+'</p></div>';
         markup += '</div>';
         eventListEl.append(markup);
 

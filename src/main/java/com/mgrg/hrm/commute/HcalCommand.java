@@ -74,6 +74,10 @@ public class HcalCommand implements Command{
 							 StatusDTO sDto = new StatusDTO(sdf.format(startDate),"attend",false);
 							 dates.add(sDto);
 							// System.out.println(sdf.format(startDate));
+						 }else if(oHdto.getStatus().equals("조퇴")) {
+							 StatusDTO sDto = new StatusDTO(sdf.format(startDate),"eleave",false);
+							 dates.add(sDto);
+							 // System.out.println(sdf.format(startDate));
 						 }else {
 							// System.out.print(sdf.format(startDate));
 							// System.out.println("없습니다");

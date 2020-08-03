@@ -1,6 +1,11 @@
 @charset "UTF-8";
-
-
+#content {
+	max-width: 95%;
+} 
+table.dataTable.nowrap th, table.dataTable.nowrap td {
+/* 	white-space: nowrap; */
+	background-color: #fbfbfb;
+}
 /* 테이블 사이즈 */
 #list {
 	margin: auto;
