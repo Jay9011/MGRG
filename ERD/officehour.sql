@@ -98,45 +98,7 @@ FROM attendance WHERE "uid" = 4 AND TO_CHAR("start", 'mm') = TO_CHAR(to_date('20
 -------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------
 
-SELECT * FROM attendance;
-
-SELECT e.emp_uid , oh.W_UID , oh.W_START , oh.W_END , TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
-				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
-			FROM (SELECT * FROM EMPLOYEES)e LEFT OUTER JOIN OFFICE_HOUR oh ON e.emp_uid = oh.EMP_UID 
-			WHERE to_char(oh.W_START , 'mm') = to_char(sysdate, 'mm')
-			ORDER BY e.EMP_UID;
-		
-SELECT * FROM attendance WHERE "uid" = 1;
-		
-SELECT to_char(sysdate, 'mm') FROM dual;
-		
-SELECT * FROM OFFICE_HOUR oh WHERE EMP_UID = 4;
-INSERT INTO OFFICE_HOUR (W_UID , W_START , EMP_UID )
-VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-31 08:55:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID )
-VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-06-27 08:55:20', '2020-06-27 18:50:22', 4);
-DELETE FROM OFFICE_HOUR oh WHERE EMP_UID = 4 AND W_START = '2020-07-31 08:55:20';
-		 
--- 이번 달 주말 제외한 모든 날짜의 출근 현황 뽑기
-SELECT *
-FROM (SELECT mon.*
-      FROM (SELECT TRUNC(SYSDATE ,'mm') + LEVEL - 1 AS IN_DATE
-         FROM DUAL CONNECT BY LEVEL <= ROUND(SYSDATE - TRUNC(SYSDATE,'mm'))) mon
-      WHERE TO_CHAR(mon.IN_DATE, 'd') NOT IN (1, 7)) work_day
-LEFT OUTER JOIN (SELECT * FROM OFFICE_HOUR WHERE EMP_UID = 4) oh 
-ON oh.W_START BETWEEN work_day.in_date AND work_day.in_date + 1
-;
-
--- 휴일 뺀 이번 월 모든 날짜 뽑기
-SELECT mon.*
-FROM (SELECT TRUNC(SYSDATE ,'mm') + LEVEL - 1 AS IN_DATE
-   FROM DUAL CONNECT BY LEVEL <= ROUND(SYSDATE - TRUNC(SYSDATE,'mm'))) mon
-WHERE TO_CHAR(mon.IN_DATE, 'd') NOT IN (1, 7)
-;
-
-SELECT TRUNC(SYSDATE ,'mm') + LEVEL - 1 FROM dual;
-
-SELECT ROUND(SYSDATE - TRUNC(SYSDATE,'mm')) FROM dual;
+SELECT att.*,  FROM attendance att, ;
 
 -- 8월까지 휴가인 직원 INSERT
 INSERT INTO HOLIDAY (H_UID , H_START , H_END , EMP_UID )
@@ -165,18 +127,24 @@ SELECT * FROM HOLIDAY h WHERE EMP_UID = 1;
 -------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------
 -- 만약 휴가가 다음달까지 연장 되어있을때 이번달 말일 - 이번달 휴가 시작일 + 1 해주기
-SELECT 
+SELECT sum(
 	CASE 
-		-- 이번달 말이 휴가일에 포함이 되어 있다면 --
 		WHEN TRUNC(LAST_DAY(SYSDATE), 'dd') BETWEEN h.H_START AND h.H_END THEN TRUNC(LAST_DAY(SYSDATE), 'dd') - h.H_START + 1
 		WHEN TRUNC(SYSDATE ,'mm') BETWEEN h.H_START AND h.H_END THEN h.H_END - TRUNC(sysdate, 'mm')
 		ELSE h.H_END - h.H_START + 1
-		END AS holidayCnt 
+		END ) AS holidayCnt 
 FROM HOLIDAY h 
-WHERE EMP_UID = 1
+WHERE EMP_UID = 1 AND TO_CHAR(H_START , 'mm') = TO_CHAR(SYSDATE , 'mm');
 ;
 -------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------
+
+SELECT count(CASE 
+				WHEN TRUNC(LAST_DAY(SYSDATE), 'dd') BETWEEN h.H_START AND h.H_END THEN TRUNC(LAST_DAY(SYSDATE), 'dd') - h.H_START + 1 END ) AS "untillThisMonth",
+		count(CASE 
+				WHEN TRUNC(SYSDATE ,'mm') BETWEEN h.H_START AND h.H_END THEN h.H_END - TRUNC(sysdate, 'mm') END ) AS "untillToday",
+		count(CASE 
+				h.H_END - h.H_START + 1 END )
 
 CREATE OR REPLACE VIEW holi_count AS 
 SELECT h.EMP_UID ,
@@ -187,27 +155,17 @@ SELECT h.EMP_UID ,
 		ELSE h.H_END - h.H_START + 1
 		END AS holidayCnt 
 FROM HOLIDAY h ;
-SELECT * FROM holi_count;
+SELECT count(*) FROM holi_count WHERE emp_uid = 1 ;
 -- DROP VIEW holi_count;
 
 SELECT * FROM holi_count hc , HOLIDAY h 
 WHERE hc.EMP_UID = 1 AND TO_CHAR(h.H_START , 'mm') = TO_CHAR(SYSDATE , 'mm') ;
 
 INSERT INTO HOLIDAY (H_UID , H_START , H_END , EMP_UID )
-VALUES (SEQ_HOLIDAY_H_UID.nextval, '2020-08-28', '2020-09-03', 1);
+VALUES (SEQ_HOLIDAY_H_UID.nextval, '2020-08-23', '2020-08-25', 1);
 
 SELECT * FROM attendance WHERE "uid" = 4;
 SELECT count(*) FROM attendance WHERE "uid" = 4 AND TO_CHAR("start", 'mm') = TO_CHAR(SYSDATE, 'mm') ;
-
-SELECT COUNT(CASE 
-			 WHEN "status" = '출근' THEN '출근' END ) AS intime, 
-	   COUNT(CASE 
-			 WHEN "status" = '퇴근' THEN '퇴근' END ) AS off, 
-	   COUNT(CASE 
-			 WHEN "status" = '조퇴' THEN '조퇴' END ) AS earlyOff, 
-	   COUNT(CASE 
-			 WHEN "status" = '지각' THEN '지각' END ) AS late
-FROM attendance WHERE "uid" = 4 AND TO_CHAR("start", 'mm') = TO_CHAR(to_date('2020-07-30'), 'mm');
 
 SELECT trunc(last_day(SYSDATE), 'dd')
 FROM DUAL 
@@ -232,6 +190,7 @@ FROM currStatus
 ;
 
 SELECT * FROM currStatus;
+SELECT * FROM attendance;
 
 CREATE OR REPLACE VIEW currStatus AS 
 SELECT e.EMP_UID "e_uid", e.EMP_NAME name, category.W_START "start", d.DEP_NAME posRank, p.P_NAME dept, category.W_END "end", category.stat "status", category.w_uid 

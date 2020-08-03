@@ -305,88 +305,87 @@ System.out.println(empname);
         
       </script>
       <script>
-         var token = $("meta[name='_csrf']").attr("content");
-         var header = $("meta[name='_csrf_header']").attr("content");
-         $(document).ready(function() {
-            // ajax를 보내기전에 header세팅해주기
-            $.ajaxSetup({
-               beforeSend : function(xhr) {
-                  xhr.setRequestHeader(header, token);
-               }
-            });
+//          var token = $("meta[name='_csrf']").attr("content");
+//          var header = $("meta[name='_csrf_header']").attr("content");
+//          $(document).ready(function() {
+//             // ajax를 보내기전에 header세팅해주기
+//             $.ajaxSetup({
+//                beforeSend : function(xhr) {
+//                   xhr.setRequestHeader(header, token);
+//                }
+//             });
 
-            var sessionData = "present";
-            //
+//             var sessionData = "present";
+//             //
             
-            //
-            $('#present').click(function() {
-               var data = $('#presentform').serialize();
-               //alert(data);
-               $.ajax({
-                  url : "/hrm/officehour/present",
-                  type : "POST",
-                  cache : false,
-                  data : data,
-                  success : function(data, status) {
-                     if (status == "success") {
-                        //alert('수정 성공');
-                        sessionStorage.removeItem("off");
-		               sessionStorage.setItem("present", sessionData);
-		               //alert(sessionStorage.getItem("present"));
+//             //
+//             $('#present').click(function() {
+//                var data = $('#presentform').serialize();
+//                //alert(data);
+//                $.ajax({
+//                   url : "/hrm/officehour/present",
+//                   type : "POST",
+//                   cache : false,
+//                   data : data,
+//                   success : function(data, status) {
+//                      if (status == "success") {
+//                         //alert('수정 성공');
+//                         sessionStorage.removeItem("off");
+// 		               sessionStorage.setItem("present", sessionData);
+// 		               //alert(sessionStorage.getItem("present"));
                			
-                     }
-                  }
+//                      }
+//                   }
 
-               });
-              var compare = sessionStorage.getItem("present");
-              console.log(typeof(compare));
-// 			  $('#present').attr('disabled',true);
-// 			  $('#off').attr('disabled',false);
+//                });
+//               var compare = sessionStorage.getItem("present");
+//               console.log(typeof(compare));
+// // 			  $('#present').attr('disabled',true);
+// // 			  $('#off').attr('disabled',false);
               	
                
-            })
+//             })
 
-         });
+//          });
       </script>
       <script>
-         var token = $("meta[name='_csrf']").attr("content");
-         var header = $("meta[name='_csrf_header']").attr("content");
-         $(document).ready(function() {
-            // ajax를 보내기전에 header세팅해주기
-            $.ajaxSetup({
-               beforeSend : function(xhr) {
-                  xhr.setRequestHeader(header, token);
-               }
-            });
+//          var token = $("meta[name='_csrf']").attr("content");
+//          var header = $("meta[name='_csrf_header']").attr("content");
+//          $(document).ready(function() {
+//             // ajax를 보내기전에 header세팅해주기
+//             $.ajaxSetup({
+//                beforeSend : function(xhr) {
+//                   xhr.setRequestHeader(header, token);
+//                }
+//             });
 			
-            var sessionData = "off";
-            
-            $('#off').click(function() {
-               var data = $('#offform').serialize();
-             // alert(data);
-               $.ajax({
-                  url : path + "/officehour/off",
-                  type : "POST",
-                  cache : false,
-                  data : data,
-                  success : function(data, status) {
-                     if(status == "success") {
-                        alert('수정 성공');
-                        sessionStorage.removeItem("present");
-                    	 sessionStorage.setItem("off", sessionData);
-                    	 
-                     }
-                  }
+//             var sessionData = "off";
 
-               });
-               var compare = sessionStorage.getItem("off");
-               console.log(typeof(compare));
-//                $('#present').attr('disabled',false);
-//                $('#off').attr('disabled',true);
+//             $('#off').click(function() {
+//                var data = $('#offform').serialize();
+//              // alert(data);
+//                $.ajax({
+//                   url : path + "/officehour/off",
+//                   type : "POST",
+//                   cache : false,
+//                   data : data,
+//                   success : function(data, status) {
+//                      if (status == "success") {
+//                         alert('수정 성공');
+//                         sessionStorage.removeItem("present");
+//                     	 sessionStorage.setItem("off", sessionData);
+//                      }
+//                   }
+
+//                });
+//                var compare = sessionStorage.getItem("off");
+//                console.log(typeof(compare));
+// //                $('#present').attr('disabled',false);
+// //                $('#off').attr('disabled',true);
                
-            })
+//             })
 
-         });
+//          });
       </script>
       <script type="text/javascript" src="<%= request.getContextPath()%>/resources/JS/login/clsSessionStorage.js"></script>
       </div>
