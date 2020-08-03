@@ -32,14 +32,25 @@
 	</update>
 	
 	<select id="loginCount" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM  OFFICE_HOUR WHERE EMP_UID =  #{param1} AND TO_CHAR(W_START,'yyyy-mm-dd')= TO_CHAR(SYSDATE, 'yyyy-mm-dd')
+		SELECT COUNT(*) FROM  OFFICE_HOUR WHERE EMP_UID = #{param1} AND TO_CHAR(W_START,'yyyy-mm-dd') = TO_CHAR(SYSDATE, 'yyyy-mm-dd')
 	</select>
 	
 	<select id="outCount" resultType="java.lang.Integer">
-	SELECT COUNT(*) FROM  OFFICE_HOUR WHERE EMP_UID = #{param1} AND TO_CHAR(W_END,'yyyy-mm-dd')= TO_CHAR(SYSDATE, 'yyyy-mm-dd')
+		SELECT COUNT(*) FROM  OFFICE_HOUR WHERE EMP_UID = #{param1} AND TO_CHAR(W_END,'yyyy-mm-dd') = TO_CHAR(SYSDATE, 'yyyy-mm-dd')
 	</select>
 	
-	
+	<select id="selectAttendByUid"
+		flushCache="true"
+		resultType="com.mgrg.hrm.member.AttendanceDTO">
+		SELECT e.EMP_NAME "name", W_START "start" ,W_END "end"
+			FROM (
+				SELECT W_START ,W_END ,EMP_UID 
+				FROM OFFICE_HOUR
+				WHERE EMP_UID = #{uid} AND ( W_START BETWEEN TRUNC(SYSDATE ,'dd') AND TRUNC(SYSDATE + 1 ,'dd')) 
+				) h
+			LEFT JOIN EMPLOYEES e
+			ON h.EMP_UID = e.EMP_UID
+	</select>
 	
 	
 </mapper>

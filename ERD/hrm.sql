@@ -68,8 +68,6 @@ CREATE TABLE employees
 	PRIMARY KEY (emp_uid)
 );
 
-SELECT * FROM EMPLOYEES e2 ;
-
 CREATE TABLE holiday
 (
 	h_uid number NOT NULL,
@@ -337,8 +335,6 @@ INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_
 VALUES (SEQ_employees_emp_uid.nextval, '공돌이', to_date('1898-10-04', 'YYYY-MM-DD'), 'gong@gmail.com', 'gong', '123', '123456 서울특별시 강남구 강남로 한강변 초대형 아파트 제일 윗층과 인천광역시 부평구 신생로 새로생긴 아파트 102동 402호에 살고있는 공돌이 입니다.', 01012345678,50000000, 1, 5);
 ;
 
-SELECT * FROM EMPLOYEES;
-
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
 VALUES (SEQ_employees_emp_uid.nextval, '대대리', to_date('1980-01-07', 'YYYY-MM-DD'), 'bald@gmail.com', 'bald', '123', 60000000, 2, 1);
 ;
@@ -380,18 +376,6 @@ INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-31', 'YYYY-MM-DD'), to_date('2020-07-31', 'YYYY-MM-DD'), 1)
 ;
 
-/* SELECT */
-
-SELECT * FROM EMPLOYEES ;
-SELECT * FROM DEPARTMENT;
-SELECT * FROM NOTICE;
-SELECT * FROM POSITIONRANK;
-SELECT * FROM HOLIDAY;
-SELECT * FROM OFFICE_HOUR;
-SELECT n_uid "uid", n_subject subject, n_content content,n_regdate regdate,dep_uid department, p_uid "position"  FROM NOTICE where p_uid = 1  ;
-select n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid from notice where p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC ;
-SELECT * FROM (SELECT n_uid "uid", n_subject subject, n_content content, n_regdate regdate, dep_uid depuid, p_uid puid FROM notice WHERE p_uid = 1 AND (DEP_UID IS NULL OR DEP_UID = 1) ORDER BY N_REGDATE DESC) WHERE ROWNUM <= 5;
-
 
 -- 공통과 해당되는 부서의 목록보기
 SELECT * FROM NOTICE WHERE (DEP_UID IS NULL OR DEP_UID = 1) AND P_UID <= 1;
@@ -413,52 +397,6 @@ SELECT * FROM NOTI;
 -- 뷰 삭제
 -- DROP VIEW NOTI;
 
-/* 해당 년도 휴가 가져오기 */
-SELECT *
-FROM HOLIDAY h 
-WHERE h.EMP_UID = 1 AND h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
-;
-
-/* 해당 사원의 모든 휴가의 휴가 일수 구하기 */
-SELECT (h.H_END - h.H_START) "Day"
-FROM HOLIDAY h 
-WHERE h.EMP_UID = 1 AND h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
-;
-
-SELECT h.h_uid "uid" ,h.h_start startTime, h.h_end endTime, e.emp_uid emp_uid, e.EMP_NAME name
-FROM HOLIDAY h JOIN EMPLOYEES e ON h.EMP_UID = e.EMP_UID WHERE e.EMP_UID = 1;
-
-
-
-/* 해당 사원의 총 휴가 일수 구하기 */
-
-SELECT SUM("Day") "useHoliday"
-FROM (
-	SELECT (h.H_END - h.H_START) "Day"
-	FROM HOLIDAY h 
-	WHERE h.EMP_UID = 1 AND h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
-)
-;
-
-/* 모든 사원의 휴가 일수 구하기 */
-SELECT SUM("Day") "useHoliday", EMP_UID 
-FROM (
-	SELECT (h.H_END - h.H_START) "Day", h.EMP_UID EMP_UID
-	FROM HOLIDAY h 
-	WHERE h.H_START BETWEEN TO_DATE('2020-01-01', 'YYYY-MM-DD') AND TO_DATE('2021-01-01', 'YYYY-MM-DD')
-)
-GROUP BY EMP_UID 
-;
-/* 현재 년도의 모든 사원의 휴가 일수 */
-SELECT SUM("Day") "useHoliday", EMP_UID 
-FROM (
-	SELECT (h.H_END - h.H_START) "Day", h.EMP_UID EMP_UID
-	FROM HOLIDAY h 
-	WHERE h.H_START BETWEEN TO_DATE(TO_CHAR(SYSDATE ,'YYYY') , 'YYYY') AND TO_DATE(TO_CHAR(SYSDATE ,'YYYY') + 1, 'YYYY')
-)
-GROUP BY EMP_UID 
-;
-
 /* 휴가 VIEW */
 CREATE OR REPLACE VIEW holi AS
 SELECT SUM("Day") "useHoliday", EMP_UID 
@@ -470,16 +408,6 @@ FROM (
 GROUP BY EMP_UID 
 ;
 
-SELECT * FROM holi
-;
-
-SELECT "useHoliday" , EMP_UID empuid FROM holi;
-
-
-/* 사원목록 */
-SELECT * FROM EMPLOYEES
-;
-
 /* 사원목록 VIEW */
 CREATE OR REPLACE VIEW emp AS
 SELECT e.EMP_UID "uid", e.EMP_NAME name, e.EMP_BIRTHDATE birthday, e.EMP_PHONENUM phonenum, e.EMP_EMAIL email, e.EMP_ID id, e.EMP_PW password, e.EMP_ADDRZONECODE addrZoneCode, e.EMP_ADDRROAD addrRoad, e.EMP_ADDRDETAIL addrDetail, e.EMP_HIREDATE hiredate, e.EMP_SALARY salary, p.P_UID p_uid, p.P_NAME "position", d.DEP_UID ,d.DEP_NAME department, NVL(h."useHoliday", 0) "useHoliday", p.P_HOLIDAY "total", (p.P_HOLIDAY - NVL(h."useHoliday", 0)) "leftHoliday"
@@ -487,8 +415,6 @@ FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID
 				LEFT OUTER JOIN POSITIONRANK p ON e.P_UID = p.P_UID
 				LEFT OUTER JOIN holi h ON e.EMP_UID = h.EMP_UID
 ;
-
-SELECT * FROM emp;
 
 -----------------------------------------------
 -- Office HOUR Dummy Variables --

@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	var emp_uid = $('#empUid').val();
-	alert(emp_uid + " " + typeof(emp_uid));
+//	alert(emp_uid + " " + typeof(emp_uid));
 	var ctx = document.getElementById('myChart');
 	
 	loadData(emp_uid);

@@ -1,6 +1,5 @@
 package com.mgrg.hrm.login;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 
 import com.mgrg.hrm.fileupload.IDocDAO;
 import com.mgrg.hrm.fileupload.docDTO;
-import com.mgrg.hrm.officehr.OhDTO;
 
 public class BSelectCommand implements BCommand {
 
@@ -46,15 +44,15 @@ public class BSelectCommand implements BCommand {
 		List<docDTO> arr2 = dao3.select();
 		model.addAttribute("doclist", arr2);
 		
-		// 출근버튼 컨트롤러
-		int num = dao.loginCount(dto.getDep_uid());
-		System.out.println("로그인 했뉘?" + num);
-		session.setAttribute("numin", num);
-		
-		// 퇴근버튼 컨트롤러
-		int num2 = dao.outCount(dto.getDep_uid());
-		System.out.println("퇴근은 했뉘?" + num2);
-		session.setAttribute("numout", num2);
+//		// 출근버튼 컨트롤러
+//		int num = dao.loginCount(dto.getDep_uid());
+//		System.out.println("로그인 했뉘?" + num);
+//		session.setAttribute("numin", num);
+//		
+//		// 퇴근버튼 컨트롤러
+//		int num2 = dao.outCount(dto.getDep_uid());
+//		System.out.println("퇴근은 했뉘?" + num2);
+//		session.setAttribute("numout", num2);
 
 		System.out.println("결과: " + (SessionDTO) model.getAttribute("puid"));
 
