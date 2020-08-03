@@ -19,12 +19,12 @@ $(function(){
 	
 	input_pw.on('propertychange change keyup paste input', function(e){
 		if(input_id != null && input_id.val() != ''){
-			chk_idUser(input_id, input_pw, change_btn);
+			chk_idUser(input_id, input_pw, input_pwnew, input_pwchk, change_btn);
 		}
 	});
 	input_id.on('propertychange change keyup paste input', function(e){
 		if(input_pw != null && input_pw.val() != ''){
-			chk_idUser(input_id, input_pw, change_btn);
+			chk_idUser(input_id, input_pw, input_pwnew, input_pwchk, change_btn);
 		}
 	});
 	change_btn.on('click', function(){
@@ -32,11 +32,11 @@ $(function(){
 	});
 });
 
-function chk_idUser(form_id, form_pw, form_btn){
+function chk_idUser(form_id, form_pw, form_pwnew, form_pwchk, form_btn){
 	id = form_id.val();
 	pw = form_pw.val();
 	$.ajax({
-		url : 'findId',
+		url : 'changePw/findId',
 		type : 'POST',
 		cache : false,
 		data : {
@@ -46,12 +46,12 @@ function chk_idUser(form_id, form_pw, form_btn){
 		success : function(data, status){
 			if(status == 'success'){
 				if(data.status == 'OK'){
-					form_id.attr('disabled', false);
-					form_pw.attr('disabled', false);
+					form_pwnew.attr('disabled', false);
+					form_pwchk.attr('disabled', false);
 					form_btn.attr('disabled', false);
 				} else if(data.status == 'FAIL'){
-					form_id.attr('disabled', true);
-					form_pw.attr('disabled', true);
+					form_pwnew.attr('disabled', true);
+					form_pwchk.attr('disabled', true);
 					form_btn.attr('disabled', true);
 				} // end data == OK
 			} // end success
@@ -64,7 +64,7 @@ function change_user_Pw(form_id, form_pw, form_pwnew){
 	pw = form_pw.val();
 	pwnew = form_pwnew.val();
 	$.ajax({
-		url : 'findId',
+		url : 'changePw/changePw',
 		type : 'POST',
 		cache : false,
 		data : {

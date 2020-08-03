@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mgrg.hrm.JSONBase;
-import com.mgrg.hrm.commute.HolidayCommand;
-import com.mgrg.hrm.commute.HolidayJSON;
 import com.mgrg.hrm.pwchange.ChangePassword;
 import com.mgrg.hrm.pwchange.findIdPwCommand;
 
