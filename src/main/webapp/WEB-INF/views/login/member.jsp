@@ -160,7 +160,7 @@ System.out.println(empname);
          </div>
          <table class="table table-sm table-hover table-borderless tale">
 
-            <theads>
+            <thead>
                <tr>
                   <th scope="col">No.</th>
                   <th class="noticeCenter" scope="col">문서 양식</th>
@@ -178,7 +178,7 @@ System.out.println(empname);
                            <td>${dto2.doc_uid }</td>
                            <td class="noticeCenter"><span class="noticea"
                               data-uid="${dto2.doc_uid }">${dto2.doc_title }</span></td>
-                           <td class="noticeCenter">${dto2.doc_file }</td>
+                           <td class="noticeCenter"><a style="color:black;"href="${pageContext.request.contextPath}/upload/down?fileName=${dto2.doc_file}">${dto2.doc_file }</a></td>
 
                         </tr>
                      </c:forEach>
@@ -323,7 +323,7 @@ System.out.println(empname);
 //             });
 			
 //             var sessionData = "off";
-            
+
 //             $('#off').click(function() {
 //                var data = $('#offform').serialize();
 //              // alert(data);
@@ -337,7 +337,6 @@ System.out.println(empname);
 //                         alert('수정 성공');
 //                         sessionStorage.removeItem("present");
 //                     	 sessionStorage.setItem("off", sessionData);
-                    	 
 //                      }
 //                   }
 
