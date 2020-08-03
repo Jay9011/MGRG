@@ -12,13 +12,20 @@ import com.mgrg.hrm.JSONBase;
 import com.mgrg.hrm.commute.HolidayCommand;
 import com.mgrg.hrm.commute.HolidayJSON;
 import com.mgrg.hrm.pwchange.ChangePassword;
+import com.mgrg.hrm.pwchange.findIdPwCommand;
 
 @RestController
 @RequestMapping("/changePw")
 public class PwChangeController {
 
-//	@RequestMapping("/findId")
-	
+	@RequestMapping("/findId")
+	public JSONBase findIdPw(String id, String pw, Model model ) {
+		model.addAttribute("id",id);
+		model.addAttribute("pw",pw);
+		new findIdPwCommand().execute(model);
+		JSONBase list = (JSONBase) model.getAttribute("list");
+		return list;
+	}
 	
 	@PostMapping("/changePw")
 	public JSONBase changePw(Model model, @RequestParam Map<String, String> param) {
