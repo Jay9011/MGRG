@@ -25,7 +25,10 @@
 	</insert>
 	
 	<update id="off" flushCache="true" parameterType="int">
-		update OFFICE_HOUR set w_end = SYSDATE where emp_uid = #{param1} AND TO_CHAR(SYSDATE, 'yyyymmdd') = (SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = #{param1})
+		UPDATE
+		 	OFFICE_HOUR
+	  	set w_end = SYSDATE where emp_uid = #{param}
+		 AND TO_CHAR(W_START,'yyyy-mm-dd') = TO_CHAR(SYSDATE, 'yyyy-mm-dd')
 	</update>
 	
 	<select id="loginCount" resultType="java.lang.Integer">

@@ -2,8 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%
-   int puid = (Integer) session.getAttribute("puid");
+<%   int puid = (Integer) session.getAttribute("puid");
 int depuid = (Integer) session.getAttribute("depuid");
 int empuid = (Integer) session.getAttribute("empuid");
 String empname = (String) session.getAttribute("empname");
@@ -327,9 +326,9 @@ System.out.println(empname);
             
             $('#off').click(function() {
                var data = $('#offform').serialize();
-              alert(data);
+             // alert(data);
                $.ajax({
-                  url : path + "officehour/off",
+                  url : path + "/officehour/off",
                   type : "POST",
                   cache : false,
                   data : data,
