@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mgrg.hrm.officehr.ChartDAO">
+	<select id="chartList" resultType="com.mgrg.hrm.officehr.ChartDTO">
+		SELECT COUNT(CASE 
+				 WHEN "status" = '미출근' THEN '미출근' END ) AS absent, 
+		   COUNT(CASE 
+				 WHEN "status" = '퇴근' THEN '퇴근' END ) AS off, 
+		   COUNT(CASE 
+				 WHEN "status" = '조퇴' THEN '조퇴' END ) AS earlyOff, 
+		   COUNT(CASE 
+				 WHEN "status" = '지각' THEN '지각' END ) AS late
+		FROM attendance WHERE "uid" = #{uid} AND TO_CHAR("start", 'mm') = TO_CHAR(#{date}, 'mm')
+	</select>
+	
+	<select id="holiCnt" resultType="java.lang.Integer">
+		SELECT NVL(sum(
+			CASE 
+				WHEN TRUNC(LAST_DAY(SYSDATE), 'dd') BETWEEN h.H_START AND h.H_END THEN TRUNC(LAST_DAY(SYSDATE), 'dd') - h.H_START + 1
+				WHEN TRUNC(SYSDATE ,'mm') BETWEEN h.H_START AND h.H_END THEN h.H_END - TRUNC(sysdate, 'mm')
+				ELSE h.H_END - h.H_START + 1
+				END ), 0) AS holidayCnt 
+		FROM HOLIDAY h 
+		WHERE EMP_UID = #{uid} AND TO_CHAR(H_START , 'mm') = TO_CHAR(#{date} , 'mm')
+	</select>
+
+</mapper>

@@ -81,9 +81,7 @@ FROM DEPARTMENT d , POSITIONRANK p , EMPLOYEES e LEFT OUTER JOIN
 
 -------------------------------------------------------------------------------------------------------------		
 -- attendance VIEW를 활용해서 직원 한달 출결 횟수 뽑기--------------------------------------------------------------------
-SELECT * FROM attendance WHERE "uid" = 1;
-SELECT "uid", "status", "start" FROM attendance WHERE "uid" = 1;
-
+SELECT * FROM attendance WHERE "uid" = 4;
 SELECT count(*) FROM attendance WHERE "uid" = 4 AND TO_CHAR("start", 'mm') = TO_CHAR(SYSDATE, 'mm') ;
 
 SELECT COUNT(CASE 
@@ -94,12 +92,18 @@ SELECT COUNT(CASE
 			 WHEN "status" = '조퇴' THEN '조퇴' END ) AS earlyOff, 
 	   COUNT(CASE 
 			 WHEN "status" = '지각' THEN '지각' END ) AS late
-FROM attendance WHERE "uid" = 4 AND TO_CHAR("start", 'mm') = TO_CHAR(to_date('2020-07-30'), 'mm');
+FROM attendance WHERE "uid" = 3 AND TO_CHAR("start", 'mm') = TO_CHAR(to_date('2020-08-30'), 'mm');
 -------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------
+SELECT * FROM attendance WHERE "uid" = 3;
+SELECT * FROM OFFICE_HOUR oh WHERE EMP_UID = 7;
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID )
+VALUES (SEQ_OFFICE_HOUR_W_UID.NEXTVAL, '2020-08-03 08:56:00' , '2020-08-03 18:20:23', 3);
+INSERT INTO HOLIDAY (H_UID , H_START , H_END , EMP_UID )
+VALUES (SEQ_HOLIDAY_H_UID.nextval, '2020-07-29', '2020-08-01', 7);
 
 SELECT att.*,  FROM attendance att, ;
-
+INSERT INTO OFFICE_HOUR ();
 -- 8월까지 휴가인 직원 INSERT
 INSERT INTO HOLIDAY (H_UID , H_START , H_END , EMP_UID )
 VALUES
@@ -127,24 +131,17 @@ SELECT * FROM HOLIDAY h WHERE EMP_UID = 1;
 -------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------
 -- 만약 휴가가 다음달까지 연장 되어있을때 이번달 말일 - 이번달 휴가 시작일 + 1 해주기
-SELECT sum(
+SELECT NVL( sum(
 	CASE 
 		WHEN TRUNC(LAST_DAY(SYSDATE), 'dd') BETWEEN h.H_START AND h.H_END THEN TRUNC(LAST_DAY(SYSDATE), 'dd') - h.H_START + 1
 		WHEN TRUNC(SYSDATE ,'mm') BETWEEN h.H_START AND h.H_END THEN h.H_END - TRUNC(sysdate, 'mm')
 		ELSE h.H_END - h.H_START + 1
-		END ) AS holidayCnt 
+		END ), 0) AS holidayCnt 
 FROM HOLIDAY h 
-WHERE EMP_UID = 1 AND TO_CHAR(H_START , 'mm') = TO_CHAR(SYSDATE , 'mm');
+WHERE EMP_UID = 7 AND TO_CHAR(H_START , 'mm') = TO_CHAR(SYSDATE , 'mm')
 ;
 -------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------
-
-SELECT count(CASE 
-				WHEN TRUNC(LAST_DAY(SYSDATE), 'dd') BETWEEN h.H_START AND h.H_END THEN TRUNC(LAST_DAY(SYSDATE), 'dd') - h.H_START + 1 END ) AS "untillThisMonth",
-		count(CASE 
-				WHEN TRUNC(SYSDATE ,'mm') BETWEEN h.H_START AND h.H_END THEN h.H_END - TRUNC(sysdate, 'mm') END ) AS "untillToday",
-		count(CASE 
-				h.H_END - h.H_START + 1 END )
 
 CREATE OR REPLACE VIEW holi_count AS 
 SELECT h.EMP_UID ,
@@ -155,7 +152,9 @@ SELECT h.EMP_UID ,
 		ELSE h.H_END - h.H_START + 1
 		END AS holidayCnt 
 FROM HOLIDAY h ;
-SELECT count(*) FROM holi_count WHERE emp_uid = 1 ;
+SELECT count(*) FROM holi_count WHERE emp_uid = 7 ;
+SELECT * FROM holi_count;
+SELECT * FROM HOLIDAY h2 ;
 -- DROP VIEW holi_count;
 
 SELECT * FROM holi_count hc , HOLIDAY h 

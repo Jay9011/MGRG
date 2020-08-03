@@ -53,11 +53,5 @@ public class OfficeHrRestController {
 		return json;
 	}
 	
-	@RequestMapping(value = "/chart", method = RequestMethod.GET)
-	public OhJSON chart(@RequestParam("uid") int uid, Model model) {
-		model.addAttribute("uid", uid);
-		new OfficeChartCommand().execute(model);
-		OhJSON json = (OhJSON)model.getAttribute("json");
-		return json;
-	}
+
 }
