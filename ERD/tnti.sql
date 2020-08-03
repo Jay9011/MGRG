@@ -72,3 +72,12 @@ FROM (SELECT TRUNC(SYSDATE ,'mm') + LEVEL - 1 AS IN_DATE
 WHERE TO_CHAR(mon.IN_DATE, 'd') NOT IN (1, 7)
 ;
 
+update OFFICE_HOUR set w_end = SYSDATE 
+where emp_uid = 7 AND TO_CHAR(sysdate, 'yyyymmdd') = (
+SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = 7);
+
+SELECT to_char(W_START, 'yyyymmdd') FROM OFFICE_HOUR WHERE EMP_UID = 7;
+
+
+
+
