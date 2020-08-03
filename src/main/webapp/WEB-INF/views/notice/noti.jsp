@@ -38,13 +38,13 @@
 		</div>
 		</div>
 		<form id="frmList" name="frmList">
-			<table id="tlc"  class="table table-hover" style="width:100%">
+			<table id="tlc"  class="table table-hover nowrap" style="width:100%">
 				<thead>
 					<th style="width:3%"> </th>
-					<th style="width:75%">제목</th>
-					<th style="width:9%">작성일</th>
-					<th style="width:8%">부서</th>
-					<th style="width:5%">직책</th>
+					<th style="width:60%">제목</th>
+					<th style="width:17%">작성일</th>
+					<th style="width:10%">부서</th>
+					<th style="width:10%">직책</th>
 				</thead>
 
 			</table>

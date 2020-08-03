@@ -55,6 +55,7 @@ System.out.println(empname);
               <ul class="kindlist">
                <li><span class="kind"><div class="type-absence"></div> 출근</span></li>
                <li><span class="kind"><div class="type-late"></div> 지각</span></li>
+               <li><span class="kind"><div class="type-eleave"></div> 조퇴</span></li>
                <li><span class="kind"><div class="type-attend"></div> 결근</span></li>
                <li><span class="kind"><div class="type-holiday"></div> 휴가 </span></li>
             </ul>
@@ -146,13 +147,13 @@ System.out.println(empname);
          </table>
          </div>
            <div class="col-12  col-md-1"></div>
-           	  <!--     문서 게시판 -->
+                 	  <!--     문서 게시판 -->
     
            <div class="col-12 col-md-4">
          <div>
             <h2 class="float-left">문서</h2>
             <div class="float-right">
-               <button type="button" id="viewnotice" class="btn btnadd">
+               <button type="button" id="viewdoc" class="btn btnadd">
                   <small>문서 더보기</small> +
 
                </button>
@@ -160,7 +161,7 @@ System.out.println(empname);
          </div>
          <table class="table table-sm table-hover table-borderless tale">
 
-            <thead>
+            <theads>
                <tr>
                   <th scope="col">No.</th>
                   <th class="noticeCenter" scope="col">문서 양식</th>
@@ -176,9 +177,9 @@ System.out.println(empname);
                      <c:forEach var="dto2" items="${doclist}" begin="0" end="5">
                         <tr>
                            <td>${dto2.doc_uid }</td>
-                           <td class="noticeCenter"><span class="noticea"
-                              data-uid="${dto2.doc_uid }">${dto2.doc_title }</span></td>
-                           <td class="noticeCenter"><a style="color:black;"href="${pageContext.request.contextPath}/upload/down?fileName=${dto2.doc_file}">${dto2.doc_file }</a></td>
+                           <td class="noticeCenter"><span class="doc"
+                              data-uid="${dto2.doc_uid }" onclick="location.href='../upload/down?fileName=${dto2.doc_file}'">${dto2.doc_title }</span></td>
+                           <td class="noticeCenter">${dto2.doc_file }</td>
 
                         </tr>
                      </c:forEach>
@@ -219,18 +220,54 @@ System.out.println(empname);
                               <td>${dto.uid }</td>
                               <td><span class="noticea" data-uid="${dto.uid }">${dto.subject }</span></td>
                               <td>${dto.regdate }</td>
-
                            </tr>
                         </c:forEach>
                      </tbody>
                   </table>
-			
                </div>
             </div>
          </div>
       </div>
+      
 <!--                ///////////////////////////////////////////////////// -->
-
+		<!-- 문서 더보기 모달 -->
+      <div class="modal fade" id="viewdocmodal" data-keyboard="false"
+         role="dialog" aria-labelledby="staticBackdropLabel"
+         aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">문서 양식</h5>
+                  <button type="button" class="close" data-dismiss="modal"
+                     aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body margin">
+                  <table id="notitable"
+                     class="table table-sm table-hover table-borderless tale tale2">
+                     <thead class="table-primary">
+                        <tr>
+                           <th style="width: 1%">No.</th>
+                           <th style="width: 95%; text-align: center;">문서 양식</th>
+                           <th style="width: 4%">문서 파일</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <c:forEach var="dto2" items="${doclist}">
+                           <tr>
+                              <td>${dto2.doc_uid }</td>
+                              <td style="text-align: center;"><span class="doc" data-uid="${dto2.doc_uid }" onclick="location.href='../upload/down?fileName=${dto2.doc_file}'">${dto2.doc_title }</span></td>
+                              <td>${dto2.doc_file }</td>
+                           </tr>
+                        </c:forEach>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>	
+		<!-- ///////////////////////////////////////////////////// -->
       <!-- 공지사항 내용 보기 -->
       <div class="modal fade" id="uviewModal" data-keyboard="false"
          role="dialog" aria-labelledby="staticBackdropLabel"
