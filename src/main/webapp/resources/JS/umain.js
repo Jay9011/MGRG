@@ -17,6 +17,13 @@ $(document).ready(function() {
 	$('#viewdoc').click(function() {
 		$('#viewdocmodal').modal('show'); 
 	});
+	
+	// 프로필 변경
+	$('#profile').click(function() {
+		$('#profileModal').modal('show');
+	});
+	
+	
 	dataTable();
 	showView();
 	
