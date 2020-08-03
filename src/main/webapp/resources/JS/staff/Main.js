@@ -375,6 +375,8 @@ function initStaffForm(modal){
 	modal.find('#staff_department option:eq(0)').prop('selected', true);
 	modal.find('#staff_position option:eq(0)').prop('selected', true);
 	modal.find('form span').html('');
+	modal.find('.invalid-form').removeClass('invalid-form');
+	modal.find('input[class=editForm]').val('');
 }
 
 function initViewStaff(){
