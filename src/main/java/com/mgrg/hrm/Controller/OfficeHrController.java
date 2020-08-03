@@ -43,8 +43,8 @@ public class OfficeHrController {
 	@PostMapping("/off")
 	public String off(HttpServletRequest request,HttpServletResponse response) {
 		String empuid = request.getParameter("emp_uid");
-		
-		System.out.println("present() => "+empuid);
+		System.out.println("들어오오오오ㅗ아ㅗ아");
+		System.out.println("off() => "+empuid);
 		int empuid2= Integer.parseInt(empuid);
 		ILoginDAO dao = C.sqlSession.getMapper(ILoginDAO.class);
 		dao.off(empuid2);
