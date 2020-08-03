@@ -204,5 +204,7 @@
 			{
 			}
 		});
+		chartReset();
+		holidayReload();
 	}
     </script>

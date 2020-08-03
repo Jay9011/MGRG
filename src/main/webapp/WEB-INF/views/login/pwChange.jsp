@@ -14,6 +14,7 @@
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 		crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<link rel="stylesheet" type="text/css"
 		href="<%=request.getContextPath()%>/resources/CSS/mail.css">
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
