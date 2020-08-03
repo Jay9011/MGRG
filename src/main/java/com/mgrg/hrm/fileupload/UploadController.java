@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -148,6 +149,17 @@ public class UploadController {
             System.out.println("FileNotFoundException : " + e);
         }
     }
+	
+	@GetMapping("/view")
+	public String goviewdetail(HttpServletRequest request, Model model) {
+		int uid = Integer.parseInt(request.getParameter("view"));
+		IDocDAO dao = C.sqlSession.getMapper(IDocDAO.class);
+		docDTO dto = dao.selectUid(uid);
+//		
+		model.addAttribute("view", dto);
+//		
+		return "thymeleaf/upload/viewlist";
+	}
 	
 	
 	

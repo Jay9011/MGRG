@@ -11,4 +11,6 @@ public interface IDocDAO {
 	
 	public List<docDTO> select();
 	
+	public docDTO selectUid(int doc_uid);
+	
 }
