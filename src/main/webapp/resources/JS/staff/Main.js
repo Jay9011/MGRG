@@ -264,6 +264,8 @@ function modiOk(){
 			$('body').loadingModal('destroy');
 			if(status == 'success'){
 				switch(data.status){
+				case 'Err_Common' :
+				case 'Err_Nm' :
 				case 'Err_Em' :
 				case 'Err_Pn' :
 					Swal.fire({
@@ -283,7 +285,23 @@ function modiOk(){
 			} else {
 				
 			}
-		} 
+		},
+		error : function(xhr, ajaxSettings, thrownError){
+			$('body').loadingModal('destroy');
+			Swal.fire({
+			  icon: 'error',
+			  title: '연결 실패',
+			  text: '서버에 연결을 실패했습니다. 다시 시도해 주세요.',
+			  showCancelButton: false,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '확인'
+			}).then((result) => {
+			  if (result.value) {
+				  location.reload();
+			  }
+			});
+	   }
 	});
 }
 
