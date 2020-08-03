@@ -11,5 +11,8 @@
 	   	 	select doc_uid, doc_title, doc_content, doc_file from doc_table order by doc_uid asc
 	</select>
 
-
+	<select id="selectUid" resultType="com.mgrg.hrm.fileupload.docDTO">
+			select doc_uid, doc_title, doc_content, doc_file from doc_table where doc_uid = #{param1}
+	</select>
+	
 </mapper>
