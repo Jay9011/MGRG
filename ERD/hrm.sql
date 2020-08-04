@@ -207,35 +207,15 @@ INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (7, 
 
 /* 공지사항 더미 */
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
-VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/7)', '<h2><span style="color:#e74c3c;">8월 7일부터는 휴가입니다.</span></h2>
-<pre>
-<span style="color:#e74c3c;">
-각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
-',to_date('2020-07-29', 'yyyy-mm-dd'),1);
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/7)', '<h2><span style="color:#e74c3c;">8월 7일부터는 휴가입니다.</span></h2><pre><span style="color:#e74c3c;">각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>',to_date('2020-07-29', 'yyyy-mm-dd'),1);
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
-VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/1)', '<h2><span style="color:#e74c3c;">8월 1일부터는 휴가입니다.</span></h2>
-<pre>
-<span style="color:#e74c3c;">
-각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
-',to_date('2020-07-29', 'yyyy-mm-dd'),2);
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/1)', '<h2><span style="color:#8e44ad;"><strong>8월 1일부터는 휴가입니다.</strong></span></h2><pre><span style="color:#e74c3c;"></span><span style="color:#f39c12;">각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>',to_date('2020-07-29', 'yyyy-mm-dd'),2);
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
-VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/2)', '<h2><span style="color:#e74c3c;">8월 2일부터는 휴가입니다.</span></h2>
-<pre>
-<span style="color:#e74c3c;">
-각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
-',to_date('2020-07-29', 'yyyy-mm-dd'),3);
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/2)', '<h2><span style="color:#8e44ad;"><strong>8월 2일부터는 휴가입니다.</strong></span></h2><pre><span style="color:#e74c3c;"></span><span style="color:#f39c12;">각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>',to_date('2020-07-29', 'yyyy-mm-dd'),3);
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
-VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/3)', '<h2><span style="color:#e74c3c;">8월 3일부터는 휴가입니다.</span></h2>
-<pre>
-<span style="color:#e74c3c;">
-각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
-',to_date('2020-07-29', 'yyyy-mm-dd'),4);
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/3)', '<h2><span style="color:#8e44ad;"><strong>8월 3일부터는 휴가입니다.</strong></span></h2><pre><span style="color:#e74c3c;"></span><span style="color:#f39c12;">각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>',to_date('2020-07-29', 'yyyy-mm-dd'),4);
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
-VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/6)', '<h2><span style="color:#e74c3c;">8월 6일부터는 휴가입니다.</span></h2>
-<pre>
-<span style="color:#e74c3c;">
-각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
-',to_date('2020-07-29', 'yyyy-mm-dd'),5);
+VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/6)', '<h2><span style="color:#8e44ad;"><strong>8월 6일부터는 휴가입니다.</strong></span></h2><pre><span style="color:#e74c3c;"></span><span style="color:#f39c12;">각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>',to_date('2020-07-29', 'yyyy-mm-dd'),5);
 
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
 VALUES (SEQ_notice_n_uid.NEXTVAL, '사)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-29', 'yyyy-mm-dd'),1,1);
@@ -250,7 +230,7 @@ VALUES (SEQ_notice_n_uid.NEXTVAL, '과)구조조정 관련 공지 입니다.', '
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
 VALUES (SEQ_notice_n_uid.NEXTVAL, '사)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">인사부 사원 여러분들은 8시 출근이 아닌 8시 30분에  출근해 주십시오</span></h2>', to_date('2020-07-29', 'yyyy-mm-dd'),1,1);
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
-VALUES (SEQ_notice_n_uid.NEXTVAL, '대)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">인사부 대리 여러분들은 8시 출근이 아닌 8시 30분에 출근해 주십시오</span></h2>', to_date('2020-07-27', 'yyyy-mm-dd'),1,2);
+VALUES (SEQ_notice_n_uid.NEXTVAL, '대)출근시간 변경 공지 입니다.', '<h2><span style="color:#16a085;">인사부 대리 여러분들은 8시 출근이 아닌 8시 30분에 출근해 주십시오</span></h2>', to_date('2020-07-27', 'yyyy-mm-dd'),1,2);
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
 VALUES (SEQ_notice_n_uid.NEXTVAL, '팀)출근시간 변경 공지 입니다.', '<h2><span style="color:#e74c3c;">인사부 팀장 여러분들은 8시 출근이 아닌 8시 30분에 출근해 주십시오</span></h2>', to_date('2020-07-26', 'yyyy-mm-dd'),1,3);
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
@@ -386,37 +366,55 @@ VALUES (SEQ_employees_emp_uid.nextval, '인사관리', to_date('2020-06-04', 'YY
 
 /* 휴가 더미 */
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-20', 'YYYY-MM-DD'), 1)
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-01', 'YYYY-MM-DD'), to_date('2020-07-03', 'YYYY-MM-DD'), 1)
 ;
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-15', 'YYYY-MM-DD'), to_date('2020-07-18', 'YYYY-MM-DD'), 2)
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-07', 'YYYY-MM-DD'), to_date('2020-07-10', 'YYYY-MM-DD'), 2)
 ;
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-23', 'YYYY-MM-DD'), to_date('2020-07-27', 'YYYY-MM-DD'), 1)
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-13', 'YYYY-MM-DD'), to_date('2020-07-13', 'YYYY-MM-DD'), 3)
 ;
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-30', 'YYYY-MM-DD'), to_date('2020-07-31', 'YYYY-MM-DD'), 1)
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-08-17', 'YYYY-MM-DD'), to_date('2020-08-19', 'YYYY-MM-DD'), 4)
 ;
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-31', 'YYYY-MM-DD'), to_date('2020-07-31', 'YYYY-MM-DD'), 1)
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-16', 'YYYY-MM-DD'), to_date('2020-07-17', 'YYYY-MM-DD'), 5)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-07', 'YYYY-MM-DD'), to_date('2020-07-09', 'YYYY-MM-DD'), 6)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-20', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 7)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-20', 'YYYY-MM-DD'), to_date('2020-07-24', 'YYYY-MM-DD'), 8)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-28', 'YYYY-MM-DD'), to_date('2020-07-31', 'YYYY-MM-DD'), 9)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-27', 'YYYY-MM-DD'), to_date('2020-07-28', 'YYYY-MM-DD'), 10)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-23', 'YYYY-MM-DD'), to_date('2020-07-24', 'YYYY-MM-DD'), 10)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-17', 'YYYY-MM-DD'), to_date('2020-07-17', 'YYYY-MM-DD'), 4)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-20', 'YYYY-MM-DD'), to_date('2020-07-20', 'YYYY-MM-DD'), 4)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-08-05', 'YYYY-MM-DD'), to_date('2020-08-07', 'YYYY-MM-DD'), 5)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-08-05', 'YYYY-MM-DD'), to_date('2020-08-07', 'YYYY-MM-DD'), 6)
+;
+INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
+VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-08-05', 'YYYY-MM-DD'), to_date('2020-08-05', 'YYYY-MM-DD'), 7)
 ;
 
-INSERT INTO OFFICE_HOUR (w_uid, w_start, EMP_UID )
-VALUES
-(SEQ_office_hour_w_uid.nextval, to_date('2020-07-22 08:50:00', 'yyyy/mm/dd HH24:Mi:ss'), 2);
 
--- 휴가 테이블 --
-
-INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-20', 'YYYY-MM-DD'), to_date('2020-07-28', 'YYYY-MM-DD'), 4)
-;
-
-INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-06-29', 'YYYY-MM-DD'), to_date('2020-07-02', 'YYYY-MM-DD'), 2)
-;
-INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
-VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 5)
-;
 
 -- 문서 더미
 INSERT INTO doc_table VALUES (seq_uid.nextval, '휴가신청서', '휴가신청서 양식입니다', 'requestVacation.hwp');
@@ -430,7 +428,6 @@ INSERT INTO doc_table VALUES (seq_uid.nextval, '근무확인서', '근무확인�
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 07:23:59', '2020-07-01 18:50:20', 1);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 08:12:59', '2020-07-01 18:30:20', 2);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 09:15:59', '2020-07-01 18:20:20', 3);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 08:20:59', '2020-07-01 18:10:20', 4);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 07:50:59', '2020-07-01 18:00:20', 5);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 08:30:59', '2020-07-01 19:10:20', 6);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 08:10:59', '2020-07-01 19:20:20', 7);
@@ -440,7 +437,6 @@ INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 08:23:59', '2020-07-02 18:50:20', 1);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 09:23:59', '2020-07-02 18:50:20', 2);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 10:23:59', '2020-07-02 18:50:20', 3);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 4);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 5);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 6);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 7);
@@ -450,7 +446,6 @@ INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 1);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 2);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 3);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 4);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 5);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 6);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 7);
@@ -463,17 +458,40 @@ INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 9);
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 9);
 
--- uid 가 4 인 직원 출결 dummy variables
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-06 08:23:59', '2020-07-06 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-07 08:23:59', '2020-07-07 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-08 08:23:59', '2020-07-08 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-09 08:23:59', '2020-07-09 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-10 08:23:59', '2020-07-10 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-13 08:23:59', '2020-07-13 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-14 08:23:59', '2020-07-14 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-15 08:23:59', '2020-07-15 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-16 08:23:59', '2020-07-16 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-17 08:23:59', '2020-07-17 17:50:20', 4);
+-- 출결더미 4번의 7월
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-06 08:23:59', '2020-07-06 18:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-07 09:23:59', '2020-07-07 21:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-08 08:23:59', '2020-07-08 20:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-09 08:23:59', '2020-07-09 18:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-10 08:23:59', '2020-07-10 19:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-13 08:23:59', '2020-07-13 15:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-14 10:23:59', '2020-07-14 19:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-15 08:23:59', '2020-07-15 19:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-16 08:23:59', '2020-07-16 18:50:20', 4);
+/*INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-17 08:23:59', '2020-07-17 18:50:20', 4);
+ * 
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-20 08:23:59', '2020-07-20 18:50:20', 4);*/
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-21 08:23:59', '2020-07-21 20:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-22 08:23:59', '2020-07-22 18:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-23 09:23:59', '2020-07-23 18:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-24 08:23:59', '2020-07-24 20:50:20', 4);
+
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-27 08:23:59', '2020-07-27 17:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-28 08:23:59', '2020-07-28 18:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-29 09:23:59', '2020-07-29 18:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-30 08:23:59', '2020-07-30 18:50:20', 4);
+INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-31 08:23:59', '2020-07-31 18:50:20', 4);
+INSERT INTO OFFICE_HOUR (w_uid, W_START , W_END , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-03 08:20:30', '2020-08-03 18:20:26' 4);
+INSERT INTO OFFICE_HOUR (w_uid, W_START , W_END , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-04 08:30:30', '2020-08-04 18:20:26' 4);
+
+INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-05 08:45:30', 1);
+INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-05 08:45:30', 2);
+INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-05 09:45:30', 3);
+/*INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-05 10:45:30',5);
+INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-05 08:20:30', 6);
+INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-05 08:50:30', 7);*/
+INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-05 08:30:30', 8);
+INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID ) VALUES (SEQ_office_hour_w_uid.nextval, '2020-08-05 07:45:30', 9);
 
 
 ----------- dummy variables (2020-07-29) 출근 시간 ------------

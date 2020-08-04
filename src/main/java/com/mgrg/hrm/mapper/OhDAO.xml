@@ -17,7 +17,7 @@
 						WHEN h.startTime <= 900 AND h.endTime >= 1800 THEN '퇴근'
 						WHEN h.endtime IS NULL AND h.startTime <= 900 THEN '출근'
 						WHEN h.startTime > 900 THEN '지각'
-						ELSE '미출근'
+						ELSE '휴가'
 						END AS stat
 				FROM (SELECT e.emp_uid , oh.W_UID , oh.W_START , oh.W_END , TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
 							 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
