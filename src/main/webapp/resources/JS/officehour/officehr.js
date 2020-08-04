@@ -269,8 +269,8 @@ function makeTable(ajax_data){
                tbl +='<td ><div>'+val['posRank']+'</div></td>';
                tbl +='<td ><div>'+val['dept']+'</div></td>';
                tbl +='<td ><div class="status">'+val['status']+'</div></td>';
-               tbl +='<td ><div class="row_data start upnum" id="start" col_name="start" value="' + val['start'] + '">'+val['start']+'</div></td>';
-               tbl +='<td ><div class="row_data end upnum" col_name="end">'+val['end']+'</div></td>';
+               tbl +='<td ><div class="row_data start" id="start" col_name="start" value="' + val['start'] + '">'+val['start']+'</div></td>';
+               tbl +='<td ><div class="row_data end" col_name="end">'+val['end']+'</div></td>';
 
 
                //--->edit options > start
@@ -299,12 +299,12 @@ function makeTable(ajax_data){
 
    //out put table data
    $(document).find('.tbl_user_data').html(tbl);
-   $('div.status:contains("출근")').addClass('bg-success');
-   $('div.status:contains("지각")').addClass('bg-warning');
-   $('div.status:contains("결근")').addClass('bg-danger');
-   $('div.status:contains("퇴근")').addClass('bg-primary');
+   $('div.status:contains("출근")').css({'color':'#fff', 'background-color':'#5A7FCE'});
+   $('div.status:contains("지각")').css({'color':'#fff', 'background-color':'#FFB15E'});
+   $('div.status:contains("결근")').css({'color':'#fff', 'background-color':'#FF7A5E'});
+   $('div.status:contains("퇴근")').css({'color':'#fff', 'background-color':'#4FAAC8'});
    $('div.status:contains("미출근")').addClass('bg-light').css({'color':'#8C8C8C', 'border':'1px solid #8C8C8C'} );
-   $('div.status:contains("조퇴")').addClass('bg-').css('color', '#EAEAEA');
+   $('div.status:contains("조퇴")').css({'color':'#fff', 'background-color':'#FDD941'});
    
 
    $(document).find('.btn_save').hide();
