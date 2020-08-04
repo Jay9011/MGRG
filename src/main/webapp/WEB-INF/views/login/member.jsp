@@ -45,12 +45,12 @@ System.out.println(empname);
             <div style="display: inline-block; margin-left: 8.333333%;">
             <div class="text-right">
 
-               <button type="button" id="viewcom" class="btn btnadd" data-emp='${empuid}'><small>현황 더보기</small> +</button>
+               <button type="button" id="viewcom" class="btn btnadd" data-emp='${empuid}'><small>달력 보기</small> +</button>
          	</div>
             <canvas id="myChart" height="450" width="450" style="display: inline-block;"></canvas>
             </div>
 <!--                근태현황 테이블 -->
-            <span id="comShow" style="display: none;" >
+            <span id="comShow" style="display: none; margin: 0 20px" >
             
               <ul class="kindlist">
                <li><span class="kind"><div class="type-absence"></div> 출근</span></li>

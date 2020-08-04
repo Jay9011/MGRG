@@ -214,7 +214,7 @@ function loadtable() {
 					data : "uid",
 					"render" : function(data, type, full, meta) {
 			if(today ==  parseInt(full.startTime.replace(/-/gi,"")) || today >= parseInt(full.startTime.replace(/-/gi,""))){
-					return '<button type="button" style="display:none;"  value='+ full.startTime + ' disabled>삭제</button>'
+					return ''
 				}else{
 					return '<button type="button" class="btn delBtn Hdel" value="'+ full.startTime + '" onclick="return Hdel('+ full.uid+', \'' + full.name+ '\');">삭제</button>'
 					
