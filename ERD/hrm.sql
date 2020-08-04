@@ -419,9 +419,12 @@ VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date(
 ;
 
 -- 문서 더미
-INSERT INTO DOC_TABLE VALUES (seq_uid.nextval, 'gd', '웁스', 'sp');
-INSERT INTO DOC_TABLE (doc_uid, doc_title, doc_file) VALUES (seq_uid.nextval, 'gd', 'sp');
-
+INSERT INTO doc_table VALUES (seq_uid.nextval, '휴가신청서', '휴가신청서 양식입니다', 'requestVacation.hwp');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '사유서', '사유서 양식입니다', 'Explaination.hwp');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '퇴직증명서', '퇴직증명서 양식입니다', 'retirementVerify.hwp');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '회의록', '회의록 양식입니다', 'meetingrecord.docx');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '일간스케쥴', '일간스케쥴 양식입니다', 'WorkSchedule.hwp');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '근무확인서', '근무확인서 양식입니다', 'WorkCertification.xls');
 
 -- 회사 출결 Dummy --
 INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 07:23:59', '2020-07-01 18:50:20', 1);
