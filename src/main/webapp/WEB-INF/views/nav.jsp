@@ -4,7 +4,7 @@
 <!-- 관리자 페이지 -->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
-            <a href="${pageContext.request.contextPath}/login/admain" class=""><strong>MR</strong></a>
+            <a href="${pageContext.request.contextPath}/login/ad" class=""><strong>MR</strong></a>
             <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
             <div id="navbarSupportedContent">
             <ul class="nav ">
@@ -43,16 +43,6 @@
                        	직원 명부
                     </a>
                     </li>
-                <li>
-                <a href="#pageSubmenu" >
-                      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-cash-stack" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-						  <path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z"/>
-						  <path fill-rule="evenodd" d="M15 5H1v8h14V5zM1 4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H1z"/>
-						  <path d="M13 5a2 2 0 0 0 2 2V5h-2zM3 5a2 2 0 0 1-2 2V5h2zm10 8a2 2 0 0 1 2-2v2h-2zM3 13a2 2 0 0 0-2-2v2h2zm7-4a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
-						</svg>
-                      	  급여 관리
-                    </a>
-                    </li>
                	 <li>
                     <a href="${pageContext.request.contextPath}/holiy">
 					<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-file-earmark-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -63,6 +53,17 @@
 				휴가 관리
                     </a>
                 </li>
+                <li>
+                <a href="<%= request.getContextPath() %>/upload/doclist" >
+                      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-file-earmark-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						  <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+						  <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
+						  <path fill-rule="evenodd" d="M5.646 9.146a.5.5 0 0 1 .708 0L8 10.793l1.646-1.647a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 0-.708z"/>
+						  <path fill-rule="evenodd" d="M8 6a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0v-4A.5.5 0 0 1 8 6z"/>
+						</svg>
+                      	  문서 관리
+                    </a>
+                    </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/notice">
 					<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
