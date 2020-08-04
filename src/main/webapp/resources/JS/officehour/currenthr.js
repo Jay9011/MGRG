@@ -23,4 +23,6 @@ $(document).ready(function(){
 	});
 });
 
-$(document).on('keyup','')
+$(document).on('keyup','.upnum', function() {
+	alert('dd');
+})
