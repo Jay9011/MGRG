@@ -24,9 +24,13 @@ CREATE TABLE doc_table
 	PRIMARY KEY (doc_uid)
 );
 
-INSERT INTO DOC_TABLE VALUES (seq_uid.nextval, 'gd', '웁스', 'sp');
-INSERT INTO DOC_TABLE (doc_uid, doc_title, doc_file) VALUES (seq_uid.nextval, 'gd', 'sp');
-
 
 SELECT * FROM DOC_TABLE ;
 DELETE FROM doc_table WHERE doc_uid = 3;
+
+INSERT INTO doc_table VALUES (seq_uid.nextval, '휴가신청서', '휴가신청서 양식입니다', 'requestVacation.hwp');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '사유서', '사유서 양식입니다', 'Explaination.hwp');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '퇴직증명서', '퇴직증명서 양식입니다', 'retirementVerify.hwp');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '회의록', '회의록 양식입니다', 'meetingrecord.docx');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '일간스케쥴', '일간스케쥴 양식입니다', 'WorkSchedule.hwp');
+INSERT INTO doc_table VALUES (seq_uid.nextval, '근무확인서', '근무확인서 양식입니다', 'WorkCertification.xls');

@@ -1,42 +1,52 @@
+
 /* Drop Tables */
+
 DROP TABLE holiday CASCADE CONSTRAINTS;
 DROP TABLE office_hour CASCADE CONSTRAINTS;
 DROP TABLE employees CASCADE CONSTRAINTS;
 DROP TABLE notice CASCADE CONSTRAINTS;
 DROP TABLE department CASCADE CONSTRAINTS;
 DROP TABLE positionrank CASCADE CONSTRAINTS;
-DROP TABLE doc_table CASCADE CONSTRAINTS;
 
 /* DROP VIEW */
-DROP VIEW holi;
-DROP VIEW NOTI;
+DROP VIEW holi
+;
+
+SELECT * FROM attendance;
 
 
 /* Drop Sequences */
+
 DROP SEQUENCE SEQ_department_dep_uid;
 DROP SEQUENCE SEQ_employees_emp_uid;
 DROP SEQUENCE SEQ_holiday_h_uid;
 DROP SEQUENCE SEQ_office_hour_w_uid;
 DROP SEQUENCE SEQ_positionrank_p_uid;
 DROP SEQUENCE SEQ_notice_n_uid;
-DROP SEQUENCE seq_uid;
+
+
+
 
 /* Create Sequences */
+
 CREATE SEQUENCE SEQ_department_dep_uid INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_employees_emp_uid INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_holiday_h_uid INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_office_hour_w_uid INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_positionrank_p_uid INCREMENT BY 1 START WITH 1;
 CREATE SEQUENCE SEQ_notice_n_uid INCREMENT BY 1 START WITH 1;
-CREATE SEQUENCE seq_uid;
+
+
 
 /* Create Tables */
+
 CREATE TABLE department
 (
 	dep_uid number NOT NULL,
 	dep_name varchar2(60),
 	PRIMARY KEY (dep_uid)
 );
+
 
 CREATE TABLE employees
 (
@@ -101,26 +111,21 @@ CREATE TABLE positionrank
 	PRIMARY KEY (p_uid)
 );
 
-CREATE TABLE doc_table
-(
-	doc_uid number NOT NULL,
-	doc_title varchar2(30) NOT NULL,
-	doc_content clob NULL,
-	doc_file varchar2(80) NOT NULL,
-	PRIMARY KEY (doc_uid)
-);
 
 
 /* Create Foreign Keys */
+
 ALTER TABLE employees
 	ADD FOREIGN KEY (dep_uid)
 	REFERENCES department (dep_uid)
 ;
 
+
 ALTER TABLE notice
 	ADD FOREIGN KEY (dep_uid)
 	REFERENCES department (dep_uid)
 ;
+
 
 ALTER TABLE holiday
 	ADD FOREIGN KEY (emp_uid)
@@ -128,65 +133,24 @@ ALTER TABLE holiday
 	ON DELETE CASCADE
 ;
 
+
 ALTER TABLE office_hour
 	ADD FOREIGN KEY (emp_uid)
 	REFERENCES employees (emp_uid)
 	ON DELETE CASCADE
 ;
 
+
 ALTER TABLE employees
 	ADD FOREIGN KEY (p_uid)
 	REFERENCES positionrank (p_uid)
 ;
 
+
 ALTER TABLE notice
 	ADD FOREIGN KEY (p_uid)
 	REFERENCES positionrank (p_uid)
 ;
-
-/* Create VIEW */
-CREATE OR REPLACE VIEW NOTI AS SELECT
- n.n_uid "uid", n.n_subject subject, n.n_content content, n.n_regdate regdate, NVL(d.DEP_UID, 0) dep_uid , NVL(d.DEP_NAME, '공통') department,p.P_UID p_uid,p.P_NAME "position" 
-FROM NOTICE n JOIN DEPARTMENT d ON n.DEP_UID = d.DEP_UID(+) JOIN POSITIONRANK p ON n.P_UID =p.P_UID;
-
-/* 휴가 VIEW */
-CREATE OR REPLACE VIEW holi AS
-SELECT SUM("Day") "useHoliday", EMP_UID 
-FROM (
-	SELECT (h.H_END - h.H_START) "Day", h.EMP_UID EMP_UID
-	FROM HOLIDAY h 
-	WHERE h.H_START BETWEEN TO_DATE(TO_CHAR(SYSDATE ,'YYYY') , 'YYYY') AND TO_DATE(TO_CHAR(SYSDATE ,'YYYY') + 1, 'YYYY')
-)
-GROUP BY EMP_UID 
-;
-
-/* 사원목록 VIEW */
-CREATE OR REPLACE VIEW emp AS
-SELECT e.EMP_UID "uid", e.EMP_NAME name, e.EMP_BIRTHDATE birthday, e.EMP_PHONENUM phonenum, e.EMP_EMAIL email, e.EMP_ID id, e.EMP_PW password, e.EMP_ADDRZONECODE addrZoneCode, e.EMP_ADDRROAD addrRoad, e.EMP_ADDRDETAIL addrDetail, e.EMP_HIREDATE hiredate, e.EMP_SALARY salary, p.P_UID p_uid, p.P_NAME "position", d.DEP_UID ,d.DEP_NAME department, NVL(h."useHoliday", 0) "useHoliday", p.P_HOLIDAY "total", (p.P_HOLIDAY - NVL(h."useHoliday", 0)) "leftHoliday"
-FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID 
-				LEFT OUTER JOIN POSITIONRANK p ON e.P_UID = p.P_UID
-				LEFT OUTER JOIN holi h ON e.EMP_UID = h.EMP_UID
-;
-
--- 모든 직원들 출결 view로 만들어주기
-CREATE OR REPLACE VIEW attendance AS 
-SELECT e.EMP_UID "uid", e.EMP_NAME name, category.W_START "start", category.W_END "end", d.DEP_NAME posRank, p.P_NAME dept, category.stat "status", category.w_uid 
-FROM DEPARTMENT d , POSITIONRANK p , EMPLOYEES e LEFT OUTER JOIN 
-	(SELECT  
-		h.*,
-		CASE
-			WHEN h.startTime IS NULL THEN '미출근'
-			WHEN h.endTime < 1800 THEN '조퇴'
-			WHEN h.startTime <= 900 AND h.endTime >= 1800 THEN '퇴근'
-			WHEN h.endtime IS NULL AND h.startTime <= 900 THEN '출근'
-			WHEN h.startTime > 900 THEN '지각'
-			ELSE '결근'
-			END AS stat
-	FROM (SELECT e.emp_uid , oh.W_UID , oh.W_START , oh.W_END , TO_NUMBER(TO_CHAR(oh.W_START , 'hh24mi')) AS startTime, 
-				 to_number(TO_CHAR(oh.W_END , 'hh24mi')) AS endTime
-			FROM (SELECT * FROM EMPLOYEES)e LEFT OUTER JOIN OFFICE_HOUR oh ON e.emp_uid = oh.EMP_UID 
-			ORDER BY e.EMP_UID) h) category ON e.EMP_UID = category.EMP_UID
-			WHERE e.DEP_UID = d.dep_uid AND e.P_UID = p.P_UID AND e.P_UID NOT IN (6, 7);
 
 
 /* 부서 더미 */
@@ -197,6 +161,16 @@ INSERT INTO department (dep_uid, dep_name) VALUES (SEQ_department_dep_uid.nextva
 INSERT INTO department (dep_uid, dep_name) VALUES (SEQ_department_dep_uid.nextval, '기술부');
 
 /* 직책 더미 */
+/*
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (1, '사원', 1, 14);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (2, '대리', 2, 17);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (3, '팀장', 3, 20);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (4, '부장', 4, 22);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (5, '과장', 5, 24);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (6, '사장', 6, 27);
+INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday) VALUES (7, '인사총괄', 7, 0);
+*/
+
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (1, '사원', 1, 14, 'ROLE_MEMBER');
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (2, '대리', 2, 17, 'ROLE_MEMBER');
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (3, '팀장', 3, 20, 'ROLE_MEMBER');
@@ -204,8 +178,8 @@ INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (4, 
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (5, '과장', 5, 24, 'ROLE_MEMBER');
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (6, '사장', 6, 27, 'ROLE_MEMBER');
 INSERT INTO positionrank (p_uid, p_name, p_level, p_holiday, p_auth) VALUES (7, '인사총괄', 7, 0, 'ROLE_ADMIN');
-
 /* 공지사항 더미 */
+
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,p_uid) 
 VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/7)', '<h2><span style="color:#e74c3c;">8월 7일부터는 휴가입니다.</span></h2>
 <pre>
@@ -236,6 +210,7 @@ VALUES (SEQ_notice_n_uid.NEXTVAL, '휴가 관련 공지사항입니다.(8/6)', '
 <span style="color:#e74c3c;">
 각 부서 팀장님들께서는 휴가 공지를 해주시어 빠르게 처리할 수 있도록 해주십시오</span></pre>
 ',to_date('2020-07-29', 'yyyy-mm-dd'),5);
+
 
 INSERT INTO notice (n_uid, n_subject, n_content,n_regdate,dep_uid,p_uid) 
 VALUES (SEQ_notice_n_uid.NEXTVAL, '사)구조조정 관련 공지 입니다.', '<h2><span style="color:#e74c3c;">실적이 좋지 않은 사원들은 구조조정이 있을 예정입니다.</span></h2>', to_date('2020-06-29', 'yyyy-mm-dd'),1,1);
@@ -340,6 +315,7 @@ VALUES (SEQ_notice_n_uid.NEXTVAL, '과)출근시간 변경 공지 입니다.', '
 
 
 /* 사원 더미 */
+
 INSERT INTO employees (emp_uid, emp_name, emp_birthdate, emp_email, emp_id, emp_pw, emp_salary, p_uid, dep_uid)
 VALUES (SEQ_employees_emp_uid.nextval, '사사원', to_date('1990-11-07', 'YYYY-MM-DD'), 'test@gmail.com', 'test', '123', 50000000, 1, 1);
 ;
@@ -401,11 +377,67 @@ INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-31', 'YYYY-MM-DD'), to_date('2020-07-31', 'YYYY-MM-DD'), 1)
 ;
 
+
+-- 공통과 해당되는 부서의 목록보기
+SELECT * FROM NOTICE WHERE (DEP_UID IS NULL OR DEP_UID = 1) AND P_UID <= 1;
+SELECT n.n_uid "uid", n.n_subject subject, n.n_content content, n.n_regdate regdate, NVL(d.DEP_NAME, '공통') department, p.P_NAME "position" 
+FROM NOTICE n JOIN DEPARTMENT d ON n.DEP_UID = d.DEP_UID(+) JOIN POSITIONRANK p ON n.P_UID =p.P_UID WHERE (d.DEP_UID IS NULL OR d.DEP_UID = 1) AND p.P_UID <= 1  ;
+
+-- SELECT * FROM NOTICE WHERE (DEP_UID IS NULL OR DEP_UID = 2) AND P_UID = 2;
+
+--CREATE OR REPLACE VIEW NOTI AS SELECT
+-- n.n_uid "uid", n.n_subject subject, n.n_content content, n.n_regdate regdate, d.DEP_UID , NVL(d.DEP_NAME, '공통') department,p.P_UID ,p.P_NAME "position" 
+--FROM NOTICE n JOIN DEPARTMENT d ON n.DEP_UID = d.DEP_UID(+) JOIN POSITIONRANK p ON n.P_UID =p.P_UID;
+
+CREATE OR REPLACE VIEW NOTI AS SELECT
+ n.n_uid "uid", n.n_subject subject, n.n_content content, n.n_regdate regdate, NVL(d.DEP_UID, 0) dep_uid , NVL(d.DEP_NAME, '공통') department,p.P_UID p_uid,p.P_NAME "position" 
+FROM NOTICE n JOIN DEPARTMENT d ON n.DEP_UID = d.DEP_UID(+) JOIN POSITIONRANK p ON n.P_UID =p.P_UID;
+
+SELECT * FROM NOTI WHERE (DEP_UID =  0 OR DEP_UID = 1) AND P_UID <= 1  ;
+SELECT * FROM NOTI;
+-- 뷰 삭제
+-- DROP VIEW NOTI;
+
+/* 휴가 VIEW */
+CREATE OR REPLACE VIEW holi AS
+SELECT SUM("Day") "useHoliday", EMP_UID 
+FROM (
+	SELECT (h.H_END - h.H_START) "Day", h.EMP_UID EMP_UID
+	FROM HOLIDAY h 
+	WHERE h.H_START BETWEEN TO_DATE(TO_CHAR(SYSDATE ,'YYYY') , 'YYYY') AND TO_DATE(TO_CHAR(SYSDATE ,'YYYY') + 1, 'YYYY')
+)
+GROUP BY EMP_UID 
+;
+
+/* 사원목록 VIEW */
+CREATE OR REPLACE VIEW emp AS
+SELECT e.EMP_UID "uid", e.EMP_NAME name, e.EMP_BIRTHDATE birthday, e.EMP_PHONENUM phonenum, e.EMP_EMAIL email, e.EMP_ID id, e.EMP_PW password, e.EMP_ADDRZONECODE addrZoneCode, e.EMP_ADDRROAD addrRoad, e.EMP_ADDRDETAIL addrDetail, e.EMP_HIREDATE hiredate, e.EMP_SALARY salary, p.P_UID p_uid, p.P_NAME "position", d.DEP_UID ,d.DEP_NAME department, NVL(h."useHoliday", 0) "useHoliday", p.P_HOLIDAY "total", (p.P_HOLIDAY - NVL(h."useHoliday", 0)) "leftHoliday"
+FROM EMPLOYEES e LEFT OUTER JOIN DEPARTMENT d ON e.DEP_UID = d.DEP_UID 
+				LEFT OUTER JOIN POSITIONRANK p ON e.P_UID = p.P_UID
+				LEFT OUTER JOIN holi h ON e.EMP_UID = h.EMP_UID
+;
+
+-----------------------------------------------
+-- Office HOUR Dummy Variables --
+SELECT * FROM POSITIONRANK p ;
+
+SELECT e2.EMP_NAME, d.DEP_NAME 
+FROM EMPLOYEES e2, DEPARTMENT d 
+WHERE e2.dep_uid = d.DEP_UID ;
+
+SELECT e.EMP_NAME , p.P_NAME 
+FROM EMPLOYEES e , POSITIONRANK p
+WHERE e.P_UID = p.P_UID ;
+
+SELECT * FROM OFFICE_HOUR;
+
 INSERT INTO OFFICE_HOUR (w_uid, w_start, EMP_UID )
 VALUES
 (SEQ_office_hour_w_uid.nextval, to_date('2020-07-22 08:50:00', 'yyyy/mm/dd HH24:Mi:ss'), 2);
 
+--------------------------------------------------
 -- 휴가 테이블 --
+SELECT * FROM HOLIDAY;
 
 INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-20', 'YYYY-MM-DD'), to_date('2020-07-28', 'YYYY-MM-DD'), 4)
@@ -418,94 +450,11 @@ INSERT INTO HOLIDAY (H_UID ,H_START ,H_END ,EMP_UID )
 VALUES (SEQ_holiday_h_uid.nextval, to_date('2020-07-18', 'YYYY-MM-DD'), to_date('2020-07-23', 'YYYY-MM-DD'), 5)
 ;
 
--- 문서 더미
-INSERT INTO doc_table VALUES (seq_uid.nextval, '휴가신청서', '휴가신청서 양식입니다', 'requestVacation.hwp');
-INSERT INTO doc_table VALUES (seq_uid.nextval, '사유서', '사유서 양식입니다', 'Explaination.hwp');
-INSERT INTO doc_table VALUES (seq_uid.nextval, '퇴직증명서', '퇴직증명서 양식입니다', 'retirementVerify.hwp');
-INSERT INTO doc_table VALUES (seq_uid.nextval, '회의록', '회의록 양식입니다', 'meetingrecord.docx');
-INSERT INTO doc_table VALUES (seq_uid.nextval, '일간스케쥴', '일간스케쥴 양식입니다', 'WorkSchedule.hwp');
-INSERT INTO doc_table VALUES (seq_uid.nextval, '근무확인서', '근무확인서 양식입니다', 'WorkCertification.xls');
 
--- 회사 출결 Dummy --
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 07:23:59', '2020-07-01 18:50:20', 1);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 08:12:59', '2020-07-01 18:30:20', 2);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 09:15:59', '2020-07-01 18:20:20', 3);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 08:20:59', '2020-07-01 18:10:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 07:50:59', '2020-07-01 18:00:20', 5);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 08:30:59', '2020-07-01 19:10:20', 6);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 08:10:59', '2020-07-01 19:20:20', 7);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 08:40:59', '2020-07-01 19:30:20', 8);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-01 09:34:59', '2020-07-01 19:40:20', 9);
+SELECT  * FROM HOLIDAY WHERE EMP_UID = 1;
+SELECT h_uid "uid", h_start startTime, h_end endTime, emp_uid emp_uid FROM HOLIDAY WHERE EMP_UID = 1;
+-- 금일날짜에 휴가인 사람 뽑기 --
+SELECT * FROM HOLIDAY
+WHERE TO_CHAR(H_START, 'yyyy/mm/dd') <= TO_CHAR(SYSDATE , 'yyyy/mm/dd') AND 
+TO_CHAR(H_END, 'yyyy/mm/dd') >= TO_CHAR(SYSDATE, 'yyyy/mm/dd');
 
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 08:23:59', '2020-07-02 18:50:20', 1);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 09:23:59', '2020-07-02 18:50:20', 2);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 10:23:59', '2020-07-02 18:50:20', 3);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 5);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 6);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 7);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 8);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-02 07:23:59', '2020-07-02 18:50:20', 9);
-
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 1);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 2);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 3);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 5);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 6);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 7);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 8);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 9);
-
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-04 10:23:59', '2020-07-03 17:50:20', 9);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-06 09:23:59', '2020-07-03 20:50:20', 9);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-12 08:23:59', '2020-07-03 20:50:20', 9);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 9);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-03 07:23:59', '2020-07-03 18:50:20', 9);
-
--- uid 가 4 인 직원 출결 dummy variables
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-06 08:23:59', '2020-07-06 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-07 08:23:59', '2020-07-07 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-08 08:23:59', '2020-07-08 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-09 08:23:59', '2020-07-09 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-10 08:23:59', '2020-07-10 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-13 08:23:59', '2020-07-13 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-14 08:23:59', '2020-07-14 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-15 08:23:59', '2020-07-15 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-16 08:23:59', '2020-07-16 17:50:20', 4);
-INSERT INTO OFFICE_HOUR (W_UID , W_START , W_END , EMP_UID ) VALUES (SEQ_OFFICE_HOUR_W_UID.nextval, '2020-07-17 08:23:59', '2020-07-17 17:50:20', 4);
-
-
------------ dummy variables (2020-07-29) 출근 시간 ------------
-INSERT INTO OFFICE_HOUR (w_uid, W_START , W_END , EMP_UID )
-VALUES
-(SEQ_office_hour_w_uid.nextval, '2020-07-29 07:55:32', 5);
-
-INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID )
-VALUES
-(SEQ_office_hour_w_uid.nextval, '2020-07-29 07:55:32', 9);
-
-INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID )
-VALUES
-(SEQ_office_hour_w_uid.nextval, '2020-07-29 08:55:32', 2);
-
-INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID )
-VALUES
-(SEQ_office_hour_w_uid.nextval, '2020-07-29 09:55:32', 6);
-
-INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID )
-VALUES
-(SEQ_office_hour_w_uid.nextval, '2020-07-29 07:20:32', 10);
-
-INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID )
-VALUES
-(SEQ_office_hour_w_uid.nextval, '2020-07-29 07:50:32', 3);
-
-INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID )
-VALUES
-(SEQ_office_hour_w_uid.nextval, '2020-07-29 08:45:30', 4);
-
--- 다른 날짜 --
-INSERT INTO OFFICE_HOUR (w_uid, W_START , EMP_UID )
-VALUES
-(SEQ_office_hour_w_uid.nextval, '2020-08-03 08:45:30', 4);

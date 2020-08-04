@@ -174,7 +174,7 @@ System.out.println(empname);
                      <!--          배열이 비어있거나 있긴있지만 길이가 0개 짜리 배열일때를 체크 -->
                   </c:when>
                   <c:otherwise>
-                     <c:forEach var="dto2" items="${doclist}" begin="0" end="5">
+                     <c:forEach var="dto2" items="${doclist}" begin="0" end="2">
                         <tr>
                            <td>${dto2.doc_uid }</td>
                            <td class="noticeCenter"><span class="doc"

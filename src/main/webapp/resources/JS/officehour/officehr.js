@@ -48,7 +48,7 @@ $(document).ready(function($)
          $(this).attr('original_entry', $(this).html());
       });       
       //--->add the original entry > end
-
+      
    });
    //--->button > edit > end
 
@@ -73,12 +73,9 @@ $(document).ready(function($)
       .removeClass('bg-white')
       .css('padding','') 
 
-      tbl_row.find('.row_data').each(function(index, val) 
-      {   
-         $(this).html( $(this).attr('original_entry') ).attr('contenteditable', 'false'); 
-      });  
    });
    //--->button > cancel > end
+//   document.getElementById('start').val= new Date().toISOString().slice(0, -1);
    
    //--->save whole row entery > start   
    $(document).on('click', '.btn_save', function(event) 
@@ -268,13 +265,13 @@ function makeTable(ajax_data){
                tbl +='<td ><div col_name="fname">'+val['name']+
                     '</div><input class="e_uid" type="hidden" value=' + val['uid'] + '>' + 
                     '<input class="w_uid" type="hidden" value=' + val['w_uid'] + '></td>';
-               tbl +='<td ><div col_name="lname">'+val['dept']+'</div></td>';
-               tbl +='<td ><div col_name="email">'+val['posRank']+'</div></td>';
-               tbl +='<td ><div class="status" col_name="email">'+val['status']+'</div></td>';
-               tbl +='<td ><div class="row_data start upnum" col_name="start" value="' + val['start'] + '">'+val['start']+'</div></td>';
+
+               tbl +='<td ><div>'+val['posRank']+'</div></td>';
+               tbl +='<td ><div>'+val['dept']+'</div></td>';
+               tbl +='<td ><div class="status">'+val['status']+'</div></td>';
+               tbl +='<td ><div class="row_data start upnum" id="start" col_name="start" value="' + val['start'] + '">'+val['start']+'</div></td>';
                tbl +='<td ><div class="row_data end upnum" col_name="end">'+val['end']+'</div></td>';
-//               tbl +='<td >' + startTime + '</td>';
-//               tbl +='<td >' + endTime + '</td>';
+
 
                //--->edit options > start
                tbl +='<td>';
@@ -306,7 +303,7 @@ function makeTable(ajax_data){
    $('div.status:contains("지각")').addClass('bg-warning');
    $('div.status:contains("결근")').addClass('bg-danger');
    $('div.status:contains("퇴근")').addClass('bg-primary');
-   $('div.status:contains("미출근")').addClass('bg-light').css('color', '#8C8C8C' );
+   $('div.status:contains("미출근")').addClass('bg-light').css({'color':'#8C8C8C', 'border':'1px solid #8C8C8C'} );
    $('div.status:contains("조퇴")').addClass('bg-').css('color', '#EAEAEA');
    
 
