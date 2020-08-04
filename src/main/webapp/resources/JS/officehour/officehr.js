@@ -265,11 +265,13 @@ function makeTable(ajax_data){
                tbl +='<td ><div col_name="fname">'+val['name']+
                     '</div><input class="e_uid" type="hidden" value=' + val['uid'] + '>' + 
                     '<input class="w_uid" type="hidden" value=' + val['w_uid'] + '></td>';
+
                tbl +='<td ><div>'+val['posRank']+'</div></td>';
                tbl +='<td ><div>'+val['dept']+'</div></td>';
                tbl +='<td ><div class="status">'+val['status']+'</div></td>';
-               tbl +='<td ><div class="row_data start" id="start" col_name="start" value="' + val['start'] + '">'+val['start']+'</div></td>';
-               tbl +='<td ><div class="row_data end" col_name="end">'+val['end']+'</div></td>';
+               tbl +='<td ><div class="row_data start upnum" id="start" col_name="start" value="' + val['start'] + '">'+val['start']+'</div></td>';
+               tbl +='<td ><div class="row_data end upnum" col_name="end">'+val['end']+'</div></td>';
+
 
                //--->edit options > start
                tbl +='<td>';
