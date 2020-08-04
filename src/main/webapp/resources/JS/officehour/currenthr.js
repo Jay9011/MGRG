@@ -21,5 +21,6 @@ $(document).ready(function(){
 			$('#startDate').datepicker('option', 'maxDate', selectedDate);
 		}
 	});
-
 });
+
+$(document).on('keyup','')

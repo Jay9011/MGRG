@@ -147,13 +147,13 @@ function chkWrite() {
 						  title: '공지 작성 성공',
 						  text: data.count + "개의 공지가 작성 되었습니다." 
 						})
-					boardRord();
+					$('#tlc').DataTable().ajax.reload();
 				} else {
 					Swal.fire({
 						  icon: 'error',
 						  title: '공지 작성 실패',
 						  text:  data.status + " : " + data.message
-						})
+					})
 				}
 			}
 		}
@@ -213,7 +213,7 @@ function chkDelete() {
 							  title: '공지 삭제 성공',
 							  text: data.count + "개의 공지가 삭제 되었습니다." 
 							})
-						boardRord();
+						$('#tlc').DataTable().ajax.reload();
 					} else {
 						Swal.fire({
 							  icon: 'error',
@@ -239,28 +239,28 @@ function addViewEvent() {
 
 				// 읽어오기
 				$.ajax({
-							url : path+"/notice/view.ajax?uid=" + $(this).attr('data-uid'),
-							type : "GET",
-							cache : false,
-							success : function(data, status) {
-								if (status == "success") {
-									if (data.status == "OK") {
-										// 읽어온 view 데이터를 전역변수에 세팅
-										viewItem = data.data[0]; 
-										//alert(viewItem.uid + " : " + viewItem.department+ " : " + viewItem.position + " : " + viewItem.content);
-										// 팝업에 보여주기
-										setPopup("view");
-										$("#dlg_write").show();
-									} else {
-										Swal.fire({
-											  icon: 'error',
-											  title: '공지 읽기 실패',
-											  text: ""+ data.message
-											})
-									}
-								}
+					url : path+"/notice/view.ajax?uid=" + $(this).attr('data-uid'),
+					type : "GET",
+					cache : false,
+					success : function(data, status) {
+						if (status == "success") {
+							if (data.status == "OK") {
+								// 읽어온 view 데이터를 전역변수에 세팅
+								viewItem = data.data[0]; 
+								//alert(viewItem.uid + " : " + viewItem.department+ " : " + viewItem.position + " : " + viewItem.content);
+								// 팝업에 보여주기
+								setPopup("view");
+								$("#dlg_write").show();
+							} else {
+								Swal.fire({
+									  icon: 'error',
+									  title: '공지 읽기 실패',
+									  text: ""+ data.message
+									})
 							}
-						});
+						}
+					}
+				});
 
 			});
 
@@ -404,7 +404,7 @@ function deleteUid(uid) {
 						  title: '공지 삭제 성공',
 						  text: data.count + "개의 공지가 삭제 되었습니다." 
 						})
-					boardRord();
+					$('#tlc').DataTable().ajax.reload();
 				} else {
 					Swal.fire({
 						  icon: 'error',
@@ -440,7 +440,7 @@ function chkUpdate() {
 						  title: '공지 수정 성공',
 						  text: data.count + "개의 공지가 수정 되었습니다." 
 						})
-					boardRord();
+					$('#tlc').DataTable().ajax.reload();
 				} else {
 					Swal.fire({
 						  icon: 'error',
