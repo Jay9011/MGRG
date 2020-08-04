@@ -410,17 +410,17 @@ tr.calendar-body .calendar-day .day[disabled] {
 .event-container > .event-icon > div.event-bullet-absence,
 .event-indicator > .type-bullet > div.type-absence,
 .kind div.type-absence {
-  	background-color: #3ca8ff;
+  	background-color: #5A7FCE;
 }
 .event-container > .event-icon > div.event-bullet-late,
 .event-indicator > .type-bullet > div.type-late,
 .kind div.type-late {
-    background-color: #ffc107;
+    background-color: #FFB15E;
 }
 .event-container > .event-icon > div.event-bullet-attend,
 .event-indicator > .type-bullet > div.type-attend,
 .kind div.type-attend {
-    background-color: #ff7575;
+    background-color: #FF7A5E;
 }
 .event-container > .event-icon > div.event-bullet-holiday,
 .event-indicator > .type-bullet > div.type-holiday,
