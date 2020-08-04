@@ -442,7 +442,9 @@ function displayOnClickInit(init){
 }
 
 function displayBlurInit(init){
-	init.siblings('span.showText').text(numberFormatting(init.val()));
+	if(init.attr('name') == 'phonenum'){
+		init.siblings('span.showText').text(numberFormatting(init.val()));
+	}
 	init.siblings('span').css('display', 'block');
 	init.css('display', 'none');
 }
