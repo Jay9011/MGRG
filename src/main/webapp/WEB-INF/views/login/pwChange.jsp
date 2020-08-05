@@ -30,7 +30,7 @@
 				<input type="text" name="id" placeholder="ID" id="input_id"> 
 				<input type="password" name="password" placeholder="PW" id="input_pw">
 				<input type="password" name="passwordnew" placeholder="NEW PW" id="input_pwnew" disabled="disabled">
-				<input type="password" name="passwordnewChk" placeholder="Chack PW" id="intput_pwchk" disabled="disabled">
+				<input type="password" name="passwordnewChk" placeholder="Check PW" id="intput_pwchk" disabled="disabled">
 				<button type="button" id="change_btn" disabled="disabled">Send</button>
 			</form>
 		</div>
