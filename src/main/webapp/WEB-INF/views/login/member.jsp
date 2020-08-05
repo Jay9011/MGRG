@@ -133,7 +133,7 @@ System.out.println(empname);
                      <!--          배열이 비어있거나 있긴있지만 길이가 0개 짜리 배열일때를 체크 -->
                   </c:when>
                   <c:otherwise>
-                     <c:forEach var="dto" items="${list}" begin="0" end="2">
+                     <c:forEach var="dto" items="${list}" begin="0" end="3">
                         <tr>
                            <td>${dto.uid }</td>
                            <td class="noticeCenter"><span class="noticea"
