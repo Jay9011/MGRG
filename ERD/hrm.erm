@@ -83,7 +83,7 @@
 				<is_use_logical_name>true</is_use_logical_name>
 			</export_excel_setting>
 			<export_html_setting>
-				<output_dir></output_dir>
+				<output_dir>C:\Users\trowe\Desktop</output_dir>
 				<with_category_image>true</with_category_image>
 				<with_image>true</with_image>
 				<is_open_after_saved>true</is_open_after_saved>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2020-08-04 09:25:06</creation_date>
-			<updated_date>2020-08-04 10:17:10</updated_date>
+			<updated_date>2020-08-05 09:55:44</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -2462,6 +2462,21 @@
 			<decimal_size>0</decimal_size>
 		</sequence>
 		<sequence>
+			<name>SEQ_doc_table_doc_uid</name>
+			<schema></schema>
+			<increment>1</increment>
+			<min_value></min_value>
+			<max_value></max_value>
+			<start>1</start>
+			<cache></cache>
+			<nocache>false</nocache>
+			<cycle>false</cycle>
+			<order>false</order>
+			<description></description>
+			<data_type></data_type>
+			<decimal_size>0</decimal_size>
+		</sequence>
+		<sequence>
 			<name>SEQ_employees_emp_uid</name>
 			<schema></schema>
 			<increment>1</increment>
@@ -2536,27 +2551,18 @@
 			<data_type></data_type>
 			<decimal_size>0</decimal_size>
 		</sequence>
-		<sequence>
-			<name>SEQ_doc_table_doc_uid</name>
-			<schema></schema>
-			<increment>1</increment>
-			<min_value></min_value>
-			<max_value></max_value>
-			<start>1</start>
-			<cache></cache>
-			<nocache>false</nocache>
-			<cycle>false</cycle>
-			<order>false</order>
-			<description></description>
-			<data_type></data_type>
-			<decimal_size>0</decimal_size>
-		</sequence>
 	</sequence_set>
 	<trigger_set>
 		<trigger>
 			<name>TRI_department_dep_uid</name>
 			<schema></schema>
 			<sql>BEFORE INSERT ON department&#x0D;&#x0A;FOR EACH ROW&#x0D;&#x0A;BEGIN&#x0D;&#x0A;&#x09;SELECT SEQ_department_dep_uid.nextval&#x0D;&#x0A;&#x09;INTO :new.dep_uid&#x0D;&#x0A;&#x09;FROM dual;&#x0D;&#x0A;END</sql>
+			<description></description>
+		</trigger>
+		<trigger>
+			<name>TRI_doc_table_doc_uid</name>
+			<schema></schema>
+			<sql>BEFORE INSERT ON doc_table&#x0D;&#x0A;FOR EACH ROW&#x0D;&#x0A;BEGIN&#x0D;&#x0A;&#x09;SELECT SEQ_doc_table_doc_uid.nextval&#x0D;&#x0A;&#x09;INTO :new.doc_uid&#x0D;&#x0A;&#x09;FROM dual;&#x0D;&#x0A;END</sql>
 			<description></description>
 		</trigger>
 		<trigger>
@@ -2587,12 +2593,6 @@
 			<name>TRI_positionrank_p_uid</name>
 			<schema></schema>
 			<sql>BEFORE INSERT ON positionrank&#x0D;&#x0A;FOR EACH ROW&#x0D;&#x0A;BEGIN&#x0D;&#x0A;&#x09;SELECT SEQ_positionrank_p_uid.nextval&#x0D;&#x0A;&#x09;INTO :new.p_uid&#x0D;&#x0A;&#x09;FROM dual;&#x0D;&#x0A;END</sql>
-			<description></description>
-		</trigger>
-		<trigger>
-			<name>TRI_doc_table_doc_uid</name>
-			<schema></schema>
-			<sql>BEFORE INSERT ON doc_table&#x0D;&#x0A;FOR EACH ROW&#x0D;&#x0A;BEGIN&#x0D;&#x0A;&#x09;SELECT SEQ_doc_table_doc_uid.nextval&#x0D;&#x0A;&#x09;INTO :new.doc_uid&#x0D;&#x0A;&#x09;FROM dual;&#x0D;&#x0A;END</sql>
 			<description></description>
 		</trigger>
 	</trigger_set>

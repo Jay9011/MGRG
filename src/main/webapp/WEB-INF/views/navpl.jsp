@@ -78,18 +78,32 @@
 	  		      if (status == "success") {
 		  		      if(data.status == "OK"){
 		  		    	Swal.fire({
-		  		    	  icon: 'success',
-		  		    	  title: '출근 완료!',
-		  		    	  text: data.message
-		  		    	});
-		  		    	initAttendance();
+		  		    		icon: 'success',
+			  		    	  title: '출근 완료!',
+			  		    	  text: data.message,
+							  showCancelButton: false,
+							  confirmButtonColor: '#3085d6',
+							  cancelButtonColor: '#d33',
+							  confirmButtonText: '확인'
+							}).then((result) => {
+							  if (result.value) {
+								  location.reload();
+							  }
+						});
 		  		      } else if(data.status == "FAIL"){
 		  		    	Swal.fire({
-		  		    	  icon: 'error',
-		  		    	  title: '출근 처리 실패!',
-		  		    	  text: data.message
-		  		    	});
-		  		    	initAttendance();
+		  		    		icon: 'error',
+			  		    	  title: '출근 처리 실패!',
+			  		    	  text: data.message,
+							  showCancelButton: false,
+							  confirmButtonColor: '#3085d6',
+							  cancelButtonColor: '#d33',
+							  confirmButtonText: '확인'
+							}).then((result) => {
+							  if (result.value) {
+								  location.reload();
+							  }
+						});
 		  		      }
 	  		      }
 	  		   }
@@ -107,18 +121,32 @@
 	   		      if (status == "success") {
 	   		    	if(data.status == "OK"){
 		  		    	Swal.fire({
-		  		    	  icon: 'success',
-		  		    	  title: '퇴근 완료!',
-		  		    	  text: data.message
-		  		    	});
-		  		    	initAttendance();
+		  		    		icon: 'success',
+			  		    	  title: '퇴근 완료!',
+			  		    	  text: data.message,
+							  showCancelButton: false,
+							  confirmButtonColor: '#3085d6',
+							  cancelButtonColor: '#d33',
+							  confirmButtonText: '확인'
+							}).then((result) => {
+							  if (result.value) {
+								  location.reload();
+							  }
+						});
 		  		      }	else if(data.status == "FAIL"){
 		  		    	Swal.fire({
-		  		    	  icon: 'error',
-		  		    	  title: '퇴근 처리 실패!',
-		  		    	  text: data.message
-		  		    	});
-		  		    	initAttendance();
+		  		    		icon: 'error',
+			  		    	  title: '퇴근 처리 실패!',
+			  		    	  text: data.message,
+							  showCancelButton: false,
+							  confirmButtonColor: '#3085d6',
+							  cancelButtonColor: '#d33',
+							  confirmButtonText: '확인'
+							}).then((result) => {
+							  if (result.value) {
+								  location.reload();
+							  }
+						});
 		  		      }
 	   		      }
 	   		   }
@@ -204,7 +232,6 @@
 			{
 			}
 		});
-		chartReset();
 		holidayReload();
 	}
     </script>
