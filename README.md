@@ -50,7 +50,7 @@
  쿠키, 세션, 파일업로드
  MVC model2 기반 웹 어플리케이션 구현<br>
  &nbsp;&nbsp; AJAX, API 서버 설계 및 구축<br>
- Jackson, COS 등 라이브러리 활용
+ &nbsp;&nbsp; Jackson, COS 등 라이브러리 활용
  CKEditor 연동
  Tomcat 서버
 
