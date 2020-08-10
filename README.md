@@ -49,7 +49,7 @@
      &nbsp;Servlet / JSP / JSTL / EL / 
  쿠키, 세션, 파일업로드
  MVC model2 기반 웹 어플리케이션 구현
- AJAX, API 서버 설계 및 구축
+ AJAX, API 서버 설계 및 구축<br>
  Jackson, COS 등 라이브러리 활용
  CKEditor 연동
  Tomcat 서버
@@ -58,14 +58,14 @@
   - MVC모델2 기반 웹어플리케이션 제작 (80 hr)
   
   - Spring Framework (100 hr)
-  &nbsp; Dependency Injection, Autowire, DI Config
-  &nbsp; AOP, Spring MVC, request mapping, Spring validation,
-  &nbsp; Spring-jdbc, Transaction, ORM(MyBatis), Interceptor
-  &nbsp; REST, Spring Security
+  &nbsp; Dependency Injection, Autowire, DI Config,<br>
+ AOP, Spring MVC, request mapping, Spring validation,<br>
+ Spring-jdbc, Transaction, ORM(MyBatis), Interceptor,<br>
+ REST, Spring Security
   
   
   - Arduino (40 hr)
   &nbsp; Tinkercad를 이용한 project
   
-  -스프링 프레임워크 기반 웹어플리케이션 제작 (136 hr)
+  - 스프링 프레임워크 기반 웹어플리케이션 제작 (136 hr)
   
