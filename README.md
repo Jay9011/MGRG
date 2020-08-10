@@ -21,7 +21,7 @@
   - OpenWeather API
   - daum Address API
   - Validate.js
-  - Bootstrap, CK Editor, SweetAlert, DataTables
+  - Bootstrap, CK Editor, SweetAlert, DataTables, Evo Calendar
     
 
 
