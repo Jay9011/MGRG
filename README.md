@@ -46,10 +46,10 @@
 
 
   - JSP 기반 웹 프로그래밍 (100 hr)<br>
-     &nbsp;Servlet / JSP / JSTL / EL / 
+     &nbsp;&nbsp; Servlet / JSP / JSTL / EL / 
  쿠키, 세션, 파일업로드
  MVC model2 기반 웹 어플리케이션 구현<br>
- &nbsp;AJAX, API 서버 설계 및 구축<br>
+ &nbsp;&nbsp; AJAX, API 서버 설계 및 구축<br>
  Jackson, COS 등 라이브러리 활용
  CKEditor 연동
  Tomcat 서버
@@ -59,13 +59,13 @@
   
   - Spring Framework (100 hr) <br>
   &nbsp;&nbsp; Dependency Injection, Autowire, DI Config,<br>
- &nbsp;&nbsp; AOP, Spring MVC, request mapping, Spring validation,<br>
- &nbsp;&nbsp; Spring-jdbc, Transaction, ORM(MyBatis), Interceptor,<br>
- &nbsp;&nbsp; REST, Spring Security
+  &nbsp;&nbsp; AOP, Spring MVC, request mapping, Spring validation,<br>
+  &nbsp;&nbsp; Spring-jdbc, Transaction, ORM(MyBatis), Interceptor,<br>
+  &nbsp;&nbsp; REST, Spring Security
   
   
-  - Arduino (40 hr)
-  &nbsp; Tinkercad를 이용한 project
+  - Arduino (40 hr) <br>
+  &nbsp;&nbsp; Tinkercad를 이용한 project
   
   - 스프링 프레임워크 기반 웹어플리케이션 제작 (136 hr)
   
