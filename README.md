@@ -65,7 +65,7 @@
   
   
   - Arduino (40 hr) <br>
-  &nbsp;&nbsp; Tinkercad를 이용한 project
+  &nbsp;&nbsp; Tinkercad를 이용한 임베디드 시스템 구현
   
   - 스프링 프레임워크 기반 웹어플리케이션 제작 (136 hr)
   
