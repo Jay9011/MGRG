@@ -2,7 +2,7 @@
 인사 관리 시스템
 
 ##### 1. Development Environment & Tools
-  - Flow Chart : kakao oven , draw.io
+  - Flow Chart : draw.io
   - Used Model : Spring MVC model
   - Backend : 
    Java 1.8 , Tomcat 9, Oracle 11g, JDBC, DBeaver, ERMaster, Spring Security
@@ -14,7 +14,7 @@
 ##### 2. Configuration Management
   - Git
   - GitHub
-
+  - Source tree
 
 
 ##### 3. API
@@ -57,5 +57,15 @@
 
   - MVC모델2 기반 웹어플리케이션 제작 (80 hr)
   
-  여기 아래에 내용 더 아는 사람
+  - Spring Framework (100 hr)
+  &nbsp; Dependency Injection, Autowire, DI Config
+  &nbsp; AOP, Spring MVC, request mapping, Spring validation,
+  &nbsp; Spring-jdbc, Transaction, ORM(MyBatis), Interceptor
+  &nbsp; REST, Spring Security
+  
+  
+  - Arduino (40 hr)
+  &nbsp; Tinkercad를 이용한 project
+  
+  -스프링 프레임워크 기반 웹어플리케이션 제작 (136 hr)
   
