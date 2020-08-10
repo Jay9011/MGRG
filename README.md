@@ -58,10 +58,10 @@
   - MVC모델2 기반 웹어플리케이션 제작 (80 hr)
   
   - Spring Framework (100 hr) <br>
-  &nbsp; Dependency Injection, Autowire, DI Config,<br>
- &nbsp;AOP, Spring MVC, request mapping, Spring validation,<br>
- &nbsp;Spring-jdbc, Transaction, ORM(MyBatis), Interceptor,<br>
- &nbsp;REST, Spring Security
+  &nbsp;&nbsp; Dependency Injection, Autowire, DI Config,<br>
+ &nbsp;&nbsp; AOP, Spring MVC, request mapping, Spring validation,<br>
+ &nbsp;&nbsp; Spring-jdbc, Transaction, ORM(MyBatis), Interceptor,<br>
+ &nbsp;&nbsp; REST, Spring Security
   
   
   - Arduino (40 hr)
