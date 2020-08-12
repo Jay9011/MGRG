@@ -1,6 +1,6 @@
 # MGRG
-## 인사 관리 시스템
-#### 팀원: 한수빈(팀장), 윤종섭, 임상빈, 홍성용
+### 인사 관리 시스템
+**팀원: 윤종섭, 임상빈, 홍성용, 한수빈**
 
 ##### 1. Development Environment & Tools
   - Flow Chart : draw.io
